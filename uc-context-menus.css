@@ -179,8 +179,8 @@ menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
 }
 
 menupopup menuitem:is([type="checkbox"], [type="radio"])::before {
-  content: "";
-  display: inline-block;
+  content: "" !important;
+  display: flex;
   width: 14px;
   min-width: 14px;
   height: 14px;

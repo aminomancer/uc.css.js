@@ -57,7 +57,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-copyimage .menu-text,
 #context-copyimage-contents .menu-text,
 #context-copylink .menu-text,
-#context-stripOnShareLink .menu-text,
+:is(#context-stripOnShareLink, #strip-on-share) .menu-text,
 #menu_copy .menu-text,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info) .menu-text,
 #placesContext_showInFolder .menu-text,
@@ -271,12 +271,6 @@ menuitem#enableDeveloperTools .menu-text,
 menu#fill-login > .menu-text,
 menuitem#manage-saved-logins > .menu-text,
 menuitem#fill-login-generated-password > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_autofill"] > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-username"] > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-password"] > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-totp"] > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_generate-password"] > .menu-text,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-identifier"] > .menu-text,
 menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic) > .menu-text,
@@ -461,7 +455,7 @@ menuitem#sanitizeItem::before,
 #context-copyaudiourl::before,
 #context-copyimage::before,
 #context-copylink::before,
-#context-stripOnShareLink::before,
+:is(#context-stripOnShareLink, #strip-on-share)::before,
 #menu_openLocation::before,
 #context-copyvideourl::before,
 #context-bookmarkframe::before,
@@ -594,12 +588,6 @@ menuitem[data-l10n-id="full-screen-exit"]::before,
 menu#fill-login::before,
 menuitem#manage-saved-logins::before,
 menuitem#fill-login-generated-password::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_autofill"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before,
 menu[label="Bitwarden"]:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before,
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options:not(.menuitem-iconic, .menu-iconic)::before,
@@ -665,7 +653,7 @@ menuitem.unified-extensions-context-menu-Options::before,
 .urlbarView-result-menuitem[data-command="not_relevant"]::before,
 .urlbarView-result-menuitem[data-command="not_interested"]::before,
 .urlbarView-result-menu > menuitem[data-command="dismiss"]::before {
-  content: "";
+  content: "" !important;
   position: relative;
   width: 16px;
   height: 16px;
@@ -1156,7 +1144,7 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
   background-image: url(chrome://userchrome/content/skin/link.svg);
 }
 
-#context-stripOnShareLink::before {
+:is(#context-stripOnShareLink, #strip-on-share)::before {
   background-image: url(chrome://userchrome/content/glyph-highlights-16.svg) !important;
 }
 
@@ -1476,33 +1464,6 @@ menuitem#enableDeveloperTools::before {
 
 :is(#context_sendTabToDevicePopupMenu, #context-sendpagetodevice-popup, #context-sendlinktodevice) .sendtab-target[clientType=""][clientId=""] + .sendtab-target:not([clientType], [clientId])::before {
   background-image: url(chrome://userchrome/content/fxa/add-device.svg);
-}
-
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_autofill"]::before {
-  background-image: url(chrome://userchrome/content/formfill.svg);
-}
-
-menuitem#manage-saved-logins::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-username"]::before {
-  background-image: url(chrome://userchrome/content/fxa/avatar-empty.svg);
-}
-
-menu#fill-login::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-password"]::before {
-  background-image: url(chrome://userchrome/content/skin/login.svg);
-}
-
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-totp"]::before {
-  background-image: url(chrome://userchrome/content/material/lock-clock.svg);
-}
-
-menuitem#fill-login-generated-password::before,
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_generate-password"]::before {
-  background-image: url(chrome://userchrome/content/generate-password.svg);
-}
-
-:is(#contentAreaContextMenu, #toolbar-context-menu) menu[label="Bitwarden"] :is(menu, menuitem)[id$="-menuitem-_copy-identifier"]::before {
-  background-image: url(chrome://userchrome/content/devtools/tool-dom.svg);
 }
 
 :is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) .menu-iconic-left {

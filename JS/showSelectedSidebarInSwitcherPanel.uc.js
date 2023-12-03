@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Show Selected Sidebar in Switcher Panel
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -62,7 +62,10 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
     SidebarUI.showSwitcherPanel = function () {
       this._switcherPanel.addEventListener(
         "popuphiding",
-        () => this._switcherTarget.classList.remove("active"),
+        () => {
+          this._switcherTarget.classList.remove("active");
+          this._switcherTarget.setAttribute("aria-expanded", false);
+        },
         { once: true }
       );
       let onRight = this._positionStart == RTL_UI;
@@ -78,18 +81,20 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
       this._switcherPanel.openPopup(this._switcherTarget);
       this._switcherTarget.classList.add("active");
       this._switcherTarget.setAttribute("aria-expanded", true);
-      for (let sidebar of this.sidebars.values()) {
-        let menuitem = document.getElementById(sidebar.switcherMenuId);
-        menuitem.setAttribute("type", "radio");
+      for (let sidebar of this.sidebars) {
+        document
+          .getElementById(sidebar.switcherMenuId)
+          ?.setAttribute("type", "radio");
       }
     };
 
     document
       .getElementById("viewSidebarMenu")
       .addEventListener("popupshowing", () => {
-        for (let sidebar of SidebarUI.sidebars.values()) {
-          let menuitem = document.getElementById(sidebar.menuId);
-          menuitem.setAttribute("type", "radio");
+        for (let sidebar of SidebarUI.sidebars) {
+          document
+            .getElementById(sidebar.menuId)
+            ?.setAttribute("type", "radio");
         }
       });
   }

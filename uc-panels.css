@@ -582,19 +582,23 @@ popupnotificationcontent {
   background-color: var(--desaturate-dimmed) !important;
   box-shadow: none !important;
   color: inherit !important;
+
+  &:focus-visible {
+    background-color: var(--desaturate-dimmed-further) !important;
+  }
+}
+
+#protections-popup-sendReportView-collection-comments,
+#protections-popup-sendReportView-collection-url {
+  margin: 4px 0 0 !important;
 }
 
 #protections-popup-sendReportView-collection-comments {
-  min-height: 55px;
+  min-height: 120px;
 }
 
 .protections-popup-sendReportView-collection-section:last-of-type {
   margin-bottom: 0 !important;
-}
-
-.popup-notification-body input:where(:-moz-focusring),
-#protections-popup-sendReportView-collection-url:where(:-moz-focusring) {
-  background-color: var(--desaturate-dimmed-further) !important;
 }
 
 .popup-notification-body .popup-notification-invalid-input {
@@ -731,11 +735,6 @@ popupnotificationcontent label[control]:not([hidden]) + menulist {
 /* "downloading and verifying add-on..." goes above the addon install progress bar */
 #addon-progress-notification .popup-notification-origin.header + .popup-notification-description {
   margin-block: 3px !important;
-}
-
-#protections-popup-message .text-link,
-.popup-notification-learnmore-link {
-  text-decoration: none !important;
 }
 
 .popup-notification-learnmore-link,

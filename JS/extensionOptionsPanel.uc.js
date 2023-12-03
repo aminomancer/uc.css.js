@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.8.9
+// @version        1.9.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with `.xpi` files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, using the built-in "Add-ons and themes" button. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. There are several translation and configuration options directly below.
@@ -635,7 +635,7 @@ class ExtensionOptionsWidget {
     const formatString = (type, args) => {
       return new Promise(resolve => {
         doc.l10n
-          .formatMessages([{ id: `details-notification-${type}`, args }])
+          .formatMessages([{ id: `details-notification-${type}2`, args }])
           .then(msg => resolve(msg[0].value));
       });
     };
@@ -1090,10 +1090,12 @@ class ExtensionOptionsWidget {
   list-style-image: url('${this.config["Icon URL"]}');
 }
 #eom-mainView-panel-header {
-  padding: 8px 4px 4px 4px;
-  min-height: 44px;
-  justify-items: center;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--arrowpanel-menuitem-margin-inline);
+  min-height: var(--arrowpanel-header-min-height);
 }
 #eom-mainView-panel-header-span {
   font-weight: 600;

@@ -532,12 +532,6 @@
   list-style-image: url(chrome://userchrome/content/skin/fullscreen-exit.svg) !important;
 }
 
-#appMenu-fxa-status2 > #appMenu-fxa-label2 {
-  padding-block: 4px !important;
-  min-height: 40px !important;
-  font-weight: inherit !important;
-}
-
 toolbarseparator.proton-zap {
   opacity: 0.7 !important;
 }

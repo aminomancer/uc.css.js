@@ -580,6 +580,7 @@ toolbar:not(#PersonalToolbar) .toolbarbutton-1:focus-visible > .toolbarbutton-ba
 
     /* for displaying larger font sizes */
     .panel-header,
+    #eom-mainView-panel-header,
     .popup-notification-description,
     #main-menubar,
     #sidebar-header,

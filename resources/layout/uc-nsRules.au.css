@@ -62,10 +62,10 @@ from the style editor in the browser toolbox. */
 
   #library-button {
     list-style-image: url(chrome://userchrome/content/skin/library.svg);
-  }
 
-  #library-button[scaling] {
-    list-style-image: url(chrome://userchrome/content/skin/library-scaling-fix.svg);
+    &[scaling] {
+      list-style-image: url(chrome://userchrome/content/skin/library-scaling-fix.svg);
+    }
   }
 
   @keyframes library-bookmark-animation {
@@ -120,44 +120,48 @@ from the style editor in the browser toolbox. */
     fill: transparent;
   }
 
-  #library-animatable-box[animate] {
-    /* Position the sprite at the y-position of the library-button, then adjust
-    based on the size difference between half of the button height and half of
-    the sprite height. */
-    top: calc(var(--library-button-height) / 2 - 27px);
-    /* Set a margin relative to the difference in widths of the
-    .toolbarbutton-icon and the .toolbar-animatable-box. This is correct even in
-    RTL because the item is positioned using `left`. */
-    left: calc(var(--library-icon-x) + (16px + 2 * var(--toolbarbutton-inner-padding) - 22px) / 2);
-    width: 22px; /* Width of each frame within the SVG sprite */
-    height: 54px; /* Height of each frame within the SVG sprite */
-  }
+  #library-animatable-box {
+    &[animate] {
+      /* Position the sprite at the y-position of the library-button, then adjust
+      based on the size difference between half of the button height and half of
+      the sprite height. */
+      top: calc(var(--library-button-height) / 2 - 27px);
+      /* Set a margin relative to the difference in widths of the
+      .toolbarbutton-icon and the .toolbar-animatable-box. This is correct even in
+      RTL because the item is positioned using `left`. */
+      left: calc(var(--library-icon-x) + (16px + 2 * var(--toolbarbutton-inner-padding) - 22px) / 2);
+      width: 22px; /* Width of each frame within the SVG sprite */
+      height: 54px; /* Height of each frame within the SVG sprite */
 
-  #library-animatable-box[animate] > .toolbarbutton-animatable-image {
-    min-height: 54px; /* Minimum height must be equal to the height of the SVG sprite */
-    width: 1078px;
-    animation-duration: 800ms;
-    animation-timing-function: steps(48);
-  }
+      > .toolbarbutton-animatable-image {
+        min-height: 54px; /* Minimum height must be equal to the height of the SVG sprite */
+        width: 1078px;
+        animation-duration: 800ms;
+        animation-timing-function: steps(48);
+      }
 
-  #library-animatable-box[animate][fade] > .toolbarbutton-animatable-image {
-    animation-duration: 2s;
-    animation-timing-function: ease-out;
-  }
+      &[fade] > .toolbarbutton-animatable-image {
+        animation-duration: 2s;
+        animation-timing-function: ease-out;
+      }
+    }
 
-  #library-animatable-box[animate="bookmark"] > .toolbarbutton-animatable-image {
-    background-image: url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
-    animation-name: library-bookmark-animation;
-    -moz-context-properties: fill, fill-opacity, stroke;
-    stroke: var(--toolbarbutton-icon-fill-attention);
-  }
+    &[animate="bookmark"] {
+      > .toolbarbutton-animatable-image {
+        background-image: url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
+        animation-name: library-bookmark-animation;
+        -moz-context-properties: fill, fill-opacity, stroke;
+        stroke: var(--toolbarbutton-icon-fill-attention);
+      }
 
-  #library-animatable-box[animate="bookmark"]:-moz-locale-dir(rtl) > .toolbarbutton-animatable-image {
-    animation-name: library-bookmark-animation-rtl;
-  }
+      &:-moz-locale-dir(rtl) > .toolbarbutton-animatable-image {
+        animation-name: library-bookmark-animation-rtl;
+      }
 
-  #library-animatable-box[animate="bookmark"][fade] > .toolbarbutton-animatable-image {
-    animation-name: library-bookmark-fade;
+      &[fade] > .toolbarbutton-animatable-image {
+        animation-name: library-bookmark-fade;
+      }
+    }
   }
 
   @keyframes bookmark-animation {
@@ -178,30 +182,51 @@ from the style editor in the browser toolbox. */
     width: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding));
     height: calc(var(--urlbar-min-height) - 2px - 2 * var(--urlbar-container-padding));
     padding: var(--urlbar-icon-padding);
-  }
 
-  /* Preload the bookmark animations to prevent a flicker during the first
-  playing of the animations. */
-  #star-button[preloadanimations] + #star-button-animatable-box > #star-button-animatable-image {
-    background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg), url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
-    background-size: 0, 0;
-  }
+    /* Preload the bookmark animations to prevent a flicker during the first
+    playing of the animations. */
+    &[preloadanimations] + #star-button-animatable-box > #star-button-animatable-image {
+      background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg), url(chrome://userchrome/content/skin/library-bookmark-animation.svg);
+      background-size: 0, 0;
+    }
 
-  #star-button[starred][animate] {
-    fill: transparent;
-    position: relative;
-  }
+    &[starred][animate] {
+      fill: transparent;
+      position: relative;
 
-  #star-button[starred][animate] + #star-button-animatable-box {
-    display: block;
-    position: absolute;
-    overflow: hidden;
-    top: calc(50% - 16.5px); /* 16.5px is half the height of the sprite */
-    /* .urlbar-icon has width 28px. Each frame is 33px wide. Set
-    margin-inline-start to be half the difference, -2.5px. */
-    margin-inline-start: -2.5px;
-    width: 33px; /* Width of each frame within the SVG sprite */
-    height: 33px; /* Height of each frame within the SVG sprite */
+      & + #star-button-animatable-box {
+        display: block;
+        position: absolute;
+        overflow: hidden;
+        top: calc(50% - 16.5px); /* 16.5px is half the height of the sprite */
+        /* .urlbar-icon has width 28px. Each frame is 33px wide. Set
+        margin-inline-start to be half the difference, -2.5px. */
+        margin-inline-start: -2.5px;
+        width: 33px; /* Width of each frame within the SVG sprite */
+        height: 33px; /* Height of each frame within the SVG sprite */
+
+        > #star-button-animatable-image {
+          background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg);
+          background-size: auto;
+          list-style-image: none;
+          min-height: 33px; /* Minimum height must be equal to the height of the SVG sprite */
+          animation-name: bookmark-animation;
+          animation-fill-mode: forwards;
+          animation-iteration-count: 1;
+          animation-timing-function: steps(19);
+          animation-duration: 317ms;
+          width: 660px;
+          -moz-context-properties: fill, stroke;
+          fill: currentColor;
+          stroke: var(--toolbarbutton-icon-fill-attention);
+          color: inherit;
+        }
+      }
+
+      &:-moz-locale-dir(rtl) + #star-button-animatable-box > #star-button-animatable-image {
+        scale: -1 1;
+      }
+    }
   }
 
   :root[uidensity="compact"] #star-button[starred][animate] + #star-button-animatable-box {
@@ -212,27 +237,6 @@ from the style editor in the browser toolbox. */
   :root[uidensity="touch"] #star-button[starred][animate] + #star-button-animatable-box {
     /* .urlbar-icon has width 30px in this case */
     margin-inline-start: -1.5px;
-  }
-
-  #star-button[starred][animate] + #star-button-animatable-box > #star-button-animatable-image {
-    background-image: url(chrome://userchrome/content/skin/bookmark-animation.svg);
-    background-size: auto;
-    list-style-image: none;
-    min-height: 33px; /* Minimum height must be equal to the height of the SVG sprite */
-    animation-name: bookmark-animation;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    animation-timing-function: steps(19);
-    animation-duration: 317ms;
-    width: 660px;
-    -moz-context-properties: fill, stroke;
-    fill: currentColor;
-    stroke: var(--toolbarbutton-icon-fill-attention);
-    color: inherit;
-  }
-
-  #star-button[starred][animate]:-moz-locale-dir(rtl) + #star-button-animatable-box > #star-button-animatable-image {
-    scale: -1 1;
   }
 
   .open-protocol-handler-icon {
@@ -293,11 +297,11 @@ from the style editor in the browser toolbox. */
     animation-name: confirmation-hint-checkmark-animation;
     animation-fill-mode: forwards;
     animation-timing-function: steps(18);
-  }
 
-  #confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image:-moz-locale-dir(rtl) {
-    animation-name: confirmation-hint-checkmark-animation-rtl;
-    transform: translateX(252px);
+    &:-moz-locale-dir(rtl) {
+      animation-name: confirmation-hint-checkmark-animation-rtl;
+      transform: translateX(252px);
+    }
   }
 
   #confirmation-hint-message {
@@ -310,20 +314,22 @@ from the style editor in the browser toolbox. */
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    #confirmation-hint-checkmark-animation-container[animate] > #confirmation-hint-checkmark-image {
-      animation-duration: 300ms;
-      animation-delay: 0ms;
+    #confirmation-hint-checkmark-animation-container[animate] {
+      > #confirmation-hint-checkmark-image {
+        animation-duration: 300ms;
+        animation-delay: 0ms;
+      }
+
+      & + #confirmation-hint-message-container {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     #confirmation-hint-message-container {
       transform: scale(0.8);
       opacity: 0;
       transition: transform 120ms cubic-bezier(0.25, 1.27, 0.35, 1.18), opacity 60ms linear;
-    }
-
-    #confirmation-hint-checkmark-animation-container[animate] + #confirmation-hint-message-container {
-      transform: scale(1);
-      opacity: 1;
     }
   }
 
@@ -338,19 +344,21 @@ of moz-document in stylesheets with file:// urls */
 @-moz-document regexp("^((chrome|resource|file)://|about:).*$") {
   :root {
     --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-big.svg);
+
+    &[fxastatus="not_configured"] {
+      --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
+    }
   }
 
-  :root[fxastatus="not_configured"] {
-    --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
-  }
+  :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) {
+    ::selection {
+      background-color: var(--ui-selection-bgcolor);
+      color: var(--ui-selection-color);
+    }
 
-  :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) ::selection {
-    background-color: var(--ui-selection-bgcolor);
-    color: var(--ui-selection-color);
-  }
-
-  :is(#mainPopupSet, #browser, #navigator-toolbox, .sidebar-panel) :-moz-window-inactive::selection {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+    :-moz-window-inactive::selection {
+      background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
+    }
   }
 
   ::selection {
@@ -387,12 +395,12 @@ of moz-document in stylesheets with file:// urls */
     --panel-border-radius: var(--menupopup-border-radius);
     border: none;
     background: none;
-  }
 
-  panel[type="autocomplete-richlistbox"]::part(content) {
-    padding: var(--panel-padding);
-    box-shadow: var(--uc-panel-shadow);
-    margin: var(--menupopup-inner-box-margin);
+    &::part(content) {
+      padding: var(--panel-padding);
+      box-shadow: var(--uc-panel-shadow);
+      margin: var(--menupopup-inner-box-margin);
+    }
   }
 
   panel[type="autocomplete-richlistbox"][anchored-on-panel],
@@ -434,47 +442,54 @@ of moz-document in stylesheets with file:// urls */
     box-shadow: var(--uc-menupopup-shadow) !important;
   }
 
-  :is(panel, menupopup)::part(arrow) {
-    -moz-context-properties: fill, stroke;
-    fill: var(--arrowpanel-background);
-    stroke: var(--arrowpanel-border-color);
-  }
+  panel,
+  menupopup {
+    &::part(arrow) {
+      -moz-context-properties: fill, stroke;
+      fill: var(--arrowpanel-background);
+      stroke: var(--arrowpanel-border-color);
+    }
 
-  :is(panel, menupopup)[side="top"]::part(arrow),
-  :is(panel, menupopup)[side="bottom"]::part(arrow) {
-    list-style-image: url("chrome://userchrome/content/panelarrow-vertical.svg");
-    position: relative;
-    margin-inline: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
-  }
+    &[side="top"],
+    &[side="bottom"] {
+      &::part(arrow) {
+        list-style-image: url("chrome://userchrome/content/panelarrow-vertical.svg");
+        position: relative;
+        margin-inline: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
+      }
+    }
 
-  :is(panel, menupopup)[side="top"]::part(arrow) {
-    margin-bottom: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
-  }
+    &[side="top"]::part(arrow) {
+      margin-bottom: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+    }
 
-  :is(panel, menupopup)[side="bottom"]::part(arrow) {
-    transform: scaleY(-1);
-    margin-top: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
-  }
+    &[side="bottom"]::part(arrow) {
+      transform: scaleY(-1);
+      margin-top: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+    }
 
-  :is(panel, menupopup)[side="left"]::part(arrow),
-  :is(panel, menupopup)[side="right"]::part(arrow) {
-    list-style-image: url("chrome://userchrome/content/panelarrow-horizontal.svg");
-    position: relative;
-    margin-block: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
-  }
+    &[side="left"],
+    &[side="right"] {
+      &::part(arrow) {
+        list-style-image: url("chrome://userchrome/content/panelarrow-horizontal.svg");
+        position: relative;
+        margin-block: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
+      }
+    }
 
-  :is(panel, menupopup)[side="left"]::part(arrow) {
-    margin-right: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
-  }
+    &[side="left"]::part(arrow) {
+      margin-right: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+    }
 
-  :is(panel, menupopup)[side="right"]::part(arrow) {
-    transform: scaleX(-1);
-    margin-left: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+    &[side="right"]::part(arrow) {
+      transform: scaleX(-1);
+      margin-left: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+    }
   }
 
   #confirmation-hint[hidearrow]::part(arrowbox) {
-    /* Don't display the arrow but keep the popup at the same vertical
-    offset as other arrow panels. */
+    /* Don't display the arrow but keep the popup at the same vertical offset as
+    other arrow panels. */
     visibility: hidden;
   }
 
@@ -483,9 +498,13 @@ of moz-document in stylesheets with file:// urls */
     padding-top: 0;
   }
 
-  :not(.panel-subview-body) > toolbarseparator + .panel-subview-body,
-  :not(.panel-subview-body) > .subview-subheader + .panel-subview-body {
-    padding-bottom: var(--panel-subview-body-padding-magnitude);
+  :not(.panel-subview-body) {
+    > toolbarseparator,
+    > .subview-subheader {
+      + .panel-subview-body {
+        padding-bottom: var(--panel-subview-body-padding-magnitude);
+      }
+    }
   }
 
   .subviewbutton {
@@ -500,28 +519,32 @@ of moz-document in stylesheets with file:// urls */
     margin-bottom: revert;
   }
 
-  #BMB_bookmarksPopup::part(content),
-  #BMB_bookmarksPopup menupopup::part(content),
-  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
-    padding: var(--menupopup-inner-padding);
-  }
+  #BMB_bookmarksPopup {
+    &::part(content),
+    menupopup::part(content),
+    menupopup[placespopup="true"]::part(content) {
+      padding: var(--menupopup-inner-padding);
+    }
 
-  #BMB_bookmarksPopup::part(arrowcontent) {
-    padding-block: 0;
-  }
+    &::part(arrowcontent) {
+      padding-block: 0;
+    }
 
-  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(innerbox) {
-    margin-top: 0;
-    border: none;
-  }
+    menupopup[placespopup="true"] {
+      &::part(innerbox) {
+        margin-top: 0;
+        border: none;
+      }
 
-  #BMB_bookmarksPopup menupopup[placespopup="true"]::part(content) {
-    box-shadow: var(--uc-panel-shadow);
-    margin: var(--menupopup-inner-box-margin);
-  }
+      &::part(content) {
+        box-shadow: var(--uc-panel-shadow);
+        margin: var(--menupopup-inner-box-margin);
+      }
+    }
 
-  #BMB_bookmarksPopup .panel-subview-footer-button {
-    margin-bottom: unset;
+    .panel-subview-footer-button {
+      margin-bottom: unset;
+    }
   }
 
   #PopupSearchAutoComplete::part(content) {
@@ -558,49 +581,49 @@ of moz-document in stylesheets with file:// urls */
 
   .panel-footer > button {
     border-radius: var(--general-button-border-radius);
+
+    &:not([disabled], :active):is(:hover, :focus-visible) {
+      background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
+    }
+
+    &[default]:not([disabled], :active):is(:hover, :focus-visible) {
+      background-color: var(--button-primary-hover-bgcolor);
+    }
   }
 
-  .panel-footer > button:not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
+  menupopup {
+    &::part(drop-indicator-bar) {
+      margin-block: -14px;
+      margin-inline: -5px 5px;
+    }
+
+    &::part(drop-indicator) {
+      pointer-events: none;
+      background: none;
+      list-style-image: url(chrome://userchrome/content/menu-drop-indicator.svg) !important;
+      -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+      fill: var(--lwt-toolbarbutton-icon-fill, currentColor);
+      height: 28px;
+      max-width: 28px;
+      padding-block: 3px;
+      padding-inline: 0 6px;
+    }
   }
 
-  .panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
-    background-color: var(--button-primary-hover-bgcolor);
-  }
+  #protections-popup-mainView .subviewbutton-nav:not(.notFound),
+  #identity-popup-mainView .subviewbutton-nav,
+  .widget-overflow-list .subviewbutton-nav,
+  .PanelUI-subView .subviewbutton-nav {
+    &::after {
+      -moz-context-properties: fill;
+      fill: var(--panel-disabled-color);
+    }
 
-  menupopup::part(drop-indicator-bar) {
-    margin-block: -14px;
-    margin-inline: -5px 5px;
-  }
-
-  menupopup::part(drop-indicator) {
-    pointer-events: none;
-    background: none;
-    list-style-image: url(chrome://userchrome/content/menu-drop-indicator.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
-    fill: var(--lwt-toolbarbutton-icon-fill, currentColor);
-    height: 28px;
-    max-width: 28px;
-    padding-block: 3px;
-    padding-inline: 0 6px;
-  }
-
-  #protections-popup-mainView .subviewbutton-nav:not(.notFound)::after,
-  #identity-popup-mainView .subviewbutton-nav::after,
-  .widget-overflow-list .subviewbutton-nav::after,
-  .PanelUI-subView .subviewbutton-nav::after {
-    -moz-context-properties: fill;
-    fill: var(--panel-shortcut-color);
-    fill-opacity: 1;
-  }
-
-  #protections-popup-mainView .subviewbutton-nav[disabled="true"]:not(.notFound)::after,
-  #identity-popup-mainView .subviewbutton-nav[disabled="true"]::after,
-  .widget-overflow-list .subviewbutton-nav[disabled="true"]::after,
-  .PanelUI-subView .subviewbutton-nav[disabled="true"]::after {
-    -moz-context-properties: fill, fill-opacity;
-    fill: var(--panel-disabled-color);
-    fill-opacity: 0.5;
+    &[disabled="true"]::after {
+      -moz-context-properties: fill, fill-opacity;
+      fill: var(--panel-disabled-color);
+      fill-opacity: 0.5;
+    }
   }
 
   #identity-popup-mainView .subviewbutton-nav[disabled="true"]::after {
@@ -608,11 +631,13 @@ of moz-document in stylesheets with file:// urls */
   }
 
   /* padding and margins for context menus */
-  menupopup::part(content),
-  #ContentSelectDropdown > menupopup::part(content),
-  #PlacesToolbar menupopup::part(content) {
-    padding: var(--menupopup-inner-padding);
-    margin: var(--menupopup-inner-box-margin);
+  menupopup,
+  #ContentSelectDropdown > menupopup,
+  #PlacesToolbar menupopup {
+    &::part(content) {
+      padding: var(--menupopup-inner-padding);
+      margin: var(--menupopup-inner-box-margin);
+    }
   }
 
   #BMB_bookmarksPopup::part(content),
