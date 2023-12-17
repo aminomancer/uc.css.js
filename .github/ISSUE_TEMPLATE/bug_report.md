@@ -10,6 +10,9 @@ assignees: aminomancer
 
 <!-- Please don't change or delete the template -->
 
+**Link to the file containing the bug**
+If a script is broken, link to the script. If you don't know which script is causing the problem, try removing scripts randomly and restarting Firefox until the problem disappears.
+
 **Describe the bug**
 A clear and concise description of what the bug is.
 
