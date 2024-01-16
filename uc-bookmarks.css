@@ -574,7 +574,8 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
   margin-inline: var(--context-iconic-margin) !important;
 }
 
-#BMB_bookmarksShowAll {
+#BMB_bookmarksShowAll,
+.hide-if-empty-places-result {
   display: none !important;
 }
 

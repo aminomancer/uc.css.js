@@ -348,17 +348,6 @@ progress {
   background-color: var(--tooltip-bgcolor) !important;
   color: var(--tooltip-color) !important;
 
-  transition: opacity 300ms var(--uc-smooth-timing-function), visibility 300ms !important;
-
-  &[hidden] {
-    opacity: 0 !important;
-    transition: none !important;
-  }
-
-  &[inactive][previoustype="overLink"] {
-    transition: opacity 400ms var(--uc-smooth-timing-function), visibility 400ms !important;
-  }
-
   &:not([mirror]):-moz-locale-dir(ltr),
   &[mirror]:-moz-locale-dir(rtl) {
     border-top-left-radius: 0 !important;

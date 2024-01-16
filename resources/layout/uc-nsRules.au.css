@@ -3,7 +3,8 @@ I don't register userChrome.au.css that way because
 it would mean I can't live-edit and save the stylesheet
 from the style editor in the browser toolbox. */
 
-@-moz-document regexp("^((chrome|resource|file)://|about:).*$") {
+@-moz-document regexp("^((chrome|resource|file)://|about:).*$")
+{
   menupopup:not([is="places-popup-arrow"]) {
     -moz-window-input-region-margin: var(--menupopup-inner-box-margin, 4px) !important;
   }
@@ -18,7 +19,8 @@ from the style editor in the browser toolbox. */
     -moz-window-shadow: none;
   }
 
-  @-moz-document url(chrome://browser/content/browser.xhtml) {
+  @-moz-document url(chrome://browser/content/browser.xhtml)
+  {
     :is(panel, menupopup)::part(arrow) {
       display: -moz-inline-box;
     }
@@ -334,14 +336,16 @@ from the style editor in the browser toolbox. */
   }
 
   #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"],
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before
+  {
     display: -moz-inline-box;
   }
 }
 
 /* temporarily moved from userChrome.au.css due to an issue preventing the use
 of moz-document in stylesheets with file:// urls */
-@-moz-document regexp("^((chrome|resource|file)://|about:).*$") {
+@-moz-document regexp("^((chrome|resource|file)://|about:).*$")
+{
   :root {
     --avatar-image-url: url(chrome://userchrome/content/fxa/avatar-big.svg);
 
@@ -762,13 +766,13 @@ of moz-document in stylesheets with file:// urls */
   were simply moved rather than created */
   :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
     flex: 0;
-    transition: min-width 100ms ease-out, max-width 100ms ease-out, flex 100ms ease-out
+    transition: min-width 100ms ease-out, max-width 100ms ease-out, flex 100ms ease-out;
   }
 
   /* animate tab pinning/unpinning. experimental. */
   :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
     flex: 0;
-    transition: min-width 100ms ease-out, max-width 100ms ease-out, flex 100ms ease-out
+    transition: min-width 100ms ease-out, max-width 100ms ease-out, flex 100ms ease-out;
   }
 
   :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
@@ -899,7 +903,8 @@ of moz-document in stylesheets with file:// urls */
   @-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
     url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
     regexp("^about:.*$"),
-    url-prefix("chrome://devtools/content/") {
+    url-prefix("chrome://devtools/content/")
+  {
     :is(menupopup)::part(content) {
       --arrowpanel-dimmed: color-mix(in srgb, var(--uc-toolbar-color) 7%, transparent);
       --arrowpanel-dimmed-further: color-mix(in srgb, var(--uc-toolbar-color) 12%, transparent);
@@ -990,7 +995,8 @@ of moz-document in stylesheets with file:// urls */
     font-weight: 500;
   }
 
-  @-moz-document url(chrome://browser/content/browser.xhtml) {
+  @-moz-document url(chrome://browser/content/browser.xhtml)
+  {
     :is(#customization-lwtheme-menu, #customization-uidensity-menu):is([side="bottom"], [side="right"])::part(arrowbox) {
       order: 2;
     }
@@ -1021,7 +1027,8 @@ of moz-document in stylesheets with file:// urls */
   }
 
   /* dropmarkers and other select/menulist stuff */
-  @-moz-document url(chrome://browser/content/browser.xhtml), url(chrome://mozapps/content/downloads/unknownContentType.xhtml), url(chrome://mozapps/content/handling/permissionDialog.xhtml), url(chrome://mozapps/content/handling/appChooser.xhtml), url-prefix(chrome://global/content/print.html), url(chrome://browser/content/places/bookmarkProperties.xhtml), url(chrome://browser/content/places/bookmarkProperties2.xhtml) {
+  @-moz-document url(chrome://browser/content/browser.xhtml), url(chrome://mozapps/content/downloads/unknownContentType.xhtml), url(chrome://mozapps/content/handling/permissionDialog.xhtml), url(chrome://mozapps/content/handling/appChooser.xhtml), url-prefix(chrome://global/content/print.html), url(chrome://browser/content/places/bookmarkProperties.xhtml), url(chrome://browser/content/places/bookmarkProperties2.xhtml)
+  {
     menulist:not([native]) {
       padding-inline: 6px;
     }
@@ -1287,6 +1294,10 @@ of moz-document in stylesheets with file:// urls */
 
   #picture-in-picture-button > .urlbar-icon {
     list-style-image: url("chrome://userchrome/content/pictureinpicture.svg");
+  }
+
+  #picture-in-picture-button[pipactive] > .urlbar-icon {
+    list-style-image: url("chrome://userchrome/content/pictureinpicture-closed.svg");
   }
 
   #stop-button {
@@ -2046,11 +2057,13 @@ of moz-document in stylesheets with file:// urls */
     padding: 30px 30px 20px 30px;
   }
 
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon) {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::part(icon)
+  {
     display: none;
   }
 
-  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before {
+  #handlersView .actionsMenu[image="chrome://browser/skin/preferences/application.png"]::before
+  {
     width: 16px;
     height: 16px;
     margin-inline: 11px 8px;
@@ -2064,7 +2077,8 @@ of moz-document in stylesheets with file:// urls */
     background-image: url(chrome://userchrome/content/shortcut.svg);
   }
 
-  #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"] {
+  #handlersView .actionIcon[src="chrome://browser/skin/preferences/application.png"]
+  {
     width: 16px;
     height: 16px;
     margin-inline: 11px 8px;
@@ -2078,8 +2092,87 @@ of moz-document in stylesheets with file:// urls */
     padding-inline-start: 16px !important;
   }
 
+  .checkbox-check {
+    appearance: none;
+    color: var(--checkbox-border-color, ThreeDShadow);
+    background-color: var(--checkbox-unchecked-bgcolor, Field);
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    margin-inline-end: 6px;
+
+    &:not([native]) {
+      /* TODO: Make this em-based, probably? */
+      width: 16px;
+      height: 16px;
+    }
+
+    &[checked] {
+      border-color: var(--checkbox-checked-border-color, transparent);
+      background-color: var(--checkbox-checked-bgcolor, AccentColor);
+      background-image: url("chrome://global/skin/icons/check.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      -moz-context-properties: fill;
+      fill: currentColor;
+      color: var(--checkbox-checked-color, AccentColorText);
+      /* Style the button also when printing with "Print Backgrounds" unchecked */
+      color-adjust: exact;
+    }
+
+    &[native] {
+      appearance: auto;
+      -moz-default-appearance: checkbox;
+      align-items: center;
+    }
+  }
+
+  checkbox:not([disabled="true"]):hover {
+    > .checkbox-check {
+      background-color: var(--checkbox-unchecked-hover-bgcolor, color-mix(in srgb, AccentColor 4%, Field));
+
+      @media (prefers-contrast) {
+        /* color will set the border-color on the check due to how HCM works for in-content pages. */
+        color: var(--checkbox-checked-border-color, color-mix(in srgb, AccentColor 4%, Field));
+      }
+
+      &[checked] {
+        background-color: var(--checkbox-checked-hover-bgcolor, color-mix(in srgb, currentColor 12.5%, AccentColor));
+
+        @media (prefers-contrast) {
+          color: var(--checkbox-checked-border-color, AccentColorText);
+          fill: var(--checkbox-checked-color, AccentColorText);
+          background-color: var(--checkbox-checked-bgcolor, AccentColor);
+        }
+      }
+    }
+
+    &:active > .checkbox-check {
+      background-color: var(--checkbox-unchecked-active-bgcolor, color-mix(in srgb, AccentColor 8%, Field));
+
+      &[checked] {
+        background-color: var(--checkbox-checked-active-bgcolor, color-mix(in srgb, currentColor 25%, AccentColor));
+
+        @media (prefers-contrast) {
+          color: var(--checkbox-checked-border-color, AccentColorText);
+          fill: var(--checkbox-checked-color, AccentColorText);
+          background-color: var(--checkbox-checked-bgcolor, AccentColor);
+        }
+      }
+    }
+  }
+
+  checkbox:not([native]):focus-visible > .checkbox-check {
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
+  }
+
+  .checkbox-label[native] {
+    margin: 0;
+  }
+
   @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
-    url("chrome://global/content/appPicker.xhtml") {
+    url("chrome://global/content/appPicker.xhtml")
+  {
     :root {
       --in-content-page-color: rgb(21, 20, 26);
       --in-content-page-background: #fff;

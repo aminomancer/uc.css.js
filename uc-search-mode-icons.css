@@ -61,6 +61,12 @@ a rule for it. */
     --search-engine-icon: url(chrome://userchrome/content/engines/bing.svg) !important;
   }
 
+  /* kagi */
+  &[engine="Kagi"],
+  &[engine="Kagi Search"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/kagi.svg) !important;
+  }
+
   /* baidu */
   &[engine="Baidu"],
   &[engine="Baidu Search"],

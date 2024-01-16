@@ -289,6 +289,25 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem {
   text-shadow: none !important;
 }
 
+#PopupAutoComplete > richlistbox > richlistitem {
+  > .ac-title,
+  > .two-line-wrapper {
+    margin-inline-start: 0 !important;
+  }
+
+  > .two-line-wrapper {
+    align-items: center !important;
+    gap: var(--context-iconic-margin-end) !important;
+
+    .ac-site-icon {
+      &:not([src]),
+      &[src=""] {
+        display: none !important;
+      }
+    }
+  }
+}
+
 #ContentSelectDropdown menucaption {
   background: none !important;
 }

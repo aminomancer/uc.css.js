@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Show Selected Sidebar in Switcher Panel
-// @version        1.0.4
+// @version        1.0.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -81,7 +81,7 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
       this._switcherPanel.openPopup(this._switcherTarget);
       this._switcherTarget.classList.add("active");
       this._switcherTarget.setAttribute("aria-expanded", true);
-      for (let sidebar of this.sidebars) {
+      for (let sidebar of this.sidebars.values()) {
         document
           .getElementById(sidebar.switcherMenuId)
           ?.setAttribute("type", "radio");

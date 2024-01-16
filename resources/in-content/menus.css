@@ -135,7 +135,7 @@ menupopup.in-menulist menu > menupopup {
 menupopup.in-menulist :is(menu, menuitem, menucaption) {
   appearance: none !important;
   color: var(--menu-color) !important;
-  border-radius: var(--context-menuitem-border-radius);
+  border-radius: var(--context-menuitem-border-radius) !important;
   border: none !important;
   min-height: var(--menuitem-height) !important;
   padding-block: 0 !important;

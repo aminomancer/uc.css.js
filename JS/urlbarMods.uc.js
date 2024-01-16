@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.7.9
+// @version        1.8.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -745,34 +745,15 @@ class UrlbarMods {
     if (interventions) manager.unregisterProvider(interventions);
   }
   urlbarResultsSorting() {
-    let UnifiedComplete =
-      gURLBar.view.controller.manager.muxers.get("UnifiedComplete");
-    let sortSrc = UnifiedComplete.sort.toSource();
-    if (!sortSrc.includes(`UrlbarPrefs.get("showSearchSuggestionsFirst")`)) {
-      const lazy = {};
-      ChromeUtils.defineESModuleGetters(lazy, {
-        QuickSuggest: "resource:///modules/QuickSuggest.sys.mjs",
-        UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
-        UrlbarProviderQuickSuggest:
-          "resource:///modules/UrlbarProviderQuickSuggest.sys.mjs",
-        UrlbarProviderTabToSearch:
-          "resource:///modules/UrlbarProviderTabToSearch.sys.mjs",
-        UrlbarSearchUtils: "resource:///modules/UrlbarSearchUtils.sys.mjs",
-      });
-      const { UrlbarUtils } = ChromeUtils.importESModule(
-        "resource:///modules/UrlbarUtils.sys.mjs"
-      );
-      XPCOMUtils.defineLazyGetter(lazy, "logger", () =>
-        UrlbarUtils.getLogger({ prefix: "MuxerUnifiedComplete" })
-      );
-      eval(
-        `UnifiedComplete.sort = function ${sortSrc
-          .replace(/sort/, ``)
-          .replace(
-            /showSearchSuggestionsFirst\: true/,
-            `showSearchSuggestionsFirst: lazy.UrlbarPrefs.get("showSearchSuggestionsFirst")`
-          )}`
-      );
+    if (!UrlbarPrefs._originalMakeResultGroups) {
+      UrlbarPrefs._originalMakeResultGroups = UrlbarPrefs.makeResultGroups;
+      UrlbarPrefs.makeResultGroups = function makeResultGroups(options) {
+        let newOptions = {
+          ...options,
+          showSearchSuggestionsFirst: this.get("showSearchSuggestionsFirst"),
+        };
+        return this._originalMakeResultGroups(newOptions);
+      };
     }
   }
   underlineSpaceResults() {

@@ -208,9 +208,16 @@ toolbarpaletteitem[place="palette"] > #search-container {
   color: var(--panel-description-color) !important;
 }
 
-#PopupSearchAutoComplete[engine="Google"] .searchbar-engine-image {
-  background-image: url(chrome://userchrome/content/engines/google.svg) !important;
-  padding-inline: 0 16px !important;
+#PopupSearchAutoComplete {
+  &[engine="Google"] .searchbar-engine-image {
+    background-image: url(chrome://userchrome/content/engines/google.svg) !important;
+    padding-inline: 0 16px !important;
+  }
+
+  &[engine="DuckDuckGo"] .searchbar-engine-image {
+    background-image: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
+    padding-inline: 0 16px !important;
+  }
 }
 
 #searchbar .search-go-container {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.7
+// @version        1.4.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -143,7 +143,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
           "Try to replace searchglass icon with engine icon in normal mode"
         ]
       ) {
-        function findEngineIcon(name) {
+        function findLocalEngineIcon(name) {
           const files = _ucUtils.fs.getEntry("engines");
           if (!files?.isDirectory()) return false;
           let nameParts = name
@@ -178,6 +178,13 @@ This doesn't change anything about the layout so you may want to tweak some thin
             ? `url(chrome://userchrome/content/engines/${filename})`
             : false;
         }
+        function findEngineIcon(name) {
+          let localIcon = findLocalEngineIcon(name);
+          if (localIcon) return localIcon;
+          let engine = Services.search.getEngineByName(name);
+          let installedIcon = engine?.iconURI?.spec;
+          return installedIcon ? `url("${installedIcon}")` : false;
+        }
         eval(
           `BrowserSearch._setURLBarPlaceholder = function ${BrowserSearch._setURLBarPlaceholder
             .toSource()
@@ -200,6 +207,12 @@ This doesn't change anything about the layout so you may want to tweak some thin
           `BrowserSearch._updateURLBarPlaceholder = function ${BrowserSearch._updateURLBarPlaceholder
             .toSource()
             .replace(/^_updateURLBarPlaceholder/, "")
+            .replace(/engine\.isAppProvided/, placeholderString)}`
+        );
+        eval(
+          `SearchUIUtils.updatePlaceholderNamePreference = function ${SearchUIUtils.updatePlaceholderNamePreference
+            .toSource()
+            .replace(/^_updatePlaceholderNamePreference/, "")
             .replace(/engine\.isAppProvided/, placeholderString)}`
         );
       }

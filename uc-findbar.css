@@ -336,6 +336,10 @@ findbar .matches-indicator {
   display: none !important;
 }
 
+:is(.findbar-entire-word, .findbar-case-sensitive) .checkbox-icon {
+  display: revert !important;
+}
+
 [anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) ~ :is(.findbar-find-previous, .findbar-find-next, .findbar-entire-word, .findbar-case-sensitive) {
   background-color: var(--search-box-focus) !important;
   transition: var(--findbar-textbox-bg-transition-duration, 200ms) background-color !important;

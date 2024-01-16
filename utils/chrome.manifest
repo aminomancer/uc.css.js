@@ -26,6 +26,7 @@ override chrome://browser/content/places/places-menupopup.js ../resources/script
 override chrome://global/content/elements/message-bar.js ../resources/script-override/message-bar.js
 
 # Override a bunch of icons that appear all over the browser.
+override chrome://global/skin/icons/clipboard.svg ../resources/skin/edit-copy.svg
 override chrome://global/skin/icons/check.svg ../resources/check.svg
 override chrome://global/skin/icons/success.svg ../resources/check.svg
 override chrome://global/skin/icons/check-partial.svg ../resources/check-partial.svg

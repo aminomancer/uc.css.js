@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmark in Container Tab (context menu)
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -43,6 +43,9 @@ class OpenPlacesInContainerTabMenu {
     let { l10n } = OpenPlacesInContainerTabMenu.config;
     let popups = [];
     this.loadSheet();
+    window.MozXULElement?.insertFTLIfNeeded(
+      "toolkit/global/contextual-identity.ftl"
+    );
 
     if (l10n.accessKey === `c`) this.placesMenuCopy.accessKey = `y`;
 
