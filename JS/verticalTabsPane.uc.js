@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.8
+// @version        1.7.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -151,7 +151,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         E10SUtils: "resource://gre/modules/E10SUtils.jsm",
       });
       // get some localized strings for the tooltip
-      XPCOMUtils.defineLazyGetter(this, "_l10n", function () {
+      ChromeUtils.defineLazyGetter(this, "_l10n", function () {
         return new Localization(["browser/browser.ftl"], true);
       });
       this._formatFluentStrings();

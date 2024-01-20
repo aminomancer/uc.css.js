@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Auto-hide Navbar Support
-// @version        1.2.4
+// @version        1.2.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -26,15 +26,15 @@ class AutoHideHandler {
   constructor() {
     this.observe(Services.prefs, "nsPref:read", this.prefs.autohide);
     Services.prefs.addObserver(this.prefs.autohide, this);
-    XPCOMUtils.defineLazyGetter(
+    ChromeUtils.defineLazyGetter(
       this,
       "navBlock",
       () => gNavToolbox.parentElement
     );
-    XPCOMUtils.defineLazyGetter(this, "backButton", () =>
+    ChromeUtils.defineLazyGetter(this, "backButton", () =>
       document.getElementById("back-button")
     );
-    XPCOMUtils.defineLazyGetter(this, "fwdButton", () =>
+    ChromeUtils.defineLazyGetter(this, "fwdButton", () =>
       document.getElementById("forward-button")
     );
     // Main listener for popups

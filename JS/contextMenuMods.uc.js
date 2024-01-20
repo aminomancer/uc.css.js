@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -133,9 +133,9 @@ class ContextMenuMods {
         item.classList.add("menuitem-iconic", "searchmenuitem");
         item.setAttribute("engine-id", engine.id);
         item.setAttribute("label", engine.name);
-        let iconURL = engine.getIconURLBySize(16, 16);
+        let iconURL = engine.getIconURL(16);
         if (iconURL) {
-          item.style.setProperty("--engine-icon", `url("${iconURL}")`);
+          item.style.setProperty("--engine-icon", `url('${iconURL}')`);
         }
         docfrag.appendChild(item);
       }
@@ -174,14 +174,14 @@ class ContextMenuMods {
       if (!showSearchSelect) return;
 
       let selectedText = this.isTextSelected
-        ? this.textSelected
+        ? this.selectedText
         : this.linkTextStr;
 
       menuItem.searchTerms = menuItemPrivate.searchTerms = selectedText;
       menuItem.principal = menuItemPrivate.principal = this.principal;
       menuItem.csp = menuItemPrivate.csp = this.csp;
 
-      if (selectedText.length > 15) {
+      if (selectedText?.length > 15) {
         let truncLength = 15;
         let truncChar = selectedText[15].charCodeAt(0);
         if (truncChar >= 0xdc00 && truncChar <= 0xdfff) {

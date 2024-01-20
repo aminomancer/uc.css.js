@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.8
+// @version        1.4.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -213,7 +213,10 @@ This doesn't change anything about the layout so you may want to tweak some thin
           `SearchUIUtils.updatePlaceholderNamePreference = function ${SearchUIUtils.updatePlaceholderNamePreference
             .toSource()
             .replace(/^_updatePlaceholderNamePreference/, "")
-            .replace(/engine\.isAppProvided/, placeholderString)}`
+            .replace(
+              /engine\.isAppProvided/,
+              placeholderString.replace(/engineName/g, "engine.name")
+            )}`
         );
       }
       BrowserSearch.initPlaceHolder();

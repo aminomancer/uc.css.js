@@ -49,6 +49,7 @@ menupopup {
   --lwt-background-tiling: no-repeat !important;
   --lwt-brighttext-url-color: var(--pink-action) !important;
   --lwt-popup-brighttext-url-color: var(--lwt-brighttext-url-color) !important;
+  --inactive-titlebar-opacity: 1 !important;
   --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
   --toolbarbutton-icon-fill-opacity: 1 !important;
   --arrowpanel-background: var(--uc-arrowpanel-background) !important;
@@ -107,6 +108,9 @@ menupopup {
   --focus-outline-color: var(--global-focus-outline-color) !important;
   --focus-outline-width: 2px;
   --focus-outline-offset: 2px;
+  --size-item-small: 16px !important;
+  --size-item-medium: 24px !important;
+  --size-item-large: 28px !important;
   --places-cell-focus-bgcolor: var(--uc-places-cell-focus-bgcolor) !important;
   --places-cell-hover-bgcolor: var(--uc-places-cell-hover-bgcolor) !important;
   --download-progress-fill-color: var(--toolbarbutton-icon-fill-attention) !important;

@@ -9,13 +9,13 @@ from the style editor in the browser toolbox. */
     -moz-window-input-region-margin: var(--menupopup-inner-box-margin, 4px) !important;
   }
 
-  :is(panel, menupopup)[type="arrow"] {
+  :is(panel, menupopup)[type="arrow"]:where(:not(.tooltip-xul-wrapper)) {
     -moz-window-input-region-margin: var(--panel-inner-box-margin, 4px) !important;
   }
 
-  panel,
+  panel:where(:not(.tooltip-xul-wrapper)),
   menupopup,
-  :is(menupopup, panel)[type="arrow"] {
+  :is(menupopup, panel)[type="arrow"]:where(:not(.tooltip-xul-wrapper)) {
     -moz-window-shadow: none;
   }
 
@@ -378,9 +378,9 @@ of moz-document in stylesheets with file:// urls */
     outline: revert;
   }
 
-  panel,
+  panel:where(:not(.tooltip-xul-wrapper)),
   menupopup,
-  :is(menupopup, panel)[type="arrow"] {
+  :is(menupopup, panel)[type="arrow"]:where(:not(.tooltip-xul-wrapper)) {
     --panel-background: var(--arrowpanel-background);
     --panel-color: var(--arrowpanel-color);
     --panel-border-color: var(--arrowpanel-border-color);
@@ -388,7 +388,7 @@ of moz-document in stylesheets with file:// urls */
     --panel-padding: var(--arrowpanel-padding);
   }
 
-  panel[type="arrow"] {
+  panel[type="arrow"]:where(:not(.tooltip-xul-wrapper)) {
     margin: -7px;
   }
 
@@ -421,7 +421,7 @@ of moz-document in stylesheets with file:// urls */
     margin-bottom: 8px;
   }
 
-  :is(panel, menupopup)::part(content),
+  :is(panel, menupopup):where(:not(.tooltip-xul-wrapper))::part(content),
   panel#feature-callout::part(content) {
     padding: var(--panel-padding);
     color: var(--panel-color);
@@ -432,7 +432,7 @@ of moz-document in stylesheets with file:// urls */
     max-width: calc(100% - 2 * var(--menupopup-inner-box-margin));
   }
 
-  :is(panel, menupopup)[type="arrow"]::part(content),
+  :is(panel, menupopup)[type="arrow"]:where(:not(.tooltip-xul-wrapper))::part(content),
   panel#feature-callout::part(content) {
     box-shadow: var(--uc-panel-shadow);
     margin: var(--panel-inner-box-margin, 4px);
@@ -446,7 +446,7 @@ of moz-document in stylesheets with file:// urls */
     box-shadow: var(--uc-menupopup-shadow) !important;
   }
 
-  panel,
+  panel:where(:not(.tooltip-xul-wrapper)),
   menupopup {
     &::part(arrow) {
       -moz-context-properties: fill, stroke;
@@ -1125,7 +1125,7 @@ of moz-document in stylesheets with file:// urls */
     padding-block: 0;
   }
 
-  panel button {
+  panel:where(:not(.tooltip-xul-wrapper)) button {
     border: revert;
   }
 

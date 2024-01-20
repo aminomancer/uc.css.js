@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.6
+// @version        1.3.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -66,13 +66,13 @@ When you middle click, the button will show a notification telling you the curre
       return this.defaultLabel;
     },
   };
-  XPCOMUtils.defineLazyGetter(l10n.bundles, "menu", () =>
+  ChromeUtils.defineLazyGetter(l10n.bundles, "menu", () =>
     Services.strings.createBundle("chrome://devtools/locale/menus.properties")
   );
-  XPCOMUtils.defineLazyGetter(l10n.bundles, "toolbox", () =>
+  ChromeUtils.defineLazyGetter(l10n.bundles, "toolbox", () =>
     Services.strings.createBundle("chrome://devtools/locale/toolbox.properties")
   );
-  XPCOMUtils.defineLazyGetter(
+  ChromeUtils.defineLazyGetter(
     l10n,
     "fluentStrings",
     () => new Localization(["devtools/client/toolbox.ftl"], true)
@@ -88,7 +88,7 @@ When you middle click, the button will show a notification telling you the curre
         "resource://devtools/client/framework/browser-toolbox/Launcher.sys.mjs",
       require: "resource://devtools/shared/loader/Loader.sys.mjs",
     });
-    XPCOMUtils.defineLazyGetter(
+    ChromeUtils.defineLazyGetter(
       lazy,
       "Actor",
       () => lazy.require("devtools/shared/protocol/Actor").Actor

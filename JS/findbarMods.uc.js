@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Findbar Mods
-// @version        1.4.0
+// @version        1.4.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -89,7 +89,7 @@ class FindbarMods {
     return el;
   }
   constructor() {
-    XPCOMUtils.defineLazyGetter(this, "isMini", () => {
+    ChromeUtils.defineLazyGetter(this, "isMini", () => {
       if (this.forceMiniFindbar) return true;
       let file = Cc["@mozilla.org/chrome/chrome-registry;1"]
         .getService(Ci.nsIChromeRegistry)
