@@ -24,10 +24,22 @@ titlebar, this sheet controls their appearance as well. */
   display: flex !important;
 }
 
-/* split the width in half to center the menubar between the tabs and the titlebar buttons */
-#toolbar-menubar:not([inactive="true"]) {
+#navigator-toolbox {
+	will-change: revert !important;
+	transition: none !important;
+}
+
+#titlebar {
   background: var(--titlebar-background);
 
+  :root[tabsintitlebar] & {
+    will-change: revert !important;
+    transition: revert !important;
+  }
+}
+
+#toolbar-menubar:not([inactive="true"]) {
+  /* split the width in half to center the menubar between the tabs and the titlebar buttons */
   > spacer,
   + #TabsToolbar .titlebar-spacer {
     width: calc(var(--titlebar-spacer-width, 32px) / 2) !important;
@@ -70,14 +82,6 @@ titlebar, this sheet controls their appearance as well. */
   #toolbar-menubar {
     visibility: visible !important;
   }
-
-  #titlebar {
-    background: var(--titlebar-background);
-  }
-}
-
-#toolbar-menubar[autohide="true"][inactive="true"]:not([customizing="true"]) ~ #TabsToolbar {
-  background: var(--titlebar-background);
 }
 
 /* menubar buttons */
@@ -676,8 +680,9 @@ toolbarbutton#private-browsing-indicator-with-label:is(:hover:active, [open]) > 
   }
 }
 
-/* move titlebar buttons to the left on macOS and linux */
-@media (-moz-platform: macos), (-moz-platform: linux) {
+/* move titlebar buttons to the left on macOS and linux
+or if the user sets a pref */
+@media (-moz-platform: macos), (-moz-platform: linux), (-moz-bool-pref: "userChrome.css.titlebar-buttons-on-left") {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
     order: 0 !important;
@@ -688,7 +693,8 @@ toolbarbutton#private-browsing-indicator-with-label:is(:hover:active, [open]) > 
     order: 1 !important;
   }
 
-  #toolbar-menubar > * {
+  #toolbar-menubar > *,
+  .toolbar-items {
     order: 2 !important;
   }
 
@@ -744,100 +750,5 @@ toolbarbutton#private-browsing-indicator-with-label:is(:hover:active, [open]) > 
 
   :root {
     --titlebar-background: var(--lwt-accent-color) var(--titlebar-gradient-left);
-
-    &:not([inFullscreen]) {
-      #toolbar-menubar {
-        &[inactive="true"] ~ #TabsToolbar {
-          background: var(--titlebar-background) !important;
-        }
-
-        &:not([inactive="true"]) {
-          background: var(--titlebar-background);
-        }
-      }
-    }
-  }
-}
-
-/* move titlebar buttons to the left if user sets the preference for it */
-@media (-moz-bool-pref: "userChrome.css.titlebar-buttons-on-left") {
-  .titlebar-buttonbox-container,
-  #toolbar-menubar > .titlebar-buttonbox-container {
-    order: 0 !important;
-  }
-
-  .titlebar-min,
-  .uc-titlebar-min {
-    order: 2 !important;
-  }
-
-  .titlebar-max,
-  .uc-titlebar-max,
-  .titlebar-restore,
-  .uc-titlebar-restore {
-    order: 3 !important;
-  }
-
-  .titlebar-close,
-  .uc-titlebar-close {
-    order: 1 !important;
-  }
-
-  #toolbar-menubar > spacer,
-  .titlebar-spacer[type="pre-tabs"] {
-    order: 1 !important;
-  }
-
-  #toolbar-menubar > * {
-    order: 2 !important;
-  }
-
-  #toolbar-menubar {
-    order: 0 !important;
-  }
-
-  #TabsToolbar,
-  #toolbar-menubar[inactive="true"] ~ #TabsToolbar {
-    padding-inline: 4px 3px !important;
-  }
-
-  #toolbar-menubar:not([inactive="true"]) {
-    padding-inline: 4px !important;
-  }
-
-  #toolbar-menubar > spacer,
-  .titlebar-spacer[type="pre-tabs"] {
-    width: 8px !important;
-    display: flex !important;
-  }
-
-  .titlebar-spacer[type="post-tabs"] {
-    display: none !important;
-  }
-
-  #toolbar-menubar:not([inactive="true"]) {
-    > spacer {
-      width: 8px !important;
-    }
-
-    + #TabsToolbar .titlebar-spacer[type="pre-tabs"] {
-      display: none !important;
-    }
-  }
-
-  :root {
-    --titlebar-background: var(--lwt-accent-color) var(--titlebar-gradient-left);
-
-    &:not([inFullscreen]) {
-      #toolbar-menubar {
-        &[inactive="true"] ~ #TabsToolbar {
-          background: var(--titlebar-background) !important;
-        }
-
-        &:not([inactive="true"]) {
-          background: var(--titlebar-background);
-        }
-      }
-    }
   }
 }

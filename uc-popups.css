@@ -1960,7 +1960,7 @@ link[href="chrome://global/content/printPagination.css"]
 
   input[readonly],
   textbox {
-    color: var(--lwt-toolbar-field-color) !important;
+    color: var(--toolbar-field-color) !important;
   }
 
   richlistbox,

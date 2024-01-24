@@ -14,19 +14,16 @@ docs do not inherit from <browser> elements. */
 :root,
 menupopup {
   --lwt-accent-color: var(--uc-accent-color) !important;
+  --lwt-accent-color-inactive: var(--uc-accent-color) !important;
   --lwt-frame: var(--uc-frame-color) !important;
   --lwt-text-color: var(--uc-arrowpanel-color) !important;
   --toolbar-field-focus: hsla(233, 25%, 28%, 85%) !important;
   --toolbar-field-color: var(--uc-toolbar-field-color) !important;
   --toolbar-field-focus-color: var(--uc-toolbar-field-color) !important;
-  --lwt-toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
-  --lwt-toolbar-field-color: var(--uc-toolbar-field-color) !important;
-  --lwt-toolbar-field-focus: var(--toolbar-field-focus) !important;
-  --lwt-toolbar-field-focus-color: var(--uc-toolbar-color) !important;
+  --toolbar-field-background-color: hsla(233, 25%, 28%, 85%) !important;
   --lwt-toolbar-field-highlight: var(--ui-selection-bgcolor) !important;
   --lwt-toolbar-field-highlight-text: var(--ui-selection-color) !important;
   --lwt-toolbar-field-highlight-disabled: var(--ui-selection-bgcolor-disabled) !important;
-  --lwt-tab-text: var(--uc-toolbar-color) !important;
   --identity-box-margin-inline: 3px !important;
   --urlbar-box-bgcolor: var(--identity-box-solid-bg) !important;
   --urlbar-box-focus-bgcolor: var(--button-bgcolor) !important;
@@ -35,20 +32,12 @@ menupopup {
   --urlbar-box-text-color: inherit !important;
   --urlbar-box-hover-text-color: var(--urlbar-box-text-color) !important;
   --toolbar-bgcolor: var(--uc-toolbar-bgcolor) !important;
-  --toolbar-bgimage: none;
   --toolbar-color: var(--uc-toolbar-color) !important;
-  --lwt-toolbarbutton-icon-fill: var(--ui-text-100) !important;
-  --lwt-toolbarbutton-icon-fill-attention: var(--attention-color) !important;
-  --lwt-toolbar-field-icon-fill-attention: var(--attention-color) !important;
   --toolbarbutton-icon-fill: var(--ui-text-100) !important;
   --toolbarbutton-icon-fill-attention: var(--attention-color) !important;
-  --toolbar-field-icon-fill-attention: var(--attention-color) !important;
-  --lwt-tab-attention-icon-color: var(--attention-color) !important;
   --tab-attention-icon-color: var(--lwt-tab-attention-icon-color) !important;
   --lwt-background-alignment: right top !important;
   --lwt-background-tiling: no-repeat !important;
-  --lwt-brighttext-url-color: var(--pink-action) !important;
-  --lwt-popup-brighttext-url-color: var(--lwt-brighttext-url-color) !important;
   --inactive-titlebar-opacity: 1 !important;
   --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
   --toolbarbutton-icon-fill-opacity: 1 !important;

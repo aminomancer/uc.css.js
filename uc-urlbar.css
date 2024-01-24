@@ -190,7 +190,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 #PopupSearchAutoComplete .autocomplete-richlistitem .ac-emphasize-text {
-  color: var(--lwt-toolbar-field-color);
+  color: var(--toolbar-field-color);
 }
 
 #PopupSearchAutoComplete .ac-type-icon {
@@ -1141,7 +1141,7 @@ for some window scaling factors. */
 #identity-icon-label {
   margin: 0 !important;
   padding-inline-start: 7px !important;
-  color: var(--lwt-toolbar-field-color, black) !important;
+  color: var(--toolbar-field-color, black) !important;
   opacity: var(--urlbar-icon-fill-opacity, 0.6) !important;
   font-weight: var(--urlbar-base-font-weight, 400);
   font-size: inherit !important;
@@ -1150,7 +1150,7 @@ for some window scaling factors. */
 
 #urlbar-label-box .urlbar-label,
 #urlbar-search-mode-indicator-title {
-  color: var(--lwt-toolbar-field-color, black) !important;
+  color: var(--toolbar-field-color, black) !important;
   opacity: var(--urlbar-icon-fill-opacity, 0.6) !important;
   padding-inline: 0px !important;
   font-size: inherit !important;
@@ -1161,7 +1161,7 @@ for some window scaling factors. */
 #urlbar[actiontype="switchtab"] #urlbar-label-box::before {
   content: "Tabs";
   display: -moz-inline-box;
-  color: var(--lwt-toolbar-field-color, hsl(0, 0%, 0%));
+  color: var(--toolbar-field-color, hsl(0, 0%, 0%));
   opacity: 0.6;
   font-weight: var(--urlbar-base-font-weight, 400);
 }

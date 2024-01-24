@@ -149,7 +149,7 @@ findbar[hidden] {
 
 .findbar-textbox {
   background-color: var(--search-box-color) !important;
-  color: var(--lwt-toolbar-field-color) !important;
+  color: var(--toolbar-field-color) !important;
 }
 
 .findbar-textbox::placeholder {
@@ -158,7 +158,7 @@ findbar[hidden] {
 
 .findbar-textbox:focus {
   background-color: var(--search-box-focus) !important;
-  color: var(--lwt-toolbar-field-color) !important;
+  color: var(--toolbar-field-color) !important;
 }
 
 .findbar-textbox[status="notfound"] {
@@ -174,7 +174,7 @@ findbar[hidden] {
 
 [anonid="findbar-textbox-wrapper"]:focus-within .findbar-textbox:not([status="notfound"]) {
   background-color: var(--search-box-focus) !important;
-  color: var(--lwt-toolbar-field-color) !important;
+  color: var(--toolbar-field-color) !important;
 }
 
 findbar .matches-indicator {

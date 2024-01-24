@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.4.9
+// @version        1.5.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -82,14 +82,10 @@ This doesn't change anything about the layout so you may want to tweak some thin
     // urlbar placeholder text IF the engine is built into firefox, for example,
     // the default Google engine. if you switch your engine to an engine from an
     // extension or one you built yourself with "Add custom search engine", the
-    // placeholder will just say "Search or enter address". this setting changes
+    // placeholder will just say "Search or enter address". this script changes
     // that. it will show the name in the placeholder even if the engine was
     // installed by the user. the extra settings below can add some restrictions
     // if you want.
-    "Show engine name in placeholder": Services.prefs.getBoolPref(
-      "searchModeIndicatorIcons.showEngineNameInPlaceholder",
-      true
-    ),
 
     // it's possible for an extension to add an engine with any arbitrary name.
     // so if the developer is stupid, they could name an engine "Awesome Amazon
@@ -195,24 +191,26 @@ This doesn't change anything about the layout so you may want to tweak some thin
             )}`
         );
       }
-      if (config["Show engine name in placeholder"]) {
-        let placeholderString = `engine`;
-        if (config["Engine name character limit"] > 0) {
-          placeholderString += ` && engineName.length <= config["Engine name character limit"]`;
-        }
-        if (config["Engine name word limit"] > 0) {
-          placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
-        }
+      let placeholderString = `engine`;
+      if (config["Engine name character limit"] > 0) {
+        placeholderString += ` && engineName.length <= config["Engine name character limit"]`;
+      }
+      if (config["Engine name word limit"] > 0) {
+        placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
+      }
+      if (BrowserSearch._updateURLBarPlaceholder.name) {
         eval(
           `BrowserSearch._updateURLBarPlaceholder = function ${BrowserSearch._updateURLBarPlaceholder
             .toSource()
             .replace(/^_updateURLBarPlaceholder/, "")
             .replace(/engine\.isAppProvided/, placeholderString)}`
         );
+      }
+      if (SearchUIUtils.updatePlaceholderNamePreference.name) {
         eval(
           `SearchUIUtils.updatePlaceholderNamePreference = function ${SearchUIUtils.updatePlaceholderNamePreference
             .toSource()
-            .replace(/^_updatePlaceholderNamePreference/, "")
+            .replace(/^updatePlaceholderNamePreference/, "")
             .replace(
               /engine\.isAppProvided/,
               placeholderString.replace(/engineName/g, "engine.name")

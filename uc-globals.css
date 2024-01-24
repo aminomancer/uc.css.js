@@ -60,7 +60,7 @@ but other than that these variables should be available everywhere. */
   --uc-toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.17);
   --uc-toolbarbutton-active-background: hsla(234, 82%, 83%, 0.22);
   --uc-toolbarbutton-checked-active-background: hsla(232, 82%, 83%, 0.27);
-  --uc-toolbarbutton-badge-bgcolor: var(--lwt-toolbarbutton-icon-fill-attention);
+  --uc-toolbarbutton-badge-bgcolor: var(--pink-action);
   --uc-panel-description-color: hsla(235, 48%, 89%, 70%);
   --uc-panel-shortcut-color: hsla(235, 27%, 73%, 70%);
   --uc-panel-shortcut-focus: hsla(235, 32%, 80%, 95%);
