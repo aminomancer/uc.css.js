@@ -1722,13 +1722,8 @@ toolbar button slider script. but just in case) */
   padding-bottom: calc(var(--arrowpanel-padding) / 2) !important;
 }
 
-#protections-popup-milestones-separator {
-  margin-top: 0 !important;
-}
-
 #protections-popup-milestones {
-  margin: var(--arrowpanel-menuitem-margin-inline) !important;
-  margin-top: 0 !important;
+  margin: 0 !important;
   padding: 0 !important;
   background: none !important;
 }

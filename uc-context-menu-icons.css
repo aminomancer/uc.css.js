@@ -1490,6 +1490,13 @@ menuitem#enableDeveloperTools::before {
   background-image: url(chrome://browser/skin/places/bookmarksToolbar.svg);
 }
 
+
+menu#fill-login::before,
+menuitem#manage-saved-logins::before,
+menuitem#fill-login-generated-password::before {
+  background-image: url(chrome://userchrome/content/skin/login.svg);
+}
+
 :is(#spell-add-to-dictionary, #spell-add-dictionaries, #spell-add-dictionaries-main)::before {
   background-image: url(chrome://userchrome/content/skin/readerMode.svg);
 }

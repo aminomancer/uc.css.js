@@ -515,6 +515,10 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
   fill-opacity: 1 !important;
 }
 
+.tabbrowser-tab[pending] .tab-content .tab-icon-sound {
+  color: var(--uc-menu-semi-disabled-color) !important;
+}
+
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) :is(.tab-icon-sound, .tab-close-button) {
   opacity: 1 !important;
 }
