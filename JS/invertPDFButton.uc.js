@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name           PDF.js Invert Button
-// @version        1.0.0
+// @name           Invert PDF Button
+// @version        1.0.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add a new button to Firefox's PDF.js viewer toolbar. It inverts the PDF colors to provide a dark mode.
@@ -27,6 +27,7 @@
       if (button) {
         button.dataset.inverted = true;
         button.title = "Uninvert PDF";
+        button.querySelector("span").textContent = "Uninvert PDF";
       }
     }
 
@@ -39,14 +40,19 @@
       if (button) {
         delete button.dataset.inverted;
         button.title = "Invert PDF";
+        button.querySelector("span").textContent = "Invert PDF";
       }
     }
 
-    function createButton() {
-      let container = content.document.getElementById("editorModeButtons");
+    function init() {
+      let container = content.document.getElementById("toolbarViewerRight");
       if (!container || content.document.getElementById("editorInvert")) {
         return;
       }
+      let separator = content.document.createElement("div");
+      separator.className = "verticalToolbarSeparator";
+      separator.id = "editorInvertSeparator";
+      container.prepend(separator);
       let button = content.document.createElement("button");
       button.id = "editorInvert";
       button.className = "toolbarButton";
@@ -54,11 +60,25 @@
       button.onclick = function () {
         if (button.dataset.inverted) {
           uninvertPDF();
+          sendAsyncMessage("InvertPDFButton:uninvertPDF");
         } else {
           invertPDF();
+          sendAsyncMessage("InvertPDFButton:invertPDF");
         }
       };
+      let label = content.document.createElement("span");
+      label.textContent = "Invert PDF";
+      button.appendChild(label);
       container.prepend(button);
+      let inverted = Services.prefs.getBoolPref(
+        "userChrome.invertPDFButton.inverted",
+        false
+      );
+      if (inverted) {
+        invertPDF();
+      } else {
+        uninvertPDF();
+      }
       if (!content.document.getElementById("editorInvertStyles")) {
         let stylesheet = content.document.createElement("style");
         stylesheet.id = "editorInvertStyles";
@@ -74,14 +94,14 @@
 
     Services.obs.addObserver(function () {
       if (
-        content.document.nodePrincipal.originNoSuffix === "resource://pdf.js"
+        content?.document?.nodePrincipal.originNoSuffix === "resource://pdf.js"
       ) {
-        content.document.addEventListener("DOMContentLoaded", createButton);
+        content.document.addEventListener("DOMContentLoaded", init);
       }
     }, "document-element-inserted");
   }
 
-  function init() {
+  function loadFrameScript() {
     try {
       messageManager.loadFrameScript(
         `data:application/javascript,${encodeURIComponent(
@@ -90,15 +110,25 @@
         true
       );
     } catch (e) {}
+    messageManager.addMessageListener("InvertPDFButton:invertPDF", () => {
+      Services.prefs.setBoolPref("userChrome.invertPDFButton.inverted", true);
+    });
+    messageManager.addMessageListener("InvertPDFButton:uninvertPDF", () => {
+      Services.prefs.clearUserPref("userChrome.invertPDFButton.inverted");
+    });
   }
 
+  Services.prefs
+    .getDefaultBranch("")
+    .setBoolPref("userChrome.invertPDFButton.inverted", false);
+
   if (gBrowserInit.delayedStartupFinished) {
-    setTimeout(init, 0);
+    setTimeout(loadFrameScript, 0);
   } else {
     let delayedStartupFinished = (subject, topic) => {
       if (topic == "browser-delayed-startup-finished" && subject == window) {
         Services.obs.removeObserver(delayedStartupFinished, topic);
-        setTimeout(init, 0);
+        setTimeout(loadFrameScript, 0);
       }
     };
     Services.obs.addObserver(
