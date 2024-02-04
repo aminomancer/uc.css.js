@@ -632,6 +632,10 @@ For other Firefox modders and theme developers, you can use this script to distr
 
 Adds a toolbar button that implements the color picker without launching the devtools or opening any popups. That is, you can click the button and then immediately click anywhere inside the content window to copy the color of that pixel to your clipboard. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. The script also adds a customizable hotkey that does the same thing — by default, it's Ctrl+Shift+Y. (or Cmd+Shift+Y on macOS) The color format is determined by `devtools.defaultColorUnit`. For example, changing this preference to "hsl" will give you results like `hsl(25, 75%, 50%)`.
 
+#### [Invert PDF Button](/JS/invertPDFButton.uc.js):
+
+Add a new button to Firefox's PDF.js viewer toolbar. It inverts the PDF colors to provide a dark mode.
+
 #### [Findbar Mods](/JS/findbarMods.uc.js):
 
 ✨ This script adds several improvements and modifications for the findbar, and (optionally) makes it much more horizontally compact and concise by removing wasted space and unnecessary words.<details><summary>💬 **_More details..._**</summary>
