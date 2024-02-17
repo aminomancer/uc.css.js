@@ -130,6 +130,7 @@ menuitem#menu_openDownloads .menu-text,
 menuitem#menu_openAddons .menu-text,
 menuitem#menu_openUserChrome .menu-text,
 #addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic) .menu-text,
+menu[id^="format-with-prettier_phryneas_de-menuitem-"][ext-type="top-level-menu"] > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic) > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases-from-this-site:not(.menuitem-iconic) > .menu-text,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic) > .menu-text,
@@ -369,6 +370,7 @@ menuitem#menu_openDownloads::before,
 menuitem#menu_openAddons::before,
 menuitem#menu_openUserChrome::before,
 #addon_darkreader_org-menuitem-_toggle:not(.menuitem-iconic)::before,
+menu[id^="format-with-prettier_phryneas_de-menuitem-"][ext-type="top-level-menu"]::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-generate-alias:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases-from-this-site:not(.menuitem-iconic)::before,
 #private-relay_firefox_com-menuitem-_fx-private-relay-use-existing-aliases:not(.menuitem-iconic)::before,
@@ -1054,7 +1056,7 @@ menuitem#sanitizeItem::before {
 
 :is(#context-selectall, #menu_selectAll, #menu_selectall)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before {
-  background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+  background-image: url(chrome://userchrome/content/material/select-forward.svg);
 }
 
 :is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink)::before {

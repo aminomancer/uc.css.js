@@ -162,3 +162,12 @@ a rule for it. */
     --search-engine-icon: url(chrome://userchrome/content/engines/reelgood.svg) !important;
   }
 }
+
+/* replace the contextMenuMods.uc.js icons for built-in engines */
+.searchmenuitem[engine-id="google@search.mozilla.orgdefault"] {
+  --engine-icon: url(chrome://userchrome/content/engines/google.svg) !important;
+}
+
+.searchmenuitem[engine-id="ddg@search.mozilla.orgdefault"] {
+  --engine-icon: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
+}

@@ -223,8 +223,8 @@ but other than that these variables should be available everywhere. */
   --content-selection-bgcolor: hsla(0, 0%, 100%, 0.8);
   --content-selection-color: hsl(240, 4%, 10%);
   --content-selection-bgcolor-disabled: hsla(0, 0%, 100%, 0.7);
-  --pdf-selection-bgcolor: hsl(245, 100%, 46.7%);
-  --pdf-highlight-bgcolor: hsl(345, 100%, 40%);
+  --pdf-selection-bgcolor: hsla(245, 100%, 46.7%, 0.25);
+  --pdf-highlight-bgcolor: hsla(345, 100%, 40%, 0.35);
 
   /* controls the color of the search highlights in about:preferences */
   --solid-selection-bgcolor: var(--pink-action);

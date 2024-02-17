@@ -842,6 +842,10 @@ menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkRea
   background-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
+menu[id^="format-with-prettier_phryneas_de-menuitem-"][ext-type="top-level-menu"]::before {
+  background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
+}
+
 /* fix inconsistent string casing of menuitems in Dark Reader */
 #addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > label,
 #addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > label,
