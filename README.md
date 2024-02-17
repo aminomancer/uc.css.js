@@ -616,7 +616,7 @@ Each extension gets its own button in the panel. Clicking an extension's button 
 
 </details>
 
-#### [Extension Stylesheet Loader](/JS/extensionStylesheetLoader.uc.js):
+#### [Extension Stylesheet Loader](/JS/extensionStylesheetLoader.sys.mjs):
 
 ✨ This script is required if you want my "dark mode" themes for various addons like uBlock Origin, Dark Reader, etc. It allows loading CSS rules in addon documents based on ID (which is static), rather than by addon URL (which is random).<details><summary>💬 **_More details..._**</summary>
 
@@ -632,7 +632,7 @@ For other Firefox modders and theme developers, you can use this script to distr
 
 Adds a toolbar button that implements the color picker without launching the devtools or opening any popups. That is, you can click the button and then immediately click anywhere inside the content window to copy the color of that pixel to your clipboard. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. The script also adds a customizable hotkey that does the same thing — by default, it's Ctrl+Shift+Y. (or Cmd+Shift+Y on macOS) The color format is determined by `devtools.defaultColorUnit`. For example, changing this preference to "hsl" will give you results like `hsl(25, 75%, 50%)`.
 
-#### [Invert PDF Button](/JS/invertPDFButton.uc.js):
+#### [Invert PDF Button](/JS/invertPDFButton.sys.mjs):
 
 Add a new button to Firefox's PDF.js viewer toolbar. It inverts the PDF colors to provide a dark mode.
 
@@ -958,7 +958,7 @@ Without any additional CSS, the script will use the same icon that shows in the 
 
 </details>
 
-#### [Search Selection Keyboard Shortcut](/JS/searchSelectionShortcut.uc.js):
+#### [Search Selection Keyboard Shortcut](/JS/searchSelectionShortcut.sys.mjs):
 
 Adds a new keyboard shortcut (Ctrl+Shift+F) that searches for whatever text you currently have highlighted. This does basically the same thing as the context menu option "Search {Engine} for {Selection}" except that if you highlight a URL, (meaning text that is likely a URL, even if it's not a clickable hyperlink) instead of searching for the selection it will navigate directly to the URL. Optionally, you can also configure the script to use your other (non-default) search engines as well. <details><summary>💬 **_More details..._**</summary>
 
