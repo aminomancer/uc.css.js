@@ -99,6 +99,10 @@
     --link-visited-color: var(--pink-40) !important;
     --link-visited-color-hover: var(--pink-35) !important;
     --link-visited-color-active: var(--pink-30) !important;
+    --button-background: var(--uc-content-button-background) !important;
+    --button-background-hover: var(--uc-content-button-background-hover) !important;
+    --button-background-active: var(--uc-content-button-background-active) !important;
+    --button-background-solid: var(--uc-content-button-background-solid);
     --in-content-button-background: var(--uc-content-button-background) !important;
     --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
     --in-content-button-background-active: var(--uc-content-button-background-active) !important;

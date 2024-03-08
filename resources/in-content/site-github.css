@@ -8,6 +8,14 @@
 which requires Stylus. don't use this stylesheet if you don't have that theme, it'll just make things ugly. */
 
 @-moz-document domain("github.com"), domain("gist.github.com"), domain("github.community") {
+  /* add a dummy rule so this will be loaded by the style editor on github
+  even if it lacks any of the specifically selected elements. */
+  :root {
+    --uc-dummy-custom-property: initial;
+    /* --transparent-img-background: transparent !important; */
+    --fontStack-monospace: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+  }
+
   .rgh-monospace-textareas #merge_title_field,
   .rgh-monospace-textareas #commit-summary-input,
   .rgh-monospace-textareas textarea {
@@ -18,15 +26,32 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
   tt,
   code,
   samp,
-  .input-monospace {
+  kbd,
+  .input-monospace,
+  .text-mono {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
   }
 
   .blob-code-inner,
   .markdown-body pre > code,
-  .markdown-body .highlight > pre {
+  .markdown-body .highlight > pre,
+  .react-blob-print-hide,
+  .react-code-text,
+  /* this last one is weird. I can't find the element it's styling in the
+  inspector. for some reason it's invisible to the inspector. but it's there,
+  because without this rule, the text cursor when clicking on code doesn't
+  appear in the right place, because there's some invisible 12px text in this
+  invisible element and that's what you're selecting. by styling it here, we
+  basically ensure the invisible text aligns exactly with the visible text. */
+  body > div:last-child[style*="font-family"] {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
     font-size: 14px !important;
+  }
+
+  /* changing fonts makes the folder arrows next to line numbers misaligned with the text.
+  remove the 1px block margins from the arrows to fix this. */
+  .hXUKEK {
+    margin: 0 8px !important;
   }
 
   virtual-list#tree-finder-results {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.7
+// @version        1.3.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -277,7 +277,7 @@ When you middle click, the button will show a notification telling you the curre
           switch (button) {
             case this.mouseConfig.contentToolbox:
               // toggle the content toolbox
-              aDoc.ownerGlobal.key_toggleToolbox.click();
+              aDoc.getElementById("key_toggleToolbox").click();
               break;
             case this.mouseConfig.browserToolbox:
               lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
@@ -285,7 +285,7 @@ When you middle click, the button will show a notification telling you the curre
                     event: e,
                     hideCheck: true,
                   }) // if so, just show a hint that it's already open
-                : aDoc.ownerGlobal.key_browserToolbox.click(); // if not, launch a new one
+                : aDoc.getElementById("key_browserToolbox").click(); // if not, launch a new one
               break;
             case this.mouseConfig.popupHide:
               CustomHint.show(
@@ -393,7 +393,27 @@ When you middle click, the button will show a notification telling you the curre
             // get notified until the content toolbox also closes.
             case "devtools-thread-ready":
               let threadActor = sub?.wrappedJSObject;
-              if (threadActor) threadActor.destroy = destroyThreadActor;
+              if (threadActor) {
+                if (threadActor.destroy.name !== "destroyThreadActor") {
+                  const STATES = {
+                    DETACHED: "detached",
+                    EXITED: "exited",
+                    RUNNING: "running",
+                    PAUSED: "paused",
+                  };
+                  eval(
+                    `threadActor.destroy = function destroyThreadActor ${threadActor.destroy
+                      .toString()
+                      .replace(/^destroy/, "")
+                      .replace(
+                        /super\.destroy\(\)/,
+                        `lazy.Actor.prototype.destroy.call(this);
+                        // this leads back to toolboxObserver in 200ms
+                        setTimeout(() => Services.obs.notifyObservers(null, "devtools-thread-destroyed"), 200);`
+                      )}`
+                  );
+                }
+              }
               break;
             default:
               break;
@@ -408,48 +428,6 @@ When you middle click, the button will show a notification telling you the curre
           }
         }
 
-        function destroyThreadActor() {
-          if (this._state == "paused") {
-            this.doResume();
-          }
-
-          this.removeAllWatchpoints();
-          this._xhrBreakpoints = [];
-          this._updateNetworkObserver();
-
-          this._activeEventBreakpoints = new Set();
-          this._debuggerNotificationObserver.removeListener(
-            this._eventBreakpointListener
-          );
-
-          for (const global of this.dbg.getDebuggees()) {
-            try {
-              this._debuggerNotificationObserver.disconnect(
-                global.unsafeDereference()
-              );
-            } catch (e) {}
-          }
-
-          this._parent.off("window-ready", this._onWindowReady);
-          this._parent.off("will-navigate", this._onWillNavigate);
-          this._parent.off("navigate", this._onNavigate);
-
-          this.sourcesManager.off("newSource", this.onNewSourceEvent);
-          this.clearDebuggees();
-          this._threadLifetimePool.destroy();
-          this._threadLifetimePool = null;
-          this._dbg = null;
-          this._state = "exited";
-
-          lazy.Actor.prototype.destroy.call(this);
-          // this leads back to toolboxObserver in 200ms
-          setTimeout(
-            () =>
-              Services.obs.notifyObservers(null, "devtools-thread-destroyed"),
-            200
-          );
-        }
-
         toolbarbutton.setStrings = function () {
           let hotkey, labelString;
           for (const [key, val] of Object.entries(toolbarbutton.mouseConfig)) {
@@ -457,14 +435,14 @@ When you middle click, the button will show a notification telling you the curre
               switch (key) {
                 case "contentToolbox":
                   labelString = l10n.getString("toolbox.label", "toolbox");
-                  hotkey = aDoc.ownerGlobal.key_toggleToolbox;
+                  hotkey = aDoc.getElementById("key_toggleToolbox");
                   break;
                 case "browserToolbox":
                   labelString = l10n.getString(
                     "browserToolboxMenu.label",
                     "menu"
                   );
-                  hotkey = aDoc.ownerGlobal.key_browserToolbox;
+                  hotkey = aDoc.getElementById("key_browserToolbox");
                   break;
                 case "popupHide":
                   labelString = l10n.getFluentValue(

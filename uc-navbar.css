@@ -351,17 +351,11 @@ toolbar .toolbarbutton-1:not([disabled])[open]:hover > .toolbarbutton-icon {
   padding-inline: var(--arrowpanel-menuitem-padding) !important;
 }
 
-#PersonalToolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
-toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active),
+#PersonalToolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack),
+toolbarbutton.bookmark-item:not(.subviewbutton):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack),
 toolbar .toolbarbutton-1:is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack) {
   background-color: var(--toolbarbutton-checked-background) !important;
   transition: none !important;
-}
-
-#PersonalToolbar .toolbarbutton-1 > .toolbarbutton-icon,
-#PersonalToolbar .toolbarbutton-1 > .toolbarbutton-text,
-#PersonalToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-  background: none !important;
 }
 
 toolbar .toolbarbutton-1:not([disabled], [open])[checked] > :is(.toolbarbutton-icon, .toolbarbutton-badge-stack) {
@@ -433,12 +427,20 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
 
 #PersonalToolbar > * {
   transition: opacity 200ms ease-in-out, transform 150ms ease-in-out !important;
-  overflow-y: visible !important;
-  margin-block: 0 var(--bookmark-block-padding) !important;
 }
 
 #PersonalToolbar > toolbarpaletteitem:not([notransition])[place="toolbar"] {
   transition: opacity 200ms ease-in-out, transform 150ms ease-in-out, border-width var(--drag-drop-transition-duration) ease-in-out !important;
+}
+
+#PersonalToolbar[customizing] {
+  #personal-toolbar-empty {
+    display: none;
+  }
+}
+
+#personal-bookmarks {
+  justify-content: revert !important;
 }
 
 #PersonalToolbar[customizing][draggingover] {
@@ -536,12 +538,16 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
     margin-inline-start: -18px !important;
   }
 
-  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over, :focus-visible) .toolbarbutton-icon {
-    background-color: var(--button-solid-hover-background) !important;
+  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:hover, :-moz-drag-over) .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-hover-background) !important;
   }
 
   :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]):hover:active .toolbarbutton-icon {
-    background-color: var(--button-solid-active-background) !important;
+    background-color: var(--toolbarbutton-active-background) !important;
+  }
+
+  :root:not([fluent-reveal-hover], [fluent-reveal-click]) #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]):is(:focus-visible, [checked="true"]):not([disabled], [open], :hover, :active) .toolbarbutton-icon {
+    background-color: var(--toolbarbutton-checked-background) !important;
   }
 }
 

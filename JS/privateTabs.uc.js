@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.2.7
+// @version        1.3.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of [Private Tab](https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js) by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
@@ -14,53 +14,49 @@
 // ==/UserScript==
 
 class PrivateTabManager {
-  // user preferences. add these in about:config if you want them to persist
+  // user preferences. set these in about:config if you want them to persist
   // between script updates without having to reapply them.
-  config = {
-    // if you want to not record history but don't care about other data, maybe even want to keep private logins
-    neverClearData: Services.prefs.getBoolPref(
-      "privateTabs.neverClearData",
-      false
-    ),
-    restoreTabsOnRestart: Services.prefs.getBoolPref(
-      "privateTabs.restoreTabsOnRestart",
-      true
-    ),
-    doNotClearDataUntilFxIsClosed: Services.prefs.getBoolPref(
-      "privateTabs.doNotClearDataUntilFxIsClosed",
-      true
-    ),
-    deleteContainerOnDisable: Services.prefs.getBoolPref(
-      "privateTabs.deleteContainerOnDisable",
-      false
-    ),
-    clearDataOnDisable: Services.prefs.getBoolPref(
-      "privateTabs.clearDataOnDisable",
-      false
-    ),
-
-    // key for toggling private mode for the active tab. ctrl + alt + T by default.
-    toggleHotkey: Services.prefs.getCharPref("privateTabs.toggleHotkey", "T"),
-
+  defaultPrefs = [
+    // if you want to not record history but don't care about other data, maybe
+    // even want to keep private logins
+    ["neverClearData", false],
+    ["restoreTabsOnRestart", true],
+    ["doNotClearDataUntilFxIsClosed", true],
+    ["deleteContainerOnDisable", false],
+    ["clearDataOnDisable", false],
+    // key to toggle private mode for the active tab. ctrl + alt + T by default.
+    ["toggleHotkey", "T"],
     // key for opening a new private tab. ctrl + alt + P by default.
-    newTabHotkey: Services.prefs.getCharPref("privateTabs.newTabHotkey", "P"),
-
-    // modifiers for toggle hotkey. this means alt+ctrl on windows or alt+cmd on mac
-    toggleModifiers: Services.prefs.getCharPref(
-      "privateTabs.toggleModifiers",
-      "alt accel"
-    ),
-
+    ["newTabHotkey", "P"],
+    // modifiers for toggle hotkey. alt+ctrl on windows; alt+cmd on mac
+    ["toggleModifiers", "alt accel"],
     // modifiers for new tab hotkey.
-    newTabModifiers: Services.prefs.getCharPref(
-      "privateTabs.newTabModifiers",
-      "alt accel"
-    ),
-  };
+    ["newTabModifiers", "alt accel"],
+  ];
+  setupPrefs() {
+    let defaultBranch = Services.prefs.getDefaultBranch("");
+    for (let [name, value] of this.defaultPrefs) {
+      let prefName = `privateTabs.${name}`;
+      XPCOMUtils.defineLazyPreferenceGetter(this.config, name, prefName, value);
+      switch (typeof value) {
+        case "boolean":
+          defaultBranch.setBoolPref(prefName, value);
+          break;
+        case "number":
+          defaultBranch.setIntPref(prefName, value);
+          break;
+        case "string":
+          defaultBranch.setStringPref(prefName, value);
+          break;
+      }
+    }
+  }
+  config = {};
   openTabs = new Set();
   BTN_ID = "privateTab-button";
   BTN2_ID = "newPrivateTab-button";
   constructor() {
+    this.setupPrefs();
     if (!_ucUtils.sharedGlobal.privateTabGlobal) {
       _ucUtils.sharedGlobal.privateTabGlobal = {};
     }
@@ -73,23 +69,25 @@ class PrivateTabManager {
     );
     this.SSI = SessionStoreInternal;
     this.TAB_CUSTOM_VALUES = TAB_CUSTOM_VALUES;
-    XPCOMUtils.defineLazyModuleGetters(this, {
-      Management: "resource://gre/modules/Extension.jsm",
-      TabState: "resource:///modules/sessionstore/TabState.jsm",
-      TabStateFlusher: "resource:///modules/sessionstore/TabStateFlusher.jsm",
+    ChromeUtils.defineESModuleGetters(this, {
+      Management: "resource://gre/modules/Extension.sys.mjs",
+      TabState: "resource:///modules/sessionstore/TabState.sys.mjs",
+      TabStateFlusher:
+        "resource:///modules/sessionstore/TabStateFlusher.sys.mjs",
       ContextualIdentityService:
-        "resource://gre/modules/ContextualIdentityService.jsm",
+        "resource://gre/modules/ContextualIdentityService.sys.mjs",
     });
     this.sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    this.menuClass =
-      typeof window.gProton != "undefined"
-        ? ``
-        : `menuitem-iconic privatetab-icon`;
+    let iconsSheet = _ucUtils.fs.chromeDir().entry();
+    iconsSheet.append("uc-context-menu-icons.css");
+    this.menuClass = iconsSheet.exists()
+      ? `menuitem-iconic privatetab-icon`
+      : "";
     this.orig_getAttribute = MozElements.MozTab.prototype.getAttribute;
     this.init();
-    if (location.href != "chrome://browser/content/browser.xhtml") {
+    if (location.href !== "chrome://browser/content/browser.xhtml") {
       return this.exec();
     }
     if (gBrowserInit.delayedStartupFinished) {
@@ -157,7 +155,7 @@ class PrivateTabManager {
       .getElementById("placesContext")
       .addEventListener("popupshowing", this);
 
-    if (location.href != "chrome://browser/content/browser.xhtml") return;
+    if (location.href !== "chrome://browser/content/browser.xhtml") return;
 
     let keyset = _ucUtils.createElement(document, "keyset", {
       id: "privateTab-keyset",
@@ -352,19 +350,28 @@ class PrivateTabManager {
       this.clearData();
     }
 
-    this.setStyle();
-    this.sss.loadAndRegisterSheet(this.STYLE.url, this.STYLE.type);
+    let style = {
+      url: Services.io.newURI(
+        `data:text/css;charset=UTF-8,${encodeURIComponent(
+          `.privatetab-icon, #${this.BTN_ID}, #${this.BTN2_ID} { list-style-image: url(chrome://browser/skin/privateBrowsing.svg) !important; fill: currentColor; -moz-context-properties: fill; } @-moz-document url('chrome://browser/content/browser.xhtml') { .private-mask[enabled="true"] { display: flex !important; } .private-mask:not([enabled="true"]) { display: none !important; } #tabbrowser-tabs[hasadjacentnewprivatetabbutton]:not([overflow="true"]) ~ #${this.BTN_ID}, #tabbrowser-tabs[overflow="true"] > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #tabbrowser-tabs:not([hasadjacentnewprivatetabbutton]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #TabsToolbar[customizing="true"] #${this.BTN2_ID} { display: none; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"] .tab-label { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-icon-image, .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-throbber { border-bottom: 1px dashed -moz-nativehyperlinktext !important; }}`
+        )}`
+      ),
+      type: this.sss.USER_SHEET,
+    };
+    if (!this.sss.sheetRegistered(style.url, style.type)) {
+      this.sss.loadAndRegisterSheet(style.url, style.type);
+    }
 
     CustomizableUI.addListener(this);
 
     if (!privateTabGlobal.privateTabsInited) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
+        BrowserWindowTracker:
+          "resource:///modules/BrowserWindowTracker.sys.mjs",
         PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
-      });
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
-        PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.jsm",
+        PrivateBrowsingUtils:
+          "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
       });
       function getBrowserWindow(aWindow) {
         // Prefer the caller window if it's a browser window, otherwise use
@@ -644,7 +651,7 @@ class PrivateTabManager {
   }
 
   onTabSelect(e) {
-    if (e.target.userContextId != e.detail.previousTab.userContextId) {
+    if (e.target.userContextId !== e.detail.previousTab.userContextId) {
       this.toggleMask();
     }
   }
@@ -679,17 +686,6 @@ class PrivateTabManager {
         !this.config.neverClearData &&
         !this.config.doNotClearDataUntilFxIsClosed)
     );
-  }
-
-  setStyle() {
-    this.STYLE = {
-      url: Services.io.newURI(
-        `data:text/css;charset=UTF-8,${encodeURIComponent(
-          `.privatetab-icon, #${this.BTN_ID}, #${this.BTN2_ID} { list-style-image: url(chrome://browser/skin/privateBrowsing.svg) !important; fill: currentColor; -moz-context-properties: fill; } @-moz-document url('chrome://browser/content/browser.xhtml') { .private-mask[enabled="true"] { display: flex !important; } .private-mask:not([enabled="true"]) { display: none !important; } #tabbrowser-tabs[hasadjacentnewprivatetabbutton]:not([overflow="true"]) ~ #${this.BTN_ID}, #tabbrowser-tabs[overflow="true"] > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #tabbrowser-tabs:not([hasadjacentnewprivatetabbutton]) > #tabbrowser-arrowscrollbox > #tabbrowser-arrowscrollbox-periphery > #${this.BTN2_ID}, #TabsToolbar[customizing="true"] #${this.BTN2_ID} { display: none; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"] .tab-label { text-decoration: underline !important; text-decoration-color: -moz-nativehyperlinktext !important; text-decoration-style: dashed !important; } .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-icon-image, .tabbrowser-tab[usercontextid="${this.container.userContextId}"][pinned] .tab-throbber { border-bottom: 1px dashed -moz-nativehyperlinktext !important; }}`
-        )}`
-      ),
-      type: this.sss.USER_SHEET,
-    };
   }
 
   setTstStyle(baseURL) {

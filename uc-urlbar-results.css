@@ -15,8 +15,7 @@
 }
 
 .urlbarView-no-wrap > span:not([title], [label]):empty,
-.urlbarView-url:not([title], [label]):empty,
-.urlbarView:not([actionoverride]) .urlbarView-row[type="switchtab"] > .urlbarView-row-inner > .urlbarView-url {
+.urlbarView-url:not([title], [label]):empty {
   display: none;
 }
 
@@ -454,9 +453,9 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView-row-inner,
 .urlbarView-no-wrap {
-  display: flex;
+  display: inline-flex;
   flex-wrap: nowrap;
-  align-items: end;
+  align-items: center !important;
   justify-content: start;
   column-gap: calc(var(--urlbar-icon-padding) + 2px);
 }

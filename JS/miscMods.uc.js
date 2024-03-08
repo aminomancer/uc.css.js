@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.1
+// @version        2.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -366,7 +366,7 @@
           return;
         }
 
-        Services.els.addSystemEventListener(document, "keyup", this, false);
+        document.addEventListener("keyup", this, { mozSystemGroup: true });
 
         let tabs = gBrowser.visibleTabs;
         if (tabs.length > 2) {
