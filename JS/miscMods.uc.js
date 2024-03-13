@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.2
+// @version        2.1.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -574,37 +574,6 @@
             `engine.name ? this.setAttribute("engine", engine.name) : this.removeAttribute("engine");\n      $1`
           )}`
       );
-
-      // Add a separator between "Enhanced Tracking Protection is ON for this
-      // site" and "Site not working?" for aesthetic reasons.
-      ChromeUtils.defineLazyGetter(
-        gProtectionsHandler,
-        "_protectionsPopupTPSwitchSeparator",
-        function () {
-          let footer = this._protectionsPopupTPSwitchBreakageLink.parentElement;
-          let separator = document.createElement("toolbarseparator");
-          separator.id = "protections-popup-tp-switch-separator";
-          separator.hidden = true;
-          footer.before(separator);
-          return separator;
-        }
-      );
-      if (
-        gProtectionsHandler.toggleBreakageLink.name !== "uc_toggleBreakageLink"
-      ) {
-        eval(
-          `gProtectionsHandler.toggleBreakageLink = function uc_toggleBreakageLink ${gProtectionsHandler.toggleBreakageLink
-            .toSource()
-            .replace(/^\(/, "")
-            .replace(/\)$/, "")
-            .replace(/^function\s*/, "")
-            .replace(/^toggleBreakageLink\s*/, "")
-            .replace(
-              /}$/,
-              `\n    this._protectionsPopupTPSwitchSeparator.hidden =\n      this._protectionsPopupTPSwitchBreakageLink.hidden &&\n      this._protectionsPopupTPSwitchBreakageFixedLink.hidden;\n  }`
-            )}`
-        );
-      }
     }
   }
 
