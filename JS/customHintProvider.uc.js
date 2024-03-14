@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.8
+// @version        1.1.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -30,46 +30,46 @@ window.CustomHint = {
    * element, usually used in response to a user action to reaffirm that it was
    * successful and potentially provide extra context.
    *
-   * @param  anchor (DOM node, required)
-   *         The anchor for the panel. A value of null will anchor to the viewpoint (see options.x below)
-   * @param  message (string, required)
-   *         The message to be shown.
-   * @param  options (object, optional)
-   *         An object with any number of the following optional properties:
-   *         - event (DOM event): The event that triggered the feedback.
-   *         - hideArrow (boolean): Optionally hide the arrow.
-   *         - hideCheck (boolean): Optionally hide the checkmark.
-   *         - description (string): If provided, show a more detailed description/subtitle with the passed text.
-   *         - duration (numeric): How long the hint should stick around, in milliseconds.
-   *                               Default is 1500 — 1.5 seconds. Pass -1 to make the hint stay open
-   *                               indefinitely, until the user clicks out of it, presses Escape, etc.
-   *         - position (string): One of a number of strings representing how the anchor point of the popup
-   *                              is aligned relative to the anchor point of the anchor node.
-   *                              Possible values for position are:
-   *                                  before_start, before_end, after_start, after_end,
-   *                                  start_before, start_after, end_before, end_after,
-   *                                  overlap, after_pointer
-   *                              For example, after_start means the anchor node's bottom left corner will
-   *                              be aligned with the popup node's top left corner. overlap means their
-   *                              top left corners will be lined up exactly, so they will overlap.
-   *         - x (number): Horizontal offset in pixels, relative to the anchor.
-   *                       If no anchor is provided, relative to the viewport.
-   *         - y (number): Vertical offset in pixels, relative to the anchor.
-   *                       Negative values may also be used to move to the left and upwards respectively.
-   *                       Unanchored popups may be created by supplying null as the anchor node.
-   *                       An unanchored popup appears at the position specified by x and y, relative to the
-   *                       viewport of the document containing the popup node. (ignoring the anchor parameter)
-   *
+   * @param {Element} anchor The anchor for the panel. A value of null will
+   *   anchor to the viewpoint (see options.x below)
+   * @param {string} message The text to be shown.
+   * @param {object} [options] Object with optional extra properties:
+   * @param {string} [options.description] If provided, show a more detailed
+   *   description/subtitle with the passed text.
+   * @param {boolean} [options.hideArrow] Optionally hide the arrow.
+   * @param {boolean} [options.hideCheck] Optionally hide the checkmark.
+   * @param {number} [options.duration] How long the hint should stick around,
+   *   in milliseconds. Default is 1500 — 1.5 seconds. Pass -1 to make the hint
+   *   stay open until the user clicks out of it, presses Escape, etc.
+   * @param {DOMEvent} [options.event] The event that triggered the feedback.
+   * @param {string} [options.position] One of a number of strings representing
+   *   how the anchor point of the popup is aligned relative to the anchor point
+   *   of the anchor node. Possible values for position are:
+   *     before_start, before_end, after_start, after_end, start_before,
+   *     start_after, end_before, end_after, overlap, after_pointer
+   *   For example, `after_start` means the anchor node's bottom left corner
+   *   will be aligned with the popup node's top left corner. `overlap` means
+   *   their top left corners will be lined up exactly, so they will overlap.
+   * @param {number} [options.x] Horizontal offset in pixels, relative to the
+   *   anchor. If no anchor is provided, relative to the viewport.
+   * @param {number} [options.y] Vertical offset in pixels, relative to the
+   *   anchor. Negative values may also be used to move to the left and upwards
+   *   respectively. Unanchored popups may be created by supplying null as the
+   *   anchor node. An unanchored popup appears at the position specified by x
+   *   and y, relative to the viewport of the document containing the popup
+   *   node. (ignoring the anchor parameter)
    */
   show(anchor, message, options = {}) {
+    let { description, hideArrow, hideCheck, duration, event, position, x, y } =
+      options;
     this._reset();
 
     this._message.removeAttribute("data-l10n-id");
     this._message.textContent = message;
 
-    if (options.description) {
+    if (description) {
       this._description.removeAttribute("data-l10n-id");
-      this._description.textContent = options.description;
+      this._description.textContent = description;
       this._description.hidden = false;
       this._panel.classList.add("with-description");
     } else {
@@ -77,11 +77,11 @@ window.CustomHint = {
       this._panel.classList.remove("with-description");
     }
 
-    if (options.hideArrow) {
+    if (hideArrow) {
       this._panel.setAttribute("hidearrow", "true");
     }
 
-    if (options.hideCheck) {
+    if (hideCheck) {
       this._animationBox.setAttribute("hidden", "true");
       this._panel.setAttribute("data-message-id", "hideCheckHint");
     } else {
@@ -89,7 +89,7 @@ window.CustomHint = {
       this._panel.setAttribute("data-message-id", "checkmarkHint");
     }
 
-    const DURATION = options.duration || 1500;
+    const DURATION = duration || 1500;
     this._panel.addEventListener(
       "popupshown",
       () => {
@@ -111,8 +111,7 @@ window.CustomHint = {
       { once: true }
     );
 
-    let { position, x, y } = options;
-    this._panel.openPopup(null, { position, triggerEvent: options.event });
+    this._panel.openPopup(null, { position, triggerEvent: event });
     this._panel.moveToAnchor(anchor, position, x, y);
   },
 
