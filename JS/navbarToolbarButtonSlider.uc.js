@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.6
+// @version        2.9.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -339,6 +339,7 @@ class NavbarToolbarSlider {
       let nodes = arr ?? widgetList.map(w => w.forWindow(window).node);
       for (let i = 0; i < length; i++) {
         let el = nodes[i];
+        if (!el) continue;
         const style = window.getComputedStyle(el);
         if (style?.visibility === "visible" && style?.display !== "none") {
           maxWidth += NavbarToolbarSlider.parseWidth(el);
