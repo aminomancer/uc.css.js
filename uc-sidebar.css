@@ -517,10 +517,6 @@ trees so it is relatively safe to collapse them. */
     color: var(--ui-selection-color) !important;
   }
 
-  :-moz-window-inactive::selection {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
-  }
-
   * {
     scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;

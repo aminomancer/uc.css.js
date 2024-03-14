@@ -359,19 +359,11 @@ of moz-document in stylesheets with file:// urls */
       background-color: var(--ui-selection-bgcolor);
       color: var(--ui-selection-color);
     }
-
-    :-moz-window-inactive::selection {
-      background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
-    }
   }
 
   ::selection {
     background-color: var(--global-selection-bgcolor);
     color: var(--global-selection-color);
-  }
-
-  :-moz-window-inactive::selection {
-    background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background);
   }
 
   radio[focused="true"] > .radio-label-box {

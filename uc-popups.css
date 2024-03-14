@@ -135,10 +135,6 @@ tabmodalprompt :is(input, textarea)::selection {
   color: var(--ui-selection-color) !important;
 }
 
-tabmodalprompt :-moz-window-inactive::selection {
-  background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
-}
-
 tabmodalprompt input[type="number"] {
   overflow: hidden !important;
   overflow-clip-box: padding-box !important;
@@ -1012,20 +1008,10 @@ rtl languages. adjust the border radius accordingly */
     color: var(--ui-selection-color) !important;
   }
 
-  input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
-  textarea:-moz-window-inactive::selection {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
-  }
-
   window[role="dialog"] ::selection,
   window[role="dialog"] textarea::selection {
     background-color: var(--global-selection-bgcolor) !important;
     color: var(--global-selection-color) !important;
-  }
-
-  window[role="dialog"] :-moz-window-inactive::selection,
-  window[role="dialog"] textarea:-moz-window-inactive::selection {
-    background-color: var(--global-selection-bgcolor-disabled, text-select-disabled-background) !important;
   }
 
   input[type="number"] {
@@ -1327,11 +1313,6 @@ rtl languages. adjust the border radius accordingly */
   :root[dialogroot] textarea::selection {
     background-color: var(--ui-selection-bgcolor) !important;
     color: var(--ui-selection-color) !important;
-  }
-
-  :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):-moz-window-inactive::selection,
-  :root[dialogroot] textarea:-moz-window-inactive::selection {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background) !important;
   }
 
   :root[dialogroot] details > summary {

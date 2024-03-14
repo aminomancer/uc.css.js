@@ -34,11 +34,6 @@
     background-color: var(--content-selection-bgcolor) !important;
   }
 
-  :root[uc-extension-id="notes@mozilla.com"] textarea:-moz-window-inactive::selection,
-  :root[uc-extension-id="notes@mozilla.com"] :-moz-window-inactive::selection {
-    background-color: var(--content-selection-bgcolor-disabled) !important;
-  }
-
   :root[uc-extension-id="notes@mozilla.com"] :is(:root, body, .ck.ck-reset_all, .ck.ck-reset_all *, code) {
     font-family: var(--ck-font-face) !important;
   }

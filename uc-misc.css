@@ -392,10 +392,6 @@ link[href="chrome://global/skin/search-textbox.css"] {
     background-color: var(--ui-selection-bgcolor);
     color: var(--ui-selection-color);
   }
-
-  ~ :-moz-window-inactive::selection {
-    background-color: var(--ui-selection-bgcolor-disabled, text-select-disabled-background);
-  }
 }
 
 /* hide keyword fixup notification */

@@ -29,10 +29,6 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
     color: var(--global-selection-color) !important;
   }
 
-  :-moz-window-inactive::selection {
-    background-color: var(--global-selection-bgcolor-disabled) !important;
-  }
-
   /* pdf viewer: selection, findbar highlights */
   .pdfViewer .textLayer .highlight {
     background-color: var(--pdf-selection-bgcolor) !important;
@@ -88,10 +84,6 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
     ::selection {
       color: var(--content-selection-color) !important;
       background-color: var(--content-selection-bgcolor) !important;
-    }
-
-    :-moz-window-inactive::selection {
-      background-color: var(--content-selection-bgcolor-disabled) !important;
     }
   }
 }

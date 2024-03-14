@@ -14,9 +14,4 @@ which you can download from the extensions folder in the main directory. */
     color: var(--content-selection-color) !important;
     background-color: var(--content-selection-bgcolor) !important;
   }
-
-  :root[uc-extension-id="note-tab@aminomancer"] textarea:-moz-window-inactive::selection,
-  :root[uc-extension-id="note-tab@aminomancer"] :-moz-window-inactive::selection {
-    background-color: var(--content-selection-bgcolor-disabled) !important;
-  }
 }

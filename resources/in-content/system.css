@@ -13,10 +13,6 @@
       background-color: var(--content-selection-bgcolor) !important;
     }
 
-    :-moz-window-inactive::selection {
-      background-color: var(--content-selection-bgcolor-disabled) !important;
-    }
-
     .highlight :is(.start-tag, .end-tag)::selection {
       color: #801f1f !important;
     }

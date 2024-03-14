@@ -499,11 +499,6 @@ the NTP/home page hasn't opened yet. */
   color: var(--lwt-toolbar-field-highlight-text, HighlightText) !important;
 }
 
-.urlbar-input-box input:not(:focus)::selection,
-.searchbar-textbox:not(:focus-within)::selection {
-  background-color: var(--lwt-toolbar-field-highlight-disabled, text-select-disabled-background) !important;
-}
-
 #urlbar > #urlbar-input-container {
   border: none !important;
 }
