@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.8
+// @version        1.3.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -10,7 +10,9 @@ Adds a new toolbar button that 1) opens the content toolbox on left click; 2) op
 
 If you want to change which mouse buttons execute which functions, search for `userChrome.toolboxButton.mouseConfig` in <about:config>. Change the 0, 1, and 2 values. 0 = left click, 1 = middle, and 2 = right. By default, when you open a browser toolbox window, the script will disable popup auto-hide, and then re-enable it when you close the toolbox. I find that I usually want popup auto-hide disabled when I'm using the toolbox, and never want it disabled when I'm not using the toolbox, so I made it automatic, instead of having to right click and then immediately middle click every time. If you don't like this automatic feature, you can turn it off by setting `userChrome.toolboxButton.popupAutohide.toggle-on-toolbox-launch` to false in about:config.
 
-When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. (The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon. This change is animated, as long as the user doesn't have reduced motion enabled) All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, `#confirmation-hint`. So you can customize them with that selector.
+You can force the browser toolbox to open in multiprocess mode by holding Shift and Accel (Ctrl/Cmd) when you right click (or whatever mouse button you set `browserToolbox` to for `userChrome.toolboxButton.mouseConfig`) the button.
+
+When you middle click, the button will show a notification telling you the current status of popup auto-hide, e.g. "Holding popups open." This is just so that people who use the feature a lot won't lose track of whether it's on or off, and won't need to open a popup and try to close it to test it. The toolbar button also changes appearance while popup auto-hide is disabled. It becomes blue like the downloads button and the icon changes into a popup icon. This change is animated, as long as the user doesn't have reduced motion enabled. All of these notifications use the native confirmation hint custom element, since it looks nice. That's the one that appears when you save a bookmark, `#confirmation-hint`. So you can customize them with that selector.
 */
 // @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/atoolboxButton.uc.js
 // @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/atoolboxButton.uc.js
@@ -82,17 +84,22 @@ When you middle click, the button will show a notification telling you the curre
     /^chrome:\/\/browser\/content\/browser.(xul||xhtml)$/i.test(location) &&
     !CustomizableUI.getPlacementOfWidget("toolbox-button", true)
   ) {
+    const { loader } = ChromeUtils.importESModule(
+      "resource://devtools/shared/loader/Loader.sys.mjs"
+    );
     const lazy = {};
     ChromeUtils.defineESModuleGetters(lazy, {
       BrowserToolboxLauncher:
         "resource://devtools/client/framework/browser-toolbox/Launcher.sys.mjs",
-      require: "resource://devtools/shared/loader/Loader.sys.mjs",
     });
-    ChromeUtils.defineLazyGetter(
-      lazy,
-      "Actor",
-      () => lazy.require("devtools/shared/protocol/Actor").Actor
-    );
+    for (const [key, val] of Object.entries({
+      gDevToolsBrowser:
+        "resource://devtools/client/framework/devtools-browser.js",
+      Actor: "resource://devtools/shared/protocol/Actor.js",
+      dumpn: "resource://devtools/shared/DevToolsUtils.js",
+    })) {
+      loader.lazyRequireGetter(lazy, key, val, true);
+    }
 
     CustomizableUI.createWidget({
       id: "toolbox-button",
@@ -270,22 +277,38 @@ When you middle click, the button will show a notification telling you the curre
 
         let onClick = function (e) {
           let { button } = e;
-          if (e.getModifierState("Accel")) {
-            if (button == 2) return;
-            if (button == 0 && AppConstants.platform == "macosx") button = 2;
+          let accel = e.getModifierState("Accel");
+          let shift = e.getModifierState("Shift");
+          if (accel) {
+            if (button == 2 && !shift) {
+              return;
+            }
+            if (button == 0 && AppConstants.platform == "macosx") {
+              button = 2;
+              accel = false;
+            }
           }
           switch (button) {
             case this.mouseConfig.contentToolbox:
               // toggle the content toolbox
-              aDoc.getElementById("key_toggleToolbox").click();
+              lazy.gDevToolsBrowser.toggleToolboxCommand(
+                aDoc.ownerGlobal.gBrowser
+              );
               break;
             case this.mouseConfig.browserToolbox:
-              lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState() // check if a browser toolbox window is already open
-                ? CustomHint.show(toolbarbutton, l10n.alreadyOpenMsg, {
-                    event: e,
-                    hideCheck: true,
-                  }) // if so, just show a hint that it's already open
-                : aDoc.getElementById("key_browserToolbox").click(); // if not, launch a new one
+              if (lazy.BrowserToolboxLauncher.getBrowserToolboxSessionState()) {
+                // check if a browser toolbox window is already open. if so,
+                // just show a hint that it's already open.
+                CustomHint.show(toolbarbutton, l10n.alreadyOpenMsg, {
+                  event: e,
+                  hideCheck: true,
+                });
+              } else {
+                // if not, launch a new one.
+                lazy.BrowserToolboxLauncher.init({
+                  forceMultiprocess: accel && shift,
+                });
+              }
               break;
             case this.mouseConfig.popupHide:
               CustomHint.show(
@@ -318,9 +341,7 @@ When you middle click, the button will show a notification telling you the curre
           this.addEventListener(
             "animationend",
             () => this.removeAttribute("animate"),
-            {
-              once: true,
-            }
+            { once: true }
           );
           this.setAttribute("animate", "true");
         };
@@ -405,6 +426,7 @@ When you middle click, the button will show a notification telling you the curre
                     `threadActor.destroy = function destroyThreadActor ${threadActor.destroy
                       .toString()
                       .replace(/^destroy/, "")
+                      .replace(/dumpn/, "lazy.dumpn")
                       .replace(
                         /super\.destroy\(\)/,
                         `lazy.Actor.prototype.destroy.call(this);
