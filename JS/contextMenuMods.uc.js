@@ -133,9 +133,10 @@ class ContextMenuMods {
         item.classList.add("menuitem-iconic", "searchmenuitem");
         item.setAttribute("engine-id", engine.id);
         item.setAttribute("label", engine.name);
-        let iconURL = engine.getIconURL(16);
-        iconURL.then((iconData) => {
-          item.style.setProperty("--engine-icon", `url('${iconData}')`);
+        engine.getIconURL(16).then(iconURL => {
+          if (iconURL) {
+            item.style.setProperty("--engine-icon", `url('${iconURL}')`);
+          }
         });
         docfrag.appendChild(item);
       }
