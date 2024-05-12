@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.2
+// @version        1.0.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -133,10 +133,11 @@ class ContextMenuMods {
         item.classList.add("menuitem-iconic", "searchmenuitem");
         item.setAttribute("engine-id", engine.id);
         item.setAttribute("label", engine.name);
-        let iconURL = engine.getIconURL(16);
-        if (iconURL) {
-          item.style.setProperty("--engine-icon", `url('${iconURL}')`);
-        }
+        engine.getIconURL(16).then(iconURL => {
+          if (iconURL) {
+            item.style.setProperty("--engine-icon", `url('${iconURL}')`);
+          }
+        });
         docfrag.appendChild(item);
       }
       event.target.appendChild(docfrag);
