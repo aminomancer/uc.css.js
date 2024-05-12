@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.2
+// @version        1.0.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
