@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.3
+// @version        1.0.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -37,16 +37,9 @@ class ContextMenuMods {
 
   _initialized = false;
 
+  engines = [];
+
   constructor() {
-    this.contextMenu = document.getElementById("contentAreaContextMenu");
-    this.originalCallback = this.contextMenu.getAttribute("onpopupshowing");
-    this.contextMenu.setAttribute(
-      "onpopupshowing",
-      this.originalCallback.replace(
-        /(gContextMenu = new nsContextMenu)/,
-        "ucContextMenuMods.init();   $1"
-      )
-    );
     this._searchMenuitem();
   }
 
@@ -83,6 +76,72 @@ class ContextMenuMods {
   _searchMenuitem() {
     if (!this.config["Replace search menuitem with submenu"]) return;
 
+    this.contextMenu = document.getElementById("contentAreaContextMenu");
+    this.originalCallback = this.contextMenu.getAttribute("onpopupshowing");
+    this.contextMenu.setAttribute(
+      "onpopupshowing",
+      this.originalCallback.replace(
+        /(gContextMenu = new nsContextMenu)/,
+        "ucContextMenuMods.init();   $1"
+      )
+    );
+
+    let enginesLocked = false;
+
+    const _updateEngines = async () => {
+      if (enginesLocked) return;
+      enginesLocked = true;
+      this.engines.length = 0;
+      await Services.search.promiseInitialized;
+      let engineObjects = await Services.search.getVisibleEngines();
+      await Promise.all(
+        engineObjects.map(async engine => {
+          if (engine.hideOneOffButton) return null;
+          return this.engines.push({
+            id: engine.id,
+            name: engine.name,
+            iconURL: await engine.getIconURL(16),
+          });
+        })
+      );
+      enginesLocked = false;
+    };
+
+    const onEngineModified = (_subject, topic) => {
+      if (topic == "browser-search-engine-modified") {
+        _updateEngines();
+      }
+    };
+
+    const onStartup = () => {
+      _updateEngines();
+      Services.obs.addObserver(
+        onEngineModified,
+        "browser-search-engine-modified"
+      );
+      window.addEventListener("unload", () =>
+        Services.obs.removeObserver(
+          onEngineModified,
+          "browser-search-engine-modified"
+        )
+      );
+    };
+
+    if (gBrowserInit.delayedStartupFinished) {
+      onStartup();
+    } else {
+      const delayedListener = (subject, topic) => {
+        if (topic == "browser-delayed-startup-finished" && subject == window) {
+          Services.obs.removeObserver(delayedListener, topic);
+          onStartup();
+        }
+      };
+      Services.obs.addObserver(
+        delayedListener,
+        "browser-delayed-startup-finished"
+      );
+    }
+
     let originalMenu = this.contextMenu.querySelector("#context-searchselect");
     let originalMenuPrivate = this.contextMenu.querySelector(
       "#context-searchselect-private"
@@ -109,38 +168,27 @@ class ContextMenuMods {
   }
 
   _searchMenuItemInit() {
-    let { config } = this;
+    const { config } = this;
 
-    if (!config["Replace search menuitem with submenu"]) return;
-
-    let getSearchEngines = () =>
-      Services.search.wrappedJSObject?._cachedSortedEngines?.filter(
-        engine => !engine.hidden
-      );
-
-    if (Services.search.isInitialized && !getSearchEngines()) {
-      Services.search.getVisibleEngines(); // Update the engines once.
-    }
+    const getEngines = () => this.engines;
 
     nsContextMenu.prototype.createSearchMenu = function (event) {
       while (event.target.hasChildNodes()) {
         event.target.firstChild.remove();
       }
 
-      let docfrag = document.createDocumentFragment();
-      for (let engine of getSearchEngines()) {
+      let fragment = document.createDocumentFragment();
+      for (let engine of getEngines()) {
         let item = document.createXULElement("menuitem");
         item.classList.add("menuitem-iconic", "searchmenuitem");
         item.setAttribute("engine-id", engine.id);
         item.setAttribute("label", engine.name);
-        engine.getIconURL(16).then(iconURL => {
-          if (iconURL) {
-            item.style.setProperty("--engine-icon", `url('${iconURL}')`);
-          }
-        });
-        docfrag.appendChild(item);
+        if (engine.iconURL) {
+          item.style.setProperty("--engine-icon", `url('${engine.iconURL}')`);
+        }
+        fragment.appendChild(item);
       }
-      event.target.appendChild(docfrag);
+      event.target.appendChild(fragment);
     };
 
     nsContextMenu.prototype.showAndFormatSearchContextItem = function () {
@@ -156,6 +204,7 @@ class ContextMenuMods {
       const docIsPrivate = PrivateBrowsingUtils.isBrowserPrivate(this.browser);
       const privatePref = "browser.search.separatePrivateDefault.ui.enabled";
       let showSearchSelect =
+        !!getEngines().length &&
         !this.inAboutDevtoolsToolbox &&
         (this.isTextSelected || this.onLink) &&
         !this.onImage;
