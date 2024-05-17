@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.6
+// @version        1.2.7
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -249,14 +249,18 @@ class TabTooltipNav {
     this.navPopup.removeAttribute("side");
     this.navPopup.removeAttribute("flip");
     if (
-      this.config["Show vanilla tooltip if modifier is not pressed"] &&
-      /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
+      !_ucUtils.getScriptData("urlbarTabUrlIndicator.uc.js")?.isEnabled
     ) {
-      document
-        .querySelector("#tabbrowser-tab-tooltip")
-        .addEventListener("popupshowing", this);
-    } else {
-      gBrowser.tabContainer.removeAttribute("tooltip");
+      if (
+        this.config["Show vanilla tooltip if modifier is not pressed"] &&
+        /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
+      ) {
+        document
+          .querySelector("#tabbrowser-tab-tooltip")
+          .addEventListener("popupshowing", this);
+      } else {
+        gBrowser.tabContainer.removeAttribute("tooltip");
+      }
     }
     [
       "TabClose",
