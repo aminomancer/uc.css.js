@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -227,15 +227,13 @@ class TabTooltipNav {
       <box id="tab-nav-favicon-box">
         <image id="tab-nav-tooltip-favicon"></image>
       </box>
-      <vbox id="tab-nav-tooltip-textbox" class="places-tooltip-box" flex="1">
+      <box id="tab-nav-tooltip-textbox" class="places-tooltip-box" flex="1">
         <description id="tab-nav-tooltip-label" class="tooltip-label places-tooltip-title"/>
-        <hbox id="tab-nav-tooltip-uri-box">
-          <description
-            id="tab-nav-tooltip-uri"
-            crop="center"
-            class="tooltip-label places-tooltip-uri uri-element"/>
-        </hbox>
-      </vbox>
+        <description
+          id="tab-nav-tooltip-uri"
+          crop="center"
+          class="tooltip-label places-tooltip-uri uri-element"/>
+      </box>
     </hbox>
   </hbox>
 </panel>
@@ -461,7 +459,7 @@ class TabTooltipNav {
   goBack(e) {
     if (!this.triggerTab) return;
     let { tabs } = this;
-    let where = whereToOpenLink(e, false, true);
+    let where = BrowserUtils.whereToOpenLink(e, false, true);
     if (where == "current") {
       tabs.forEach(tab => {
         let browser = gBrowser.getBrowserForTab(tab);
@@ -474,7 +472,7 @@ class TabTooltipNav {
   goForward(e) {
     if (!this.triggerTab) return;
     let { tabs } = this;
-    let where = whereToOpenLink(e, false, true);
+    let where = BrowserUtils.whereToOpenLink(e, false, true);
     if (where == "current") {
       tabs.forEach(tab => {
         let browser = gBrowser.getBrowserForTab(tab);
@@ -486,10 +484,10 @@ class TabTooltipNav {
   }
   // used by the back/forward context menu items. navigates a given browser's history
   gotoHistoryIndex(e) {
-    e = getRootEvent(e);
+    e = BrowserUtils.getRootEvent(e);
     let index = e.target.getAttribute("index");
     if (!index) return false;
-    let where = whereToOpenLink(e);
+    let where = BrowserUtils.whereToOpenLink(e);
     if (where == "current") {
       try {
         this.triggerTab.linkedBrowser.gotoIndex(index);
@@ -505,7 +503,7 @@ class TabTooltipNav {
   // called when pressing the reload button. depending on modifier keys pressed,
   // either reload the tab in place or reload it in a new tab or window.
   reloadOrDuplicate(e) {
-    e = getRootEvent(e);
+    e = BrowserUtils.getRootEvent(e);
     let { tabs } = this;
     let accelKeyPressed =
       AppConstants.platform == "macosx" ? e.metaKey : e.ctrlKey;
@@ -518,7 +516,7 @@ class TabTooltipNav {
       );
       return;
     }
-    let where = whereToOpenLink(e, false, true);
+    let where = BrowserUtils.whereToOpenLink(e, false, true);
     if (where == "current") {
       this.browserReloadWithFlags(tabs, Ci.nsIWebNavigation.LOAD_FLAGS_NONE);
     } else {
@@ -602,11 +600,10 @@ class TabTooltipNav {
   handleTooltip() {
     let tab = this.triggerTab;
     if (!tab) return;
-    let id, args;
+    let id, args, raw;
     let { linkedBrowser } = tab;
-    const { selectedTabs } = gBrowser;
-    const contextTabInSelection = selectedTabs.includes(tab);
-    const tabCount = contextTabInSelection ? selectedTabs.length : 1;
+    const contextTabInSelection = gBrowser.selectedTabs.includes(tab);
+    const tabCount = contextTabInSelection ? gBrowser.selectedTabs.length : 1;
     this.setFavicon(tab);
     if (tab.mOverCloseButton) {
       id = "tabbrowser-close-tabs-tooltip";
@@ -627,12 +624,13 @@ class TabTooltipNav {
           : "tabbrowser-mute-tab-audio-background-tooltip";
       }
     } else {
-      id = "tabbrowser-tab-tooltip";
-      args = { title: gBrowser.getTabTooltip(tab, true) };
+      raw = gBrowser.getTabTooltip(tab, true);
     }
     let title = this.navPopup.querySelector(".places-tooltip-title");
     let localized = {};
-    if (id) {
+    if (raw) {
+      localized.label = raw;
+    } else if (id) {
       let [msg] = gBrowser.tabLocalization.formatMessagesSync([{ id, args }]);
       localized.value = msg.value;
       if (msg.attributes) {
@@ -643,12 +641,12 @@ class TabTooltipNav {
     let box = this.navPopup.querySelector(".places-tooltip-box");
     if (tab.getAttribute("customizemode") === "true") {
       box.setAttribute("desc-hidden", "true");
-    } else {
-      box.removeAttribute("desc-hidden");
+      return;
     }
     let url = this.navPopup.querySelector(".places-tooltip-uri");
     url.value = linkedBrowser?.currentURI?.spec.replace(/^https:\/\//, "");
     if (this.knownWidth) this.captureKnownWidth();
+    box.removeAttribute("desc-hidden");
   }
   // sets the main favicon in the nav popup to match the trigger tab
   setFavicon(tab) {
@@ -835,7 +833,7 @@ class TabTooltipNav {
   appearance: none;
   margin: 0;
   padding: 0 var(--toolbarbutton-outer-padding);
-  -moz-box-pack: center;
+  align-items: center;
   background: none !important;
   outline: none !important;
 }
@@ -869,10 +867,12 @@ class TabTooltipNav {
   border-left: 1px solid var(--panel-separator-color);
   width: 0;
   margin-block: 3px;
-  margin-inline: 4px 6px;
+  margin-inline: 4px;
 }
 #tab-nav-tooltip-box {
   min-width: var(--tab-nav-known-width, revert);
+  padding-inline: 4px;
+  gap: 6px;
 }
 #tab-nav-tooltip-textbox {
   padding-block: 4px;
@@ -907,6 +907,8 @@ class TabTooltipNav {
   display: none;
 }
 #tab-nav-popup[type="arrow"]::part(content) {
+  min-width: 100%;
+  min-height: 100%;
   margin: 0;
 }`;
     let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
