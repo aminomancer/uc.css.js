@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Show Selected Sidebar in Switcher Panel
-// @version        1.0.5
+// @version        1.0.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -18,38 +18,48 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
 // ==/UserScript==
 
 (function () {
-  const builtInSidebars = ["Bookmarks", "History", "Tabs"];
   function init() {
-    for (let type of builtInSidebars) {
-      SidebarUI.sidebars.get(
-        `view${type}Sidebar`
-      ).switcherMenuId = `sidebar-switcher-${type.toLowerCase()}`;
-    }
-
-    SidebarUI.selectMenuItem = function selectMenuItem(commandID) {
-      for (let [id, { menuId, switcherMenuId, triggerButtonId }] of this
-        .sidebars) {
-        let menu = document.getElementById(menuId);
-        let menuitem = document.getElementById(switcherMenuId);
-        let triggerbutton =
-          triggerButtonId && document.getElementById(triggerButtonId);
-        if (id == commandID) {
-          menu.setAttribute("checked", "true");
-          menuitem.setAttribute("checked", "true");
-          if (triggerbutton) {
-            triggerbutton.setAttribute("checked", "true");
-            updateToggleControlLabel(triggerbutton);
-          }
-        } else {
-          menu.removeAttribute("checked");
-          menuitem.removeAttribute("checked");
-          if (triggerbutton) {
-            triggerbutton.removeAttribute("checked");
-            updateToggleControlLabel(triggerbutton);
-          }
-        }
+    window.SidebarController.sidebars.forEach((sidebar, id) => {
+      let type = id.match(/view(\w+)Sidebar/)?.[1];
+      if (
+        type &&
+        !sidebar.hasOwnProperty("extensionId") &&
+        !sidebar.hasOwnProperty("switcherMenuId")
+      ) {
+        sidebar.switcherMenuId = `sidebar-switcher-${type.toLowerCase()}`;
       }
-    };
+    });
+
+    if (window.SidebarController.selectMenuItem.name === "selectMenuItem") {
+      eval(
+        `window.SidebarController.selectMenuItem = function ${window.SidebarController.selectMenuItem
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function[^\S\r\n]*/, "")
+          .replace(/^selectMenuItem[^\S\r\n]*/, "")
+          .replace(/^(.)/, `uc_selectMenuItem$1`)
+          .replace(
+            /{ menuId, triggerButtonId }/,
+            "{ menuId, switcherMenuId, triggerButtonId }"
+          )
+          .replace(
+            /(let menu = document\.getElementById\(menuId\);)/,
+            `$1
+            let menuitem = document.getElementById(switcherMenuId);`
+          )
+          .replace(
+            /(menu\.setAttribute\("checked", "true"\);)/,
+            `$1
+            menuitem?.setAttribute("checked", "true");`
+          )
+          .replace(
+            /(menu\.removeAttribute\("checked"\);)/,
+            `$1
+            menuitem?.removeAttribute("checked");`
+          )}`
+      );
+    }
 
     // support icons for the "move sidebar to left" and "move sidebar to right" buttons in
     // the sidebar switcher dropdown menu that appear when you click the sidebar switcher:
@@ -59,39 +69,35 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
     // #sidebar-reverse-position[to-position="right"] {
     //     list-style-image: url(chrome://browser/skin/forward.svg);
     // }
-    SidebarUI.showSwitcherPanel = function () {
-      this._switcherPanel.addEventListener(
-        "popuphiding",
-        () => {
-          this._switcherTarget.classList.remove("active");
-          this._switcherTarget.setAttribute("aria-expanded", false);
-        },
-        { once: true }
+    if (
+      window.SidebarController.showSwitcherPanel.name === "showSwitcherPanel"
+    ) {
+      eval(
+        `window.SidebarController.showSwitcherPanel = function ${window.SidebarController.showSwitcherPanel
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function[^\S\r\n]*/, "")
+          .replace(/^showSwitcherPanel[^\S\r\n]*/, "")
+          .replace(/^(.)/, `uc_showSwitcherPanel$1`)
+          .replace(
+            /(this\._switcherPanel\.hidden = false;)/,
+            `$1
+            this._reversePositionButton.setAttribute(
+              "to-position",
+              this._positionStart == RTL_UI ? "left" : "right"
+            );
+            for (let sidebar of this.sidebars.values()) {
+              document.getElementById(sidebar.switcherMenuId)?.setAttribute("type", "radio");
+            }`
+          )}`
       );
-      let onRight = this._positionStart == RTL_UI;
-      let label = onRight
-        ? gNavigatorBundle.getString("sidebar.moveToLeft")
-        : gNavigatorBundle.getString("sidebar.moveToRight");
-      this._reversePositionButton.setAttribute("label", label);
-      this._reversePositionButton.setAttribute(
-        "to-position",
-        onRight ? "left" : "right"
-      );
-      this._switcherPanel.hidden = false;
-      this._switcherPanel.openPopup(this._switcherTarget);
-      this._switcherTarget.classList.add("active");
-      this._switcherTarget.setAttribute("aria-expanded", true);
-      for (let sidebar of this.sidebars.values()) {
-        document
-          .getElementById(sidebar.switcherMenuId)
-          ?.setAttribute("type", "radio");
-      }
-    };
+    }
 
     document
       .getElementById("viewSidebarMenu")
       .addEventListener("popupshowing", () => {
-        for (let sidebar of SidebarUI.sidebars) {
+        for (let sidebar of window.SidebarController.sidebars) {
           document
             .getElementById(sidebar.menuId)
             ?.setAttribute("type", "radio");

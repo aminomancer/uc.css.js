@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Link in Unloaded Tab (context menu item)
-// @version        1.5.5
+// @version        1.5.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -105,7 +105,7 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openAllSyncedFromDevice(this.parentElement)`,
+      oncommand: `unloadedTabMenu.openAllSyncedFromDevice()`,
     });
     this.syncedMenuOpenAll.after(this.syncedMenuOpenAllUnloaded);
 
@@ -115,7 +115,7 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openSyncedTabUnloaded(this.parentElement)`,
+      oncommand: `unloadedTabMenu.openSyncedTabUnloaded()`,
     });
     this.syncedMenuOpenTab.after(this.syncedMenuOpenUnloaded);
 
@@ -217,9 +217,18 @@ class UnloadedTabMenuBase {
       ))
     );
   }
+  get syncedTabsDeck() {
+    return document.getElementById("sidebar")?.contentWindow
+      .syncedTabsDeckComponent;
+  }
+  get syncedTabsList() {
+    return this.syncedTabsDeck.tabListComponent;
+  }
   get syncedTabsStore() {
-    return document.getElementById("sidebar")?.syncedTabsDeckComponent
-      ._syncedTabsListStore;
+    return this.syncedTabsList._store;
+  }
+  get syncedTabsView() {
+    return this.syncedTabsList._view;
   }
   get selectedSyncedRow() {
     return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
@@ -328,15 +337,15 @@ class UnloadedTabMenuBase {
     }
     items.forEach(item => this.openTab(item, { bulkOpen: true }));
   }
-  openSyncedTabUnloaded(popup) {
+  openSyncedTabUnloaded() {
     if (!this.syncedContextMenuInited) return;
-    if (popup.triggerNode?.closest(".tabs-container")) {
+    if (this.syncedTabsStore._selectedRow[1] >= 0) {
       this.openTab(this.selectedSyncedTab, { syncedTabs: true });
     }
   }
-  openAllSyncedFromDevice(popup) {
+  openAllSyncedFromDevice() {
     if (!this.syncedContextMenuInited) return;
-    if (popup.triggerNode?.closest(".tabs-container")) {
+    if (this.syncedTabsStore._selectedRow[0] >= 0) {
       this.selectedSyncedRow.tabs.forEach(item =>
         this.openTab(item, { bulkOpen: true, syncedTabs: true })
       );

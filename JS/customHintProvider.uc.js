@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Custom Hint Provider
-// @version        1.1.9
+// @version        1.2.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -147,7 +147,7 @@ window.CustomHint = {
 
       MozXULElement.insertFTLIfNeeded("toolkit/branding/brandings.ftl");
       MozXULElement.insertFTLIfNeeded("browser/confirmationHints.ftl");
-      document.l10n.setAttributes(this._message, messageId);
+      document.l10n.setAttributes(this._message, messageId, options.l10nArgs);
 
       if (options.descriptionId) {
         document.l10n.setAttributes(this._description, options.descriptionId);

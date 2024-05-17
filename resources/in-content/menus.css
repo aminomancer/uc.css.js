@@ -29,6 +29,10 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 menupopup.in-menulist > :where(menucaption, menuitem) {
   padding-inline: 8px !important;
   align-items: center !important;
+
+  &.menuitem-iconic {
+    padding-inline-start: 0 !important;
+  }
 }
 
 .actionsMenu {

@@ -1,0 +1,17 @@
+<!-- This Source Code Form is subject to the terms of the Creative Commons
+   - Attribution-NonCommercial-ShareAlike International License, v. 4.0.
+   - If a copy of the CC BY-NC-SA 4.0 was not distributed with this
+   - file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/
+   - or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. -->
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="context-fill"
+    fill-opacity="context-fill-opacity">
+    <path opacity="0.4" d="M5.252,10V5c0-0.771,0.301-1.468,0.78-2H4C2.895,3,2,3.895,2,5v6H1c-0.552,0-1,0.448-1,1s0.448,1,1,1h2.53
+	c-0.172-0.295-0.278-0.634-0.278-1C3.252,10.897,4.149,10,5.252,10z" />
+    <path d="M10.379,12.5l-1.414-1.414c-0.391-0.391-0.391-1.024,0-1.414l0.707-0.707c0.391-0.391,1.024-0.391,1.414,0l1.414,1.414
+	l1.414-1.414C13.94,8.939,13.973,8.93,14,8.907V5c0-1.105-0.895-2-2-2H8.252c-1.105,0-2,0.895-2,2v6h-1c-0.552,0-1,0.448-1,1
+	s0.448,1,1,1h4.627L10.379,12.5z" />
+    <path d="M14.3,10l-1.8,1.8L10.7,10c-0.2-0.2-0.5-0.2-0.7,0s-0.2,0.5,0,0.7l1.8,1.8L10,14.3c-0.2,0.2-0.2,0.5,0,0.7s0.5,0.2,0.7,0
+	l1.8-1.8l1.8,1.8c0.2,0.2,0.5,0.2,0.7,0s0.2-0.5,0-0.7l-1.8-1.8l1.8-1.8c0.2-0.2,0.2-0.5,0-0.7S14.5,9.8,14.3,10z" />
+    <path d="M16,12c0-0.2-0.1-0.5-0.2-0.6l-1.1,1.1l0.5,0.5C15.6,12.9,16,12.5,16,12z" />
+</svg>

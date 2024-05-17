@@ -24,6 +24,9 @@ menupopup {
   --lwt-toolbar-field-highlight: var(--ui-selection-bgcolor) !important;
   --lwt-toolbar-field-highlight-text: var(--ui-selection-color) !important;
   --lwt-toolbar-field-highlight-disabled: var(--ui-selection-bgcolor-disabled) !important;
+  --input-bgcolor: var(--in-content-box-background) !important;
+  --input-color: inherit !important;
+  --input-border-color: var(--in-content-box-border-color) !important;
   --identity-box-margin-inline: 3px !important;
   --urlbar-box-bgcolor: var(--identity-box-solid-bg) !important;
   --urlbar-box-focus-bgcolor: var(--button-bgcolor) !important;
@@ -40,6 +43,7 @@ menupopup {
   --lwt-background-tiling: no-repeat !important;
   --inactive-titlebar-opacity: 1 !important;
   --toolbarbutton-border-radius: var(--general-button-border-radius) !important;
+  --border-radius-small: var(--general-button-border-radius) !important;
   --toolbarbutton-icon-fill-opacity: 1 !important;
   --arrowpanel-background: var(--uc-arrowpanel-background) !important;
   --arrowpanel-color: var(--uc-arrowpanel-color) !important;

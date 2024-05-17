@@ -1019,50 +1019,66 @@ differently since we don't want to invert the background on hovering the icon */
 with the theme's colors, we can afford to show a border around the popup panel.
 for other extensions that haven't been customized, the border color would
 probably be inconsistent with the popup doc's colors. so by default we hide the
-border on extension panels (see userChrome.au.css) */
+border on extension panels (see userChrome.au.css). if you have others, copy
+this rule into your custom-chrome.css file, replacing the selectors with your
+own extension panel selectors. make sure to include --chrome-style-tooltips: 0
+if you use tooltipStyler.uc.js, since it gives extension panels a gray background,
+and this variable tells it not to do that for these particular extensions. */
 #customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-BAV"],
 #customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-BAV"],
 #customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"],
 #customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-BAV"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"],
-#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"],
 #customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-BAV"] {
   --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
   --customized-webextension-panel-stroke: var(--panel-border-color);
   --arrowpanel-border-color: var(--uc-menu-border-color) !important;
+
+  browser {
+    --chrome-style-tooltips: 1;
+  }
 }
 
-#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-BAV"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-BAV"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-BAV"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"][side="top"],
-#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="top"],
-#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-BAV"][side="top"] {
-  --customized-webextension-panel-margin-bottom: -5px;
+/* extension popups that haven't been customized directly, but which have
+borders added and arrow colors modified to match the popups. */
+#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"] {
+  --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
+  --customized-webextension-panel-stroke: var(--panel-border-color);
+  --panel-border-color: hsl(229, 15%, 23%) !important;
+  --arrowpanel-background: hsl(229, 15%, 23%) !important;
 }
 
-#customizationui-widget-panel[viewId="PanelUI-webext-sort-bookmarks_heftig-BAV"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-_testpilot-containers-BAV"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-addon_darkreader_org-BAV"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-simple-translate_sienori-BAV"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"][side="bottom"],
-#customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"][side="bottom"],
-#customizationui-widget-panel[viewId="PanelUI-webext-private-bookmarks_rharel-BAV"][side="bottom"] {
-  --customized-webextension-panel-margin-top: -5px;
-}
-
-#customizationui-widget-panel[viewId="PanelUI-webext-ublock0_raymondhill_net-BAV"],
 #customizationui-widget-panel[viewId^="PanelUI-webext-multithreaded-download-manager"] {
+  --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
+  --customized-webextension-panel-stroke: var(--panel-border-color);
   --panel-border-color: var(--in-content-border-color-dim) !important;
 }
 
 #customizationui-widget-panel[viewId="PanelUI-webext-nordvpnproxy_nordvpn_com-BAV"] {
-  --panel-border-color:  transparent !important;
-  --arrowpanel-background: hsl(0, 0%, 25%) !important;
+  --arrowpanel-background: #3f3f3f !important;
+}
+
+/* zoom extension */
+#customizationui-widget-panel[viewId="PanelUI-webext-_bf855ead-d7c3-4c7b-9f88-9a7e75c0efdf_-BAV"] {
+  --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
+  --customized-webextension-panel-stroke: var(--panel-border-color);
+  --panel-border-color: var(--in-content-separator-dim) !important;
+  --arrowpanel-background: var(--in-content-bg-darker) !important;
+}
+
+/* violentmonkey */
+#customizationui-widget-panel[viewId="PanelUI-webext-_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-BAV"] {
+  --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
+  --customized-webextension-panel-stroke: var(--panel-border-color);
+  --panel-border-color: color-mix(in srgb, #1e1e1e, white 10%) !important;
+  --arrowpanel-background: #1e1e1e !important;
+}
+
+/* stylus */
+#customizationui-widget-panel[viewId="PanelUI-webext-_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-BAV"] {
+  --customized-webextension-panel-border: 1px solid var(--panel-border-color) !important;
+  --customized-webextension-panel-stroke: var(--panel-border-color);
+  --panel-border-color: hsl(0, 0%, 27%) !important;
+  --arrowpanel-background: hsl(0, 0%, 14%); !important;
 }
 
 /* a possible way to make sidebar border more theme responsive */

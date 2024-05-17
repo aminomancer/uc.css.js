@@ -21,7 +21,7 @@ menu#pageStyleMenu > .menu-text,
 #viewToolbarsMenu > .menu-text,
 #viewSidebarMenuMenu > .menu-text,
 #sidebar-reverse-position > .menu-text,
-#sidebarMenu-popup > menuitem[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"] > .menu-text,
+#sidebarMenu-popup > menuitem[data-l10n-id="sidebar-menu-close"] > .menu-text,
 #menu_showAllHistory > .menu-text,
 menuitem#sanitizeItem > .menu-text,
 :is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter) > .menu-text,
@@ -95,6 +95,7 @@ menuitem#sanitizeItem > .menu-text,
 #menu_newPrivateWindow .menu-text,
 #context-searchselect .menu-text,
 #context-searchselect-private .menu-text,
+#context-translate-selection .menu-text,
 #menu_find .menu-text,
 #menu_findAgain .menu-text,
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap) .menu-text,
@@ -109,6 +110,7 @@ menuitem#repair-text-encoding .menu-text,
 :is(#undobookmarksmenuUndo, #undobookmarksmenuRedo) .menu-text,
 #context-cut .menu-text,
 #context-paste .menu-text,
+#context-paste-no-formatting .menu-text,
 #menu_cut .menu-text,
 #menu_paste .menu-text,
 #context-delete .menu-text,
@@ -233,6 +235,7 @@ menuitem[data-l10n-id="full-screen-exit"] .menu-text,
 #context_sendTabToDevice > .menu-text,
 menuitem.share-tab-url-item > .menu-text,
 #context_closeTabOptions > .menu-text,
+#context_closeDuplicateTabs > .menu-text,
 :is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs) .menu-text,
 #context_undoCloseTab .menu-text,
 #toolbar-context-undoCloseTab .menu-text,
@@ -400,7 +403,7 @@ menuitem#helpPolicySupport::before,
 #viewToolbarsMenu::before,
 #viewSidebarMenuMenu::before,
 #sidebar-reverse-position::before,
-#sidebarMenu-popup > menuitem[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"]::before,
+#sidebarMenu-popup > menuitem[data-l10n-id="sidebar-menu-close"]::before,
 #menu_showAllHistory::before,
 menuitem#sanitizeItem::before,
 :is(#sync-tabs-menuitem, #syncedTabsRefresh, #syncedTabsRefreshFilter)::before,
@@ -441,6 +444,7 @@ menuitem#sanitizeItem::before,
 #context-copyimage-contents::before,
 #context-cut::before,
 #context-paste::before,
+#context-paste-no-formatting::before,
 #menu_copy::before,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)::before,
 #placesContext_showInFolder::before,
@@ -482,6 +486,7 @@ menuitem#sanitizeItem::before,
 #menu_newPrivateWindow::before,
 #context-searchselect::before,
 #context-searchselect-private::before,
+#context-translate-selection::before,
 #menu_find::before,
 #menu_findAgain::before,
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before,
@@ -528,6 +533,7 @@ menuitem#repair-text-encoding::before,
 #context_sendTabToDevice::before,
 menuitem.share-tab-url-item::before,
 #context_closeTabOptions::before,
+#context_closeDuplicateTabs::before,
 :is(#context_closeTabsToTheStart, #context_closeTabsToTheEnd, #context_closeOtherTabs)::before,
 #context_undoCloseTab::before,
 #toolbar-context-undoCloseTab::before,
@@ -1026,7 +1032,7 @@ menupopup#viewSidebarMenu #menu_tabsSidebar:is([type="checkbox"], [type="radio"]
   background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
-#sidebarMenu-popup > menuitem[oncommand="SidebarUI.hide()"][data-l10n-id="sidebar-menu-close"]::before {
+#sidebarMenu-popup > menuitem[data-l10n-id="sidebar-menu-close"]::before {
   background-image: url(chrome://userchrome/content/close-big.svg);
 }
 
@@ -1125,6 +1131,10 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
   background-image: url(chrome://userchrome/content/skin/edit-paste-and-go.svg);
 }
 
+#context-paste-no-formatting::before {
+  background-image: url(chrome://userchrome/content/skin/edit-paste-clear.svg);
+}
+
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before {
   background-image: url(chrome://userchrome/content/delete.svg);
 }
@@ -1208,6 +1218,10 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
 
 :is(#context-searchselect, #context-searchselect-private, #menu_find, #menu_searchBookmarks, #menu_searchHistory)::before {
   background-image: url(chrome://userchrome/content/search-glass.svg);
+}
+
+#context-translate-selection::before {
+  background-image: url(chrome://browser/skin/translations.svg);
 }
 
 #menu_findAgain::before {
@@ -1312,6 +1326,10 @@ menuitem.share-tab-url-item::before {
 
 #context_closeTabOptions::before {
   background-image: url(chrome://userchrome/content/skin/close-tabs-mult.svg);
+}
+
+#context_closeDuplicateTabs::before {
+  background-image: url(chrome://userchrome/content/skin/close-tabs-duplicate.svg);
 }
 
 #context_closeTabsToTheStart::before,

@@ -401,7 +401,7 @@ export class SearchSelectionShortcutParent extends JSWindowActorParent {
           host = uri.host;
         } catch (e) {}
         switch (uri.scheme) {
-          case "moz-extension":
+          case "moz-extension": {
             const policy = WebExtensionPolicy.getByHostname(host);
             if (policy) {
               const extPrincipal = policy && policy.extension.principal;
@@ -412,6 +412,7 @@ export class SearchSelectionShortcutParent extends JSWindowActorParent {
               canon = false;
             }
             break;
+          }
           case "about":
             canon = lazy.E10SUtils.getAboutModule(uri);
             options.triggeringPrincipal =

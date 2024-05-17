@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.3.6
+// @version        1.3.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -368,7 +368,29 @@
           count: affectedTabsLength,
         });
       }
-      this._mouseenter();
+
+      if (this.container._showCardPreviews) {
+        const previewContainer = document.getElementById(
+          "tabbrowser-tab-preview"
+        );
+        previewContainer.overCloseButton = this.mOverCloseButton;
+        previewContainer.overPlayingIcon = this._overPlayingIcon;
+        previewContainer.audioMuted = this.linkedBrowser.audioMuted;
+      }
+
+      if (this.hidden || this.closing) {
+        return;
+      }
+
+      let tabToWarm = this.mOverCloseButton
+        ? gBrowser._findTabToBlurTo(this)
+        : this;
+      gBrowser.warmupTab(tabToWarm);
+
+      // If the previous target wasn't part of this tab then this is a mouseenter event.
+      if (!this.contains(event.relatedTarget)) {
+        this._mouseenter();
+      }
     }
 
     on_mouseout(event) {
@@ -381,7 +403,11 @@
       ) {
         this.setSecondaryTabTooltipLabel(null);
       }
-      this._mouseleave();
+
+      // If the new target is not part of this tab then this is a mouseleave event.
+      if (!this.contains(event.relatedTarget)) {
+        this._mouseleave();
+      }
     }
 
     on_dragstart(event) {
@@ -397,6 +423,8 @@
         gSharedTabWarning.willShowSharedTabWarning(this)
       ) {
         event.stopPropagation();
+      } else {
+        this.dispatchEvent(new CustomEvent("TabHoverEnd", { bubbles: true }));
       }
     }
 
@@ -462,7 +490,7 @@
       }
     }
 
-    on_mouseup(event) {
+    on_mouseup() {
       // Make sure that clear-selection is released.
       // Otherwise selection using Shift key may be broken.
       gBrowser.unlockClearMultiSelection();
@@ -560,9 +588,6 @@
     }
 
     _mouseenter() {
-      if (this.hidden || this.closing) {
-        return;
-      }
       this._hover = true;
 
       if (this.selected) {
@@ -575,11 +600,7 @@
       // Prepare connection to host beforehand.
       SessionStore.speculativeConnectOnTabHover(this);
 
-      let tabToWarm = this;
-      if (this.mOverCloseButton) {
-        tabToWarm = gBrowser._findTabToBlurTo(this);
-      }
-      gBrowser.warmupTab(tabToWarm);
+      this.dispatchEvent(new CustomEvent("TabHoverStart", { bubbles: true }));
     }
 
     _mouseleave() {
@@ -591,6 +612,7 @@
         this.linkedBrowser.unselectedTabHover(false);
         this.cancelUnselectedTabHoverTimer();
       }
+      this.dispatchEvent(new CustomEvent("TabHoverEnd", { bubbles: true }));
     }
 
     setSecondaryTabTooltipLabel(l10nID, l10nArgs) {
@@ -694,6 +716,12 @@
       this.muteReason = aMuteReason || null;
 
       gBrowser._tabAttrModified(this, ["muted"]);
+      if (this.container._showCardPreviews) {
+        const previewContainer = document.getElementById(
+          "tabbrowser-tab-preview"
+        );
+        previewContainer.audioMuted = browser.audioMuted;
+      }
     }
 
     setUserContextId(aUserContextId) {
@@ -725,11 +753,11 @@
       this.setAttribute("aria-describedby", "tabbrowser-tab-a11y-desc");
     }
 
-    on_focus(event) {
+    on_focus() {
       this.updateA11yDescription();
     }
 
-    on_AriaFocus(event) {
+    on_AriaFocus() {
       this.updateA11yDescription();
     }
   }

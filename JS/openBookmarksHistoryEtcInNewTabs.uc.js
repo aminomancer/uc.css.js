@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmarks, History, etc. in New Tabs
-// @version        1.2.6
+// @version        1.2.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    In vanilla Firefox, `browser.tabs.loadBookmarksInTabs` only affects bookmark items. When you enable this pref and left-click a bookmark (e.g., in the bookmarks toolbar or menu) it opens in a new tab instead of in the current tab. But if you left-click a history entry or a synced tab, it will still open in the current tab. So you'd have to middle click or ctrl+click to avoid losing your current tab's navigation state. This script just makes that preference apply to history and synced tabs too.
@@ -13,11 +13,12 @@
 
 (function () {
   function init() {
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      BrowserUtils: "resource://gre/modules/BrowserUtils.sys.mjs",
+      PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
+    });
     if (window.PlacesUIUtils && !PlacesUIUtils._hasBeenModifiedForOBHNT) {
-      const lazy = {};
-      ChromeUtils.defineESModuleGetters(lazy, {
-        PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
-      });
       function getBrowserWindow(aWindow) {
         return aWindow &&
           aWindow.document.documentElement.getAttribute("windowtype") ==
@@ -38,13 +39,13 @@
       let proto = HistoryMenu.prototype;
       if (!proto._hasBeenModifiedForOBHNT) {
         proto._onCommand = function (e) {
-          e = getRootEvent(e);
+          e = BrowserUtils.getRootEvent(e);
           let placesNode = e.target._placesNode;
           if (placesNode) {
             if (!PrivateBrowsingUtils.isWindowPrivate(window)) {
               PlacesUIUtils.markPageAsTyped(placesNode.uri);
             }
-            let where = whereToOpenLink(e, false, true);
+            let where = BrowserUtils.whereToOpenLink(e, false, true);
             if (PlacesUIUtils.loadBookmarksInTabs) {
               if (where == "current") where = "tab";
               if (where == "tab" && gBrowser.selectedTab.isEmpty) {
@@ -130,10 +131,10 @@
           `proto._createSyncedTabElement = function ${proto._createSyncedTabElement
             .toSource()
             .replace(/_createSyncedTabElement/, "")
-            .replace(/document\.defaultView\.whereToOpenLink\(e\)/, "preWhere")
+            .replace(/BrowserUtils\.whereToOpenLink\(e\)/, "preWhere")
             .replace(
               /document\.defaultView\.openUILink\(tabInfo\.url, e, {\n[^\S\r\n]*triggeringPrincipal.*\n[^\S\r\n]*{}\n[^\S\r\n]*\),\n[^\S\r\n]*}\);/,
-              `let where = document.defaultView.whereToOpenLink(e, false, true);\n      let preWhere = where;\n      if (document.defaultView.PlacesUIUtils.loadBookmarksInTabs) {\n        if (where == "current") where = "tab";\n        if (where == "tab" && document.defaultView.gBrowser.selectedTab.isEmpty) where = "current";\n      }\n      document.defaultView.openTrustedLinkIn(tabInfo.url, where);`
+              `let where = BrowserUtils.whereToOpenLink(e, false, true);\n      let preWhere = where;\n      if (document.defaultView.PlacesUIUtils.loadBookmarksInTabs) {\n        if (where == "current") where = "tab";\n        if (where == "tab" && document.defaultView.gBrowser.selectedTab.isEmpty) where = "current";\n      }\n      document.defaultView.openTrustedLinkIn(tabInfo.url, where);`
             )}`
         );
         proto._hasBeenModifiedForOBHNT = true;
@@ -144,7 +145,7 @@
       if (!proto._hasBeenModifiedForOBHNT) {
         proto.onOpenSelected = function (url, e) {
           let browserWindow = this._window.browsingContext.topChromeWindow;
-          let where = browserWindow.whereToOpenLink(e, false, true);
+          let where = lazy.BrowserUtils.whereToOpenLink(e, false, true);
           if (browserWindow.PlacesUIUtils.loadBookmarksInTabs) {
             if (where == "current") where = "tab";
             if (where == "tab" && browserWindow.gBrowser.selectedTab.isEmpty) {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Arrowpanel Arrows
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -21,7 +21,7 @@
     }
 
     static get markup() {
-      return `<vbox class="panel-arrowcontainer" flex="1">
+      return `<vbox class="panel-arrowcontainer" part="arrowcontainer" flex="1">
                 <box class="panel-arrowbox" part="arrowbox">
                   <image class="panel-arrow" part="arrow" />
                 </box>

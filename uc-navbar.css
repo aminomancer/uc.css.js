@@ -636,40 +636,11 @@ up/down if mousewheel.autodir.enabled = true. setting that up without the pref
 is difficult for these elements) notification icons/close buttons are animated
 with a similar slide+zoom motif to tab icons/close buttons. notifications are
 translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
-#navigator-toolbox > :is(legacy-stack, .notificationbox-stack),
-#navigator-toolbox > named-deck > :is(legacy-stack, .notificationbox-stack),
-#navigator-toolbox .global-notificationbox {
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  position: absolute !important;
-  width: unset !important;
-  background: none !important;
-  width: 100% !important;
-  pointer-events: none !important;
-  overflow: scroll !important;
-  scrollbar-width: none !important;
-  column-gap: 5px !important;
-  z-index: 20 !important;
-}
-
-#navigator-toolbox .global-notificationbox {
-  position: fixed !important;
-  bottom: 0 !important;
-}
 
 #navigator-toolbox > :is(legacy-stack, .notificationbox-stack) notification-message,
 #navigator-toolbox > named-deck > .notificationbox-stack notification-message,
 #navigator-toolbox .global-notificationbox notification-message,
 .notificationbox-stack notification {
-  display: flex !important;
-  position: relative !important;
-  max-width: 100vh !important;
-  height: 32px !important;
-  transition: margin-top 100ms linear, max-width 100ms ease-in-out !important;
-  margin: 0 !important;
-  border: 0 !important;
-  flex-basis: max-content !important;
-  pointer-events: auto !important;
   --in-content-button-background: var(--desaturate-dimmed) !important;
   --in-content-button-background-hover: var(--desaturate-dimmed-further) !important;
   --in-content-button-background-active: var(--desaturate-dimmed-even-further) !important;
@@ -720,59 +691,11 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   color: var(--message-bar-text-color);
 }
 
-.notificationbox-stack[notificationside="top"] > :is(notification, notification-message) {
-  border-radius: 0 !important;
-  overflow: hidden !important;
-  border-bottom-left-radius: 4px !important;
-  border-bottom-right-radius: 4px !important;
-}
-
-.notificationbox-stack[notificationside="bottom"] > :is(notification, notification-message),
-#navigator-toolbox .global-notificationbox > :is(notification, notification-message) {
-  border-radius: 0 !important;
-  overflow: hidden !important;
-  border-top-left-radius: 4px !important;
-  border-top-right-radius: 4px !important;
-}
-
 .notificationbox-stack :is(notification, notification-message) {
-  min-height: revert !important;
-}
-
-.notificationbox-stack notification-message[type="system"] {
-  --uc-notification-message-close-button-opacity: 1 !important;
-  --uc-notification-message-close-button-transform: none !important;
-  --uc-notification-message-content-margin-inline-start: 30px !important;
-}
-
-.notificationbox-stack :is(notification, notification-message) {
-  align-items: center !important;
-  position: relative !important;
-  border-radius: 0 !important;
-  color: inherit !important;
-  overflow: hidden !important;
   background-color: var(--notification-box-bgcolor) !important;
   background-image: var(--notification-box-bgimage) !important;
   backdrop-filter: var(--notification-box-filter) !important;
-  padding-inline: 0 !important;
-  align-items: center !important;
-  font-size: inherit !important;
-  flex-shrink: 0 !important;
-  flex-grow: 0 !important;
-  flex-basis: auto !important;
 }
-
-/* temporarily disabled due to backdrop-filter being disabled. see https://bugzilla.mozilla.org/show_bug.cgi?id=1741779 */
-/* :root {
-  --notification-box-bgcolor: var(--acrylic-blue) !important;
-  --notification-box-bgimage: var(--acrylic-texture) !important;
-  --notification-box-filter: var(--acrylic-blur) !important;
-}
-
-:root[inFullscreen] {
-  --notification-box-bgcolor: var(--arrowpanel-background) !important;
-  --notification-box-filter: none !important;
-} */
 
 :root {
   --notification-box-bgcolor: var(--arrowpanel-background) !important;
@@ -780,150 +703,21 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   --notification-box-filter: none !important;
 }
 
-.notificationbox-stack :is(notification, notification-message) .notification-button {
-  height: 22px !important;
-  padding-inline: 5px !important;
-  margin-inline-end: 1px !important;
-  flex: 1 !important;
-}
-
-.notificationbox-stack :is(notification, notification-message) > hbox[anonid="details"] {
-  order: 1 !important;
-  margin-left: -28px !important;
-}
-
-#navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="critical"],
-#navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="critical"],
-#navigator-toolbox .global-notificationbox notification-message[type="critical"] {
-  flex-shrink: 0.25 !important;
-}
-
-#navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="warning"],
-#navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="warning"],
-#navigator-toolbox .global-notificationbox notification-message[type="warning"] {
-  flex-shrink: 0.5 !important;
-}
-
-#navigator-toolbox > :is(legacy-stack, .notificationbox-stack, named-deck) notification-message[type="info"],
-#navigator-toolbox > named-deck > .notificationbox-stack notification-message[type="info"],
-#navigator-toolbox .global-notificationbox notification-message[type="info"] {
-  flex-shrink: 0.75 !important;
-}
-
 link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container {
-  border-radius: 0 !important;
-  overflow: hidden !important;
   background-color: var(--notification-box-bgcolor) !important;
   background-image: var(--notification-box-bgimage) !important;
   backdrop-filter: var(--notification-box-filter) !important;
-  padding-inline: 8px 4px !important;
-  align-items: center !important;
-  flex-grow: 1 !important;
-  text-overflow: ellipsis !important;
-}
-
-.container::before {
-  border-radius: 0 !important;
-}
-
-.notificationbox-stack :is(notification, notification-message)::before {
-  content: "";
-  display: block;
-  width: 2px;
-  position: absolute;
-  background-image: linear-gradient(0, #9059ff 0%, #ff4aa2 52.08%, #ffbd4f 100%);
-  top: 0;
-  inset-inline-start: 0;
-  height: 100%;
-}
-
-.notificationbox-stack notification[style*="opacity: 0;"],
-#navigator-toolbox > :is(legacy-stack, .notificationbox-stack) > notification-message[style*="opacity: 0;"],
-#navigator-toolbox > named-deck > .notificationbox-stack > notification-message[style*="opacity: 0;"] {
-  margin-top: -32px !important;
-  max-width: 1px !important;
-  transition: margin-top 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
-}
-
-#navigator-toolbox .global-notificationbox notification-message.animated {
-  transition: margin-top 100ms linear, transform 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
-}
-
-#navigator-toolbox .global-notificationbox notification-message[style*="opacity: 0;"] {
-  margin-top: 0.001px !important;
-  transform: translateY(32px) !important;
-  max-width: 1px !important;
-  transition: margin-top 100ms linear, transform 100ms linear, max-width 100ms ease-in-out, opacity 100ms ease-in-out !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-content {
-  flex-flow: row nowrap !important;
-  flex-grow: 2 !important;
-  display: flex !important;
-  white-space: nowrap !important;
-  text-overflow: ellipsis !important;
-  overflow: hidden !important;
-  padding-inline: 0 4px !important;
-  margin-inline: 0 !important;
-  height: 100% !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-content .notification-message {
-  padding-block: 6px !important;
-  min-height: auto !important;
-  text-overflow: ellipsis !important;
-  overflow: hidden !important;
-  padding-inline: var(--uc-notification-message-content-margin-inline-start, 8px) 8px !important;
-  margin-inline: 0 !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container > .spacer {
-  flex-grow: 0.1 !important;
-  display: none !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-content .notification-button-container {
-  flex-flow: row nowrap !important;
-  flex-grow: 2 !important;
-  display: flex !important;
-  align-content: end !important;
-  align-items: end !important;
-  justify-content: end !important;
-  justify-items: end !important;
-  gap: 4px !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-content .notification-button {
-  margin: revert !important;
-  outline-offset: 0 !important;
-  align-items: center !important;
-}
-
-.notificationbox-stack notification :is(button, toolbarbutton),
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button {
-  border-radius: var(--in-content-button-border-radius) !important;
-  font-weight: inherit !important;
   padding-block: 0 !important;
-  outline-offset: 0 !important;
+  padding-inline: 10px 4px !important;
 }
 
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-content .notification-button-container > .notification-button.small {
-  margin: 0 !important;
-  font-weight: var(--uc-font-weight-bold, 600) !important;
+notification-message .notification-button,
+link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button {
+	border-radius: var(--toolbarbutton-border-radius) !important;
 }
 
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button .button-text {
-  margin-block: 2px 1px !important;
-}
-
-notification .messageImage {
-  width: 16px !important;
-  height: 16px !important;
-  margin: 8px 0 8px 6px !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container > .icon {
-  margin-inline-start: 6px !important;
+link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button {
+  background-size: 14px !important;
 }
 
 link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.close:hover {
@@ -934,53 +728,12 @@ link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container b
   background-color: var(--notification-button-background-active) !important;
 }
 
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.close {
-  left: 2px !important;
-  right: auto !important;
-  position: absolute !important;
-  display: block !important;
-  align-self: center !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.close > .toolbarbutton-icon {
-  width: 16px !important;
-  padding: 0 !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.close,
-notification .messageImage,
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-close,
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .icon {
-  transition: 0.25s transform var(--animation-easing-function), 0.25s opacity var(--animation-easing-function) !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.close,
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container .notification-close {
-  width: 20px !important;
-  height: 20px !important;
-  margin: 0 4px !important;
-  position: absolute !important;
-  opacity: var(--uc-notification-message-close-button-opacity, 0) !important;
-  transform: var(--uc-notification-message-close-button-transform, translateX(-15px) scale(0.5)) !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container:is(:hover, :focus-within) button.close,
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container:is(:hover, :focus-within) .notification-close {
-  transform: none !important;
-  opacity: 1 !important;
-}
-
 link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.ghost-button:not(.semi-transparent):enabled:is(:hover, :focus-visible) {
   background-color: var(--in-content-button-background) !important;
 }
 
 link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container button.ghost-button:not(.semi-transparent):enabled:hover:active {
   background-color: var(--in-content-button-background-hover) !important;
-}
-
-link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container:is(:hover, :focus-within) .icon {
-  transform: translateX(15px) scale(0.5) !important;
-  opacity: 0 !important;
 }
 
 #fxa-toolbar-menu-button #fxa-avatar-image {

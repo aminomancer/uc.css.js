@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.7.9
+// @version        1.8.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -176,7 +176,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         create(document, "menuitem", {
           id: "vertical-tabs-context-position",
           label: config.l10n.context["Move Pane to Right"],
-          oncommand: `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, true);`,
+          oncommand: `Services.prefs.setBoolPref(SidebarController.POSITION_START_PREF, true);`,
         })
       );
       this._contextMenu.menuitemExpand = this._contextMenu.appendChild(
@@ -289,15 +289,15 @@ When you collapse the pane with the unpin button, it collapses to a small width 
       });
       prefSvc.addObserver("userChrome.tabs.verticalTabsPane", this);
       prefSvc.addObserver("privacy.userContext", this);
-      prefSvc.addObserver(SidebarUI.POSITION_START_PREF, this);
+      prefSvc.addObserver(window.SidebarController.POSITION_START_PREF, this);
       // re-initialize the sidebar's positionstart pref callback since we
       // changed it earlier at the bottom to make it also move the pane.
       XPCOMUtils.defineLazyPreferenceGetter(
-        SidebarUI,
+        window.SidebarController,
         "_positionStart",
-        SidebarUI.POSITION_START_PREF,
+        window.SidebarController.POSITION_START_PREF,
         true,
-        SidebarUI.setPosition.bind(SidebarUI)
+        window.SidebarController.setPosition.bind(window.SidebarController)
       );
       this._l10nIfNeeded();
       // the pref observer changes stuff in the script when the pref is changed.
@@ -329,7 +329,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         if (window.closed) return;
         readPref(reversePref);
         readPref(userContextPref);
-        readPref(SidebarUI.POSITION_START_PREF);
+        readPref(window.SidebarController.POSITION_START_PREF);
         // try to adopt from previous window, otherwise restore from prefs.
         let sourceWindow = window.opener;
         if (
@@ -768,22 +768,23 @@ When you collapse the pane with the unpin button, it collapses to a small width 
         case containerOnClickPref:
           this._handlePrivacyChange();
           break;
-        case SidebarUI.POSITION_START_PREF:
+        case window.SidebarController.POSITION_START_PREF: {
           let menuitem = this._contextMenu.menuitemPosition;
           if (value) {
             menuitem.label = config.l10n.context["Move Pane to Left"];
             menuitem.setAttribute(
               "oncommand",
-              `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, false);`
+              `Services.prefs.setBoolPref(SidebarController.POSITION_START_PREF, false);`
             );
           } else {
             menuitem.label = config.l10n.context["Move Pane to Right"];
             menuitem.setAttribute(
               "oncommand",
-              `Services.prefs.setBoolPref(SidebarUI.POSITION_START_PREF, true);`
+              `Services.prefs.setBoolPref(SidebarController.POSITION_START_PREF, true);`
             );
           }
           break;
+        }
       }
     }
     toggle() {
@@ -1785,7 +1786,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
             icon.setAttribute("type", "local-page");
             icon.hidden = false;
             return;
-          case "about":
+          case "about": {
             let pathQueryRef = docURI?.pathQueryRef;
             if (
               pathQueryRef &&
@@ -1803,6 +1804,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
             icon.setAttribute("type", "about-page");
             icon.hidden = false;
             return;
+          }
           case "moz-extension":
             icon.setAttribute("type", "extension-page");
             icon.hidden = false;
@@ -2511,11 +2513,14 @@ When you collapse the pane with the unpin button, it collapses to a small width 
     // set the sidebar position since we modified this function. change the
     // onUnload function (invoked when window is closed) so that it calls our
     // uninit function too.
-    SidebarUI.setPosition();
+    window.SidebarController.setPosition();
     eval(
       `gBrowserInit.onUnload = function ${gBrowserInit.onUnload
         .toSource()
-        .replace(/(SidebarUI\.uninit\(\))/, `$1; verticalTabsPane.uninit()`)}`
+        .replace(
+          /(SidebarController\.uninit\(\))/,
+          `$1; verticalTabsPane.uninit()`
+        )}`
     );
     // reset the event handler since it used the bind method, which creates an
     // anonymous version of the function that we can't change. just re-bind our
@@ -2640,7 +2645,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
 
   // tab pane's horizontal alignment should mirror that of the sidebar, which
   // can be moved from left to right.
-  SidebarUI.setPosition = function () {
+  window.SidebarController.setPosition = function () {
     let appcontent = document.getElementById("appcontent");
     let verticalSplitter = document.getElementById("vertical-tabs-splitter");
     let verticalPane = document.getElementById("vertical-tabs-pane");
@@ -2661,7 +2666,7 @@ When you collapse the pane with the unpin button, it collapses to a small width 
       verticalPane.removeAttribute("positionstart");
     }
     this.hideSwitcherPanel();
-    let content = SidebarUI.browser.contentWindow;
+    let content = window.SidebarController.browser.contentWindow;
     if (content && content.updatePosition) content.updatePosition();
   };
 

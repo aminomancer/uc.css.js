@@ -420,14 +420,14 @@ of moz-document in stylesheets with file:// urls */
     background: var(--panel-background, Menu);
     border-radius: var(--panel-border-radius);
     width: var(--panel-width);
-    max-height: calc(100% - 2 * var(--menupopup-inner-box-margin));
-    max-width: calc(100% - 2 * var(--menupopup-inner-box-margin));
   }
 
   :is(panel, menupopup)[type="arrow"]:where(:not(.tooltip-xul-wrapper))::part(content),
   panel#feature-callout::part(content) {
     box-shadow: var(--uc-panel-shadow);
     margin: var(--panel-inner-box-margin, 4px);
+    max-height: calc(100% - 2 * var(--panel-inner-box-margin));
+    max-width: calc(100% - 2 * var(--panel-inner-box-margin));
     overflow: hidden;
   }
 
@@ -451,17 +451,17 @@ of moz-document in stylesheets with file:// urls */
       &::part(arrow) {
         list-style-image: url("chrome://userchrome/content/panelarrow-vertical.svg");
         position: relative;
-        margin-inline: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
+        margin-inline: calc(6px + var(--panel-inner-box-margin, 4px));
       }
     }
 
     &[side="top"]::part(arrow) {
-      margin-bottom: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+      margin-bottom: calc(-1px - var(--panel-inner-box-margin, 4px));
     }
 
     &[side="bottom"]::part(arrow) {
       transform: scaleY(-1);
-      margin-top: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+      margin-top: calc(-1px - var(--panel-inner-box-margin, 4px));
     }
 
     &[side="left"],
@@ -469,17 +469,17 @@ of moz-document in stylesheets with file:// urls */
       &::part(arrow) {
         list-style-image: url("chrome://userchrome/content/panelarrow-horizontal.svg");
         position: relative;
-        margin-block: calc(6px + var(--panel-inner-box-margin, 4px)) !important;
+        margin-block: calc(6px + var(--panel-inner-box-margin, 4px));
       }
     }
 
     &[side="left"]::part(arrow) {
-      margin-right: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+      margin-right: calc(-1px - var(--panel-inner-box-margin, 4px));
     }
 
     &[side="right"]::part(arrow) {
       transform: scaleX(-1);
-      margin-left: calc(-1px - var(--panel-inner-box-margin, 4px)) !important;
+      margin-left: calc(-1px - var(--panel-inner-box-margin, 4px));
     }
   }
 
@@ -576,14 +576,30 @@ of moz-document in stylesheets with file:// urls */
   }
 
   .panel-footer > button {
-    border-radius: var(--general-button-border-radius);
+    &:not([disabled]) {
+      &:hover,
+      &:focus-visible {
+        background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
+      }
 
-    &:not([disabled], :active):is(:hover, :focus-visible) {
-      background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent));
-    }
+      &:hover:active {
+        background-color: var(--button-active-bgcolor, color-mix(in srgb, currentColor 30%, transparent));
+      }
 
-    &[default]:not([disabled], :active):is(:hover, :focus-visible) {
-      background-color: var(--button-primary-hover-bgcolor);
+      &[default],
+      &.primary {
+        color: var(--button-primary-color);
+        background-color: var(--button-primary-bgcolor);
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--button-primary-hover-bgcolor);
+        }
+
+        &:hover:active {
+          background-color: var(--button-primary-active-bgcolor);
+        }
+      }
     }
   }
 
@@ -819,7 +835,8 @@ of moz-document in stylesheets with file:// urls */
   }
 
   @-moz-document regexp("^chrome:(?!\/\/(devtools|mozapps|browser\/content\/(sanitize|places\/places.xhtml)|global\/content\/commonDialog)).*") {
-    .panel-footer > button {
+    .panel-footer > button,
+    .footer-button {
       font-weight: var(--uc-font-weight-bold, 600);
     }
   }
@@ -844,11 +861,11 @@ of moz-document in stylesheets with file:// urls */
   }
 
   #customizationui-widget-panel[viewId^="PanelUI-webext-"][side="top"]::part(arrow) {
-    margin-bottom: var(--customized-webextension-panel-margin-bottom, -4px);
+    margin-bottom: var(--customized-webextension-panel-margin-bottom, calc(-1px - var(--panel-inner-box-margin, 4px)));
   }
 
   #customizationui-widget-panel[viewId^="PanelUI-webext-"][side="bottom"]::part(arrow) {
-    margin-top: var(--customized-webextension-panel-margin-top, -4px);
+    margin-top: var(--customized-webextension-panel-margin-top, calc(-1px - var(--panel-inner-box-margin, 4px)));
   }
 
   #customization-panelWrapper {
@@ -2160,6 +2177,10 @@ of moz-document in stylesheets with file:// urls */
 
   .checkbox-label[native] {
     margin: 0;
+  }
+
+  #tabbrowser-tab-preview::part(arrowbox) {
+    display: none;
   }
 
   @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),

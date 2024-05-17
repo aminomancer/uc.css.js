@@ -23,8 +23,6 @@ tooltip {
   border: none !important;
   max-width: max(20vw, 30em);
   padding: 5px !important;
-  margin-inline-start: -5px !important;
-  margin-block-start: 16px !important;
   pointer-events: none !important;
 }
 
@@ -90,7 +88,8 @@ tooltip .uc-tooltip-box {
   color: var(--panel-shortcut-color) !important;
 }
 
-.places-tooltip-title {
+.places-tooltip-title,
+.tab-preview-title {
   font-weight: 600;
   /* Clip after 2 lines, this should ideally use a different method like
   -webkit-line-clamp or overflow: hidden; to get ellipsis support but XUL
@@ -115,6 +114,26 @@ tooltip .uc-tooltip-box {
   .places-tooltip-title {
     margin-bottom: 1px !important;
   }
+}
+
+#tabPreviewPanel {
+  margin: calc(0px - var(--panel-inner-box-margin, 4px)) !important;
+}
+
+.tab-preview-container {
+  --tab-preview-background-color: var(--tooltip-bgcolor, Menu) !important;
+  --tab-preview-text-color: var(--tooltip-color) !important;
+  --tab-preview-border-color: var(--dialog-box-border-color) !important;
+  margin: var(--panel-inner-box-margin, 4px) !important;
+  max-height: calc(100% - 2 * var(--panel-inner-box-margin)) !important;
+  max-width: calc(100% - 2 * var(--panel-inner-box-margin)) !important;
+  border-radius: var(--arrowpanel-border-radius) !important;
+  box-shadow: var(--uc-panel-shadow) !important;
+  box-sizing: border-box !important;
+}
+
+.tab-preview-text-container {
+  padding: 6px 8px 7px 8px !important;
 }
 
 #places-tooltip-insecure-icon {
@@ -264,7 +283,6 @@ necessary attributes based on tab security state. */
   border-radius: var(--tooltip-border-radius) !important;
   box-shadow: var(--tooltip-box-shadow) !important;
   padding: var(--uc-tooltip-inner-padding) !important;
-  margin-block-start: 26px !important;
 }
 
 #eom-theme-preview-tooltip {
@@ -607,6 +625,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
     }
 
     .places-tooltip-title,
+    .tab-preview-title,
     :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label[id] {
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -614,11 +633,13 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
     }
 
     .places-tooltip-uri,
+    .tab-preview-uri,
     :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
       font-weight: var(--uc-font-weight-thin, 300) !important;
     }
 
-    .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri {
+    .places-tooltip-title[hidden="true"] ~ .places-tooltip-uri,
+    .tab-preview-title[hidden="true"] ~ .tab-preview-uri {
       font-weight: inherit !important;
     }
 
@@ -699,7 +720,8 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
     }
 
     .dialog-button-box,
-    :root[dialogroot] {
+    :root[dialogroot],
+    notification-message {
       button {
         font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -746,6 +768,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
   tooltip > description,
   tooltip .uc-tooltip-box,
   .places-tooltip-box,
+  .tab-preview-container,
   #tracking-protection-container tooltip,
   #statuspanel-label {
     border: none !important;

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.4
+// @version        1.0.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -259,8 +259,8 @@ class ContextMenuMods {
     let engineId = event.target.getAttribute("engine-id");
     let engine = Services.search.getEngineById(engineId);
 
-    event = getRootEvent(event);
-    let where = whereToOpenLink(event);
+    event = BrowserUtils.getRootEvent(event);
+    let where = BrowserUtils.whereToOpenLink(event);
     if (where == "current") where = "tab";
     if (usePrivate && !PrivateBrowsingUtils.isWindowPrivate(window)) {
       where = "window";

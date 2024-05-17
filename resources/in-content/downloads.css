@@ -1,6 +1,6 @@
 /* just for downloads in the places organizer */
 
-/* downloads panel */
+/* downloads panel and places organizer */
 @-moz-document url("chrome://browser/content/browser.xhtml"), url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
   #downloadsPanel-mainView,
   #downloadsPanel-blockedSubview {
@@ -397,6 +397,22 @@
   }
 }
 
+/* downloads panel */
+@-moz-document url("chrome://browser/content/browser.xhtml") {
+  richlistitem.download-state:is([state="-1"], [state="5"], [state="0"], [state="4"], [state="7"]) .downloadMainArea {
+    padding-block: 0 !important;
+
+    .downloadContainer {
+      row-gap: 3px !important;
+    }
+  }
+
+  .downloadProgress {
+    height: 2px !important;
+  }
+}
+
+/* places organizer */
 @-moz-document url-prefix("chrome://browser/content/places/places.xhtml"), url-prefix("about:downloads") {
   #downloadsListBox {
     border: none !important;

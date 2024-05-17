@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Floating Sidebar Resizer
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -26,7 +26,7 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
 (() => {
   function startup() {
     // outer box
-    let box = SidebarUI._box;
+    let box = window.SidebarController._box;
     let prefsvc = Services.prefs;
     // boolean pref: whether sidebar is on the left or right side of the browser content area.
     let anchor = "sidebar.position_start";
@@ -61,7 +61,7 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
       if (frame) return;
       frame = true;
       requestAnimationFrame(() => {
-        if (SidebarUI._positionStart) {
+        if (window.SidebarController._positionStart) {
           box.style.width = `${startWidth + e.screenX - startX}px`;
         } else {
           box.style.width = `${startWidth - e.screenX + startX}px`;
@@ -95,7 +95,7 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
         if (e.repeat || e.shiftKey || e.altKey || e.ctrlKey || this.hidden) {
           return;
         }
-        SidebarUI.toggle();
+        window.SidebarController.toggle();
         e.preventDefault();
       }
     }
@@ -132,7 +132,7 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
     attachListeners();
   }
 
-  // wait until components are initialized so we can access SidebarUI
+  // wait until components are initialized so we can access window.SidebarController
   if (gBrowserInit.delayedStartupFinished) {
     startup();
   } else {

@@ -105,7 +105,7 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
           icon.hidden = false;
           return;
         // about: pages
-        case "about":
+        case "about": {
           let pathQueryRef = docURI?.pathQueryRef;
           if (
             pathQueryRef &&
@@ -123,6 +123,7 @@ override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
           icon.setAttribute("type", "about-page");
           icon.hidden = false;
           return;
+        }
         // extension pages (except the new tab page)
         case "moz-extension":
           icon.setAttribute("type", "extension-page");

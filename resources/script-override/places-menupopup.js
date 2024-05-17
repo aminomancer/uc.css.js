@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Places Menupopup Arrows
-// @version        1.1.2
+// @version        1.3.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -603,7 +603,7 @@ function closingPopupEndsDrag(popup) {
   class MozPlacesPopupArrow extends MozPlacesPopup {
     get markup() {
       return `<html:link rel="stylesheet" href="chrome://global/skin/global.css" />
-              <vbox class="panel-arrowcontainer" flex="1">
+              <vbox class="panel-arrowcontainer" part="arrowcontainer" flex="1">
                 <box class="panel-arrowbox" part="arrowbox">
                   <image class="panel-arrow" part="arrow" />
                 </box>

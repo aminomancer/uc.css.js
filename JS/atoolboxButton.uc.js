@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toolbox Button
-// @version        1.3.9
+// @version        1.4.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -412,7 +412,7 @@ When you middle click, the button will show a notification telling you the curre
             // system principal (such as on about:preferences), we will still
             // get notified that the toolbox has closed. otherwise, we wouldn't
             // get notified until the content toolbox also closes.
-            case "devtools-thread-ready":
+            case "devtools-thread-ready": {
               let threadActor = sub?.wrappedJSObject;
               if (threadActor) {
                 if (threadActor.destroy.name !== "destroyThreadActor") {
@@ -437,6 +437,7 @@ When you middle click, the button will show a notification telling you the curre
                 }
               }
               break;
+            }
             default:
               break;
           }

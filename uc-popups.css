@@ -26,6 +26,9 @@ tabmodalprompt {
   --link-color: var(--purple-35) !important;
   --link-color-hover: var(--purple-30) !important;
   --link-color-active: var(--purple-30) !important;
+  --color-accent-primary: var(--purple-40) !important;
+  --color-accent-primary-hover: var(--purple-35) !important;
+  --color-accent-primary-active: var(--purple-30) !important;
   --in-content-primary-button-background: var(--purple-40) !important;
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;
@@ -43,6 +46,7 @@ tabmodalprompt {
   --in-content-button-border-radius: var(--general-button-border-radius) !important;
   --in-content-button-vertical-padding: 5px !important;
   --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+  --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
   --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
 }
 
@@ -807,7 +811,7 @@ rtl languages. adjust the border radius accordingly */
   justify-items: center;
 }
 
-@-moz-document url("chrome://global/content/commonDialog.xhtml"), url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml") {
+@-moz-document url("chrome://global/content/commonDialog.xhtml"), url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml"), url("chrome://browser/content/preferences/dialogs/siteDataRemoveSelected.xhtml") {
   #commonDialogWindow[dialogroot],
   #commonDialogWindow[dialogroot] *,
   .dialog-button-box {
@@ -829,12 +833,16 @@ rtl languages. adjust the border radius accordingly */
     --link-color: var(--purple-35) !important;
     --link-color-hover: var(--purple-30) !important;
     --link-color-active: var(--purple-30) !important;
+    --color-accent-primary: var(--purple-40) !important;
+    --color-accent-primary-hover: var(--purple-35) !important;
+    --color-accent-primary-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-primary-button-text-color-hover: white !important;
     --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -945,7 +953,8 @@ rtl languages. adjust the border radius accordingly */
   }
 
   richlistbox[id] richlistitem {
-    min-height: 32px !important;
+    min-height: var(--menuitem-height) !important;
+    align-items: center !important;
   }
 
   richlistbox[id] richlistitem[selected="true"] {
@@ -1082,7 +1091,7 @@ rtl languages. adjust the border radius accordingly */
   }
 }
 
-@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url("chrome://global/content/appPicker.xhtml") {
+@-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"), url("chrome://global/content/appPicker.xhtml"), url("chrome://browser/content/preferences/dialogs/siteDataRemoveSelected.xhtml") {
   :root,
   :root dialog,
   .dialog-button-box {
@@ -1111,11 +1120,15 @@ rtl languages. adjust the border radius accordingly */
     --link-visited-color: var(--pink-40) !important;
     --link-visited-color-hover: var(--pink-35) !important;
     --link-visited-color-active: var(--pink-30) !important;
+    --color-accent-primary: var(--purple-40) !important;
+    --color-accent-primary-hover: var(--purple-35) !important;
+    --color-accent-primary-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-accent-color: var(--purple-35) !important;
     --in-content-table-background: var(--in-content-box-background) !important;
@@ -1150,9 +1163,9 @@ rtl languages. adjust the border radius accordingly */
     margin-block: 0 !important;
   }
 
-  separator.thin:not([orient="vertical"]) {
+  /* separator.thin:not([orient="vertical"]) {
     height: 5px !important;
-  }
+  } */
 
   .dialog-button-box:not([hidden]) {
     column-gap: 10px !important;
@@ -1182,7 +1195,7 @@ rtl languages. adjust the border radius accordingly */
   }
 }
 
-@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url-prefix("chrome://global/content/print.html"), url("chrome://browser/content/places/bookmarkProperties.xhtml"), url("chrome://browser/content/places/bookmarkProperties2.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml"), url("chrome://browser/content/spotlight.html") {
+@-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml"), url("chrome://mozapps/content/handling/appChooser.xhtml"), url-prefix("chrome://global/content/print.html"), url("chrome://browser/content/places/bookmarkProperties.xhtml"), url("chrome://browser/content/places/bookmarkProperties2.xhtml"), url-prefix("chrome://browser/content/sanitize.xhtml"), url("chrome://browser/content/spotlight.html"), url("chrome://browser/content/preferences/dialogs/siteDataRemoveSelected.xhtml") {
   :root[dialogroot],
   :root[dialogroot] dialog,
   :root[dialogroot] richlistbox[id]:not(#categories) > richlistitem[selected],
@@ -1207,11 +1220,15 @@ rtl languages. adjust the border radius accordingly */
     --link-color: var(--purple-30) !important;
     --link-color-hover: var(--purple-25) !important;
     --link-color-active: var(--purple-20) !important;
+    --color-accent-primary: var(--purple-40) !important;
+    --color-accent-primary-hover: var(--purple-35) !important;
+    --color-accent-primary-active: var(--purple-30) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
     --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
@@ -1245,25 +1262,6 @@ rtl languages. adjust the border radius accordingly */
   .onboardingContainer .main-content {
     border: 1px solid var(--arrowpanel-border-color);
     background-color: var(--in-content-page-background) !important;
-  }
-
-  :root[dialogroot] input[type="checkbox"]:checked {
-    background-image: url(chrome://userchrome/content/check.svg) !important;
-    background-size: contain !important;
-  }
-
-  :root[dialogroot] input[type="radio"],
-  :root[dialogroot] .radio-check {
-    appearance: none;
-    border: 1px solid var(--in-content-box-border-color);
-    border-radius: 100%;
-    margin-block: 3px;
-    margin-inline: 0 10px;
-    background-color: var(--in-content-button-background);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain !important;
-    flex-shrink: 0;
   }
 
   :root[dialogroot] select:not([size], [multiple]) > option {
@@ -1305,7 +1303,8 @@ rtl languages. adjust the border radius accordingly */
   :where(:root[dialogroot], .dialog-button-box) menulist:focus-visible,
   :where(:root[dialogroot], .dialog-button-box) checkbox:not([native]):focus-visible > .checkbox-check,
   :where(:root[dialogroot], .dialog-button-box) radio[focused="true"] > .radio-check,
-  :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text {
+  :where(:root[dialogroot], .dialog-button-box) tab:focus-visible > .tab-middle > .tab-text,
+  :where(:root[dialogroot], .dialog-button-box) .toggle-group-input:focus-visible + .toggle-group-label{
     outline-offset: 0 !important;
   }
 
@@ -1320,9 +1319,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   :root[dialogroot] details > summary:focus-visible {
-    box-shadow: none;
-    outline: 2px solid var(--in-content-focus-outline-color);
-    outline-offset: 5px;
+    outline-offset: 2px;
   }
 
   :root[dialogroot] menulist,
@@ -1383,39 +1380,14 @@ rtl languages. adjust the border radius accordingly */
   }
 
   button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
-  button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
+  button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
+  .toggle-group-input:checked:focus-visible + .toggle-group-label {
     background-color: var(--in-content-primary-button-background-hover) !important;
     color: var(--in-content-primary-button-text-color-hover) !important;
   }
 
   :root[dialogroot] input[type="number"] {
-    overflow: hidden !important;
-    overflow-clip-box: padding-box !important;
     border-radius: var(--in-content-button-border-radius) !important;
-    background-clip: padding-box !important;
-    border-right: none !important;
-  }
-
-  :root[dialogroot] input[type="number"]::-moz-number-spin-box {
-    border-top-right-radius: var(--in-content-button-border-radius) !important;
-    border-bottom-right-radius: var(--in-content-button-border-radius) !important;
-    border-right: 1px solid var(--in-content-box-border-color) !important;
-    border-left: none !important;
-    width: calc(1em + 0.67px) !important;
-  }
-
-  :root[dialogroot] input[type="number"]:hover,
-  :root[dialogroot] input[type="number"]:hover::-moz-number-spin-box {
-    border-color: var(--in-content-border-hover) !important;
-  }
-
-  :root[dialogroot] input[type="number"]:hover:active::-moz-number-spin-box {
-    border-color: var(--purple-40) !important;
-  }
-
-  :root[dialogroot] input[type="number"]:focus,
-  :root[dialogroot] input[type="number"]:focus::-moz-number-spin-box {
-    border-color: var(--in-content-focus-outline-color) !important;
   }
 
   :root[dialogroot] #titleText {
@@ -1511,6 +1483,33 @@ rtl languages. adjust the border radius accordingly */
   :root[dialogroot] * {
     scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+  }
+
+  richlistbox.theme-listbox > richlistitem {
+    --in-content-button-background: var(--purple-50) !important;
+    --in-content-button-background-hover: var(--purple-55) !important;
+    --in-content-button-background-active: var(--purple-60) !important;
+    --in-content-button-text-color: var(--in-content-item-selected-text) !important;
+    --in-content-button-text-color-hover: var(--in-content-item-selected-text) !important;
+    --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
+    --in-content-focus-outline-color: var(--in-content-item-selected-text) !important;
+    --focus-outline-color: var(--in-content-item-selected-text) !important;
+    --listitem-selectedTextColor: inherit !important;
+    --listitem-selectedColor: var(--purple-50) !important;
+    --listitem-selectedBorder: transparent !important;
+    --listitem-selectedBottomBorder: transparent !important;
+    --listitem-selectedBackground: var(--purple-50) !important;
+    --listitem-selectedImage: none;
+    --listitem-selectedCurrentBorder: transparent !important;
+    --listitem-selectedFocusColor: var(--purple-40) !important;
+    --listitem-selectedFocusBorder: transparent !important;
+    --listitem-selectedFocusBottomBorder: transparent !important;
+    --listitem-selectedFocusBackground: var(--purple-40) !important;
+    --listitem-selectedFocusImage: none;
+    --listitem-selectedFocusCurrentBorder: transparent !important;
+    --listitem-selectedFocusCurrentBottomBorder: transparent !important;
+    --listitem-selectedFocusCurrentBackground: var(--listitem-selectedFocusColor);
+    margin-inline: 0 !important;
   }
 
   @-moz-document url("chrome://mozapps/content/handling/permissionDialog.xhtml") {

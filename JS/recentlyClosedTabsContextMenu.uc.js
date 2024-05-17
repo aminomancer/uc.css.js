@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.3
+// @version        2.1.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -192,7 +192,12 @@ class UndoListInTabmenu {
   // if TST is installed, listen for its sidebar opening
   async attachSidebarListener() {
     let TST = await AddonManager.getAddonByID("treestyletab@piro.sakura.ne.jp");
-    if (TST) SidebarUI._switcherTarget.addEventListener("SidebarShown", this);
+    if (TST) {
+      window.SidebarController._switcherTarget.addEventListener(
+        "SidebarShown",
+        this
+      );
+    }
   }
   // when a TST sidebar is created, add context menus.
   // when context menu is opened, hide/show the menus.
@@ -218,7 +223,7 @@ class UndoListInTabmenu {
         // around if you switch from one extension sidebar to another, but we
         // delete our menu items if the sidebar is switched to anything but TST.
         if (
-          SidebarUI.currentID ===
+          window.SidebarController.currentID ===
           "treestyletab_piro_sakura_ne_jp-sidebar-action"
         ) {
           if (sidebarContext.hasAttribute("undo-list-init")) break;
@@ -1099,7 +1104,7 @@ class RecentlyClosedPanelContext {
     let target = e.currentTarget;
     if (this.REMOVE_ON_MID_CLICK) {
       switch (e.button) {
-        case 0:
+        case 0: {
           let { shiftKey } = e;
           let accelKey = e.getModifierState("Accel");
           if (accelKey) {
@@ -1112,6 +1117,7 @@ class RecentlyClosedPanelContext {
             }
           }
           return;
+        }
         case 1:
           this.onRemoveFromList(target);
         // fall through

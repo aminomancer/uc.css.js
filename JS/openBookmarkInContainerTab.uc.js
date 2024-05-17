@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Bookmark in Container Tab (context menu)
-// @version        1.2.7
+// @version        1.2.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -138,9 +138,18 @@ class OpenPlacesInContainerTabMenu {
       ))
     );
   }
+  get syncedTabsDeck() {
+    return document.getElementById("sidebar")?.contentWindow
+      .syncedTabsDeckComponent;
+  }
+  get syncedTabsList() {
+    return this.syncedTabsDeck.tabListComponent;
+  }
   get syncedTabsStore() {
-    return document.getElementById("sidebar")?.syncedTabsDeckComponent
-      ._syncedTabsListStore;
+    return this.syncedTabsList._store;
+  }
+  get syncedTabsView() {
+    return this.syncedTabsList._view;
   }
   get selectedSyncedRow() {
     return this.syncedTabsStore.data[this.syncedTabsStore._selectedRow[0]];
@@ -261,20 +270,13 @@ class OpenPlacesInContainerTabMenu {
     let win = window.gBrowser ? window : BrowserWindowTracker.getTopWindow();
     if (!win) return;
     let { gBrowser, Services } = win;
-    let urls = [];
     if (!item) {
       let view = this.getActivePlacesView(popup);
       if (!view) return;
       item = view.selectedNode;
     }
-    if (item instanceof Array) {
-      item.forEach(node => {
-        let url = typeof node === "object" ? node.url || node.uri : node;
-        urls.push(url);
-      });
-    } else {
-      urls = [typeof item === "object" ? item.url || item.uri : item];
-    }
+    let items = Array.isArray(item) ? item : [item];
+    let urls = items.map(node => node.url || node.uri || node).filter(Boolean);
     gBrowser.loadTabs(urls, {
       userContextId: parseInt(e.target.getAttribute("data-usercontextid")),
       inBackground: Services.prefs.getBoolPref(
@@ -314,7 +316,7 @@ class OpenPlacesInContainerTabMenu {
   }
   openAllSyncedFromDevice(e, popup) {
     if (!this.syncedContextMenuInited) return;
-    if (popup.triggerNode?.closest(".tabs-container")) {
+    if (this.syncedTabsStore._selectedRow[0] >= 0) {
       this.openLinkInContainer(e, popup, this.selectedSyncedRow.tabs);
     }
   }

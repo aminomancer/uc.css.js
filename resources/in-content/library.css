@@ -74,6 +74,13 @@
     box-shadow: inset 0 -1px var(--organizer-border-color);
   }
 
+  tree {
+    appearance: none !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
   treecol,
   treecolpicker {
     background-color: var(--organizer-pane-background) !important;

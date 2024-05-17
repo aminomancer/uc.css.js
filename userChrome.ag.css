@@ -29,11 +29,6 @@ tooltip {
   --uc-tooltip-inner-padding: 4px 7px 6px 7px;
 }
 
-tooltip:not([position]) {
-  margin-block-start: 16px;
-  margin-inline-start: -5px;
-}
-
 tooltip > description {
   background-color: var(--tooltip-bgcolor);
   color: var(--tooltip-color);

@@ -55,6 +55,7 @@
   :root[uc-extension-id="@testpilot-containers"] hr {
     padding: 0 !important;
     margin: var(--menupopup-inner-padding) !important;
+    border-color: var(--menu-separator-color) !important;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .scrollable,

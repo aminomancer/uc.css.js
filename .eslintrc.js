@@ -6,14 +6,7 @@
 
 "use strict";
 
-const path = require("path");
-
 module.exports = {
-  parser: "@babel/eslint-parser",
-  parserOptions: {
-    sourceType: "script",
-    babelOptions: { configFile: path.join(__dirname, ".babel-eslint.rc.js") },
-  },
   env: {
     node: false,
     // "mozilla/browser-window": true,
@@ -57,7 +50,6 @@ module.exports = {
     {
       files: ["JS/**", "experimental/**"],
       parserOptions: {
-        sourceType: "script",
         ecmaVersion: "latest",
       },
       env: { browser: true, "mozilla/browser-window": true },
@@ -108,13 +100,17 @@ module.exports = {
       globals: { user_pref: "readonly" },
     },
     {
-      files: ["resources/script-override/**"],
+      files: ["resources/script-override/**/*.js"],
       rules: {
         "prefer-destructuring": "off",
         "prefer-template": "off",
         "prettier/prettier": ["error", { quoteProps: "preserve" }],
       },
       env: { browser: true, "mozilla/browser-window": true },
+    },
+    {
+      files: ["resources/script-override/**"],
+      env: { browser: true },
     },
     {
       // All .eslintrc.js files are in the node environment, so turn that
@@ -172,13 +168,15 @@ module.exports = {
         "prettier",
       ],
       rules: {
-        "fetch-options/no-fetch-credentials": "error",
-
         "react/jsx-boolean-value": ["error", "always"],
         "react/jsx-key": "error",
-        "react/jsx-no-bind": "error",
+        "react/jsx-no-bind": [
+          "error",
+          { allowArrowFunctions: true, allowFunctions: true },
+        ],
         "react/jsx-no-comment-textnodes": "error",
         "react/jsx-no-duplicate-props": "error",
+        "react/jsx-no-target-blank": "error",
         "react/jsx-no-undef": "error",
         "react/jsx-pascal-case": "error",
         "react/jsx-uses-react": "error",
@@ -192,6 +190,7 @@ module.exports = {
         "react/no-is-mounted": "error",
         "react/no-unknown-property": "error",
         "react/require-render-return": "error",
+        "react-hooks/exhaustive-deps": "error",
 
         "jsx-a11y/anchor-has-content": "off",
         "jsx-a11y/heading-has-content": "off",
@@ -208,16 +207,11 @@ module.exports = {
         "consistent-this": ["error", "use-bind"],
         curly: ["error", "multi-line", "consistent"],
         eqeqeq: "error",
-        "for-direction": "error",
         "func-name-matching": "error",
-        "getter-return": "error",
         "guard-for-in": "error",
-        "lines-between-class-members": "error",
-        "max-depth": ["error", 4],
         "max-nested-callbacks": ["error", 4],
         "max-params": ["error", 6],
         "max-statements": ["error", 50],
-        "max-statements-per-line": ["error", { max: 2 }],
         "new-cap": ["error", { newIsCap: true, capIsNew: false }],
         "no-alert": "error",
         "no-console": ["error", { allow: ["error"] }],
@@ -266,7 +260,6 @@ module.exports = {
         "prefer-spread": "error",
         "prefer-template": "error",
         radix: ["error", "always"],
-        "require-await": "error",
         "sort-vars": "error",
         "symbol-description": "error",
         "vars-on-top": "error",

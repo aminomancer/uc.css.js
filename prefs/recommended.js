@@ -24,13 +24,11 @@ user_pref("layout.css.backdrop-filter.enabled", true);
 user_pref("ui.systemUsesDarkTheme", 1);
 // enable content dark mode
 user_pref("layout.css.prefers-color-scheme.content-override", 0);
-// allow the color-mix() CSS function
-user_pref("layout.css.color-mix.enabled", true);
-// other CSS features
-user_pref("layout.css.moz-outline-radius.enabled", true);
 //// avoid native styling
 user_pref("browser.display.windows.non_native_menus", 1);
 user_pref("widget.content.allow-gtk-dark-theme", true);
+// make sure the tab bar is in the titlebar on Linux
+user_pref("browser.tabs.inTitlebar", 1);
 ////
 // avoid custom menulist/select styling
 user_pref("dom.forms.select.customstyling", false);
