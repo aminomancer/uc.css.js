@@ -66,7 +66,7 @@ menupopup {
   --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
   --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
   --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
-  --default-focusring: auto !important;
+  --default-focusring: var(--global-focus-outline) !important;
   --button-bgcolor: var(--uc-arrowpanel-faint) !important;
   --button-hover-bgcolor: var(--uc-arrowpanel-dimmed) !important;
   --button-active-bgcolor: var(--uc-arrowpanel-dimmed-further) !important;

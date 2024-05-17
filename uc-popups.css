@@ -431,7 +431,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   }
 
   #controls[keying] button:focus-visible {
-    outline-style: auto !important;
+    outline: var(--global-focus-outline) !important;
     box-shadow: 0 0 5px #111 !important;
   }
 
@@ -2073,15 +2073,20 @@ link[href="chrome://global/content/printPagination.css"]
     --checkbox-checked-active-bgcolor: var(--uc-checkbox-checked-active-bgcolor) !important;
   }
 
+  checkbox:focus-visible > .checkbox-check {
+    outline: var(--global-focus-outline) !important;
+  }
+
   .radio-check {
-    appearance: none;
     color: var(--checkbox-border-color, ThreeDDarkShadow);
     background-color: var(--checkbox-unchecked-bgcolor, Field);
     border: 1px solid currentColor;
     border-radius: 50%;
     align-items: center;
-    min-width: 13px;
-    min-height: 13px;
+
+    radiogroup:focus-visible > radio[focused] > & {
+      outline: var(--global-focus-outline) !important;
+    }
   }
 
   .radio-check[selected] {
@@ -2192,6 +2197,10 @@ link[href="chrome://global/content/printPagination.css"]
 
   #perm-shortcuts-row .permissionLabel {
     background-image: url(chrome://userchrome/content/material/keyboard-command.svg);
+  }
+
+  #perm-speaker-row .permissionLabel {
+    background-image: url(chrome://userchrome/content/material/speaker.svg);
   }
 
   #perm-desktop-notification-row .permissionLabel {

@@ -114,10 +114,6 @@ user_pref("browser.theme.toolbar-theme", 0);
 // set the default background color for color-scheme: dark. see it for example
 // on about:blank
 user_pref("browser.display.background_color.dark", "#19191b");
-////
-// make `outline-style: auto` result in one big stroke instead of two
-// contrasting strokes
-user_pref("widget.non-native-theme.solid-outline-style", true);
 //// findbar highlight and selection colors
 user_pref("ui.textHighlightBackground", "#7755FF");
 user_pref("ui.textHighlightForeground", "#FFFFFF");

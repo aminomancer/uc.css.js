@@ -681,7 +681,7 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   --message-bar-button-background-color-ghost-active: var(--button-background-color-active);
   --message-bar-container-min-height: 0 !important;
   --message-bar-border-color: color-mix(in srgb, currentColor 9%, transparent);
-  --message-bar-border-radius: var(--border-radius-small);
+  --message-bar-border-radius: calc(var(--menupopup-border-radius) - 1px) !important;
   --message-bar-border-width: var(--border-width);
   --message-bar-text-color: var(--text-color);
   --message-bar-text-line-height: 1.5em;
@@ -689,12 +689,20 @@ translucent with acrylic effect. enable layout.css.backdrop-filter.enabled */
   --info-bar-background-color: light-dark(var(--color-white), rgb(66, 65, 77));
   --info-bar-text-color: light-dark(var(--color-gray-100), var(--color-gray-05));
   color: var(--message-bar-text-color);
+  overflow: hidden !important;
 }
 
 .notificationbox-stack :is(notification, notification-message) {
   background-color: var(--notification-box-bgcolor) !important;
   background-image: var(--notification-box-bgimage) !important;
   backdrop-filter: var(--notification-box-filter) !important;
+}
+
+/* keep margins consistent between the multiple notification box areas */
+named-deck:has(.notificationbox-stack:not(:empty)) {
+  ~ .notificationbox-stack notification-message:first-of-type {
+    margin-top: 0 !important;
+  }
 }
 
 :root {
@@ -707,7 +715,6 @@ link[href="chrome://global/content/elements/moz-message-bar.css"] ~ .container {
   background-color: var(--notification-box-bgcolor) !important;
   background-image: var(--notification-box-bgimage) !important;
   backdrop-filter: var(--notification-box-filter) !important;
-  padding-block: 0 !important;
   padding-inline: 10px 4px !important;
 }
 
