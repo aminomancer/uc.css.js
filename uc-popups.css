@@ -2084,7 +2084,8 @@ link[href="chrome://global/content/printPagination.css"]
     border-radius: 50%;
     align-items: center;
 
-    radiogroup:focus-visible > radio[focused] > & {
+    radiogroup:focus-visible > radio[focused] > &,
+    radiogroup:focus-visible radio[focused] & {
       outline: var(--global-focus-outline) !important;
     }
   }

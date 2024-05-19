@@ -2363,7 +2363,8 @@ of moz-document in stylesheets with file:// urls */
     }
 
     checkbox:focus-visible > .checkbox-check,
-    radiogroup:focus-visible > radio[focused] > .radio-check  {
+    radiogroup:focus-visible > radio[focused] > .radio-check,
+    radiogroup:focus-visible radio[focused] .radio-check  {
       outline: var(--global-focus-outline);
     }
 
