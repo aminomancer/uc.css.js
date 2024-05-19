@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.7
+// @version        1.2.8
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -21,6 +21,23 @@ class TabTooltipNav {
   // user preferences. add these in about:config if you want them to persist
   // between script updates without having to reapply them.
   static config = {
+    // default preferences. don't change them here, change them in
+    // about:config.
+    defaultPrefs: {
+      "tabTooltipNavButtons.modifierKey": false,
+      "tabTooltipNavButtons.showVanillaTooltip": true,
+      "tabTooltipNavButtons.elementOrder": JSON.stringify([
+        "back",
+        "forward",
+        "reload",
+        "separator",
+        "text",
+      ]),
+      "tabTooltipNavButtons.alignment": "left",
+      "tabTooltipNavButtons.updateTooltipWhenHoveringHistoryMenu": true,
+      "tabTooltipNavButtons.showOnlyOnNavigableTabs": false,
+    },
+
     // if you only want the popup to open while you have a modifier key pressed,
     // type it here. accepted values are "ctrl", "shift", "alt", "meta", and
     // "accel". combinations are not accepted. if you want a modifier key, the
@@ -43,6 +60,32 @@ class TabTooltipNav {
         true
       ),
 
+    // the order of elements in the popup. you can change the order of the
+    // buttons and the text box by changing the order of the strings in this
+    // array. the available strings are "back", "forward", "reload",
+    // "separator", and "text". the separator is a vertical line that separates
+    // the buttons from the text box. the text box is where the tab title and
+    // URL are displayed. if you want to remove an element, you can delete the
+    // element's corresponding string from the array.
+    "Element order": (function () {
+      try {
+        return JSON.parse(
+          Services.prefs.getStringPref("tabTooltipNavButtons.elementOrder")
+        );
+      } catch (e) {}
+      return ["back", "forward", "reload", "separator", "text"];
+    })(),
+
+    // the alignment of the popup. if you want the popup to open to the left of
+    // the tab, set this to "left". if you want it to open to the right, set it
+    // to "right". if you want it to open centered under the tab, set it to
+    // "center".
+    // "left" | "right" | "center"
+    "Popup alignment": Services.prefs.getStringPref(
+      "tabTooltipNavButtons.alignment",
+      "left"
+    ),
+
     // When you right click one of the back or forward buttons, it opens a
     // little context menu that shows up to 15 items in that tab's history. when
     // you mouse over them, the popup's tooltip will be temporarily updated to
@@ -56,6 +99,11 @@ class TabTooltipNav {
         "tabTooltipNavButtons.updateTooltipWhenHoveringHistoryMenu",
         true
       ),
+
+    "Show only on navigable tabs": Services.prefs.getBoolPref(
+      "tabTooltipNavButtons.showOnlyOnNavigableTabs",
+      false
+    ),
 
     l10n: {
       "Go Back (Single Tab)": "Navigate tab back one page",
@@ -171,6 +219,22 @@ class TabTooltipNav {
   }
   constructor() {
     this.config = TabTooltipNav.config;
+    // Make the prefs show up in about:config
+    for (let [key, val] of Object.entries(this.config.defaultPrefs)) {
+      let prefType = typeof val;
+      switch (prefType) {
+        case "boolean":
+          prefType = "Bool";
+          break;
+        case "string":
+          prefType = "String";
+          break;
+        case "number":
+          prefType = "Int";
+          break;
+      }
+      Services.prefs.getDefaultBranch("")[`set${prefType}Pref`](key, val);
+    }
     let { l10n } = this.config;
     XPCOMUtils.defineLazyPreferenceGetter(
       this,
@@ -202,39 +266,51 @@ class TabTooltipNav {
   onmouseleave="tabNavButtons.onMouseleave(event);"
   consumeoutsideclicks="never">
   <hbox id="tab-nav-popup-body" class="panel-subview-body">
-    <toolbarbutton
-      id="tab-nav-back"
-      class="toolbarbutton-1"
-      tooltiptext='${l10n["Go Back (Single Tab)"]}'
-      oncommand="tabNavButtons.goBack(event)"
-      onclick="checkForMiddleClick(this, event);"
-      context="tabBackForwardMenu"/>
-    <toolbarbutton
-      id="tab-nav-forward"
-      class="toolbarbutton-1"
-      tooltiptext='${l10n["Go Forward (Single Tab)"]}'
-      oncommand="tabNavButtons.goForward(event)"
-      onclick="checkForMiddleClick(this, event);"
-      context="tabBackForwardMenu"/>
-    <toolbarbutton
-      id="tab-nav-reload"
-      class="toolbarbutton-1"
-      tooltiptext='${l10n["Reload (Single Tab)"]}'
-      oncommand="tabNavButtons.reloadOrDuplicate(event)"
-      onclick="checkForMiddleClick(this, event);"/>
-    <separator id="tab-nav-separator" orient="vertical"/>
-    <hbox id="tab-nav-tooltip-box" align="center">
-      <box id="tab-nav-favicon-box">
-        <image id="tab-nav-tooltip-favicon"></image>
-      </box>
-      <box id="tab-nav-tooltip-textbox" class="places-tooltip-box" flex="1">
-        <description id="tab-nav-tooltip-label" class="tooltip-label places-tooltip-title"/>
-        <description
-          id="tab-nav-tooltip-uri"
-          crop="center"
-          class="tooltip-label places-tooltip-uri uri-element"/>
-      </box>
-    </hbox>
+    ${this.config["Element order"]
+      .map(el => {
+        switch (el) {
+          case "back":
+            return /* html */ `<toolbarbutton
+          id="tab-nav-back"
+          class="toolbarbutton-1"
+          tooltiptext='${l10n["Go Back (Single Tab)"]}'
+          oncommand="tabNavButtons.goBack(event)"
+          onclick="checkForMiddleClick(this, event);"
+          context="tabBackForwardMenu"/>`;
+          case "forward":
+            return /* html */ `<toolbarbutton
+          id="tab-nav-forward"
+          class="toolbarbutton-1"
+          tooltiptext='${l10n["Go Forward (Single Tab)"]}'
+          oncommand="tabNavButtons.goForward(event)"
+          onclick="checkForMiddleClick(this, event);"
+          context="tabBackForwardMenu"/>`;
+          case "reload":
+            return /* html */ `<toolbarbutton
+          id="tab-nav-reload"
+          class="toolbarbutton-1"
+          tooltiptext='${l10n["Reload (Single Tab)"]}'
+          oncommand="tabNavButtons.reloadOrDuplicate(event)"
+          onclick="checkForMiddleClick(this, event);"/>`;
+          case "separator":
+            return /* html */ `<separator id="tab-nav-separator" orient="vertical"/>`;
+          case "text":
+            return /* html */ `<hbox id="tab-nav-tooltip-box" align="center">
+            <box id="tab-nav-favicon-box">
+              <image id="tab-nav-tooltip-favicon"></image>
+            </box>
+            <box id="tab-nav-tooltip-textbox" class="places-tooltip-box" flex="1">
+              <description id="tab-nav-tooltip-label" class="tooltip-label places-tooltip-title"/>
+              <description
+                id="tab-nav-tooltip-uri"
+                crop="center"
+                class="tooltip-label places-tooltip-uri uri-element"/>
+            </box>
+          </hbox>`;
+        }
+        return "";
+      })
+      .join("\n")}
   </hbox>
 </panel>
 <menupopup
@@ -249,18 +325,16 @@ class TabTooltipNav {
     this.navPopup.removeAttribute("side");
     this.navPopup.removeAttribute("flip");
     if (
+      this.config["Show vanilla tooltip if modifier is not pressed"] &&
+      /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
+    ) {
+      document
+        .querySelector("#tabbrowser-tab-tooltip")
+        .addEventListener("popupshowing", this);
+    } else if (
       !_ucUtils.getScriptData("urlbarTabUrlIndicator.uc.js")?.isEnabled
     ) {
-      if (
-        this.config["Show vanilla tooltip if modifier is not pressed"] &&
-        /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
-      ) {
-        document
-          .querySelector("#tabbrowser-tab-tooltip")
-          .addEventListener("popupshowing", this);
-      } else {
-        gBrowser.tabContainer.removeAttribute("tooltip");
-      }
+      gBrowser.tabContainer.removeAttribute("tooltip");
     }
     [
       "TabClose",
@@ -349,12 +423,25 @@ class TabTooltipNav {
     if (this.menuOpen) return;
     let tab = e.target.closest("tab");
     if (this.isOpen || this.openTimer || this.closeTimer) {
-      if (this.triggerTab === tab) return this.handleTooltip();
-      else if (tab) return this.movePopup(e, tab) || this.onMouseleave();
+      if (this.triggerTab === tab) {
+        return this.handleTooltip();
+      } else if (tab) {
+        return this.movePopup(e, tab) || this.onMouseleave();
+      }
       return this.onMouseleave();
     }
     this.triggerTab = tab;
     if (tab) {
+      if (this.config["Show only on navigable tabs"]) {
+        let browser = tab.linkedBrowser;
+        if (
+          !browser?.browsingContext ||
+          tab.hasAttribute("pending") ||
+          !(browser.canGoBack || browser.canGoForward)
+        ) {
+          return;
+        }
+      }
       this.openTimer = setTimeout(() => this.openPopup(e), this.popupDelay);
     }
   }
@@ -408,8 +495,10 @@ class TabTooltipNav {
       return this.closePopup();
     }
     if (this.triggerTab.matches(":hover")) {
+      let alignment = this.config["Popup alignment"];
+      let position = `bottom${alignment} top${alignment}`;
       this.navPopup.openPopup(this.triggerTab, {
-        position: "after_start",
+        position,
         triggerEvent: e,
       });
     }
@@ -421,12 +510,24 @@ class TabTooltipNav {
       this.closePopup();
       return true;
     }
+    if (this.config["Show only on navigable tabs"]) {
+      let browser = tab.linkedBrowser;
+      if (
+        !browser?.browsingContext ||
+        tab.hasAttribute("pending") ||
+        !(browser.canGoBack || browser.canGoForward)
+      ) {
+        return this.onMouseleave();
+      }
+    }
     if (gBrowser.tabContainer.matches(":hover")) {
       if (this.triggerTab) this.triggerTab.removeAttribute("open");
       this.triggerTab = tab;
       this.knownWidth = null;
       this.onPopupShowing();
-      this.navPopup.moveToAnchor(this.triggerTab, "after_start");
+      let alignment = this.config["Popup alignment"];
+      let position = `bottom${alignment} top${alignment}`;
+      this.navPopup.moveToAnchor(this.triggerTab, position);
       this.triggerTab.setAttribute("open", true);
       return true;
     }
@@ -848,13 +949,13 @@ class TabTooltipNav {
   border-radius: var(--toolbarbutton-border-radius);
 }
 #tab-nav-popup
-  .toolbarbutton-1:not([disabled="true"], [checked], [open], :active):hover
+  .toolbarbutton-1:not([disabled], [checked], [open], :active):hover
   > .toolbarbutton-icon {
   background-color: var(--toolbarbutton-hover-background);
   color: inherit;
 }
 #tab-nav-popup
-  .toolbarbutton-1:not([disabled="true"]):is([open], [checked], :hover:active)
+  .toolbarbutton-1:not([disabled]):is([open], [checked], :hover:active)
   > .toolbarbutton-icon {
   background-color: var(--toolbarbutton-active-background);
   color: inherit;
@@ -904,7 +1005,7 @@ class TabTooltipNav {
 #tab-nav-reload:-moz-locale-dir(rtl) > .toolbarbutton-icon {
   scale: -1 1;
 }
-.tabbrowser-tab[open] > .tab-stack > .tab-background:not([selected="true"], [multiselected]) {
+.tabbrowser-tab[open] > .tab-stack > .tab-background:not([selected], [multiselected]) {
   background-color: color-mix(in srgb, currentColor 11%, transparent);
 }
 #tab-nav-popup[side]::part(arrowbox) {
