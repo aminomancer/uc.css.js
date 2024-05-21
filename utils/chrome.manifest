@@ -14,7 +14,7 @@ content userchrome ../resources/
 override chrome://global/skin/arrowscrollbox.css ../resources/layout/arrowscrollbox.css
 
 # Override the tab element to restore the tab sound button and move the close button, among other things.
-override chrome://browser/content/tabbrowser-tab.js ../resources/script-override/tabMods.uc.js
+override chrome://browser/content/tabbrowser/tab.js ../resources/script-override/tabMods.uc.js
 
 # These 3 are necessary for restorePreProtonArrowpanels.uc.js
 # Restore the arrow for panels.

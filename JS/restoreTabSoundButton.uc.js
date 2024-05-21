@@ -13,7 +13,7 @@ It also changes the tooltip a bit so that it's always anchored to the tab rather
 This script _requires_ that you either 1) use my theme, complete with [chrome.manifest][] and the resources folder, or 2) download [tabMods.uc.js][] and put it in your `chrome/resources/script-override/` folder, then edit your [chrome.manifest][] file to add the following line:
 
 ```
-override chrome://browser/content/tabbrowser-tab.js ../resources/tabMods.uc.js
+override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
 ```
 
 [chrome.manifest]: https://github.com/aminomancer/uc.css.js/blob/master/utils/chrome.manifest
