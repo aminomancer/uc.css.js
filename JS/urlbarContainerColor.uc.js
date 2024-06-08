@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Container Color Indicator
-// @version        1.0.2
+// @version        1.0.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @description    Change the background color of the urlbar to match the active tab's contextual identity (aka multi-account container). Made by request.
@@ -20,7 +20,7 @@
       if (value) element.classList.add(prefix + value);
     }
     let hbox = document.getElementById("userContext-icons");
-    let urlbar = document.getElementById("urlbar-input-container");
+    let urlbar = gURLBar.querySelector(".urlbar-input-container");
     let userContextId = gBrowser.selectedBrowser.getAttribute("usercontextid");
     if (!userContextId) {
       replaceContainerClass("color", hbox, "");
@@ -53,7 +53,7 @@
   );
   let uri = Services.io.newURI(
     `data:text/css;charset=UTF=8,${encodeURIComponent(
-      `#urlbar-input-container[contextid] {background-color: color-mix(in srgb, transparent 75%, var(--identity-tab-color));} #urlbar[open] #urlbar-input-container[contextid] {border-bottom-left-radius: 0; border-bottom-right-radius: 0;} #urlbar[open] > #urlbar-input-container[contextid] ~ .urlbarView > .urlbarView-body-outer > .urlbarView-body-inner {border-color: transparent}`
+      `.urlbar-input-container[contextid] {background-color: color-mix(in srgb, transparent 75%, var(--identity-tab-color));} #urlbar[open] .urlbar-input-container[contextid] {border-bottom-left-radius: 0; border-bottom-right-radius: 0;} #urlbar[open] > .urlbar-input-container[contextid] ~ .urlbarView > .urlbarView-body-outer > .urlbarView-body-inner {border-color: transparent}`
     )}`
   );
   if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;

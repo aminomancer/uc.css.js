@@ -25,9 +25,6 @@ override chrome://browser/content/places/places-menupopup.js ../resources/script
 # Override the notification message bar element to move the close button to the left in tab order.
 override chrome://global/content/elements/message-bar.js ../resources/script-override/message-bar.js
 
-# Override the tab preview tooltip
-override chrome://browser/content/tabpreview/tabpreview.mjs ../resources/script-override/tabpreview.mjs
-
 # Override a bunch of icons that appear all over the browser.
 override chrome://global/skin/icons/clipboard.svg ../resources/skin/edit-copy.svg
 override chrome://global/skin/icons/check.svg ../resources/check.svg

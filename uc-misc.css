@@ -120,7 +120,7 @@ tooltip .uc-tooltip-box {
   margin: calc(0px - var(--panel-inner-box-margin, 4px)) !important;
 }
 
-.tab-preview-container {
+#tab-preview-panel {
   --tab-preview-background-color: var(--tooltip-bgcolor, Menu) !important;
   --tab-preview-text-color: var(--tooltip-color) !important;
   --tab-preview-border-color: var(--dialog-box-border-color) !important;
@@ -768,7 +768,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
   tooltip > description,
   tooltip .uc-tooltip-box,
   .places-tooltip-box,
-  .tab-preview-container,
+  #tab-preview-panel,
   #tracking-protection-container tooltip,
   #statuspanel-label {
     border: none !important;

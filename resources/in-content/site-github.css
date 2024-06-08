@@ -12,7 +12,6 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
   even if it lacks any of the specifically selected elements. */
   :root {
     --uc-dummy-custom-property: initial;
-    /* --transparent-img-background: transparent !important; */
     --fontStack-monospace: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
   }
 

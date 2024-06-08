@@ -1189,21 +1189,21 @@ Simply changes the update banners in the hamburger button app menu to make the s
 
 A lightweight aesthetic script that changes the background color of the urlbar to match the active tab's contextual identity (aka multi-account container).<details><summary>💬 **_More details..._**</summary>
 
-Made by request. Will conflict with any custom themes/stylesheets that set the background color of `#urlbar-input-container` with `!important` rules, so be sure to check your stylesheet if it's not working. You can add the following code to the bottom of your custom stylesheet to make sure the color rules win out:
+Made by request. Will conflict with any custom themes/stylesheets that set the background color of `.urlbar-input-container` with `!important` rules, so be sure to check your stylesheet if it's not working. You can add the following code to the bottom of your custom stylesheet to make sure the color rules win out:
 
 <!-- prettier-ignore -->
 ```css
-#urlbar-input-container[contextid] {
+#urlbar .urlbar-input-container[contextid] {
   background-color: color-mix(in srgb, transparent 75%, var(--identity-tab-color)) !important;
 }
 
-#urlbar[open] #urlbar-input-container[contextid] {
+#urlbar[open] .urlbar-input-container[contextid] {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
 
 #urlbar[open]
-  > #urlbar-input-container[contextid]
+  > .urlbar-input-container[contextid]
   ~ .urlbarView
   > .urlbarView-body-outer
   > .urlbarView-body-inner {

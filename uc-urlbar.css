@@ -121,7 +121,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
 }
 
 @media (-moz-bool-pref: "userChrome.urlbar.focus-ring-enabled") {
-  #urlbar-input-container,
+  #urlbar .urlbar-input-container
   #searchbar {
     outline: 0 solid transparent !important;
     outline-offset: 0 !important;
@@ -132,7 +132,7 @@ toolbarpaletteitem[place="palette"] > #search-container {
     outline-offset: -2px !important;
   }
 
-  #urlbar[focused="true"] #urlbar-input-container,
+  #urlbar[focused] .urlbar-input-container,
   #searchbar:focus-within {
     outline-width: 2px !important;
     outline-color: var(--search-box-focus-outline-color, -moz-accent-color) !important;
@@ -254,25 +254,25 @@ toolbarpaletteitem[place="palette"] > #search-container {
   fill-opacity: 1 !important;
 }
 
-#urlbar-input-container,
+#urlbar .urlbar-input-container,
 #searchbar {
   background-color: var(--urlbar-input-bgcolor) !important;
   margin-top: 0 !important;
 }
 
-#urlbar:is([focused="true"], :focus-within) > #urlbar-input-container,
+#urlbar:is([focused], :focus-within) > .urlbar-input-container,
 #searchbar:is(:focus-within, :focus-visible) {
   background-color: var(--urlbar-input-bgcolor-brighter) !important;
 }
 
-#urlbar[disabled="true"] > #urlbar-input-container,
-toolbarpaletteitem > #urlbar-container #urlbar-input-container,
+#urlbar[disabled="true"] > .urlbar-input-container,
+toolbarpaletteitem > #urlbar-container .urlbar-input-container,
 toolbar toolbarpaletteitem > #search-container #searchbar {
   background-color: var(--urlbar-input-bgcolor-disabled) !important;
 }
 
 toolbarpaletteitem > #search-container #searchbar,
-toolbarpaletteitem > #urlbar-container #urlbar-input-container,
+toolbarpaletteitem > #urlbar-container .urlbar-input-container,
 toolbarpaletteitem > #stop-reload-button .toolbarbutton-icon {
   transition: transform var(--drag-drop-transition-duration) cubic-bezier(0.6, 2, 0.75, 1.5), background-color var(--drag-drop-transition-duration) var(--uc-smooth-timing-function) !important;
 }
@@ -281,7 +281,7 @@ toolbarpaletteitem[mousedown] > #search-container {
   transform: none !important;
 }
 
-toolbarpaletteitem[mousedown] > #urlbar-container #urlbar-input-container,
+toolbarpaletteitem[mousedown] > #urlbar-container .urlbar-input-container,
 toolbarpaletteitem[mousedown] > #search-container #searchbar {
   transform: scale(1.04) !important;
   background-color: var(--urlbar-input-bgcolor) !important;
@@ -307,7 +307,7 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
   justify-items: center !important;
 }
 
-:is(.urlbar-page-action:not([disabled]), #urlbar-go-button, .search-go-button):not([disabled], :hover, [open]):focus-visible {
+:is(.urlbar-page-action:not([disabled]), .urlbar-go-button, .search-go-button):not([disabled], :hover, [open]):focus-visible {
   background-color: var(--urlbar-box-focus-bgcolor) !important;
 }
 
@@ -372,33 +372,33 @@ toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background
   fill-opacity: inherit !important;
 }
 
-#urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #urlbar-go-button {
+#urlbar[usertyping]:is([focused], [open]) > .urlbar-input-container > .urlbar-go-button {
   display: -moz-inline-box !important;
   order: 2 !important;
   margin-inline-end: calc(var(--urlbar-container-padding) + 1px) !important;
 }
 
-#urlbar[usertyping]:is([focused], [open]) > #urlbar-input-container > #page-action-buttons {
+#urlbar[usertyping]:is([focused], [open]) > .urlbar-input-container > #page-action-buttons {
   margin-inline-end: 0 !important;
 }
 
-#urlbar[textoverflow="both"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+#urlbar[textoverflow="both"] > .urlbar-input-container > .urlbar-input-box > .urlbar-input {
   mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 3ch), transparent);
 }
 
-#urlbar[textoverflow="right"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+#urlbar[textoverflow="right"] > .urlbar-input-container > .urlbar-input-box > .urlbar-input {
   mask-image: linear-gradient(to left, transparent, black 3ch);
 }
 
-#urlbar[textoverflow="left"] > #urlbar-input-container > .urlbar-input-box > #urlbar-input {
+#urlbar[textoverflow="left"] > .urlbar-input-container > .urlbar-input-box > .urlbar-input {
   mask-image: linear-gradient(to right, transparent, black 3ch);
 }
 
-#urlbar[textoverflow="both"][usertyping="true"] #urlbar-input {
+#urlbar[textoverflow="both"][usertyping="true"] .urlbar-input {
   mask-image: linear-gradient(to right, transparent, black 3ch, black calc(100% - 55px), transparent calc(100% - 5px)) !important;
 }
 
-#urlbar[textoverflow="right"][usertyping="true"] #urlbar-input {
+#urlbar[textoverflow="right"][usertyping="true"] .urlbar-input {
   mask-image: linear-gradient(to left, transparent 5px, black 55px) !important;
 }
 
@@ -426,7 +426,7 @@ the NTP/home page hasn't opened yet. */
 }
 
 /* iffy modification to center urlbar buttons not contained in page action button box */
-#urlbar-input-container {
+.urlbar-input-container {
   align-items: center;
 }
 
@@ -499,11 +499,11 @@ the NTP/home page hasn't opened yet. */
   color: var(--lwt-toolbar-field-highlight-text, HighlightText) !important;
 }
 
-#urlbar > #urlbar-input-container {
+#urlbar > .urlbar-input-container {
   border: none !important;
 }
 
-#urlbar > #urlbar-input-container > #identity-box[pageproxystate="invalid"] {
+#urlbar > .urlbar-input-container > #identity-box[pageproxystate="invalid"] {
   display: flex !important;
 }
 
@@ -594,7 +594,7 @@ gIdentityHandler._isPotentiallyTrustworthy and this test inexplicably
 }
 
 /* on an extension page e.g. moz-extension://{guid}/options.html */
-#urlbar[actiontype="extension"] > #urlbar-input-container > #identity-box #identity-icon,
+#urlbar[actiontype="extension"] > .urlbar-input-container > #identity-box #identity-icon,
 #identity-box.extensionPage[pageproxystate="valid"] #identity-icon {
   list-style-image: url(chrome://userchrome/content/material/extension.svg) !important;
 }
@@ -725,7 +725,7 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   display: none !important;
 }
 
-:root:not([hide-tp-icon-on-ntp]) #urlbar-input-container[pageproxystate="invalid"] > #tracking-protection-icon-container {
+:root:not([hide-tp-icon-on-ntp]) .urlbar-input-container[pageproxystate="invalid"] > #tracking-protection-icon-container {
   visibility: visible !important;
 }
 
@@ -768,9 +768,9 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   pointer-events: auto !important;
 }
 
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box:not(:focus-visible) :is(#identity-icon, #remote-control-icon:not(:hover, :focus-visible)),
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box ~ #identity-permission-box:not(:focus-visible, [open="true"]) image:not(:hover, :focus-visible),
-:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused="true"], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box ~ #notification-popup-box:not([open="true"]) > :is(image, stack):not(:hover, :focus-visible) {
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box:not(:focus-visible) :is(#identity-icon, #remote-control-icon:not(:hover, :focus-visible)),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box ~ #identity-permission-box:not(:focus-visible, [open="true"]) image:not(:hover, :focus-visible),
+:root[hide-tp-icon-on-ntp]:not([customizing]) #urlbar:not([searchmode], [usertyping="true"], [focused], [open="true"], :focus-within) #tracking-protection-icon-container[hidden]:not([view-source]) ~ #identity-box:not(.chromeUI, .localResource, .httpsOnlyErrorPage, .certErrorPage, .unknownIdentity) > #identity-icon-box ~ #notification-popup-box:not([open="true"]) > :is(image, stack):not(:hover, :focus-visible) {
   fill-opacity: 0.4 !important;
 }
 
@@ -812,12 +812,12 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   color: var(--toolbar-color) !important;
 }
 
-#urlbar:is([focused="true"], :focus-within, [open]) .urlbar-input-box input::placeholder,
+#urlbar:is([focused], :focus-within, [open]) .urlbar-input-box input::placeholder,
 .searchbar-textbox:focus::placeholder {
   opacity: var(--urlbar-icon-fill-opacity) !important;
 }
 
-#urlbar-go-button,
+.urlbar-go-button,
 #page-action-buttons {
   color: var(--lwt-toolbarbutton-icon-fill) !important;
 }
@@ -826,7 +826,7 @@ urlbarMods.uc.js assigns them custom classes .aboutBlockedPage and
   opacity: revert !important;
 }
 
-:root[customizing] #wrapper-urlbar-container[removable="false"] #urlbar > #urlbar-input-container image {
+:root[customizing] #wrapper-urlbar-container[removable="false"] #urlbar > .urlbar-input-container image {
   fill-opacity: 0.3 !important;
 }
 
@@ -1022,8 +1022,8 @@ for some window scaling factors. */
   display: none !important;
 }
 
-#urlbar[searchmode] > #urlbar-input-container > #identity-box,
-#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > #urlbar-input-container > #identity-box {
+#urlbar[searchmode] > .urlbar-input-container > #identity-box,
+#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > .urlbar-input-container > #identity-box {
   background: none !important;
   padding-inline-start: 8px !important;
   margin-inline-start: 0 !important;
@@ -1033,8 +1033,8 @@ for some window scaling factors. */
   padding-inline-end: 0 !important;
 }
 
-#urlbar[searchmode] > #urlbar-input-container > #identity-box #identity-icon,
-#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > #urlbar-input-container > #identity-box #identity-icon {
+#urlbar[searchmode] > .urlbar-input-container > #identity-box #identity-icon,
+#urlbar[actiontype="switchtab"]:not([actionoverride="true"]) > .urlbar-input-container > #identity-box #identity-icon {
   margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
 }
@@ -1045,8 +1045,8 @@ for some window scaling factors. */
   margin-inline: 0 !important;
 }
 
-#urlbar[focused="true"],
-#urlbar-input-container:focus-within {
+#urlbar[focused],
+.urlbar-input-container:focus-within {
   --identity-box-solid-bg: var(--identity-box-focus-bg);
 }
 

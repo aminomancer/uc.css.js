@@ -38,7 +38,7 @@ from the style editor in the browser toolbox. */
   }
 
   #forward-button,
-  #urlbar-go-button,
+  .urlbar-go-button,
   .search-go-button,
   .unified-nav-forward[_moz-menuactive="true"]:-moz-locale-dir(ltr),
   .unified-nav-back[_moz-menuactive="true"]:-moz-locale-dir(rtl) {

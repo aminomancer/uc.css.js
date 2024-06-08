@@ -29,6 +29,9 @@ user_pref("browser.display.windows.non_native_menus", 1);
 user_pref("widget.content.allow-gtk-dark-theme", true);
 // make sure the tab bar is in the titlebar on Linux
 user_pref("browser.tabs.inTitlebar", 1);
+// disable tab thumbnail tooltip as it conflicts with scripts and I don't
+// support it yet. I will eventually implement compatibility.
+user_pref("browser.tabs.hoverPreview.enabled", false);
 ////
 // avoid custom menulist/select styling
 user_pref("dom.forms.select.customstyling", false);

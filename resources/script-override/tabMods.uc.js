@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.3.8
+// @version        1.3.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -370,9 +370,7 @@
       }
 
       if (this.container._showCardPreviews) {
-        const previewContainer = document.getElementById(
-          "tabbrowser-tab-preview"
-        );
+        const previewContainer = document.getElementById("tab-preview-panel");
         previewContainer.overCloseButton = this.mOverCloseButton;
         previewContainer.overPlayingIcon = this._overPlayingIcon;
         previewContainer.audioMuted = this.linkedBrowser.audioMuted;
@@ -717,9 +715,7 @@
 
       gBrowser._tabAttrModified(this, ["muted"]);
       if (this.container._showCardPreviews) {
-        const previewContainer = document.getElementById(
-          "tabbrowser-tab-preview"
-        );
+        const previewContainer = document.getElementById("tab-preview-panel");
         previewContainer.audioMuted = browser.audioMuted;
       }
     }

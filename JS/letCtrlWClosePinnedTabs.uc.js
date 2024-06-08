@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Let Ctrl+W Close Pinned Tabs
-// @version        1.0.1
+// @version        1.0.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    The filename should say it all, this just removes the behavior that prevents you from closing pinned tabs with the Ctrl+W/⌘+W shortcut. Since my theme makes pinned tabs really small, I also added a preference to hide the close button on pinned tabs.
@@ -28,9 +28,9 @@
       gBrowser.removeCurrentTab({ animate: true });
     };
 
-    document
-      .getElementById("cmd_close")
-      .setAttribute("oncommand", "AminoCloseTabOrWindow(event);");
+    let cmdClose = document.getElementById("cmd_close");
+    cmdClose.setAttribute("oncommand", "AminoCloseTabOrWindow(event);");
+    cmdClose.replaceWith(cmdClose.cloneNode());
   }
 
   if (gBrowserInit.delayedStartupFinished) {

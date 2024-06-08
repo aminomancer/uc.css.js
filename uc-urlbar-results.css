@@ -792,8 +792,8 @@ by underlining them (requires urlbarMods.uc.js) */
   animation: none !important;
 }
 
-#urlbar[breakout][breakout-extend] > #urlbar-input-container,
-#urlbar-input-container {
+#urlbar[breakout][breakout-extend] > .urlbar-input-container,
+#urlbar .urlbar-input-container {
   height: var(--urlbar-height) !important;
   padding: 0px !important;
   border-radius: var(--toolbarbutton-border-radius);
