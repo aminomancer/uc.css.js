@@ -1758,3 +1758,39 @@ toolbar button slider script. but just in case) */
   box-sizing: border-box !important;
   color: var(--purple-30) !important;
 }
+
+#screenshotsPagePanel screenshots-buttons {
+  padding: 4px !important;
+  padding-top: 12px !important;
+  box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
+  inset-inline: 1.5em auto !important;
+}
+
+.footer-button.screenshot-button {
+  background-color: var(--button-bgcolor, color-mix(in srgb, currentColor 13%, transparent)) !important;
+  color: var(--uc-content-page-color) !important;
+  background-color: transparent !important;
+  margin: 0 !important;
+  border: 3px solid transparent !important;
+  background-clip: padding-box !important;
+  border-radius: 6px !important;
+  padding: 53px 8px 8px !important;
+  background-position-y: 3px !important;
+  stroke: var(--primary-color-faint) !important;
+  fill: hsl(0, 0%, 93%) !important;
+  -moz-context-properties: fill, stroke !important;
+  outline: none !important;
+  outline-offset: -4px !important;
+
+  &:hover {
+    background-color: var(--button-hover-bgcolor, color-mix(in srgb, currentColor 17%, transparent)) !important;
+
+    &:active {
+      background-color: var(--button-active-bgcolor, color-mix(in srgb, currentColor 30%, transparent)) !important;
+    }
+  }
+
+  &:focus-visible:not(:hover, :active) {
+    background-color: var(--button-bgcolor, color-mix(in srgb, currentColor 17%, transparent)) !important;
+  }
+}

@@ -349,13 +349,13 @@
       cursor: pointer;
     }
 
-    &[type="warning"]:not([message-bar-type="infobar"]) {
-      --message-bar-background-color: var(--low-warning-background) !important;
+    &:is([type="system"], [type="info"], [type="generic"], :not([type])) {
+      --message-bar-background-color: var(--grey-60) !important;
       --message-bar-text-color: var(--text-color) !important;
     }
 
-    &:is([type="system"], [type="info"], [type="generic"]) {
-      --message-bar-background-color: var(--grey-60) !important;
+    &[type="warning"]:not([message-bar-type="infobar"]) {
+      --message-bar-background-color: var(--low-warning-background) !important;
       --message-bar-text-color: var(--text-color) !important;
     }
 

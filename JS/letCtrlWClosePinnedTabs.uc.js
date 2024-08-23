@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Let Ctrl+W Close Pinned Tabs
-// @version        1.0.2
+// @version        1.0.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    The filename should say it all, this just removes the behavior that prevents you from closing pinned tabs with the Ctrl+W/⌘+W shortcut. Since my theme makes pinned tabs really small, I also added a preference to hide the close button on pinned tabs.
@@ -11,26 +11,18 @@
 
 (() => {
   function init() {
-    window.AminoCloseTabOrWindow = function AminoCloseTabOrWindow(event) {
-      // If we're not a browser window, just close the window.
-      if (window.location.href != AppConstants.BROWSER_CHROME_URL) {
-        closeWindow(true);
-        return;
-      }
-
-      // In a multi-select context, close all selected tabs
-      if (gBrowser.multiSelectedTabsCount) {
-        gBrowser.removeMultiSelectedTabs();
-        return;
-      }
-
-      // If the current tab is the last one, this will close the window.
-      gBrowser.removeCurrentTab({ animate: true });
-    };
-
-    let cmdClose = document.getElementById("cmd_close");
-    cmdClose.setAttribute("oncommand", "AminoCloseTabOrWindow(event);");
-    cmdClose.replaceWith(cmdClose.cloneNode());
+    if (BrowserCommands.closeTabOrWindow.name === "closeTabOrWindow") {
+      eval(
+        `BrowserCommands.closeTabOrWindow = function ${BrowserCommands.closeTabOrWindow
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function[^\S\r\n]*/, "")
+          .replace(/^closeTabOrWindow[^\S\r\n]*/, "")
+          .replace(/^(.)/, `AminoCloseTabOrWindow$1`)
+          .replace(/gBrowser.selectedTab.pinned/, "false")}`
+      );
+    }
   }
 
   if (gBrowserInit.delayedStartupFinished) {

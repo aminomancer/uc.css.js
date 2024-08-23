@@ -29,6 +29,7 @@ menuitem#sanitizeItem > .menu-text,
 #hiddenTabsMenu > .menu-text,
 #context-sendpagetodevice > .menu-text,
 #context-selectall .menu-text,
+#context-pdfjs-selectall .menu-text,
 #menu_selectAll .menu-text,
 #menu_selectall .menu-text,
 #context-sendlinktodevice > .menu-text,
@@ -51,6 +52,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-saveframe .menu-text,
 #context-viewimage .menu-text,
 #context-copy .menu-text,
+#context-pdfjs-copy .menu-text,
 #context-copyaudiourl .menu-text,
 #context-copyemail .menu-text,
 #context-copyphone .menu-text,
@@ -104,16 +106,21 @@ menuitem#repair-text-encoding .menu-text,
 #placesContext_sortBy\:name .menu-text,
 #context-viewsource-goToLine .menu-text,
 #context-undo .menu-text,
+#context-pdfjs-undo .menu-text,
 #context-redo .menu-text,
+#context-pdfjs-redo .menu-text,
 #menu_undo .menu-text,
 #menu_redo .menu-text,
 :is(#undobookmarksmenuUndo, #undobookmarksmenuRedo) .menu-text,
 #context-cut .menu-text,
+#context-pdfjs-cut .menu-text,
 #context-paste .menu-text,
+#context-pdfjs-paste .menu-text,
 #context-paste-no-formatting .menu-text,
 #menu_cut .menu-text,
 #menu_paste .menu-text,
 #context-delete .menu-text,
+#context-pdfjs-delete .menu-text,
 #menu_delete .menu-text,
 #syncedTabsCopySelected .menu-text,
 :is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group) .menu-text,
@@ -412,6 +419,7 @@ menuitem#sanitizeItem::before,
 #context-sendpagetodevice::before,
 #context-sendlinktodevice::before,
 #context-selectall::before,
+#context-pdfjs-selectall::before,
 #menu_selectAll::before,
 #menu_selectall::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before,
@@ -441,9 +449,12 @@ menuitem#sanitizeItem::before,
 #context-take-frame-screenshot::before,
 #context-viewimage::before,
 #context-copy::before,
+#context-pdfjs-copy::before,
 #context-copyimage-contents::before,
 #context-cut::before,
+#context-pdfjs-cut::before,
 #context-paste::before,
+#context-pdfjs-paste::before,
 #context-paste-no-formatting::before,
 #menu_copy::before,
 :is(#placesContext_show_bookmark\:info, #placesContext_show_folder\:info, #placesContext_show\:info)::before,
@@ -453,6 +464,7 @@ menuitem#sanitizeItem::before,
 #syncedTabsCopySelected::before,
 :is(#placesContext_cut, #placesContext_copy, #placesContext_paste, #placesContext_paste_group)::before,
 #context-delete::before,
+#context-pdfjs-delete::before,
 #menu_delete::before,
 :is(#placesContext_deleteBookmark, #placesContext_deleteFolder, #placesContext_delete, #placesContext_delete_history)::before,
 #placesContext_deleteHost::before,
@@ -494,7 +506,9 @@ menuitem#repair-text-encoding::before,
 #placesContext_sortBy\:name::before,
 #context-viewsource-goToLine::before,
 #context-undo::before,
+#context-pdfjs-undo::before,
 #context-redo::before,
+#context-pdfjs-redo::before,
 #menu_undo::before,
 #menu_redo::before,
 :is(#undobookmarksmenuUndo, #undobookmarksmenuRedo)::before,
@@ -1060,17 +1074,34 @@ menuitem#sanitizeItem::before {
   background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-:is(#context-selectall, #menu_selectAll, #menu_selectall)::before,
-.textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"]::before {
-  background-image: url(chrome://userchrome/content/material/select-forward.svg);
+#context-selectall,
+#context-pdfjs-selectall,
+#menu_selectAll,
+#menu_selectall,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-select-all"] {
+  &::before {
+    background-image: url(chrome://userchrome/content/material/select-forward.svg);
+  }
 }
 
-:is(#context-sendaudio, #context-sendimage, #context-sendvideo, #menu_sendLink)::before {
-  background-image: url(chrome://userchrome/content/skin/mail.svg);
+#context-sendaudio,
+#context-sendimage,
+#context-sendvideo,
+#menu_sendLink {
+  &::before {
+    background-image: url(chrome://userchrome/content/skin/mail.svg);
+  }
 }
 
-:is(#context-savevideo, #context-saveaudio, #context-saveframe, #context-saveimage, #context-savelink, #menu_savePage)::before {
-  background-image: url(chrome://userchrome/content/material/places/folder-save.svg);
+#context-savevideo,
+#context-saveaudio,
+#context-saveframe,
+#context-saveimage,
+#context-savelink,
+#menu_savePage {
+  &::before {
+    background-image: url(chrome://userchrome/content/material/places/folder-save.svg);
+  }
 }
 
 #menu_openFile::before {
@@ -1085,20 +1116,29 @@ menuitem#sanitizeItem::before {
   background-image: url(chrome://userchrome/content/skin/pocket-outline.svg);
 }
 
-#context-take-frame-screenshot::before,
-#context-take-screenshot::before {
-  background-image: var(--screenshot-icon);
+#context-take-frame-screenshot,
+#context-take-screenshot {
+  &::before {
+    background-image: var(--screenshot-icon);
+  }
 }
 
 #context-viewimage::before {
   background-image: url(chrome://userchrome/content/notifications/canvas.svg);
 }
 
-:is(#context-copyimage-contents, #context-copy, #menu_copy, #placesContext_copy, #syncedTabsCopySelected)::before,
-.textbox-contextmenu menuitem[data-l10n-id="text-action-copy"]::before,
-menuitem.customize-context-CopyID::before,
-menuitem.unified-extensions-context-menu-CopyID::before {
-  background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
+#context-copyimage-contents,
+#context-copy,
+#context-pdfjs-copy,
+#menu_copy,
+#placesContext_copy,
+#syncedTabsCopySelected,
+.textbox-contextmenu menuitem[data-l10n-id="text-action-copy"],
+menuitem.customize-context-CopyID,
+menuitem.unified-extensions-context-menu-CopyID {
+  &::before {
+    background-image: url(chrome://userchrome/content/skin/edit-copy.svg);
+  }
 }
 
 menuitem.unified-extensions-context-menu-move-widget-up::before {
@@ -1117,12 +1157,12 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
   background-image: url(chrome://userchrome/content/material/places/folder-special.svg);
 }
 
-:is(#context-cut, #menu_cut, #placesContext_cut)::before,
+:is(#context-cut, #context-pdfjs-cut, #menu_cut, #placesContext_cut)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-cut"]::before {
   background-image: url(chrome://userchrome/content/skin/edit-cut.svg);
 }
 
-:is(#context-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group)::before,
+:is(#context-paste, #context-pdfjs-paste, #menu_paste, #placesContext_paste, #placesContext_paste_group)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-paste"]::before {
   background-image: url(chrome://userchrome/content/skin/edit-paste.svg);
 }
@@ -1139,7 +1179,7 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
   background-image: url(chrome://userchrome/content/delete.svg);
 }
 
-:is(#context-delete, #menu_delete)::before,
+:is(#context-delete, #context-pdfjs-delete, #menu_delete)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-delete"]::before {
   background-image: url(chrome://userchrome/content/material/backspace-solid.svg);
 }
@@ -1242,9 +1282,20 @@ menuitem#repair-text-encoding::before {
   background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
-:is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo, #context-redo, #menu_redo, #undobookmarksmenuRedo)::before,
-.textbox-contextmenu menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"])::before {
-  background-image: url(chrome://userchrome/content/undo.svg);
+#context-undo,
+#context-pdfjs-undo,
+#context_undoCloseTab,
+#toolbar-context-undoCloseTab,
+#menu_undo,
+#undobookmarksmenuUndo,
+#context-redo,
+#context-pdfjs-redo,
+#menu_redo,
+#undobookmarksmenuRedo,
+.textbox-contextmenu menuitem:is([data-l10n-id="text-action-undo"], [data-l10n-id="text-action-redo"]) {
+  &::before {
+    background-image: url(chrome://userchrome/content/undo.svg);
+  }
 }
 
 #placesContext_deleteHost::before {
@@ -1650,7 +1701,7 @@ menuitem:is(.customize-context-reportExtension, .unified-extensions-context-menu
 :is(#context_sendTabToDevice, #context-sendlinktodevice, #context-sendpagetodevice):-moz-locale-dir(rtl)::before,
 :is(#context-undo, #context_undoCloseTab, #toolbar-context-undoCloseTab, #menu_undo, #undobookmarksmenuUndo):-moz-locale-dir(rtl)::before,
 :is(#context_reloadTab, #context_reloadSelectedTabs, #toolbar-context-reloadSelectedTab, #toolbar-context-reloadSelectedTabs):-moz-locale-dir(rtl)::before,
-:is(#context-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr)::before,
+:is(#context-redo, #context-pdfjs-redo, #menu_redo, #undobookmarksmenuRedo):-moz-locale-dir(ltr)::before,
 menuitem:is(.customize-context-removeFromToolbar, .customize-context-removeFromPanel):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu menuitem:is([anonid="paste-and-go"], #paste-and-go, .searchbar-paste-and-search):-moz-locale-dir(rtl)::before,
 .textbox-contextmenu menuitem[data-l10n-id="text-action-undo"]:-moz-locale-dir(rtl)::before,

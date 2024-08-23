@@ -14,6 +14,9 @@
     --in-content-button-background-bold: hsla(0, 20%, 90%, 0.23) !important;
     --in-content-border-color: var(--dialog-box-border-color) !important;
     --in-content-border-hover: var(--dialog-box-border-hover) !important;
+    --in-content-box-background: var(--uc-content-box-background) !important;
+    --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
+    --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
     --arrowpanel-dimmed: color-mix(in srgb, currentColor 17%, transparent) !important;
     --arrowpanel-dimmed-further: color-mix(in srgb, currentColor 25%, transparent) !important;
     --arrowpanel-dimmed-even-further: color-mix(in srgb, currentColor 30%, transparent) !important;
@@ -32,6 +35,7 @@
     --organizer-outline-color: var(--purple-40) !important;
     --organizer-border-color: var(--in-content-border-color-dim) !important;
     --organizer-toolbar-field-background: var(--in-content-bg-dark) !important;
+    --organizer-toolbar-field-border-color: var(--organizer-border-color) !important;
     --organizer-toolbar-field-background-focused: var(--in-content-bg-dark) !important;
     --organizer-separator-color: var(--in-content-separator-dim) !important;
     --organizer-toolbar-field-focus-border-color: var(--organizer-outline-color) !important;

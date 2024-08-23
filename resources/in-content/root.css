@@ -48,6 +48,30 @@ html|input:is([type="date"], [type="time"], [type="datetime-local"]) {
   .pdfViewer.invert {
     filter: invert(1) brightness(1.15) contrast(0.85);
   }
+
+  /* consistent PDF viewer dialog theme */
+  #dialogContainer dialog.dialog {
+    --dialog-bg-color: var(--in-content-bg-dark) !important;
+    --dialog-border-color: var(--uc-content-border-color) !important;
+    --text-primary-color: var(--uc-content-page-color) !important;
+    --focus-ring-color: var(--global-focus-outline-color) !important;
+    --textarea-bg-color: var(--uc-content-box-background-odd) !important;
+    --textarea-border-color: var(--uc-content-box-border-color) !important;
+    --radio-bg-color: var(--uc-content-button-background) !important;
+    --radio-checked-bg-color: var(--uc-parent-primary-button-text-color) !important;
+    --radio-checked-border-color: var(--uc-parent-primary-button-background-hover) !important;
+    --button-secondary-bg-color: var(--uc-content-button-background-solid) !important;
+    --button-primary-bg-color: var(--uc-parent-primary-button-background-hover) !important;
+    --button-primary-fg-color: var(--uc-parent-primary-button-text-color) !important;
+
+    .mainContainer {
+      button {
+        &:hover {
+          cursor: default;
+        }
+      }
+    }
+  }
 }
 
 :read-only:focus:not(:focus-visible),

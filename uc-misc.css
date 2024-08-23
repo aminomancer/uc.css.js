@@ -689,7 +689,8 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
       font-weight: var(--uc-font-weight-semibold, 600) !important;
     }
 
-    .urlbarView-dynamic-weather-temperature {
+    .urlbarView-dynamic-weather-temperature,
+    .footer-button.screenshot-button {
       font-weight: var(--uc-font-weight-bold) !important;
     }
 
