@@ -296,59 +296,15 @@
     padding-block: 0 !important;
   }
 
-  link[rel="stylesheet"] {
-    &[href="chrome://global/content/elements/message-bar.css"],
-    &[href="chrome://global/content/elements/moz-message-bar.css"] {
-      ~ .container {
-        padding: 8px !important;
-        border-radius: 0 !important;
-        flex-grow: 1;
-
-        .content {
-          display: flex !important;
-          margin-inline: 8px 0 !important;
-          gap: 4px 12px !important;
-          justify-content: space-between !important;
-
-          + .spacer:last-child {
-            display: none;
-          }
-
-          .icon-container {
-            margin-inline-start: 0 !important;
-          }
-        }
-      }
+  @-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
+    mark {
+      background-color: var(--solid-selection-bgcolor, hsl(340, 73%, 58%)) !important;
+      color: white !important;
     }
   }
 
   message-bar,
   moz-message-bar {
-    &:not([hidden]) {
-      display: flex !important;
-      flex-flow: row nowrap !important;
-      margin-top: 15px !important;
-      overflow: hidden;
-      margin-inline: -15.5px !important;
-      border: 0 !important;
-    }
-
-    > span {
-      white-space: break-spaces !important;
-      flex-shrink: 1;
-      flex-grow: 1;
-      overflow: hidden;
-      overflow-wrap: break-word !important;
-      text-overflow: ellipsis !important;
-    }
-
-    > button {
-      display: inline-block !important;
-      flex-shrink: 0;
-      margin: 0 !important;
-      cursor: pointer;
-    }
-
     &:is([type="system"], [type="info"], [type="generic"], :not([type])) {
       --message-bar-background-color: var(--grey-60) !important;
       --message-bar-text-color: var(--text-color) !important;
@@ -375,14 +331,61 @@
     }
   }
 
-  @-moz-document regexp("^(about:|chrome:|moz-extension:).*") {
-    mark {
-      background-color: var(--solid-selection-bgcolor, hsl(340, 73%, 58%)) !important;
-      color: white !important;
-    }
-  }
-
   @-moz-document url-prefix("about:addons") {
+    link[rel="stylesheet"] {
+      &[href="chrome://global/content/elements/message-bar.css"],
+      &[href="chrome://global/content/elements/moz-message-bar.css"] {
+        ~ .container {
+          padding: 8px !important;
+          border-radius: 0 !important;
+          flex-grow: 1;
+
+          .content {
+            display: flex !important;
+            margin-inline: 8px 0 !important;
+            gap: 4px 12px !important;
+            justify-content: space-between !important;
+
+            + .spacer:last-child {
+              display: none;
+            }
+
+            .icon-container {
+              margin-inline-start: 0 !important;
+            }
+          }
+        }
+      }
+    }
+
+    message-bar,
+    moz-message-bar {
+      &:not([hidden]) {
+        display: flex !important;
+        flex-flow: row nowrap !important;
+        margin-top: 15px !important;
+        overflow: hidden;
+        margin-inline: -15.5px !important;
+        border: 0 !important;
+      }
+
+      > span {
+        white-space: break-spaces !important;
+        flex-shrink: 1;
+        flex-grow: 1;
+        overflow: hidden;
+        overflow-wrap: break-word !important;
+        text-overflow: ellipsis !important;
+      }
+
+      > button {
+        display: inline-block !important;
+        flex-shrink: 0;
+        margin: 0 !important;
+        cursor: pointer;
+      }
+    }
+
     .addon-badge {
       border: 1px solid transparent !important;
       width: 22px !important;

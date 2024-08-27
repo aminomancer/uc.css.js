@@ -102,6 +102,8 @@ module.exports = {
     {
       files: ["resources/script-override/**/*.js"],
       rules: {
+        complexity: "off",
+        "no-undef": "off",
         "prefer-destructuring": "off",
         "prefer-template": "off",
         "prettier/prettier": ["error", { quoteProps: "preserve" }],

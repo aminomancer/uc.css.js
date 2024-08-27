@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Animation Workaround
-// @version        1.2.0
+// @version        1.2.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    A tiny script required for duskFox. This doesn't have any visible effects, it's just a background support piece required to make the CSS theme work correctly. It cleans up transitions/animations on Firefox tabs. The first part involves making sure pinned tabs will be placed correctly. Without this script, we couldn't smoothly animate the width transition when pinning/unpinning tabs, because it would interfere with calculating the placement of tabs. The second part involves making sure that certain tab animations don't begin until the paint immediately after tabs are created/moved. Otherwise, they would start and stop within less than 1 frame.
@@ -19,6 +19,7 @@
         .replace(/^\(/, "")
         .replace(/\)$/, "")
         .replace(/^_animateTabMove/, "_uc_animateTabMove")
+        .replace(/this\.#rtlMode/g, `!this.verticalMode && RTL_UI`)
         .replace(
           /(gNavToolbox\.toggleAttribute\("movingtab", true\);)/,
           `$1;\n movedTab = draggedTab;\n draggedTab.toggleAttribute("justmoved", true);`

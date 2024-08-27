@@ -2,29 +2,52 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-:host([scrolledtostart="true"])::part(overflow-start-indicator),
-:host([scrolledtoend="true"])::part(overflow-end-indicator),
-:host(:not([overflowing="true"])) > toolbarbutton {
+:host([scrolledtostart])::part(overflow-start-indicator),
+:host([scrolledtoend])::part(overflow-end-indicator),
+:host(:not([overflowing])) > toolbarbutton {
   visibility: collapse;
 }
 
+scrollbox,
+.scrollbox-clip {
+  min-width: 0;
+  min-height: 0;
+}
+
+slot {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: inherit;
+}
+
 toolbarbutton {
-  color: inherit !important; /* override any color changes for toolbar buttons in e.g. disabled or hover states */
+  color: inherit;
   list-style-image: url("chrome://global/skin/icons/arrow-down-12.svg");
   -moz-context-properties: fill, fill-opacity;
   fill: currentColor;
   fill-opacity: 1;
   padding: 2px;
-}
+  /* Make sure we draw on top of our scrollbox, since otherwise the up button
+   * won't be hittable */
+  position: relative;
 
-toolbarbutton[disabled="true"] {
-  fill-opacity: 0.4;
-}
+  &[disabled] {
+    fill-opacity: var(--toolbarbutton-disabled-opacity);
+  }
 
-:host([orient="horizontal"]) > toolbarbutton {
-  list-style-image: url("chrome://global/skin/icons/arrow-left.svg");
+  :host([orient="horizontal"]) > & {
+    list-style-image: url("chrome://global/skin/icons/arrow-left.svg");
+  }
+
+  @media not (-moz-platform: macos) {
+    :host(:not([clicktoscroll])) > & {
+      appearance: none;
+    }
+  }
+
+  > .toolbarbutton-text {
+    display: none;
+  }
 }
 
 #scrollbutton-up > .toolbarbutton-icon {
@@ -34,22 +57,6 @@ toolbarbutton[disabled="true"] {
 :host([orient="horizontal"]) > #scrollbutton-down:-moz-locale-dir(ltr) > .toolbarbutton-icon,
 :host([orient="horizontal"]) > #scrollbutton-up:-moz-locale-dir(rtl) > .toolbarbutton-icon {
   transform: scaleX(-1);
-}
-
-toolbarbutton > .toolbarbutton-text {
-  display: none;
-}
-
-@media not (-moz-platform: macos) {
-  :host(:not([clicktoscroll="true"])) > toolbarbutton {
-    appearance: none;
-  }
-}
-
-scrollbox,
-.scrollbox-clip {
-  min-width: 0;
-  min-height: 0;
 }
 
 /* replace scrollbuttons with scrollbars for vertical scrollboxes.

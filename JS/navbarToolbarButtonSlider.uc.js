@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.7
+// @version        2.9.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -199,13 +199,14 @@ class NavbarToolbarSlider {
         this.direction = value;
       // fall through...
       case exclude:
-      case springs:
+      case springs: {
         if (this.isOverflowing) break;
         this.unwrapAll();
         let array = [...this.widgets].filter(this.filterFn, this);
         this.wrapAll(array, this.inner);
         this.setMaxWidth(array);
         break;
+      }
     }
   }
   attachListeners() {
@@ -611,7 +612,7 @@ class NavbarToolbarSlider {
         // for all the other widgets we just insert their nodes before the node
         // corresponding to the next widget.
         if (i + 1 === array?.length) {
-          array[i - 1]?.forWindow(window).node.after(aNode);
+          array[i - 1]?.forWindow(window)?.node?.after(aNode);
         } else {
           let next = array[i + 1]?.forWindow(window).node;
           if (next?.parentElement === container) {
@@ -644,10 +645,9 @@ class NavbarToolbarSlider {
       // to the array. so we check each widget's node's next sibling, and if
       // it's not equal to the node of the next widget in the array, we insert
       // the node before the next widget's node.
-      if (
-        item.forWindow(window).node.nextElementSibling !=
-        array[i + 1]?.forWindow(window).node
-      ) {
+      let node = item.forWindow(window)?.node;
+      let beforeNode = array[i + 1]?.forWindow(window)?.node;
+      if (node && beforeNode && node?.nextElementSibling !== beforeNode) {
         // if nextElementSibling returns null, then it's the last child of the
         // slider. if that widget is the last in the array, then array[i+1] will
         // return undefined. since null == undefined the if statement will still
@@ -657,10 +657,7 @@ class NavbarToolbarSlider {
         // which always results in inserting the node at the end. so it ends up
         // where it should be anyway. and this is faster than actually checking
         // if it's the last node for every iteration of the loop.
-        container.insertBefore(
-          item.forWindow(window)?.node,
-          array[i + 1]?.forWindow(window).node
-        );
+        container.insertBefore(node, beforeNode);
       }
     });
   }

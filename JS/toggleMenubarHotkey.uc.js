@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
-// @version        1.1.4
+// @version        1.1.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Adds a hotkey (Alt+M by default) that toggles the menubar on and off. Unlike just pressing the Alt key, this keeps it open permanently until closed again by the hotkey, toolbar context menu, or customize menu. Requires [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) — other script loaders will not work with this script.
@@ -34,11 +34,22 @@
   function init() {
     if (!hotkeyRegistered) return;
     document.getElementById("toolbar-menubar").setAttribute("key", options.id);
-    let src = onViewToolbarsPopupShowing.toSource();
-    if (src.startsWith("function")) {
+    if (
+      ToolbarContextMenu.onViewToolbarsPopupShowing.name ===
+      "onViewToolbarsPopupShowing"
+    ) {
+      const lazy = {};
+      ChromeUtils.defineESModuleGetters(lazy, {
+        CustomizableUI: "resource:///modules/CustomizableUI.sys.mjs",
+        SessionStore: "resource:///modules/sessionstore/SessionStore.sys.mjs",
+      });
+
       eval(
-        `window.onViewToolbarsPopupShowing = function uc_onViewToolbarsPopupShowing ${src
-          .replace(/^function onViewToolbarsPopupShowing/, "")
+        `ToolbarContextMenu.onViewToolbarsPopupShowing = function uc_onViewToolbarsPopupShowing ${ToolbarContextMenu.onViewToolbarsPopupShowing
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^onViewToolbarsPopupShowing/, "")
           .replace(
             /if \(popup\.id != \"toolbar-context-menu\"\)/,
             `if (toolbar.hasAttribute("key"))`

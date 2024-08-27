@@ -665,8 +665,21 @@ of moz-document in stylesheets with file:// urls */
     line-height: revert;
   }
 
-  :is(.tab-throbber, .tab-icon-pending, .tab-icon-image, .tab-sharing-icon-overlay, .tab-icon-overlay):not([pinned]) {
-    margin-inline-end: 0;
+  .tab-throbber,
+  .tab-icon-pending,
+  .tab-icon-image,
+  .tab-sharing-icon-overlay,
+  .tab-icon-overlay {
+    height: 16px;
+    width: 16px;
+
+    &:not([pinned]) {
+      margin-inline-end: 0;
+    }
+
+    #tabbrowser-tabs:is(:not([orient="vertical"]), [orient="vertical"][expanded]) &:not([pinned]) {
+      margin-inline-end: 0;
+    }
   }
 
   .tab-icon-stack {
