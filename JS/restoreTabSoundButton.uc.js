@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.4.1
+// @version        2.4.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -55,6 +55,7 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
   if (!sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) {
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
+  document.getElementById("tab-preview-panel").removeAttribute("type");
   /* necessary DOM:
     <tooltip id="tabbrowser-tab-tooltip"
             class="places-tooltip"
@@ -183,7 +184,7 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
   gBrowser.createTooltip = function (event) {
     event.stopPropagation();
     let tab = event.target.triggerNode?.closest("tab");
-    if (!tab) {
+    if (!tab || this._showTabCardPreview) {
       event.preventDefault();
       return;
     }
@@ -193,13 +194,15 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
 
     let tabRect = windowUtils.getBoundsWithoutFlushing(tab);
     let id, args, raw;
+    let attributeName = "label";
     let align = true;
     let { linkedBrowser } = tab;
     const contextTabInSelection = this.selectedTabs.includes(tab);
     const tabCount = contextTabInSelection ? this.selectedTabs.length : 1;
     if (tab.mOverCloseButton) {
       let rect = windowUtils.getBoundsWithoutFlushing(tab.closeButton);
-      id = "tabbrowser-close-tabs-tooltip";
+      id = "tabbrowser-close-tabs-button";
+      attributeName = "tooltiptext";
       args = { tabCount };
       align = rect.right - tabRect.left < 250;
     } else if (tab._overPlayingIcon) {
@@ -228,17 +231,23 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
       tooltip.moveToAnchor(tab, "after_start");
     }
     let title = tooltip.querySelector(".places-tooltip-title");
-    let localized = {};
     if (raw) {
-      localized.label = raw;
+      title.textContent = raw ?? "";
     } else if (id) {
+      let localized = "";
       let [msg] = this.tabLocalization.formatMessagesSync([{ id, args }]);
-      localized.value = msg.value;
-      if (msg.attributes) {
-        for (let attr of msg.attributes) localized[attr.name] = attr.value;
+      if (attributeName === "value") {
+        localized = msg.value;
+      } else if (msg.attributes) {
+        let attr = msg.attributes.find(attr => attr.name === attributeName);
+        if (attr?.value) {
+          localized = attr.value;
+        }
       }
+      title.textContent = localized ?? "";
+    } else {
+      title.textContent = "";
     }
-    title.textContent = localized.label ?? "";
     if (tab.getAttribute("customizemode") === "true") {
       tooltip
         .querySelector(".places-tooltip-box")

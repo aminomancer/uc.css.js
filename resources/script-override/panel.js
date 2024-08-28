@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Arrowpanel Arrows
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -128,6 +128,10 @@
 
     get isArrowPanel() {
       return this.getAttribute("type") == "arrow";
+    }
+
+    get noOpenOnAnchor() {
+      return this.hasAttribute("no-open-on-anchor");
     }
 
     _setSideAttribute(event) {

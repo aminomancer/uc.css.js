@@ -91,6 +91,9 @@ tooltip .uc-tooltip-box {
 .places-tooltip-title,
 .tab-preview-title {
   font-weight: 600;
+}
+
+.places-tooltip-title {
   /* Clip after 2 lines, this should ideally use a different method like
   -webkit-line-clamp or overflow: hidden; to get ellipsis support but XUL
   tooltip sizing makes that difficult. */
@@ -124,12 +127,15 @@ tooltip .uc-tooltip-box {
   --tab-preview-background-color: var(--tooltip-bgcolor, Menu) !important;
   --tab-preview-text-color: var(--tooltip-color) !important;
   --tab-preview-border-color: var(--dialog-box-border-color) !important;
-  margin: var(--panel-inner-box-margin, 4px) !important;
-  max-height: calc(100% - 2 * var(--panel-inner-box-margin)) !important;
-  max-width: calc(100% - 2 * var(--panel-inner-box-margin)) !important;
   border-radius: var(--arrowpanel-border-radius) !important;
   box-shadow: var(--uc-panel-shadow) !important;
-  box-sizing: border-box !important;
+  margin-top: -2px !important;
+
+  .tab-preview-pid-activeness {
+    > :empty {
+      display: none;
+    }
+  }
 }
 
 .tab-preview-text-container {
@@ -639,6 +645,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
 
     .places-tooltip-uri,
     .tab-preview-uri,
+    .tab-preview-pid-activeness,
     :is(#back-button-tooltip, #forward-button-tooltip) .tooltip-label:not([id]) {
       font-weight: var(--uc-font-weight-thin, 300) !important;
     }

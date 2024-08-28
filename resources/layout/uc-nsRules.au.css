@@ -887,6 +887,13 @@ of moz-document in stylesheets with file:// urls */
     --urlbar-input-bgcolor: color-mix(in srgb, currentColor 4%, var(--in-content-button-highlight-dark));
   }
 
+  #customization-container {
+    :root[lwtheme] & {
+      background-image: revert;
+      background-color: -moz-Dialog;
+    }
+  }
+
   /* dark gray context menus/menulists in system pages with gray theme */
   @-moz-document url-prefix("chrome://browser/content/places/places.xhtml"),
     url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),
@@ -2157,7 +2164,7 @@ of moz-document in stylesheets with file:// urls */
     margin: 0;
   }
 
-  #tabbrowser-tab-preview::part(arrowbox) {
+  #tab-preview-panel::part(arrowbox) {
     display: none;
   }
 

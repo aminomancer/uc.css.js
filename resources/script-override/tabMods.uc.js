@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.3.9
+// @version        1.4.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -23,7 +23,7 @@
         </vbox>
         <hbox class="tab-content" align="center">
           <stack class="tab-icon-stack">
-            <image class="tab-close-button close-icon" role="presentation"/>
+            <image class="tab-close-button close-icon" role="button" keyNav="false"/>
             <hbox class="tab-throbber"/>
             <hbox class="tab-icon-pending"/>
             <html:img class="tab-icon-image" role="presentation" decoding="sync" />
@@ -45,7 +45,7 @@
               <label class="tab-icon-sound-label tab-icon-sound-tooltip-label" role="presentation"/>
             </hbox>
           </vbox>
-          <image class="tab-icon-sound" role="presentation"/>
+          <image class="tab-icon-sound" role="button" keyNav="false"/>
         </hbox>
       </stack>
       `;
@@ -269,6 +269,14 @@
       return this._lastAccessed == Infinity ? Date.now() : this._lastAccessed;
     }
 
+    /**
+     * Returns a timestamp which attempts to represent the last time the user saw this tab.
+     * If the tab has not been active in this session, any lastAccessed is used. We
+     * differentiate between selected and explicitly visible; a selected tab in a hidden
+     * window is last seen when that window and tab were last visible.
+     * We use the application start time as a fallback value when no other suitable value
+     * is available.
+     */
     get lastSeenActive() {
       const isForegroundWindow =
         this.ownerGlobal ==
@@ -280,8 +288,18 @@
       if (this._lastSeenActive) {
         return this._lastSeenActive;
       }
-      // Use the application start time as the fallback value
-      return Services.startup.getStartupInfo().start.getTime();
+
+      if (
+        !this._lastAccessed ||
+        this._lastAccessed >= this.container.startupTime
+      ) {
+        // When the tab was created this session but hasn't been seen by the user,
+        // default to the application start time.
+        return this.container.startupTime;
+      }
+      // The tab was restored from a previous session but never seen.
+      // Use the lastAccessed as the best proxy for when the user might have seen it.
+      return this._lastAccessed;
     }
 
     get _overPlayingIcon() {
@@ -320,6 +338,13 @@
       return this.querySelector(".tab-close-button");
     }
 
+    get group() {
+      if (this.parentElement.tagName == "tab-group") {
+        return this.parentElement;
+      }
+      return null;
+    }
+
     updateLastAccessed(aDate) {
       this._lastAccessed = this.selected ? Infinity : aDate || Date.now();
     }
@@ -346,6 +371,114 @@
       delete this._lastUnloaded;
     }
 
+    _updatePreviewPanelText(popupShowing = false) {
+      if (!this.container._showCardPreviews) {
+        return;
+      }
+      if (!this.container._previewPanel) {
+        // load the tab preview component
+        const TabHoverPreviewPanel = ChromeUtils.importESModule(
+          "chrome://browser/content/tabbrowser/tab-hover-preview.mjs"
+        ).default;
+        this.container._previewPanel = new TabHoverPreviewPanel(
+          document.getElementById("tab-preview-panel")
+        );
+      }
+
+      const { previewPanel } = this.container;
+
+      if (
+        !previewPanel ||
+        (!popupShowing &&
+          !["open", "showing"].includes(previewPanel._panel.state))
+      ) {
+        return;
+      }
+
+      if (previewPanel._updatePreview.name === "_updatePreview") {
+        // eslint-disable-next-line no-eval
+        eval(
+          `previewPanel._updatePreview = function uc_updatePreview ${previewPanel._updatePreview
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^_updatePreview/, "")
+            .replace(
+              /[^\S\r\n]*this\._panel\.querySelector\("\.tab-preview-title"\)\.textContent =\s*this\._displayTitle;\s*this\._panel\.querySelector\("\.tab-preview-uri"\)\.textContent =\s*this\._displayURI;/m,
+              `this._tab._updatePreviewPanelText(true);`
+            )}`
+        );
+      }
+
+      if (previewPanel.getPrettyURI.name === "getPrettyURI") {
+        // eslint-disable-next-line no-eval
+        eval(
+          `previewPanel.getPrettyURI = function uc_getPrettyURI ${previewPanel.getPrettyURI
+            .toSource()
+            .replace(/^\(/, "")
+            .replace(/\)$/, "")
+            .replace(/^getPrettyURI/, "")
+            .replace(
+              /^(\s*\(uri\) \{\n)/,
+              `$1    if (new RegExp(\`(\$\{BROWSER_NEW_TAB_URL\}|\$\{HomePage.get(this._win)\})\`, "i").test(uri)) return "";\n`
+            )}`
+        );
+      }
+
+      let tab = previewPanel._tab;
+      if (!tab || !gBrowser._showTabCardPreview) {
+        return;
+      }
+
+      let id, args, raw;
+      let attributeName = "label";
+      let { linkedBrowser } = tab;
+      const contextTabInSelection = gBrowser.selectedTabs.includes(tab);
+      const tabCount = contextTabInSelection ? gBrowser.selectedTabs.length : 1;
+      if (tab.mOverCloseButton) {
+        id = "tabbrowser-close-tabs-button";
+        attributeName = "tooltiptext";
+        args = { tabCount };
+      } else if (tab._overPlayingIcon) {
+        args = { tabCount };
+        if (contextTabInSelection) {
+          id = linkedBrowser.audioMuted
+            ? "tabbrowser-unmute-tab-audio-tooltip"
+            : "tabbrowser-mute-tab-audio-tooltip";
+          const keyElem = document.getElementById("key_toggleMute");
+          args.shortcut = ShortcutUtils.prettifyShortcut(keyElem);
+        } else if (tab.hasAttribute("activemedia-blocked")) {
+          id = "tabbrowser-unblock-tab-audio-tooltip";
+        } else {
+          id = linkedBrowser.audioMuted
+            ? "tabbrowser-unmute-tab-audio-background-tooltip"
+            : "tabbrowser-mute-tab-audio-background-tooltip";
+        }
+      } else {
+        raw = previewPanel._displayTitle;
+      }
+      let title = previewPanel._panel.querySelector(".tab-preview-title");
+      if (raw) {
+        title.textContent = raw ?? "";
+      } else if (id) {
+        let localized = "";
+        let [msg] = gBrowser.tabLocalization.formatMessagesSync([{ id, args }]);
+        if (attributeName === "value") {
+          localized = msg.value;
+        } else if (msg.attributes) {
+          let attr = msg.attributes.find(attr => attr.name === attributeName);
+          if (attr?.value) {
+            localized = attr.value;
+          }
+        }
+        title.textContent = localized ?? "";
+      } else {
+        title.textContent = "";
+      }
+      let url = previewPanel._panel.querySelector(".tab-preview-uri");
+      url.textContent = previewPanel._displayURI;
+    }
+
     on_mouseover(event) {
       if (event.target.classList.contains("tab-close-button")) {
         this.mOverCloseButton = true;
@@ -369,12 +502,7 @@
         });
       }
 
-      if (this.container._showCardPreviews) {
-        const previewContainer = document.getElementById("tab-preview-panel");
-        previewContainer.overCloseButton = this.mOverCloseButton;
-        previewContainer.overPlayingIcon = this._overPlayingIcon;
-        previewContainer.audioMuted = this.linkedBrowser.audioMuted;
-      }
+      this._updatePreviewPanelText();
 
       if (this.hidden || this.closing) {
         return;
@@ -421,8 +549,6 @@
         gSharedTabWarning.willShowSharedTabWarning(this)
       ) {
         event.stopPropagation();
-      } else {
-        this.dispatchEvent(new CustomEvent("TabHoverEnd", { bubbles: true }));
       }
     }
 
@@ -592,7 +718,6 @@
         this.container._handleTabSelect();
       } else if (this.linkedPanel) {
         this.linkedBrowser.unselectedTabHover(true);
-        this.startUnselectedTabHoverTimer();
       }
 
       // Prepare connection to host beforehand.
@@ -608,7 +733,6 @@
       this._hover = false;
       if (this.linkedPanel && !this.selected) {
         this.linkedBrowser.unselectedTabHover(false);
-        this.cancelUnselectedTabHoverTimer();
       }
       this.dispatchEvent(new CustomEvent("TabHoverEnd", { bubbles: true }));
     }
@@ -634,56 +758,8 @@
       // TODO(Itiel): Maybe simplify this when bug 1830989 lands
     }
 
-    startUnselectedTabHoverTimer() {
-      // Only record data when we need to.
-      if (!this.linkedBrowser.shouldHandleUnselectedTabHover) {
-        return;
-      }
-
-      if (
-        !TelemetryStopwatch.running("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this)
-      ) {
-        TelemetryStopwatch.start("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this);
-      }
-
-      if (this._hoverTabTimer) {
-        clearTimeout(this._hoverTabTimer);
-        this._hoverTabTimer = null;
-      }
-    }
-
-    cancelUnselectedTabHoverTimer() {
-      // Since we're listening "mouseout" event, instead of "mouseleave".
-      // Every time the cursor is moving from the tab to its child node (icon),
-      // it would dispatch "mouseout"(for tab) first and then dispatch
-      // "mouseover" (for icon, eg: close button, speaker icon) soon.
-      // It causes we would cancel present TelemetryStopwatch immediately
-      // when cursor is moving on the icon, and then start a new one.
-      // In order to avoid this situation, we could delay cancellation and
-      // remove it if we get "mouseover" within very short period.
-      this._hoverTabTimer = setTimeout(() => {
-        if (
-          TelemetryStopwatch.running("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this)
-        ) {
-          TelemetryStopwatch.cancel("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this);
-        }
-      }, 100);
-    }
-
-    finishUnselectedTabHoverTimer() {
-      // Stop timer when the tab is opened.
-      if (
-        TelemetryStopwatch.running("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this)
-      ) {
-        TelemetryStopwatch.finish("HOVER_UNTIL_UNSELECTED_TAB_OPENED", this);
-      }
-    }
-
     resumeDelayedMedia() {
       if (this.activeMediaBlocked) {
-        Services.telemetry
-          .getHistogramById("TAB_AUDIO_INDICATOR_USED")
-          .add(3 /* unblockByClickingIcon */);
         this.removeAttribute("activemedia-blocked");
         this.linkedBrowser.resumeMedia();
         gBrowser._tabAttrModified(this, ["activemedia-blocked"]);
@@ -692,32 +768,23 @@
 
     toggleMuteAudio(aMuteReason) {
       let browser = this.linkedBrowser;
-      let hist = Services.telemetry.getHistogramById(
-        "TAB_AUDIO_INDICATOR_USED"
-      );
-
       if (browser.audioMuted) {
         if (this.linkedPanel) {
           // "Lazy Browser" should not invoke its unmute method
           browser.unmute();
         }
         this.removeAttribute("muted");
-        hist.add(1 /* unmute */);
       } else {
         if (this.linkedPanel) {
           // "Lazy Browser" should not invoke its mute method
           browser.mute();
         }
         this.toggleAttribute("muted", true);
-        hist.add(0 /* mute */);
       }
       this.muteReason = aMuteReason || null;
 
       gBrowser._tabAttrModified(this, ["muted"]);
-      if (this.container._showCardPreviews) {
-        const previewContainer = document.getElementById("tab-preview-panel");
-        previewContainer.audioMuted = browser.audioMuted;
-      }
+      this._updatePreviewPanelText();
     }
 
     setUserContextId(aUserContextId) {
