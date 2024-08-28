@@ -90,7 +90,8 @@ menupopup {
   --urlbarView-result-button-selected-background-color: var(--arrowpanel-faint) !important;
   --urlbarView-highlight-background: var(--arrowpanel-dimmed-further) !important;
   --tab-min-height: var(--uc-tab-min-height) !important;
-  --tab-block-margin: 0px !important;
+  --tab-block-margin: 2px !important;
+  --tab-inline-padding: 1px !important;
   --inline-tab-padding: 10px !important;
   --tab-shadow-max-size: 0px !important;
   --tabs-navbar-shadow-size: 0px !important;

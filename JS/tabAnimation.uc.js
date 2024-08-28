@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Animation Workaround
-// @version        1.2.1
+// @version        1.2.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    A tiny script required for duskFox. This doesn't have any visible effects, it's just a background support piece required to make the CSS theme work correctly. It cleans up transitions/animations on Firefox tabs. The first part involves making sure pinned tabs will be placed correctly. Without this script, we couldn't smoothly animate the width transition when pinning/unpinning tabs, because it would interfere with calculating the placement of tabs. The second part involves making sure that certain tab animations don't begin until the paint immediately after tabs are created/moved. Otherwise, they would start and stop within less than 1 frame.
@@ -39,22 +39,6 @@
         .replace(
           /(gNavToolbox\.removeAttribute\("movingtab"\);)/,
           `$1;\n setTimeout(() => {movedTab?.removeAttribute("justmoved"); movedTab = null;}, 1);`
-        )}`
-    );
-  }
-
-  if (
-    gBrowser.tabContainer._positionPinnedTabs.name === "_positionPinnedTabs"
-  ) {
-    eval(
-      `gBrowser.tabContainer._positionPinnedTabs = function ${gBrowser.tabContainer._positionPinnedTabs
-        .toSource()
-        .replace(/^\(/, "")
-        .replace(/\)$/, "")
-        .replace(/^_positionPinnedTabs/, "_uc_positionPinnedTabs")
-        .replace(
-          /pinnedTabWidth: tabs\[0\]\.getBoundingClientRect\(\)\.width/,
-          `pinnedTabWidth: parseInt(getComputedStyle(this).getPropertyValue("--pinned-tab-width") || 36)`
         )}`
     );
   }

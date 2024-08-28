@@ -8,7 +8,6 @@
 
 #TabsToolbar .tabbrowser-tab {
   background-color: var(--lwt-accent-color) !important;
-  padding: 0 !important;
 }
 
 /* different tab background colors in various states */
@@ -25,16 +24,8 @@
   background: var(--uc-tab-focused-hover) !important;
 }
 
-.tabbrowser-tab:not([selected])[pinned]:is(:hover, .keyboard-focused-tab, [open]) .tab-background {
-  background: var(--uc-tab-pinned-hover) !important;
-}
-
 .tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab, [open]) .tab-background {
   background: var(--uc-tab-background) !important;
-}
-
-.tabbrowser-tab:not([selected])[pinned] .tab-background {
-  background: var(--uc-tab-pinned) !important;
 }
 
 .tabbrowser-tab[multiselected]:not([selected], [pinned], :hover, .keyboard-focused-tab, [open]) .tab-background {
@@ -54,28 +45,25 @@
 .tab-background {
   border: none !important;
   outline: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
   opacity: 1 !important;
-  z-index: 1;
 }
 
 /* different tab shadows in various states. to produce the illusion of modulated depth */
-.tabbrowser-tab .tab-content {
+.tabbrowser-tab .tab-background {
   box-shadow: 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2), 0px 0px 5px 0px hsla(0, 0%, 0%, 0.1);
 }
 
-.tabbrowser-tab:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) .tab-content,
-.tabbrowser-tab:is([multiselected], [pinned]) .tab-content {
+.tabbrowser-tab:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background,
+.tabbrowser-tab:is([multiselected], [pinned]) .tab-background {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.25) !important;
 }
 
-.tabbrowser-tab[selected] .tab-content,
-.tabbrowser-tab:is([multiselected], [pinned])[selected] .tab-content {
+.tabbrowser-tab[selected] .tab-background,
+.tabbrowser-tab:is([multiselected], [pinned])[selected] .tab-background {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
-.tabbrowser-tab:focus:not([aria-activedescendant]) .tab-content {
+.tabbrowser-tab:focus:not([aria-activedescendant]) .tab-background {
   box-shadow: 0px 0px 25px 3px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
@@ -128,196 +116,8 @@
   font-style: italic !important;
 }
 
-/* tab top border roundness */
-#TabsToolbar .tabbrowser-tab,
-#TabsToolbar .tabbrowser-tab :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-right-radius: 5px !important;
-  border-top-left-radius: 5px !important;
-  overflow: clip;
-}
-
-/* unround top left/right corner for first/last tab. this is
-complicated because we don't want to unround a tab unless it's really
-in place as the first/last tab, and is stuck up against the left/right
-edge of the tab strip. that means we don't unround tabs when...
-1) a tab is being dragged/dropped,
-2) a tab is being moved by an animation, or
-3) tabs are being closed from the end via mouse, and the mouse is
-   still in the navbar, because tabs are prevented from flexing to
-   the end until the user's mouse leaves the navbar. */
-#TabsToolbar #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:last-of-type:not([justmoved], [style*="transform"]),
-#TabsToolbar #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:last-of-type:not([justmoved], [style*="transform"]) :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-right-radius: 0 !important;
-}
-
-/* remove the first tab's rounded top left corner */
-#TabsToolbar #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]),
-#TabsToolbar #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]) :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-left-radius: 0 !important;
-}
-
-/* when there are no unpinned tabs and the tab strip is not
-overflowing, the tab strip won't be filled since they don't flex
-to fill the tab strip. so the last tab should have a rounded
-corner since it won't be touching the end of the tab strip. */
-#TabsToolbar
-  #tabbrowser-tabs
-  #tabbrowser-arrowscrollbox:not([overflowing])
-  .tabbrowser-tab:last-of-type[pinned]
-  :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst),
-/* when the last tab has its max-width property set, it means tab sizing has
-been set to some value less than what would fill the tab strip, by
-_lockTabSizing in tabbrowser-tabs.js. this prevents the tabs from snapping to
-fill the space when the user closes tabs with the mouse, in order to keep the
-close button under the mouse. if the tab strip is overflowing, this is achieved
-by adding a spacer (using-closing-tabs-spacer) at the end of the tab strip. if
-it's not overflowing, this is achieved by setting the max-width of every tab to
-the current width of the tab that was just closed. this way the tabs don't
-expand when a tab is removed, until the user's mouse has moved out of the tab
-strip. since the tabs no longer fill the entire tab strip, we give the final tab
-a rounded top-right corner. you can see this at work by making a new tab and
-opening 5 tabs. select the first tab, then close tab 2 by clicking its close
-button. then close tabs 3 and 4 without moving the mouse. the tabs' width will
-not expand until you move your mouse out of the tab strip. */
-#TabsToolbar
-  #tabbrowser-tabs
-  #tabbrowser-arrowscrollbox:not([overflowing])
-  .tabbrowser-tab:last-of-type[style*="max-width"]
-  :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-right-radius: 5px !important;
-}
-
-#TabsToolbar :is(toolbarbutton, toolbaritem, toolbarpaletteitem):not([hidden]) + #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]),
-#TabsToolbar :is(toolbarbutton, toolbaritem, toolbarpaletteitem):not([hidden]) + #tabbrowser-tabs:not([using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]) :is(.tab-stack, .tab-background, .tab-content, .tab-loading-burst) {
-  border-top-left-radius: 5px !important;
-}
-
-/* set rounded outside corners on tabs so they look like folder labels.
-you can disable this by making a new pref in about:config
-and setting it to true: "userChrome.tabs.rounded-outer-corners.disabled"
-this CSS is complicated because the outside corner needs to take on the color of the
-tab, but it's not part of the tab background so it doesn't do so automatically. */
-
-/* overflow needs to be visible since the corners need to be outside the
-bounding box of the tab, otherwise they won't overlap with other tabs, they'll
-just push tabs 10px away from each other, and from the edge of the tab bar. */
-#TabsToolbar .tabbrowser-tab,
-#TabsToolbar .tabbrowser-tab .tab-stack {
-  overflow: visible;
-}
-
-.tabbrowser-tab .tab-stack::before,
-.tabbrowser-tab .tab-stack::after {
-  bottom: 0;
-  content: "";
-  display: block;
-  position: absolute;
-  pointer-events: none;
-  width: 5px;
-  height: 5px;
-  z-index: 2;
-}
-
-.tabbrowser-tab .tab-stack::before {
-  mask: url(chrome://userchrome/content/skin/tab-corner-mask-left.svg) 0/100% 100%, linear-gradient(#fff, #fff);
-  mask-composite: exclude;
-  left: -5px;
-}
-
-.tabbrowser-tab .tab-stack::after {
-  mask: url(chrome://userchrome/content/skin/tab-corner-mask-right.svg) 0/100% 100%, linear-gradient(#fff, #fff);
-  mask-composite: exclude;
-  right: -5px;
-}
-
-.tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::before {
-  left: -4.6px;
-}
-
-.tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::after {
-  right: -4.6px;
-}
-
-/* z-index of these corners is very complicated because the z-index of other
-elements needs to be set directly, to create the impression that tabs are
-layering on top of each other, with rightmost tabs on top and leftmost tabs on
-bottom. this is the normal state but hovering, selecting, pinning, etc. needs to
-change the z-index so tabs can "pop out" of the stack. so because z-index is
-being modulated so heavily we need to do the same with our outside corners, or
-else they'll end up being covered up or showing through things they shouldn't. */
-.tabbrowser-tab .tab-context-line {
-  z-index: 3;
-  position: relative !important;
-}
-
-.tabbrowser-tab {
-  z-index: 0;
-}
-
-.tabbrowser-tab .tab-content {
-  z-index: 1;
-}
-
-.tabbrowser-tab[pinned] .tab-stack::before,
-.tabbrowser-tab[pinned] .tab-stack::after {
-  z-index: 6;
-}
-
-.tab-icon-stack {
-  z-index: -1;
-}
-
-/* hide the corners on first/last visible tabs, just like we unround the top corners */
-#tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer]) .tabbrowser-tab:first-of-type:not([justmoved], [style*="transform"]) .tab-stack::before,
-#tabbrowser-tabs:not([movingtab], [using-closing-tabs-spacer]) .tabbrowser-tab:last-of-type:not([justmoved], [style*="transform"]) .tab-stack::after {
-  display: none;
-}
-
-/* we can't apply the rounded outside corner to the last tab when tabs'
-max-width is manually set to prevent tabs from flexing, while the user is
-closing tabs with the mouse button. it's kinda complicated but basically the
-outside corner would add 5px to the last tab, which would make the tab strip
-overflow for like 1ms which changes the way tabbrowser-tabs.js works. if we
-apply the corner in this situation when closing a tab to the right of the active
-tab, while the tab strip is not overflowing, then there'll be no animation when
-the tab closes. which would look very ugly so it's not worth it. this means
-there'll be rounded inside corners on the last tab when it's not stretching to
-the right edge of the tab strip, but unfortunately it won't have rounded outside
-corners unless the tab strip is overflowing. */
-#TabsToolbar #tabbrowser-tabs #tabbrowser-arrowscrollbox:not([overflowing]) .tabbrowser-tab:last-of-type[pinned] .tab-stack::after {
-  display: block;
-}
-
-/* how the background color is applied. it's not as convoluted as it looks, it
-needs to be a gradient image because the bottom line .tab-context-line overlaps
-with the outside corners. we want the corners to take on the color of the bottom
-line, but the corners are taller than the bottom line, so they can't be fully
-the same color as the line. they must have a 1px tall stripe at the bottom, the
-color of the bottom line (should it exist), with the remaining 4px being the
-current bg color of the tab. */
-.tabbrowser-tab:not([selected], [multiselected]) .tab-stack::after,
-.tabbrowser-tab:not([selected], [multiselected]) .tab-stack::before {
-  background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
-}
-
-.tabbrowser-tab[selected] .tab-stack::after,
-.tabbrowser-tab[selected] .tab-stack::before {
-  background-image: linear-gradient(var(--tab-bg-current), var(--tab-bg-current));
-}
-
-.tabbrowser-tab[multiselected] .tab-stack::after,
-.tabbrowser-tab[multiselected] .tab-stack::before {
-  background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
-}
-
-.tabbrowser-tab[usercontextid] .tab-stack::after,
-.tabbrowser-tab[usercontextid] .tab-stack::before {
-  background-image: linear-gradient(0deg, var(--identity-tab-color) 0px, var(--identity-tab-color) 1px, var(--tab-bg-current) 1px);
-}
-
-.tabbrowser-tab[usercontextid][multiselected] .tab-stack::after,
-.tabbrowser-tab[usercontextid][multiselected] .tab-stack::before {
-  background-image: linear-gradient(0deg, var(--multiselected-color) 0px, var(--multiselected-color) 1px, var(--tab-bg-current) 1px);
+.tabbrowser-tab[pinned] .tab-icon-stack {
+  margin: 0 !important;
 }
 
 /* a bunch of rules I might revisit in the future. minified since this is
@@ -352,17 +152,8 @@ just like they do with --identity-tab-color */
   --tab-bg-current: hsl(233, 51%, 10%);
 }
 
-/* disable the corners if the pref is enabled */
-@media (-moz-bool-pref: "userChrome.tabs.rounded-outer-corners.disabled") {
-  .tabbrowser-tab .tab-stack::before,
-  .tabbrowser-tab .tab-stack::after {
-    display: none !important;
-  }
-}
-
 /* style the loading burst that triggers when tab loading finishes */
 .tab-loading-burst {
-  z-index: 2;
   pointer-events: none;
 }
 
@@ -374,61 +165,8 @@ just like they do with --identity-tab-color */
   margin-inline-start: calc((var(--pinned-tab-width, 36px) / 2) - 2.5%) !important;
 }
 
-/* this is all the convoluted z-index stuff I was talking about —
-how tab depth is controlled, so shadows are cast correctly. */
-
-/* default position is for tabs to be stacked on top of the tab to their left.
-so shadows are cast to the left but not to the right. */
 .tabbrowser-tab {
-  position: relative;
-}
-
-/* hovered tabs stack on top of normal tabs in either direction. so shadows are
-cast in both directions, unless the neighboring tab is selected or something. */
-.tabbrowser-tab:not([visuallyselected], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
-  z-index: 3 !important;
-}
-
-/* selected tabs stack over hovered tabs */
-.tabbrowser-tab[visuallyselected] {
-  z-index: 6 !important;
-}
-
-/* multiselected tabs do too, but lower than selected tabs */
-.tabbrowser-tab[multiselected] {
-  z-index: 4 !important;
-}
-
-/* multiselected gets 1 extra point for being hovered */
-.tabbrowser-tab[multiselected]:not([visuallyselected], [pinned]):is(:hover, .keyboard-focused-tab, [open]) {
-  z-index: 5 !important;
-}
-
-.tabbrowser-tab[multiselected][visuallyselected] {
-  z-index: 6 !important;
-}
-
-/* pinned tabs stack over everything except selected tabs */
-.tabbrowser-tab[pinned] {
-  z-index: 7 !important;
-}
-
-/* and the same formula applies to them too */
-.tabbrowser-tab[pinned]:not([visuallyselected], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
-  z-index: 8 !important;
-}
-
-.tabbrowser-tab[pinned][multiselected] {
-  z-index: 9 !important;
-}
-
-.tabbrowser-tab[pinned][multiselected]:not([visuallyselected]):is(:hover, .keyboard-focused-tab, [open]) {
-  z-index: 10 !important;
-}
-
-.tabbrowser-tab[pinned][visuallyselected],
-.tabbrowser-tab[pinned][multiselected][visuallyselected] {
-  z-index: 11 !important;
+  padding-inline: var(--tab-inline-padding) !important;
 }
 
 /* pinned tabs should style just like regular tabs except without labels and buttons */
@@ -601,7 +339,6 @@ hover the general area of the tabs, but will show if audio is muted. */
   display: flex !important;
   position: relative !important;
   margin-right: -16px !important;
-  z-index: 1 !important;
   visibility: visible !important;
   opacity: 1 !important;
 }

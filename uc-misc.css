@@ -585,6 +585,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
     .panel-header,
     #eom-mainView-panel-header,
     .popup-notification-description,
+    #reset-pbm-panel-container description,
     #main-menubar,
     #sidebar-header,
     #PanelUI-whatsNew,
@@ -609,6 +610,10 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
     #fxa-menu-header-description {
       color: var(--panel-description-color);
       font-weight: inherit !important;
+    }
+
+    :root {
+      --font-weight-bold: var(--uc-font-weight-bold, 500) !important;
     }
 
     panel .panel-banner-item {

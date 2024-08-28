@@ -746,10 +746,9 @@ of moz-document in stylesheets with file:// urls */
     border: none;
     border-radius: 0;
     z-index: 23;
-    position: absolute;
     /* visibility of scrollbuttons is tied to
-    userChrome.tabs.rounded-outer-corners.disabled */
-    display: var(--tabbrowser-arrowscrollbox-display, none);
+    userChrome.tabs.drag-scrolling.enabled */
+    display: var(--tab-scrollbuttons-display, none);
     -moz-context-properties: fill, fill-opacity;
     padding-inline: 2px;
     width: 16px;
@@ -775,50 +774,17 @@ of moz-document in stylesheets with file:// urls */
     justify-items: center;
   }
 
-  /* make unpinned tabs stretch to fill the whole tab bar */
-  .tabbrowser-tab[fadein]:not([style*="max-width"]) {
-    max-width: var(--tab-max-width, 225px);
+  #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]):not([orient="vertical"]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
+    margin-inline-start: revert;
   }
 
-  /* improved general tab animations (imo). tab starts at 0 flex but instantly
-  gets 100 flex as fadein attribute gets applied. by transitioning this property
-  we can make the instantaneous change happen more slowly, causing the tab to
-  grow over 300ms from the time it's born. this way we don't animate tabs that
-  were simply moved rather than created */
-  :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([pinned], [justmoved], [tab-grouping], [tabdrop-samewindow]) {
-    flex: 0;
-    transition: min-width 100ms ease-out, max-width 100ms ease-out, flex 100ms ease-out;
-  }
-
-  /* animate tab pinning/unpinning. experimental. */
-  :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[pinned]:not([justmoved], [tab-grouping], [tabdrop-samewindow]) {
-    flex: 0;
-    transition: min-width 100ms ease-out, max-width 100ms ease-out, flex 100ms ease-out;
-  }
-
-  :root[sessionrestored] #tabbrowser-tabs:not([movingtab]) .tabbrowser-tab[fadein]:not([pinned], [justmoved]) {
-    flex: 100 100;
-  }
-
-  /* shrink pinned tabs */
-  :root[sessionrestored] .tabbrowser-tab[pinned] {
-    min-width: var(--pinned-tab-width, 36px);
-    max-width: var(--pinned-tab-width, 36px);
-  }
-
-  #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) > #tabbrowser-arrowscrollbox > .tabbrowser-tab[first-visible-unpinned-tab] {
-    margin-inline-start: revert !important;
+  .tabbrowser-tab[pinned] .tab-content {
+    min-width: revert;
   }
 
   /* devtools highlighter */
   :root > iframe.devtools-highlighter-renderer {
     z-index: 2147483647;
-  }
-
-  /* when drag mode is enabled. this enables the tab shadows to draw onto the drag space. */
-  :root[sizemode="normal"] #TabsToolbar > .toolbar-items #tabbrowser-arrowscrollbox::part(scrollbox) {
-    min-height: calc(var(--min-tab-height) + var(--space-above-tabbar));
-    padding-block-start: var(--space-above-tabbar);
   }
 
   /* undo window inactive tab text opacity */

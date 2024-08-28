@@ -173,19 +173,6 @@ titlebar, this sheet controls their appearance as well. */
   width: 20px !important;
 }
 
-#tabbrowser-tabs::after {
-  position: relative;
-  display: block;
-  content: "";
-  pointer-events: none;
-  box-shadow: 0 0px 14px 0px hsla(0, 0%, 0%, 0.32);
-  width: 20px;
-  margin-right: -20px;
-  height: var(--tab-min-height);
-  z-index: 11;
-  clip-path: inset(-100% 20px -100% -100%);
-}
-
 #tabs-newtab-button {
   padding-left: 4px !important;
   z-index: 1 !important;
@@ -193,7 +180,7 @@ titlebar, this sheet controls their appearance as well. */
 }
 
 #tabbrowser-tabs {
-  margin-inline-end: 2px !important;
+  margin-inline: 1px 3px !important;
 }
 
 :is(toolbarbutton, toolbaritem, toolbarpaletteitem) + #tabbrowser-tabs {

@@ -157,7 +157,7 @@ I also recommend setting the following prefs in `about:config`. There are two pr
 | userChrome.panels.vibrant-fxa-banner | Boolean | true | Highlight the profile button in the app menu with a vibrant background |
 | userChrome.tabs.all-tabs-menu.reverse-order | Boolean | true | Display the all tabs menu in reverse order (newer tabs on top, like history) |
 | userChrome.tabs.pinned-tabs.close-buttons.disabled | Boolean | true | This controls whether close buttons are shown on pinned tabs |
-| userChrome.tabs.rounded-outer-corners.disabled | Boolean | false | This controls whether tabs have rounded bottom corners<br/><img src="preview/prev-tabcorners.webp" width="100%"/> |
+| userChrome.tabs.drag-scrolling.enabled | Boolean | false | This controls whether scrollbuttons will be shown when dragging tabs |
 | userChrome.tabs.tooltip.always-show-lock-icon | Boolean | false | There's an icon in the tab tooltip representing page security. It's expanded by [this script](/JS/restoreTabSoundButton.uc.js) to show many security types. But by default, the icon is hidden on fully secure web pages. Setting this pref to true shows the icon on ALL pages |
 | userChrome.urlbar.focus-ring-enabled | Boolean | true | Outline the urlbar/searchbar when focused |
 | userChrome.urlbar.hide-bookmarks-button-on-system-pages | Boolean | true | Hides the urlbar's bookmark button on about:blank & new tab page |

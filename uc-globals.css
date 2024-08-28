@@ -235,11 +235,10 @@ but other than that these variables should be available everywhere. */
 
   --uc-tab-background: var(--lwt-accent-color);
   --uc-tab-selected: var(--uc-toolbar-bgcolor);
-  --uc-tab-hover: linear-gradient(hsl(231, 49%, 11%), hsl(233, 55%, 8%));
-  --uc-tab-pinned: linear-gradient(var(--lwt-accent-color), var(--uc-toolbar-bgcolor));
-  --uc-tab-multi: linear-gradient(hsl(231, 50%, 11%), hsl(233, 53%, 8%));
-  --uc-tab-multi-hover: linear-gradient(hsl(231, 47%, 13%), hsl(233, 51%, 10%));
-  --uc-tab-pinned-hover: var(--uc-toolbar-bgcolor);
+  --uc-tab-hover: hsl(231, 49%, 11%);
+  --uc-tab-multi: hsl(231, 50%, 11%);
+  --uc-tab-multi-hover: hsl(231, 47%, 13%);
+  --uc-tab-pinned-hover: hsl(231, 49%, 11%);
   --uc-tab-focused-highlight: hsl(231, 36%, 22%);
   --uc-tab-focused-hover: linear-gradient(color-mix(in srgb, var(--uc-tab-focused-highlight) 50%, var(--uc-toolbar-bgcolor)), var(--uc-toolbar-bgcolor));
   --multiselected-color: hsl(241, 50%, 51%);
@@ -295,8 +294,7 @@ but other than that these variables should be available everywhere. */
   --uc-menubar-searchbar-width: 256px;
   --uc-tab-min-height: 35px;
   --tab-max-width: 100vw;
-  --pinned-tab-width: 36px;
-  --tabbrowser-arrowscrollbox-display: none;
+  --tab-scrollbuttons-display: none;
   /* how round should tab buttons be? e.g. the close button or the sound icon.
   2px yields a rounded square. 50% yields a circle. this affects actual tab
   buttons, as well as buttons in tab-like elements like the all-tabs menu and my
@@ -437,7 +435,9 @@ menupopup,
 #ContentSelectDropdown,
 popupnotification,
 #customization-container,
-#mainPopupSet panel {
+#mainPopupSet panel,
+toolbar panel,
+#customizationui-widget-panel {
   --checkbox-border-color: var(--uc-checkbox-border-color) !important;
   --checkbox-checked-border-color: var(--uc-checkbox-checked-border-color) !important;
   --checkbox-unchecked-bgcolor: var(--uc-checkbox-unchecked-bgcolor) !important;
@@ -468,16 +468,8 @@ popupnotification,
   }
 }
 
-/* you can remove the following rule if you want to be able to drag tabs across
-the whole strip. but doing so causes some minor visual bugs with rounded outside
-tab corners which really bother me for some reason. if you need to be able to
-autoscroll while dragging, and the visual bugs bother you, then instead of
-deleting this rule, you can simply disable rounded outside corners by setting
-userChrome.tabs.rounded-outer-corners.disabled to false. this will mean only the
-top corners are rounded, but it'll bring back the scroll buttons without any
-visual bugs. */
-@media (-moz-bool-pref: "userChrome.tabs.rounded-outer-corners.disabled") {
+@media (-moz-bool-pref: "userChrome.tabs.drag-scrolling.enabled") {
   :root {
-    --tabbrowser-arrowscrollbox-display: block;
+    --tab-scrollbuttons-display: flex;
   }
 }

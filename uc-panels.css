@@ -1794,3 +1794,8 @@ toolbar button slider script. but just in case) */
     background-color: var(--button-bgcolor, color-mix(in srgb, currentColor 17%, transparent)) !important;
   }
 }
+
+#reset-pbm-panel-container {
+	padding: var(--uc-arrowpanel-root-padding, 12px) !important;
+  padding-block-end: 0 !important;
+}
