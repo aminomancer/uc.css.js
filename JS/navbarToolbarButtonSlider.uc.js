@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.8
+// @version        2.9.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -334,16 +334,21 @@ class NavbarToolbarSlider {
       let arr = array || [...this.kids];
       let widgetList = this.cuiArray;
       if (arr.length < widgetList.length && arr.length < length) {
-        // return setTimeout(() => this.setMaxWidth(), 1);
         return requestAnimationFrame(() => this.setMaxWidth());
       }
       let nodes = arr ?? widgetList.map(w => w.forWindow(window).node);
-      for (let i = 0; i < length; i++) {
-        let el = nodes[i];
-        if (!el) continue;
+      let buttonsCounted = 0;
+      for (const el of nodes) {
+        if (!el) {
+          continue;
+        }
         const style = window.getComputedStyle(el);
         if (style?.visibility === "visible" && style?.display !== "none") {
           maxWidth += NavbarToolbarSlider.parseWidth(el);
+          buttonsCounted += 1;
+        }
+        if (buttonsCounted >= length) {
+          break;
         }
       }
     } else {

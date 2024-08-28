@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.5.0
+// @version        1.5.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -354,7 +354,7 @@ class DebugExtension {
         this.openArchive(id);
         return;
       case "CopyID":
-      case "CopyURL":
+      case "CopyURL": {
         Cc["@mozilla.org/widget/clipboardhelper;1"]
           .getService(Ci.nsIClipboardHelper)
           .copyString(type === "CopyID" ? id : extension.baseURL);
@@ -371,6 +371,7 @@ class DebugExtension {
           window.CustomHint?.show(actionNode, "Copied");
         }
         return;
+      }
     }
     if (!url) return;
     // if the extension's principal isn't available for some reason, make a content principal.
@@ -410,38 +411,48 @@ class DebugExtension {
   // the button that was clicked is an extension or not, so it also updates the
   // visibility of our menu by the same parameter.
   modifyBuiltinMethods() {
-    eval(
-      `ToolbarContextMenu.updateExtension = async function ${ToolbarContextMenu.updateExtension
-        .toSource()
-        .replace(/async updateExtension/, "")
-        .replace(
-          /let separator/,
-          `let debugExtension = popup.querySelector(\".customize-context-debugExtension\");\n    let separator`
-        )
-        .replace(
-          /\[removeExtension, manageExtension,/,
-          `[removeExtension, manageExtension, debugExtension,`
-        )}`
-    );
-    eval(
-      `BrowserPageActions.onContextMenuShowing = async function ${BrowserPageActions.onContextMenuShowing
-        .toSource()
-        .replace(/async onContextMenuShowing/, "")
-        .replace(
-          /(let removeExtension.*);/,
-          `$1, debugExtension = popup.querySelector(".customize-context-debugExtension");`
-        )
-        .replace(/(removeExtension.hidden =)/, `$1 debugExtension.hidden =`)}`
-    );
-    eval(
-      `gUnifiedExtensions.onContextMenuCommand = function ${gUnifiedExtensions.onContextMenuCommand
-        .toSource()
-        .replace(/onContextMenuCommand/, "")
-        .replace(
-          /(classList\.contains\(\"unified-extensions-context-menu-move-widget-down\"\))/,
-          `$1 || \n classList.contains("unified-extensions-context-menu-CopyID") || \n classList.contains("unified-extensions-context-menu-CopyURL")`
-        )}`
-    );
+    if (ToolbarContextMenu.updateExtension.name === "updateExtension") {
+      eval(
+        `ToolbarContextMenu.updateExtension = async function uc_updateExtension ${ToolbarContextMenu.updateExtension
+          .toSource()
+          .replace(/async updateExtension/, "")
+          .replace(
+            /let separator/,
+            `let debugExtension = popup.querySelector(\".customize-context-debugExtension\");\n    let separator`
+          )
+          .replace(
+            /\[removeExtension, manageExtension,/,
+            `[removeExtension, manageExtension, debugExtension,`
+          )}`
+      );
+    }
+    if (
+      BrowserPageActions.onContextMenuShowing.name === "onContextMenuShowing"
+    ) {
+      eval(
+        `BrowserPageActions.onContextMenuShowing = async function uc_onContextMenuShowing ${BrowserPageActions.onContextMenuShowing
+          .toSource()
+          .replace(/async onContextMenuShowing/, "")
+          .replace(
+            /(let removeExtension.*);/,
+            `$1, debugExtension = popup.querySelector(".customize-context-debugExtension");`
+          )
+          .replace(/(removeExtension.hidden =)/, `$1 debugExtension.hidden =`)}`
+      );
+    }
+    if (
+      gUnifiedExtensions.onContextMenuCommand.name === "onContextMenuCommand"
+    ) {
+      eval(
+        `gUnifiedExtensions.onContextMenuCommand = function uc_onContextMenuCommand ${gUnifiedExtensions.onContextMenuCommand
+          .toSource()
+          .replace(/onContextMenuCommand/, "")
+          .replace(
+            /(classList\.contains\(\"unified-extensions-context-menu-move-widget-down\"\))/,
+            `$1 || \n classList.contains("unified-extensions-context-menu-CopyID") || \n classList.contains("unified-extensions-context-menu-CopyURL")`
+          )}`
+      );
+    }
   }
 }
 
