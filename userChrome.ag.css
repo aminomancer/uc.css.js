@@ -160,6 +160,16 @@ html|input[type="number"]::-moz-text-control-preview {
   cursor: text;
 }
 
+input::-moz-reveal {
+  background-image: url("chrome://userchrome/content/show-password.svg");
+  -moz-context-properties: fill;
+  fill: currentColor;
+}
+
+input:-moz-revealed::-moz-reveal {
+  background-image: url("chrome://userchrome/content/hide-password.svg");
+}
+
 /* this looks nice on unstyled ranges but looks ugly on sites
 that don't reset properties, like amazon prime video. sigh */
 /* html|input[type="range"] {

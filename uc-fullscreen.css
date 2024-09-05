@@ -20,7 +20,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 
 :root[fullscreen-autohide][inFullscreen] {
   #navigator-toolbox {
-    margin-top: calc(0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
+    margin-top: calc(0.5px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px) - (2 * var(--tab-block-margin))) !important;
     margin-bottom: -1px !important;
     transition: all 0.25s ease-in-out 0s !important;
     transition-delay: 0s !important;
@@ -39,8 +39,8 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 
   &:not([customizing]) {
     #browser findbar {
-      padding-top: calc(7px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
-      margin-top: calc(0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
+      padding-top: calc(7px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px) + (2 * var(--tab-block-margin))) !important;
+      margin-top: calc(0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px) - (2 * var(--tab-block-margin))) !important;
       transition-property: transform, opacity, width, left, right, padding-top, margin-top !important;
       transition-duration: 0.2s, 0.3s, 0.2s, 0.2s, 0.2s, 0.25s, 0.25s !important;
       transition-delay: 0s, 0s, 0s, 0s, 0s, 0s, 0s !important;
@@ -59,7 +59,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 
   &[customizing] {
     #customization-container > #customization-content-container {
-      margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+      margin-top: calc(var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px) + (2 * var(--tab-block-margin))) !important;
       z-index: 2147483647 !important;
     }
   }
@@ -70,7 +70,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
   &[customizing] #navigator-toolbox,
   #navigator-toolbox:is(:focus-within, :hover, [popup-status], [urlbar-status]) {
     margin-block: 0 !important;
-    margin-bottom: calc(-1px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)) !important;
+    margin-bottom: calc(-1px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px) - (2 * var(--tab-block-margin))) !important;
     transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
     opacity: 1 !important;
   }
@@ -88,7 +88,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
         #sidebar-box,
         #vertical-tabs-pane {
           margin-top: calc(
-            0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px)
+            0px - var(--urlbar-container-height, 40px) - var(--tab-min-height, 36px) - (2 * var(--tab-block-margin))
             ) !important;
           transition: all 0.25s ease-in-out 0s !important;
         }
@@ -97,7 +97,7 @@ we also need to adjust window controls, the main menu bar, and the bookmarks too
 
     #sidebar-box,
     #vertical-tabs-pane {
-      padding-top: calc(4px + 1px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px)) !important;
+      padding-top: calc(4px + 1px + var(--urlbar-container-height, 40px) + var(--tab-min-height, 36px) + (2 * var(--tab-block-margin))) !important;
       margin-top: 0 !important;
       transition: all 0.25s cubic-bezier(0.26, 1, 0.8, 1) 0s !important;
       transform-style: flat !important;

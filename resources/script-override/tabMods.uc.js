@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.4.0
+// @version        1.4.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -132,6 +132,74 @@
 
       if (!("_lastAccessed" in this)) {
         this.updateLastAccessed();
+      }
+
+      let cardPreviewInit = () => {
+        if (this.container._showCardPreviews) {
+          if (!this.container._previewPanel) {
+            // load the tab preview component
+            const TabHoverPreviewPanel = ChromeUtils.importESModule(
+              "chrome://browser/content/tabbrowser/tab-hover-preview.mjs"
+            ).default;
+            this.container._previewPanel = new TabHoverPreviewPanel(
+              document.getElementById("tab-preview-panel")
+            );
+          }
+
+          const { previewPanel } = this.container;
+
+          if (!previewPanel) {
+            return;
+          }
+
+          if (previewPanel._updatePreview.name === "_updatePreview") {
+            // eslint-disable-next-line no-eval
+            eval(
+              `previewPanel._updatePreview = function uc_updatePreview ${previewPanel._updatePreview
+                .toSource()
+                .replace(/^\(/, "")
+                .replace(/\)$/, "")
+                .replace(/^_updatePreview/, "")
+                .replace(
+                  /[^\S\r\n]*this\._panel\.querySelector\("\.tab-preview-title"\)\.textContent =\s*this\._displayTitle;\s*this\._panel\.querySelector\("\.tab-preview-uri"\)\.textContent =\s*this\._displayURI;/m,
+                  `this._tab._updatePreviewPanelText(true);`
+                )}`
+            );
+          }
+
+          if (previewPanel.getPrettyURI.name === "getPrettyURI") {
+            // eslint-disable-next-line no-eval
+            eval(
+              `previewPanel.getPrettyURI = function uc_getPrettyURI ${previewPanel.getPrettyURI
+                .toSource()
+                .replace(/^\(/, "")
+                .replace(/\)$/, "")
+                .replace(/^getPrettyURI/, "")
+                .replace(
+                  /^(\s*\(uri\) \{\n)/,
+                  `$1    if (new RegExp(\`(\$\{BROWSER_NEW_TAB_URL\}|\$\{HomePage.get(this._win)\})\`, "i").test(uri)) return "";\n`
+                )}`
+            );
+          }
+        }
+      };
+
+      if (gBrowserInit.delayedStartupFinished) {
+        cardPreviewInit();
+      } else {
+        let delayedListener = (subject, topic) => {
+          if (
+            topic == "browser-delayed-startup-finished" &&
+            subject == window
+          ) {
+            Services.obs.removeObserver(delayedListener, topic);
+            cardPreviewInit();
+          }
+        };
+        Services.obs.addObserver(
+          delayedListener,
+          "browser-delayed-startup-finished"
+        );
       }
     }
 
@@ -375,15 +443,6 @@
       if (!this.container._showCardPreviews) {
         return;
       }
-      if (!this.container._previewPanel) {
-        // load the tab preview component
-        const TabHoverPreviewPanel = ChromeUtils.importESModule(
-          "chrome://browser/content/tabbrowser/tab-hover-preview.mjs"
-        ).default;
-        this.container._previewPanel = new TabHoverPreviewPanel(
-          document.getElementById("tab-preview-panel")
-        );
-      }
 
       const { previewPanel } = this.container;
 
@@ -393,36 +452,6 @@
           !["open", "showing"].includes(previewPanel._panel.state))
       ) {
         return;
-      }
-
-      if (previewPanel._updatePreview.name === "_updatePreview") {
-        // eslint-disable-next-line no-eval
-        eval(
-          `previewPanel._updatePreview = function uc_updatePreview ${previewPanel._updatePreview
-            .toSource()
-            .replace(/^\(/, "")
-            .replace(/\)$/, "")
-            .replace(/^_updatePreview/, "")
-            .replace(
-              /[^\S\r\n]*this\._panel\.querySelector\("\.tab-preview-title"\)\.textContent =\s*this\._displayTitle;\s*this\._panel\.querySelector\("\.tab-preview-uri"\)\.textContent =\s*this\._displayURI;/m,
-              `this._tab._updatePreviewPanelText(true);`
-            )}`
-        );
-      }
-
-      if (previewPanel.getPrettyURI.name === "getPrettyURI") {
-        // eslint-disable-next-line no-eval
-        eval(
-          `previewPanel.getPrettyURI = function uc_getPrettyURI ${previewPanel.getPrettyURI
-            .toSource()
-            .replace(/^\(/, "")
-            .replace(/\)$/, "")
-            .replace(/^getPrettyURI/, "")
-            .replace(
-              /^(\s*\(uri\) \{\n)/,
-              `$1    if (new RegExp(\`(\$\{BROWSER_NEW_TAB_URL\}|\$\{HomePage.get(this._win)\})\`, "i").test(uri)) return "";\n`
-            )}`
-        );
       }
 
       let tab = previewPanel._tab;

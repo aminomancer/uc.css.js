@@ -223,8 +223,8 @@ overflowing tabs don't draw shadows on the special new tab button */
   fill: none !important;
 }
 
-:root:not([sizemode="maximized"], [inFullscreen]) :is(.titlebar-restore, .uc-titlebar-restore),
-:root:is([sizemode="maximized"], [inFullscreen]) :is(.titlebar-max, .uc-titlebar-max) {
+:root:not([sizemode="maximized"], [inFullscreen]) .titlebar-restore,
+:root:is([sizemode="maximized"], [inFullscreen]) .titlebar-max {
   display: none !important;
 }
 
@@ -245,9 +245,7 @@ overflowing tabs don't draw shadows on the special new tab button */
 }
 
 .titlebar-max,
-.uc-titlebar-max,
-.titlebar-restore,
-.uc-titlebar-restore {
+.titlebar-restore {
   appearance: none !important;
   padding: 0px !important;
   padding-left: 7px !important;
@@ -258,21 +256,27 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/maximize.svg) !important;
-  grid-column: 0 !important;
-  order: 0 !important;
+
+  &.titlebar-max {
+    &:hover,
+    &:focus-visible {
+      list-style-image: url(chrome://userchrome/content/window/maximize-hover.svg) !important;
+
+      :root:is([sizemode="maximized"], [inFullscreen]) & {
+        list-style-image: url(chrome://userchrome/content/window/maximize-restore.svg) !important;
+      }
+    }
+  }
+
+  &.titlebar-restore {
+    &:hover,
+    &:focus-visible {
+      list-style-image: url(chrome://userchrome/content/window/maximize-restore.svg) !important;
+    }
+  }
 }
 
-:is(.titlebar-max, .uc-titlebar-max):hover {
-  list-style-image: url(chrome://userchrome/content/window/maximize-hover.svg) !important;
-}
-
-:root:is([sizemode="maximized"], [inFullscreen]) :is(.titlebar-max, .uc-titlebar-max):hover,
-:is(.titlebar-restore, .uc-titlebar-restore):hover {
-  list-style-image: url(chrome://userchrome/content/window/maximize-restore.svg) !important;
-}
-
-.titlebar-min,
-.uc-titlebar-min {
+.titlebar-min {
   appearance: none !important;
   padding: 0px !important;
   padding-left: 7px !important;
@@ -283,16 +287,14 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
-  grid-column: 1 !important;
-  order: 1 !important;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     list-style-image: url(chrome://userchrome/content/window/minimize-hover.svg) !important;
   }
 }
 
-.titlebar-close,
-.uc-titlebar-close {
+.titlebar-close {
   appearance: none !important;
   padding: 0px !important;
   padding-left: 7px !important;
@@ -303,10 +305,9 @@ overflowing tabs don't draw shadows on the special new tab button */
   margin-bottom: 0px !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/close.svg) !important;
-  grid-column: 2 !important;
-  order: 2 !important;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     list-style-image: url(chrome://userchrome/content/window/close-hover.svg) !important;
   }
 }
@@ -689,20 +690,16 @@ or if the user sets a pref */
     order: 0 !important;
   }
 
-  .titlebar-min,
-  .uc-titlebar-min {
+  .titlebar-min {
     order: 2 !important;
   }
 
   .titlebar-max,
-  .uc-titlebar-max,
-  .titlebar-restore,
-  .uc-titlebar-restore {
+  .titlebar-restore {
     order: 3 !important;
   }
 
-  .titlebar-close,
-  .uc-titlebar-close {
+  .titlebar-close {
     order: 1 !important;
   }
 

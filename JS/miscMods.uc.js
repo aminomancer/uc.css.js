@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.3
+// @version        2.1.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -206,6 +206,16 @@
     "Show container icons on multiselected tabs": Services.prefs.getBoolPref(
       "miscMods.showContainerIconsOnMultiselectedTabs",
       false
+    ),
+
+    // On Windows the titlebar button order is Minimize, Maximize, Close - in
+    // the top right corner. On macOS it's Close, Minimize, Maximize - in the
+    // top left corner. This setting will leave the titlebar buttons in the top
+    // right, but it'll swap the Minimize and Maximize buttons so they match the
+    // macOS order (only mirrored). Does nothing on macOS.
+    "macOS titlebar button order": Services.prefs.getBoolPref(
+      "miscMods.macOSTitlebarButtonOrder",
+      true
     ),
   };
   class UCMiscMods {
@@ -574,6 +584,25 @@
             `engine.name ? this.setAttribute("engine", engine.name) : this.removeAttribute("engine");\n      $1`
           )}`
       );
+    }
+  }
+
+  if (
+    config["macOS titlebar button order"] &&
+    AppConstants.platform !== "macosx"
+  ) {
+    try {
+      for (let buttonBox of document.getElementsByClassName(
+        "titlebar-buttonbox"
+      )) {
+        let minButton = buttonBox.querySelector(".titlebar-min");
+        if (buttonBox.firstElementChild === minButton) {
+          let restoreButton = buttonBox.querySelector(".titlebar-restore");
+          restoreButton.after(minButton);
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
