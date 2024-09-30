@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -20,6 +20,7 @@
         <vbox class="tab-background">
           <hbox class="tab-context-line"/>
           <hbox class="tab-loading-burst" flex="1"/>
+          <hbox class="tab-group-line"/>
         </vbox>
         <hbox class="tab-content" align="center">
           <stack class="tab-icon-stack">
@@ -271,6 +272,15 @@
       return this.hasAttribute("pinned");
     }
 
+    get visible() {
+      return (
+        this.isConnected &&
+        !this.hidden &&
+        !this.closing &&
+        !this.group?.collapsed
+      );
+    }
+
     get hidden() {
       // This getter makes `hidden` read-only
       return super.hidden;
@@ -407,7 +417,7 @@
     }
 
     get group() {
-      if (this.parentElement.tagName == "tab-group") {
+      if (this.parentElement?.tagName == "tab-group") {
         return this.parentElement;
       }
       return null;
@@ -533,7 +543,7 @@
 
       this._updatePreviewPanelText();
 
-      if (this.hidden || this.closing) {
+      if (!this.visible) {
         return;
       }
 

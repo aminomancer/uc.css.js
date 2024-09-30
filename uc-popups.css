@@ -893,7 +893,6 @@ rtl languages. adjust the border radius accordingly */
     border-radius: var(--in-content-button-border-radius) !important;
     background-color: var(--in-content-button-background) !important;
     font-weight: 400 !important;
-    padding: 5px 7px !important;
     text-decoration: none !important;
     margin: 4px 8px !important;
     font-size: 1em !important;
@@ -1156,7 +1155,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   menulist {
-    padding: 5px 7px !important;
+    min-height: var(--menuitem-height) !important;
   }
 
   radiogroup deck menulist {
@@ -1337,10 +1336,6 @@ rtl languages. adjust the border radius accordingly */
   :root[dialogroot] textarea:focus-visible,
   :root[dialogroot] search-textbox:focus-visible {
     background-color: color-mix(in srgb, currentColor 3%, var(--in-content-box-background)) !important;
-  }
-
-  :root[dialogroot] menulist {
-    padding-inline: 4px 2px !important;
   }
 
   :root[dialogroot] richlistbox[id] {

@@ -91,7 +91,8 @@ menupopup {
   --urlbarView-highlight-background: var(--arrowpanel-dimmed-further) !important;
   --tab-min-height: var(--uc-tab-min-height) !important;
   --tab-block-margin: 2px !important;
-  --tab-inline-padding: 1px !important;
+  --tab-overflow-clip-margin: 1px !important;
+  --tab-inline-padding: 9.5px !important;
   --inline-tab-padding: 10px !important;
   --tab-shadow-max-size: 0px !important;
   --tabs-navbar-shadow-size: 0px !important;

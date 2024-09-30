@@ -165,10 +165,6 @@ just like they do with --identity-tab-color */
   margin-inline-start: calc((var(--pinned-tab-width, 36px) / 2) - 2.5%) !important;
 }
 
-.tabbrowser-tab {
-  padding-inline: var(--tab-inline-padding) !important;
-}
-
 /* pinned tabs should style just like regular tabs except without labels and buttons */
 #tabbrowser-tabs[positionpinnedtabs] > #tabbrowser-arrowscrollbox > .tabbrowser-tab[pinned] > .tab-stack {
   border-inline: none !important;
