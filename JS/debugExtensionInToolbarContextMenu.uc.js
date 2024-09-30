@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.5.1
+// @version        1.5.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -411,6 +411,18 @@ class DebugExtension {
   // the button that was clicked is an extension or not, so it also updates the
   // visibility of our menu by the same parameter.
   modifyBuiltinMethods() {
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      AddonManager: "resource://gre/modules/AddonManager.sys.mjs",
+      CustomizableUI: "resource:///modules/CustomizableUI.sys.mjs",
+      ExtensionsUI: "resource:///modules/ExtensionsUI.sys.mjs",
+    });
+    XPCOMUtils.defineLazyPreferenceGetter(
+      lazy,
+      "gAddonAbuseReportEnabled",
+      "extensions.abuseReport.enabled",
+      false
+    );
     if (ToolbarContextMenu.updateExtension.name === "updateExtension") {
       eval(
         `ToolbarContextMenu.updateExtension = async function uc_updateExtension ${ToolbarContextMenu.updateExtension
