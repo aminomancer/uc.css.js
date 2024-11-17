@@ -283,12 +283,12 @@ necessary attributes based on tab security state. */
 }
 
 #tracking-protection-container tooltip {
-  background-color: var(--ui-secondary-bg) !important;
-  color: var(--tooltip-color) !important;
-  border: 1px solid var(--tooltip-border-color) !important;
-  border-radius: var(--tooltip-border-radius) !important;
-  box-shadow: var(--tooltip-box-shadow) !important;
-  padding: var(--uc-tooltip-inner-padding) !important;
+  margin-inline-start: -5.5px !important;
+  margin-top: 16px !important;
+
+  &[position="after_start"] {
+    margin-top: -4px !important;
+  }
 }
 
 #eom-theme-preview-tooltip {

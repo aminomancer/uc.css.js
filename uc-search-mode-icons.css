@@ -164,10 +164,10 @@ a rule for it. */
 }
 
 /* replace the contextMenuMods.uc.js icons for built-in engines */
-.searchmenuitem[engine-id="google@search.mozilla.orgdefault"] {
+.searchmenuitem[engine-id="google"] {
   --engine-icon: url(chrome://userchrome/content/engines/google.svg) !important;
 }
 
-.searchmenuitem[engine-id="ddg@search.mozilla.orgdefault"] {
+.searchmenuitem[engine-id="ddg"] {
   --engine-icon: url(chrome://userchrome/content/engines/duckduckgo.svg) !important;
 }

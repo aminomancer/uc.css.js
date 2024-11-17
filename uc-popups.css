@@ -1205,9 +1205,16 @@ rtl languages. adjust the border radius accordingly */
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
     --in-content-box-border-color: var(--dialog-box-border-color) !important;
+    --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+    --background-color-box: var(--in-content-box-background) !important;
     --in-content-button-background: var(--arrowpanel-dimmed) !important;
     --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
     --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --in-content-button-background-solid: var(--uc-content-button-background-solid);
+    --button-background: var(--in-content-button-background) !important;
+    --button-background-hover: var(--in-content-button-background-hover) !important;
+    --button-background-active: var(--in-content-button-background-active) !important;
+    --button-background-solid: var(--in-content-button-background-solid);
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-item-hover: var(--arrowpanel-dimmed) !important;
     --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
@@ -1330,6 +1337,11 @@ rtl languages. adjust the border radius accordingly */
     min-height: var(--menuitem-height) !important;
     box-sizing: border-box !important;
     border-radius: var(--toolbarbutton-border-radius) !important;
+  }
+
+  #custom-range {
+    margin: 0 !important;
+    margin-top: var(--space-xsmall) !important;
   }
 
   :root[dialogroot] input:is([type="email"], [type="tel"], [type="text"], [type="password"], [type="url"], [type="number"]):focus-visible,

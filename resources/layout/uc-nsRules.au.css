@@ -1081,6 +1081,10 @@ of moz-document in stylesheets with file:// urls */
       margin: 1px 0;
     }
 
+    :is([message-bar-type="infobar"]:first-of-type) {
+      margin-top: revert;
+    }
+
     menulist::part(dropmarker) {
       display: flex;
       appearance: none;
@@ -1362,6 +1366,10 @@ of moz-document in stylesheets with file:// urls */
 
   #alltabs-button {
     list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+
+    #TabsToolbar & {
+      list-style-image: url(chrome://userchrome/content/arrow-dropdown-16.svg);
+    }
   }
 
   #privatebrowsing-button {

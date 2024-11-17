@@ -66,11 +66,6 @@ by underlining them (requires urlbarMods.uc.js) */
   padding-block: 0 !important;
 }
 
-#urlbar-container {
-  transform: none !important;
-  position: relative;
-}
-
 .urlbarView-tags,
 .urlbarView-url,
 .urlbarView-title:not(:empty) ~ .urlbarView-action {
@@ -801,14 +796,16 @@ by underlining them (requires urlbarMods.uc.js) */
 
 #urlbar[breakout][breakout-extend],
 #urlbar[breakout][breakout-extend-disabled][open] {
-  top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: -moz-available !important;
+  margin-inline: revert !important;
+  margin-top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
   overflow: visible;
   box-shadow: none !important;
   background: none !important;
   transition: none !important;
+}
+
+#urlbar[breakout][breakout-extend] {
+	width: var(--urlbar-width) !important;
 }
 
 .urlbarView {
@@ -839,6 +836,15 @@ by underlining them (requires urlbarMods.uc.js) */
   border-top-width: 0 !important;
   background: var(--urlbar-results-bgcolor) !important;
   border-radius: var(--searchbar-popup-border-radius) !important;
+}
+
+#urlbar {
+  &:not([open]),
+  &:not([breakout]) {
+    #urlbar-background {
+      display: none !important;
+    }
+  }
 }
 
 #urlbar[breakout][breakout-extend] #urlbar-background {

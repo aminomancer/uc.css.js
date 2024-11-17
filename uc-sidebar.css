@@ -11,6 +11,10 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
   position: relative !important;
 }
 
+#tabbrowser-tabbox {
+  z-index: revert !important;
+}
+
 #sidebar-box {
   --sidebar-background-color: var(--ui-secondary-bg) !important;
   --sidebar-border-color: var(--uc-menu-border-color) !important;

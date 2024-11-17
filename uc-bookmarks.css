@@ -292,18 +292,9 @@
   border-color: transparent !important;
 }
 
-#editBookmarkPanel .panel-footer > button[default] {
+/* #editBookmarkPanel .panel-footer > button[default] {
   flex-grow: 3 !important;
-  background-color: var(--ui-textbox-bgcolor) !important;
-}
-
-#editBookmarkPanel .panel-footer > button[default]:not([disabled], :active):is(:hover, :focus-visible) {
-  background-color: var(--button-primary-hover-bgcolor) !important;
-}
-
-#editBookmarkPanel .panel-footer > button[default]:not([disabled]):is(:hover:active, [open]) {
-  background-color: var(--button-primary-active-bgcolor) !important;
-}
+} */
 
 #editBMPanel_tagsField {
   display: -moz-inline-box !important;

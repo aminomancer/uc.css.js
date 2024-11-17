@@ -67,6 +67,9 @@ menupopup {
   --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;
   --toolbarbutton-checked-active-background: var(--uc-toolbarbutton-checked-active-background);
   --default-focusring: var(--global-focus-outline) !important;
+  --button-background-color: var(--uc-arrowpanel-faint) !important;
+  --button-background-color-hover: var(--uc-arrowpanel-dimmed) !important;
+  --button-background-color-active: var(--uc-arrowpanel-dimmed-further) !important;
   --button-bgcolor: var(--uc-arrowpanel-faint) !important;
   --button-hover-bgcolor: var(--uc-arrowpanel-dimmed) !important;
   --button-active-bgcolor: var(--uc-arrowpanel-dimmed-further) !important;
@@ -74,6 +77,9 @@ menupopup {
   --button-primary-hover-bgcolor: var(--purple-40) !important;
   --button-primary-active-bgcolor: var(--purple-35) !important;
   --button-primary-color: var(--button-color) !important;
+  --color-accent-primary: var(--purple-40) !important;
+  --color-accent-primary-hover: var(--purple-35) !important;
+  --color-accent-primary-active: var(--purple-30) !important;
   --urlbar-toolbar-height: var(--uc-urlbar-container-height) !important;
   --urlbar-container-height: var(--uc-urlbar-container-height) !important;
   --urlbar-height: calc(var(--urlbar-container-height) - 6px) !important;
@@ -131,6 +137,8 @@ menupopup {
   --in-content-primary-button-background: var(--purple-40) !important;
   --in-content-primary-button-background-hover: var(--purple-35) !important;
   --in-content-primary-button-background-active: var(--purple-30) !important;
+  --button-text-color-primary: var(--light-on-dark-button-text-color) !important;
+  --button-text-color-primary-hover: var(--light-on-dark-button-text-color) !important;
   --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
   --in-content-primary-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
 
@@ -261,13 +269,24 @@ printpreview-pagination {
   --border-active-shadow: var(--global-focus-outline-color) !important;
 }
 
+.toggle-button {
+	--toggle-background-color: var(--checkbox-unchecked-bgcolor) !important;
+	--toggle-background-color-hover: var(--checkbox-unchecked-hover-bgcolor) !important;
+	--toggle-background-color-active: var(--checkbox-unchecked-active-bgcolor) !important;
+	--toggle-background-color-pressed: var(--checkbox-checked-bgcolor) !important;
+	--toggle-background-color-pressed-hover: var(--checkbox-checked-hover-bgcolor) !important;
+	--toggle-background-color-pressed-active: var(--checkbox-checked-active-bgcolor) !important;
+	--toggle-border-color: var(--checkbox-border-color) !important;
+	--toggle-border-color-hover: var(--toggle-border-color) !important;
+	--toggle-border-color-active: var(--toggle-border-color) !important;
+	--toggle-dot-background-color: color-mix(in srgb, currentColor 50%, var(--toggle-background-color-active)) !important;
+	--toggle-dot-background-color-hover: var(--toggle-dot-background-color) !important;
+	--toggle-dot-background-color-active: var(--toggle-dot-background-color) !important;
+	--toggle-dot-background-color-on-pressed: var(--checkbox-checked-color) !important;
+}
+
 /* fluent reveal toolbar buttons */
 :root[fluent-reveal-hover] #navigator-toolbox :is(.toolbarbutton-1, .bookmark-item) {
   --toolbarbutton-hover-background: hsla(236, 82%, 83%, 0.05) !important;
   --toolbarbutton-active-background: hsla(236, 82%, 83%, 0.1) !important;
-}
-
-.toggle-button#moz-toggle-button[part="button"] {
-	--toggle-dot-background-color: color-mix(in srgb, currentColor 40%, var(--button-background-color-active)) !important;
-	--toggle-dot-background-color-on-pressed: var(--arrowpanel-color) !important;
 }

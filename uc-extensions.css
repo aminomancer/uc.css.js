@@ -111,8 +111,13 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
 }
 
 /* nordVPN while it's active */
-:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="nordvpnproxy@nordvpn.com"i][badge] {
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="nordvpnproxy@nordvpn.com"i][badge]:not([badge=" X "]) {
   fill: var(--toolbarbutton-icon-fill-attention) !important;
+}
+
+/* nordVPN while there are connection issues */
+:is(.webextension-browser-action, .eom-addon-button)[data-extensionid="nordvpnproxy@nordvpn.com"i][badge=" X "] {
+  fill-opacity: var(--toolbarbutton-disabled-opacity) !important;
 }
 
 #contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-iconic-left::before {
