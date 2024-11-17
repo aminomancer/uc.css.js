@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.6
+// @version        1.0.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -122,7 +122,7 @@ class ContextMenuMods {
     };
 
     const onStartup = () => {
-      _updateEngines();
+      Services.tm.idleDispatchToMainThread(() => _updateEngines());
       Services.obs.addObserver(
         onEngineModified,
         "browser-search-engine-modified"

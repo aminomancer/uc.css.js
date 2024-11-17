@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.4.2
+// @version        2.4.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -181,7 +181,7 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
     icon.hidden = true;
     icon.setAttribute("type", pending ? "pending" : "secure");
   }
-  gBrowser.createTooltip = function (event) {
+  function createTooltip(event) {
     event.stopPropagation();
     let tab = event.target.triggerNode?.closest("tab");
     if (!tab || this._showTabCardPreview) {
@@ -261,5 +261,24 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
       tab
     );
     tooltip.querySelector(".places-tooltip-box").removeAttribute("desc-hidden");
-  };
+  }
+
+  function init() {
+    gBrowser.createTooltip = createTooltip;
+  }
+
+  if (gBrowserInit.delayedStartupFinished) {
+    init();
+  } else {
+    let delayedListener = (subject, topic) => {
+      if (topic == "browser-delayed-startup-finished" && subject == window) {
+        Services.obs.removeObserver(delayedListener, topic);
+        init();
+      }
+    };
+    Services.obs.addObserver(
+      delayedListener,
+      "browser-delayed-startup-finished"
+    );
+  }
 })();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.4
+// @version        2.1.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -464,12 +464,11 @@
       );
     }
     privateBrowsingIndicatorButton() {
-      let indicator = document.getElementById(
-        "private-browsing-indicator-with-label"
+      let indicator = document.querySelector(
+        ".private-browsing-indicator-with-label"
       );
-      let tooltiptext = indicator.textContent;
-      let markup = /* html */ `<toolbarbutton id="private-browsing-indicator-with-label"
-                                tooltiptext="${tooltiptext}"
+      let markup = /* html */ `<toolbarbutton class="private-browsing-indicator-with-label"
+                                data-l10n-id="private-browsing-indicator-tooltip"
                                 oncommand="openHelpLink('private-browsing-myths')" />`;
       indicator.replaceWith(MozXULElement.parseXULToFragment(markup));
     }
@@ -547,9 +546,10 @@
     }
     randomTinyStuff() {
       // give the tracking protection popup's info button a tooltip
-      let etpPanel = document
-        .getElementById("template-protections-popup")
-        ?.content.querySelector("#protections-popup");
+      let etpPopupNode =
+        document.getElementById("protections-popup") ||
+        document.getElementById("template-protections-popup")?.content;
+      let etpPanel = etpPopupNode?.querySelector("#protections-popup");
       let setEtpPopupInfoTooltip = e => {
         let infoButton = e.target.querySelector(
           "#protections-popup-info-button"
@@ -565,6 +565,13 @@
       };
       if (etpPanel) {
         etpPanel.addEventListener("popupshowing", setEtpPopupInfoTooltip);
+      }
+
+      // fix the position of the "Why?" tooltip in the protection panel
+      if (etpPopupNode) {
+        for (let tooltip of etpPopupNode.querySelectorAll("tooltip")) {
+          tooltip.setAttribute("position", "after_start");
+        }
       }
 
       // add an "engine" attribute to the searchbar autocomplete popup, so we can replace the
