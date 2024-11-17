@@ -81,6 +81,7 @@
     --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
     --in-content-box-border-color: var(--uc-content-box-border-color) !important;
     --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+    --background-color-box: var(--in-content-box-background) !important;
     --in-content-table-background: var(--in-content-box-background) !important;
     --in-content-table-header-background: var(--purple-40-a50) !important;
     --in-content-link-color: var(--purple-30) !important;

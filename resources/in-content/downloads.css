@@ -107,6 +107,7 @@
 
   #downloadsSummary {
     height: auto !important;
+    min-height: auto !important;
     border-radius: 0 !important;
     margin: 0 !important;
     padding: 8px 4px !important;
@@ -370,7 +371,11 @@
   }
 
   .downloadProgress::-moz-progress-bar {
+    --download-progress-fill-color: inherit !important;
+    --download-progress-flare-color: inherit !important;
+
     background-image: none !important;
+    background-color: var(--download-progress-fill-color) !important;
   }
 
   .downloadProgress:not([value="0"])::-moz-progress-bar {

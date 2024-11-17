@@ -19,6 +19,7 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
   .rgh-monospace-textareas #commit-summary-input,
   .rgh-monospace-textareas textarea {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+    font-weight: 400 !important;
     font-size: 14px !important;
   }
 
@@ -29,6 +30,7 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
   .input-monospace,
   .text-mono {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+    font-weight: 400 !important;
   }
 
   .blob-code-inner,
@@ -44,6 +46,7 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
   basically ensure the invisible text aligns exactly with the visible text. */
   body > div:last-child[style*="font-family"] {
     font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace !important;
+    font-weight: 400 !important;
     font-size: 14px !important;
   }
 

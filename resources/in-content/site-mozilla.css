@@ -78,71 +78,12 @@
     }
   }
 
-  #panel {
-    top: 3.75rem !important;
-    right: 0 !important;
-    background: none !important;
-    border: none !important;
-    text-align: end !important;
-  }
-
-  #panel-toggle {
-    background: none !important;
-    display: flex !important;
-    align-items: stretch !important;
-    align-content: stretch !important;
-    justify-content: end !important;
-    padding-right: 1rem !important;
-    gap: 6px !important;
-  }
-
-  /* reverse the show/hide state of the panel so it's hidden by default. */
-  #panel-content[aria-expanded="true"] {
-    visibility: collapse;
-    width: 0 !important;
-    height: 0 !important;
-  }
-
-  #panel-content[aria-expanded="false"] {
-    display: revert !important;
-    background: var(--darkreader-bg--page-background, var(--page-background)) !important;
-    border: 1px solid var(--darkreader-border--page-border-color, var(--page-border-color)) !important;
-    border-right: 0 !important;
-    padding-right: 0.7rem !important;
-    padding-top: 0.7rem !important;
-  }
-
-  .navpanel-icon {
-    margin: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-  }
-  
-  .navpanel-icon.icon-down-dir {
-    transform: none !important;
-  }
-
-  .navpanel-icon.icon-down-dir.expanded {
-    transform: rotate(-90deg) !important;
-  }
-
-  .navpanel-icon::before {
-    margin: 0 !important;
-    width: min-content !important;
-    height: min-content !important;
-  }
-
-  #show-settings {
-    display: flex !important;
-    margin-inline-start: 10px !important;
-  }
-
-  #show-settings > .navpanel-icon {
-    display: flex !important;
-  }
-
   .graph {
     fill: currentColor !important;
+  }
+
+  #spinner {
+    pointer-events: none !important;
   }
 }
 
