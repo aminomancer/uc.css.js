@@ -24,21 +24,20 @@
   background: var(--uc-tab-focused-hover) !important;
 }
 
-.tabbrowser-tab:not([selected], [pinned], [multiselected], :hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab:not([selected], [multiselected], :hover, .keyboard-focused-tab, [open]) .tab-background {
   background: var(--uc-tab-background) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned], :hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab[multiselected]:not([selected], :hover, .keyboard-focused-tab, [open]) .tab-background {
   background: var(--uc-tab-multi) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab[multiselected]:not([selected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background {
   background: var(--uc-tab-multi-hover) !important;
 }
 
 /* block our animations while tabs are being dragged & dropped */
-#tabbrowser-tabs[movingtab] .tabbrowser-tab *,
-#tabbrowser-tabs .tabbrowser-tab[justmoved] * {
+#tabbrowser-tabs[movingtab] .tabbrowser-tab * {
   transform: none !important;
 }
 
@@ -49,17 +48,17 @@
 }
 
 /* different tab shadows in various states. to produce the illusion of modulated depth */
-.tabbrowser-tab .tab-background {
+/* .tabbrowser-tab .tab-background {
   box-shadow: 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2), 0px 0px 5px 0px hsla(0, 0%, 0%, 0.1);
-}
+} */
 
 .tabbrowser-tab:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background,
-.tabbrowser-tab:is([multiselected], [pinned]) .tab-background {
+.tabbrowser-tab[multiselected] .tab-background {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.25) !important;
 }
 
 .tabbrowser-tab[selected] .tab-background,
-.tabbrowser-tab:is([multiselected], [pinned])[selected] .tab-background {
+.tabbrowser-tab[multiselected][selected] .tab-background {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
@@ -118,6 +117,10 @@
 
 .tabbrowser-tab[pinned] .tab-icon-stack {
   margin: 0 !important;
+}
+
+.tab-content[pinned] {
+  padding: 0 var(--tab-inline-padding) !important;
 }
 
 /* a bunch of rules I might revisit in the future. minified since this is
@@ -263,7 +266,7 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need
 to follow the restore tab sound button instructions on my repo's readme */
-.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [open], [justmoved]) .tab-icon-sound[pictureinpicture] {
+.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture] {
   background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
   background-size: 12px !important;
   background-position: center !important;
@@ -285,15 +288,12 @@ to follow the restore tab sound button instructions on my repo's readme */
   border-radius: var(--tab-button-border-radius, 2px) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying],
-.tabbrowser-tab[selected][justmoved]:not([pinned]) .tab-icon-sound[pictureinpicture][soundplaying] {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying] {
   background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
 }
 
 .tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][muted],
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying][muted],
-.tabbrowser-tab[selected][justmoved]:not([pinned]) .tab-icon-sound[pictureinpicture][muted],
-.tabbrowser-tab[selected][justmoved]:not([pinned]) .tab-icon-sound[pictureinpicture][soundplaying][muted] {
+.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying][muted] {
   background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
 }
 
@@ -373,7 +373,7 @@ hover the general area of the tabs, but will show if audio is muted. */
   transform: translateX(-15px) scale(0.5) !important;
 }
 
-#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow], [justmoved]) :is(.tab-close-button, .tab-icon-image, .tab-sharing-icon-overlay, .tab-throbber) {
+#tabbrowser-tabs:not([movingtab]) .tabbrowser-tab:not([tabdrop-samewindow]) :is(.tab-close-button, .tab-icon-image, .tab-sharing-icon-overlay, .tab-throbber) {
   transition: 0.12s transform ease-in-out, 0.12s opacity ease-in-out !important;
 }
 

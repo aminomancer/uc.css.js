@@ -1024,10 +1024,6 @@ This script automatically generates its own subscript files in your chrome folde
 
 ✨ Proton removes the checkmark shown on the selected sidebar in the sidebar switcher panel. (The one that pops up when you click the button at the top of the sidebar) This script simply restores the previous behavior of adding the `checked` attribute. On its own it won't do anything, since the CSS for adding checkmarks to the menu items has also been removed. You'll need [uc-sidebar.css](/uc-sidebar.css) and the radio icon from the [resources](/resources) folder for the actual styling, or you can just read it starting around [line 120](/uc-sidebar.css#L120) if you want to make your own styles.
 
-#### [Tab Animation Workaround](/JS/tabAnimation.uc.js):
-
-✨ A tiny script required for duskFox. This doesn't have any visible effects, it's just a background support piece required to make the CSS theme work correctly. It cleans up transitions/animations on Firefox tabs. The first part involves making sure pinned tabs will be placed correctly. Without this script, we couldn't smoothly animate the width transition when pinning/unpinning tabs, because it would interfere with calculating the placement of tabs. The second part involves making sure that certain tab animations don't begin until the paint immediately after tabs are created/moved. Otherwise, they would start and stop within less than 1 frame.
-
 #### [Tab Loading Spinner Animation](/JS/tabLoadingSpinner.uc.js):
 
 ✨ Required for duskFox's custom loading spinner animation. See the file description for more details.
