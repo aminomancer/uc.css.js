@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Places Menupopup Arrows
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
