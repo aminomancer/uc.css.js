@@ -260,7 +260,7 @@ menuitem#menu_eyedropper .menu-text,
 menuitem#menu_pageSource .menu-text,
 menuitem#extensionsForDevelopers .menu-text,
 menuitem#enableDeveloperTools .menu-text,
-#discardTab .menu-text,
+#context_unloadTab .menu-text,
 #menu_searchHistory > .menu-text,
 #historyUndoWindowMenu > .menu-text,
 #historyUndoMenu > .menu-text,
@@ -565,7 +565,7 @@ menuitem#menu_eyedropper::before,
 menuitem#menu_pageSource::before,
 menuitem#extensionsForDevelopers::before,
 menuitem#enableDeveloperTools::before,
-#discardTab::before,
+#context_unloadTab::before,
 #menu_searchHistory::before,
 #historyUndoWindowMenu::before,
 #historyUndoMenu::before,
@@ -1453,7 +1453,7 @@ menuitem#enableDeveloperTools::before {
   background-image: url(chrome://userchrome/content/skin/developer.svg);
 }
 
-#discardTab::before,
+#context_unloadTab::before,
 #menu_FileQuitItem::before,
 #syncedTabsOpenAllUnloaded::before {
   background-image: url(chrome://userchrome/content/skin/quit.svg);

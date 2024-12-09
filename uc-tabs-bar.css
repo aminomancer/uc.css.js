@@ -317,7 +317,7 @@ overflowing tabs don't draw shadows on the special new tab button */
 
 /* private browsing indicator next to window controls */
 .accessibility-indicator,
-#private-browsing-indicator-with-label {
+.private-browsing-indicator-with-label {
   height: auto !important;
   width: auto !important;
   box-sizing: border-box !important;
@@ -331,7 +331,7 @@ overflowing tabs don't draw shadows on the special new tab button */
   align-items: center !important;
 }
 
-#private-browsing-indicator-with-label {
+.private-browsing-indicator-with-label {
   background: none !important;
   appearance: none !important;
 
@@ -353,7 +353,7 @@ overflowing tabs don't draw shadows on the special new tab button */
   }
 }
 
-#private-browsing-indicator-with-label {
+.private-browsing-indicator-with-label {
   -moz-context-properties: fill, fill-opacity !important;
   fill: currentColor !important;
 }
@@ -374,12 +374,12 @@ overflowing tabs don't draw shadows on the special new tab button */
 }
 
 .accessibility-indicator:is(:hover, :focus-visible) > .button-box,
-toolbarbutton#private-browsing-indicator-with-label:is(:hover, :focus-visible) > image {
+toolbarbutton.private-browsing-indicator-with-label:is(:hover, :focus-visible) > image {
   background-color: var(--arrowpanel-dimmed) !important;
 }
 
 .accessibility-indicator:is(:hover:active, [open]) > .button-box,
-toolbarbutton#private-browsing-indicator-with-label:is(:hover:active, [open]) > image {
+toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > image {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
