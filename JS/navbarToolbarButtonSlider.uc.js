@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        2.9.9
+// @version        3.0.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -151,6 +151,7 @@ class NavbarToolbarSlider {
     this.registerSheet();
     this.setupScroll();
     this.attachListeners();
+    this.modifyMethods();
     CustomizableUI.addListener(this);
     requestAnimationFrame(() => {
       let array = [...this.widgets].filter(this.filterFn, this);
@@ -214,6 +215,28 @@ class NavbarToolbarSlider {
     Services.prefs.addObserver("userChrome.toolbarSlider", this);
     this.contextMenu.addEventListener("popupshowing", this);
   }
+  modifyMethods() {
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      ToolbarContextMenu: "resource:///modules/ToolbarContextMenu.sys.mjs",
+      CustomizableUI: "resource:///modules/CustomizableUI.sys.mjs",
+      SessionStore: "resource:///modules/sessionstore/SessionStore.sys.mjs",
+    });
+    if (!ToolbarContextMenu._modifiedByNavbarToolbarSlider) {
+      eval(
+        `ToolbarContextMenu.onViewToolbarsPopupShowing = function ${ToolbarContextMenu.onViewToolbarsPopupShowing
+          .toSource()
+          .replace(/^\(/, "")
+          .replace(/\)$/, "")
+          .replace(/^function /, "")
+          .replace(
+            /(parent.localName == "toolbar" \|\|)/,
+            `$1 \n parent.classList.contains("slider-inner-container") ||`
+          )}`
+      );
+      ToolbarContextMenu._modifiedByNavbarToolbarSlider = true;
+    }
+  }
   setupPrefs() {
     const { prefs } = Services;
     const { width, exclude, springs, collapse, direction } =
@@ -265,15 +288,15 @@ class NavbarToolbarSlider {
   filterFn(item, index, array) {
     // check if window is private and widget is disallowed in private browsing.
     // if so, filter it out.
+    let isPrivate = PrivateBrowsingUtils.isWindowPrivate(window);
     if (
-      item.showInPrivateBrowsing === false &&
-      PrivateBrowsingUtils.isWindowPrivate(window)
+      (item.showInPrivateBrowsing === false && isPrivate) ||
+      (item.hideInNonPrivateBrowsing === true && !isPrivate)
     ) {
       return false;
     }
     // exclude urlbar, searchbar, system buttons, and the slider itself.
     switch (item.id) {
-      case "unified-extensions-button":
       case "wrapper-back-button":
       case "back-button":
       case "wrapper-forward-button":

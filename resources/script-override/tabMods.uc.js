@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.4.2
+// @version        1.4.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -88,13 +88,14 @@
 
     static get inheritedAttributes() {
       return {
-        ".tab-background": "selected=visuallyselected,fadein,multiselected",
-        ".tab-line": "selected=visuallyselected,multiselected",
+        ".tab-background":
+          "selected=visuallyselected,fadein,multiselected,dragover-createGroup",
+        ".tab-group-line": "selected=visuallyselected,multiselected",
         ".tab-loading-burst": "pinned,bursting,notselectedsinceload",
         ".tab-content":
-          "pinned,selected=visuallyselected,titlechanged,attention",
+          "pinned,selected=visuallyselected,multiselected,titlechanged,attention",
         ".tab-icon-stack":
-          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked",
+          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,indicator-replaces-favicon",
         ".tab-throbber":
           "fadein,pinned,busy,progress,selected=visuallyselected",
         ".tab-icon-pending":
@@ -103,7 +104,7 @@
           "src=image,triggeringprincipal=iconloadingprincipal,requestcontextid,fadein,pinned,selected=visuallyselected,busy,crashed,sharing,pictureinpicture",
         ".tab-sharing-icon-overlay": "sharing,selected=visuallyselected,pinned",
         ".tab-icon-overlay":
-          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked",
+          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,indicator-replaces-favicon",
         ".tab-label-container":
           "pinned,selected=visuallyselected,labeldirection",
         ".tab-label":
@@ -272,13 +273,14 @@
       return this.hasAttribute("pinned");
     }
 
-    get visible() {
+    get isOpen() {
       return (
-        this.isConnected &&
-        !this.hidden &&
-        !this.closing &&
-        !this.group?.collapsed
+        this.isConnected && !this.closing && this != FirefoxViewHandler.tab
       );
+    }
+
+    get visible() {
+      return this.isOpen && !this.hidden && !this.group?.collapsed;
     }
 
     get hidden() {
@@ -433,7 +435,7 @@
 
     updateLastUnloadedByTabUnloader() {
       this._lastUnloaded = Date.now();
-      Services.telemetry.scalarAdd("browser.engagement.tab_unload_count", 1);
+      Glean.browserEngagement.tabUnloadCount.add(1);
     }
 
     recordTimeFromUnloadToReload() {
@@ -445,7 +447,7 @@
       Services.telemetry
         .getHistogramById("TAB_UNLOAD_TO_RELOAD")
         .add(diff_in_msec / 1000);
-      Services.telemetry.scalarAdd("browser.engagement.tab_reload_count", 1);
+      Glean.browserEngagement.tabReloadCount.add(1);
       delete this._lastUnloaded;
     }
 
