@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.3.1
+// @version        1.3.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of [Private Tab](https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js) by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
@@ -218,8 +218,8 @@ class PrivateTabManager {
       .getElementById("tabContextMenu")
       .addEventListener("popupshowing", this);
 
-    let privateMask = document.getElementById(
-      "private-browsing-indicator-with-label"
+    let privateMask = document.querySelector(
+      ".private-browsing-indicator-with-label"
     );
     privateMask.classList.add("private-mask");
 
@@ -510,8 +510,8 @@ class PrivateTabManager {
   }
 
   toggleMask() {
-    let privateMask = document.getElementById(
-      "private-browsing-indicator-with-label"
+    let privateMask = document.querySelector(
+      ".private-browsing-indicator-with-label"
     );
     if (gBrowser.selectedTab.isToggling) {
       privateMask.setAttribute(
