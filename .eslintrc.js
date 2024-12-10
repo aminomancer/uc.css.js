@@ -55,6 +55,7 @@ module.exports = {
       env: { browser: true, "mozilla/browser-window": true },
       globals: {
         _ucUtils: "writable",
+        UC_API: "writable",
         windowUtils: "readonly",
         promiseDocumentFlushed: "readonly",
         tabPreviews: "writable",
@@ -190,7 +191,7 @@ module.exports = {
         "react/no-did-update-set-state": "error",
         "react/no-direct-mutation-state": "error",
         "react/no-is-mounted": "error",
-        "react/no-unknown-property": "error",
+        "react/no-unknown-property": ["error", { ignore: ["pref"] }],
         "react/require-render-return": "error",
         "react-hooks/exhaustive-deps": "error",
 

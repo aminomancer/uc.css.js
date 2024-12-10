@@ -18,7 +18,6 @@ export const ScriptsView = () => {
     search,
     setSearch,
     missingFxAutoconfig,
-    outdatedFxAutoconfig,
     scripts,
     scriptsDisabled,
     setUpdateCount,
@@ -177,7 +176,6 @@ export const ScriptsView = () => {
           </div>
           <WarningBox
             missingFxAutoconfig={missingFxAutoconfig}
-            outdatedFxAutoconfig={outdatedFxAutoconfig}
             noResultsForSearch={filteredScripts.length < 1 && search}
             searchUnit="scripts"
           />

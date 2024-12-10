@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.5.0
+// @version        1.5.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -140,7 +140,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
         ]
       ) {
         function findLocalEngineIcon(name) {
-          const files = _ucUtils.fs.getEntry("engines");
+          const files = UC_API.FileSystem.getEntry("engines");
           if (!files?.isDirectory()) return false;
           let nameParts = name
             .toLowerCase()

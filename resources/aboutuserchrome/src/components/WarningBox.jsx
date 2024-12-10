@@ -11,7 +11,7 @@ const MessageBox = ({ description, linkText, linkURL }) => {
         <p>{description}</p>
         {linkText && linkURL ? (
           <p>
-            <a href={linkURL} target="_blank">
+            <a href={linkURL} target="_blank" rel="noreferrer">
               {linkText}
             </a>
           </p>
@@ -23,12 +23,11 @@ const MessageBox = ({ description, linkText, linkURL }) => {
 
 export const WarningBox = ({
   missingFxAutoconfig,
-  outdatedFxAutoconfig,
   noResultsForSearch,
   searchUnit,
 }) => {
   let message = {};
-  if (missingFxAutoconfig || outdatedFxAutoconfig) {
+  if (missingFxAutoconfig) {
     message.description = `fx-autoconfig is ${
       missingFxAutoconfig ? "not installed" : "outdated"
     }.`;

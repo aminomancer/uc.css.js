@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.3.2
+// @version        1.3.3
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of [Private Tab](https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js) by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
@@ -57,9 +57,6 @@ class PrivateTabManager {
   BTN2_ID = "newPrivateTab-button";
   constructor() {
     this.setupPrefs();
-    if (!_ucUtils.sharedGlobal.privateTabGlobal) {
-      _ucUtils.sharedGlobal.privateTabGlobal = {};
-    }
     // the internal duplicateTab method doesn't pass the skipAnimation parameter
     // to addTrustedTab. so we need to make our own function, which requires us
     // to access some private objects.
@@ -80,7 +77,7 @@ class PrivateTabManager {
     this.sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
       Ci.nsIStyleSheetService
     );
-    let iconsSheet = _ucUtils.fs.chromeDir().entry();
+    let iconsSheet = UC_API.FileSystem.chromeDir().entry();
     iconsSheet.append("uc-context-menu-icons.css");
     this.menuClass = iconsSheet.exists()
       ? `menuitem-iconic privatetab-icon`
@@ -107,12 +104,11 @@ class PrivateTabManager {
   }
 
   exec() {
-    let { privateTabGlobal } = _ucUtils.sharedGlobal;
     if (PrivateBrowsingUtils.isWindowPrivate(window)) return;
     let openAll = document.getElementById(
       "placesContext_openBookmarkContainer:tabs"
     );
-    let openAllPrivate = _ucUtils.createElement(document, "menuitem", {
+    let openAllPrivate = UC_API.Utils.createElement(document, "menuitem", {
       id: "openAllPrivate",
       label: "Open All in Private Tabs",
       accesskey: "v",
@@ -127,7 +123,7 @@ class PrivateTabManager {
     openAll.after(openAllPrivate);
 
     let openAllLinks = document.getElementById("placesContext_openLinks:tabs");
-    let openAllLinksPrivate = _ucUtils.createElement(document, "menuitem", {
+    let openAllLinksPrivate = UC_API.Utils.createElement(document, "menuitem", {
       id: "openAllLinksPrivate",
       label: "Open All in Private Tabs",
       accesskey: "v",
@@ -142,7 +138,7 @@ class PrivateTabManager {
     openAllLinks.after(openAllLinksPrivate);
 
     let openTab = document.getElementById("placesContext_open:newtab");
-    let openPrivate = _ucUtils.createElement(document, "menuitem", {
+    let openPrivate = UC_API.Utils.createElement(document, "menuitem", {
       id: "openPrivate",
       label: "Open in a New Private Tab",
       accesskey: "v",
@@ -157,12 +153,12 @@ class PrivateTabManager {
 
     if (location.href !== "chrome://browser/content/browser.xhtml") return;
 
-    let keyset = _ucUtils.createElement(document, "keyset", {
+    let keyset = UC_API.Utils.createElement(document, "keyset", {
       id: "privateTab-keyset",
     });
     document.getElementById("mainKeyset").after(keyset);
 
-    let toggleKey = _ucUtils.createElement(document, "key", {
+    let toggleKey = UC_API.Utils.createElement(document, "key", {
       id: "togglePrivateTab-key",
       modifiers: this.config.toggleModifiers,
       key: this.config.toggleHotkey,
@@ -170,7 +166,7 @@ class PrivateTabManager {
     });
     keyset.appendChild(toggleKey);
 
-    let newPrivateTabKey = _ucUtils.createElement(document, "key", {
+    let newPrivateTabKey = UC_API.Utils.createElement(document, "key", {
       id: "newPrivateTab-key",
       modifiers: this.config.newTabModifiers,
       key: this.config.newTabHotkey,
@@ -178,7 +174,7 @@ class PrivateTabManager {
     });
     keyset.appendChild(newPrivateTabKey);
 
-    let menuOpenLink = _ucUtils.createElement(document, "menuitem", {
+    let menuOpenLink = UC_API.Utils.createElement(document, "menuitem", {
       id: "menu_newPrivateTab",
       label: "New Private Tab",
       accesskey: "v",
@@ -188,7 +184,7 @@ class PrivateTabManager {
     });
     document.getElementById("menu_newNavigatorTab").after(menuOpenLink);
 
-    let openLink = _ucUtils.createElement(document, "menuitem", {
+    let openLink = UC_API.Utils.createElement(document, "menuitem", {
       id: "openLinkInPrivateTab",
       label: "Open Link in New Private Tab",
       accesskey: "v",
@@ -205,7 +201,7 @@ class PrivateTabManager {
       .addEventListener("popuphidden", this);
     document.getElementById("context-openlinkintab").after(openLink);
 
-    let toggleTab = _ucUtils.createElement(document, "menuitem", {
+    let toggleTab = UC_API.Utils.createElement(document, "menuitem", {
       id: "toggleTabPrivateState",
       label: "Private Tab",
       type: "checkbox",
@@ -223,7 +219,7 @@ class PrivateTabManager {
     );
     privateMask.classList.add("private-mask");
 
-    let btn2 = _ucUtils.createElement(document, "toolbarbutton", {
+    let btn2 = UC_API.Utils.createElement(document, "toolbarbutton", {
       id: this.BTN2_ID,
       label: "New Private Tab",
       tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
@@ -311,14 +307,14 @@ class PrivateTabManager {
         }
       };
     gBrowser.tabContainer._updateNewTabVisibility();
-    if (!privateTabGlobal.privateTabsInited) {
+    if (!Services.ppmm.sharedData.get("uc_privateTabs")) {
       CustomizableUI.createWidget({
         id: this.BTN_ID,
         type: "custom",
         defaultArea: CustomizableUI.AREA_NAVBAR,
         showInPrivateBrowsing: false,
         onBuild: doc => {
-          let btn = _ucUtils.createElement(doc, "toolbarbutton", {
+          let btn = UC_API.Utils.createElement(doc, "toolbarbutton", {
             id: this.BTN_ID,
             label: "New Private Tab",
             tooltiptext: `Open a new private tab (${ShortcutUtils.prettifyShortcut(
@@ -331,12 +327,11 @@ class PrivateTabManager {
           return btn;
         },
       });
+      Services.ppmm.sharedData.set("uc_privateTabs", true);
     }
-    privateTabGlobal.privateTabsInited = true;
   }
 
   init() {
-    let { privateTabGlobal } = _ucUtils.sharedGlobal;
     this.ContextualIdentityService.ensureDataReady();
     this.container = this.ContextualIdentityService._identities.find(
       container => container.name == "Private"
@@ -364,7 +359,7 @@ class PrivateTabManager {
 
     CustomizableUI.addListener(this);
 
-    if (!privateTabGlobal.privateTabsInited) {
+    if (!Services.ppmm.sharedData.get("uc_privateTabs")) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
         BrowserWindowTracker:

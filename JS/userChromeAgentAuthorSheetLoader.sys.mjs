@@ -1,36 +1,34 @@
 // ==UserScript==
 // @name           Agent/Author Sheet Loader
-// @version        2.6.3
+// @version        2.6.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
-// @description    Load `*.ag.css` files as agent sheets and `*.au.css` files as author sheets. Will also load `*.us.css` files as user sheets, in case you ever need that for some reason. This loader is capable of loading stylesheets into browser toolbox windows, but it will not try to load [userChrome.css](https://github.com/aminomancer/uc.css.js/blob/master/userChrome.css) or [userContent.css](https://github.com/aminomancer/uc.css.js/blob/master/userContent.css) in the browser toolbox. For that you will need [userChromeDevtoolsSheetLoader.uc.js](https://github.com/aminomancer/uc.css.js#browser-toolbox-stylesheet-loader) instead.
-// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/userChromeAgentAuthorSheetLoader.uc.js
-// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/userChromeAgentAuthorSheetLoader.uc.js
+// @description    Load `*.ag.css` files as agent sheets and `*.au.css` files as author sheets. Will also load `*.us.css` files as user sheets, in case you ever need that for some reason. This loader is capable of loading stylesheets into browser toolbox windows, but it will not try to load [userChrome.css](https://github.com/aminomancer/uc.css.js/blob/master/userChrome.css) or [userContent.css](https://github.com/aminomancer/uc.css.js/blob/master/userContent.css) in the browser toolbox. For that you will need [userChromeDevtoolsSheetLoader.sys.mjs](https://github.com/aminomancer/uc.css.js#browser-toolbox-stylesheet-loader) instead.
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/userChromeAgentAuthorSheetLoader.sys.mjs
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/userChromeAgentAuthorSheetLoader.sys.mjs
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @backgroundmodule
 // ==/UserScript==
 
-let EXPORTED_SYMBOLS = [];
-(function () {
-  let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
-    Ci.nsIStyleSheetService
-  );
-  function traverseToMainProfile(str) {
-    let dir = Services.dirsvc.get(str, Ci.nsIFile);
-    if (!dir.exists()) {
-      let toAddChrome = false;
-      while (dir.target.includes("chrome_debugger_profile")) {
-        dir = dir.parent;
-        toAddChrome = true;
-      }
-      if (toAddChrome) dir.append("chrome");
+let sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+  Ci.nsIStyleSheetService
+);
+function traverseToMainProfile(str) {
+  let dir = Services.dirsvc.get(str, Ci.nsIFile);
+  if (!dir.exists()) {
+    let toAddChrome = false;
+    while (dir.target.includes("chrome_debugger_profile")) {
+      dir = dir.parent;
+      toAddChrome = true;
     }
-    return dir;
+    if (toAddChrome) dir.append("chrome");
   }
+  return dir;
+}
 
-  let chromeDir = traverseToMainProfile("UChrm");
-  let files = chromeDir.directoryEntries.QueryInterface(Ci.nsISimpleEnumerator);
-  if (!files) return;
+let chromeDir = traverseToMainProfile("UChrm");
+let files = chromeDir.directoryEntries.QueryInterface(Ci.nsISimpleEnumerator);
+if (files) {
   while (files.hasMoreElements()) {
     let file = files.getNext().QueryInterface(Ci.nsIFile);
     let name = file.leafName;
@@ -64,4 +62,4 @@ let EXPORTED_SYMBOLS = [];
       }
     }
   }
-})();
+}

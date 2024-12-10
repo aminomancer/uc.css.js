@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.4
+// @version        2.1.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -142,7 +142,7 @@ class UndoListInTabmenu {
     },
   };
   constructor() {
-    this.create = _ucUtils.createElement;
+    this.create = UC_API.Utils.createElement;
     this.config = UndoListInTabmenu.config;
     XPCOMUtils.defineLazyPreferenceGetter(
       this,
@@ -813,7 +813,7 @@ class RecentlyClosedPanelContext {
       false
     );
     this.menupopup = document.querySelector("#mainPopupSet").appendChild(
-      _ucUtils.createElement(document, "menupopup", {
+      UC_API.Utils.createElement(document, "menupopup", {
         id: "recently-closed-menu",
       })
     );
@@ -821,52 +821,52 @@ class RecentlyClosedPanelContext {
     this.menupopup.addEventListener("popupshowing", this);
 
     this.restore = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuitem", {
+      UC_API.Utils.createElement(document, "menuitem", {
         id: "recently-closed-restore",
         label: l10n.Restore.label,
         accesskey: l10n.Restore.accesskey,
       })
     );
     this.restoreInNewWindow = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuitem", {
+      UC_API.Utils.createElement(document, "menuitem", {
         id: "recently-closed-restore-in-new-window",
         label: l10n["Restore in New Window"].label,
         accesskey: l10n["Restore in New Window"].accesskey,
       })
     );
     this.restoreInNewPrivateWindow = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuitem", {
+      UC_API.Utils.createElement(document, "menuitem", {
         id: "recently-closed-restore-in-new-private-window",
         label: l10n["Restore in New Private Window"].label,
         accesskey: l10n["Restore in New Private Window"].accesskey,
       })
     );
     this.removalSeparator = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuseparator", {
+      UC_API.Utils.createElement(document, "menuseparator", {
         id: "recently-closed-removal-separator",
       })
     );
     this.removeFromList = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuitem", {
+      UC_API.Utils.createElement(document, "menuitem", {
         id: "recently-closed-remove-from-list",
         label: l10n["Remove from List"].label,
         accesskey: l10n["Remove from List"].accesskey,
       })
     );
     this.removeFromHistory = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuitem", {
+      UC_API.Utils.createElement(document, "menuitem", {
         id: "recently-closed-remove-from-history",
         label: l10n["Remove from History"].label,
         accesskey: l10n["Remove from History"].accesskey,
       })
     );
     this.placesSeparator = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuseparator", {
+      UC_API.Utils.createElement(document, "menuseparator", {
         id: "recently-closed-places-separator",
       })
     );
     this.bookmark = this.menupopup.appendChild(
-      _ucUtils.createElement(document, "menuitem", {
+      UC_API.Utils.createElement(document, "menuitem", {
         id: "recently-closed-bookmark",
         label: l10n["Bookmark Page"].label,
         accesskey: l10n["Bookmark Page"].accesskey,

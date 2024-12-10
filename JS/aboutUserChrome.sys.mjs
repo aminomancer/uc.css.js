@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:userchrome
-// @version        1.1.8
+// @version        1.1.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -125,8 +125,8 @@ function initUserChromeNotifications() {
     /** @param {Window} win chrome window */
     constructor(win) {
       this.win = win;
-      if (!win._ucUtils) return;
-      this.utils = win._ucUtils;
+      if (!win.UC_API) return;
+      this.UC_API = win.UC_API;
       if (win.gBrowserInit.delayedStartupFinished) {
         this.#init();
       } else {
@@ -138,7 +138,7 @@ function initUserChromeNotifications() {
     #init() {
       if (this.#initialized) return;
       if (!gUserChromeNotifications) {
-        gUserChromeNotifications = new UserChromeNotifications(this.utils);
+        gUserChromeNotifications = new UserChromeNotifications(this.UC_API);
       }
       Services.obs.addObserver(this, lazy.UPDATE_CHANGED_TOPIC);
       try {
@@ -194,7 +194,7 @@ function initUserChromeNotifications() {
           banner.setAttribute(
             "oncommand",
             `if (this.getAttribute("notificationid") === "script-updates-restart") {
-            setTimeout(() => _ucUtils.restart(true), 300);
+            setTimeout(() => UC_API.Runtime.restart(true), 300);
             PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
           } else {
             switchToTabHavingURI("about:userchrome", true);
@@ -231,13 +231,17 @@ function initUserChromeNotifications() {
     #addEntryPoints() {
       // Add menu item to the Tools menu
       let addonsItem = this.win.document.getElementById("menu_openAddons");
-      let item = this.utils.createElement(this.win.document, "menuitem", {
-        id: "menu_openUserChrome",
-        label: "UserChrome Manager",
-        accesskey: "U",
-        key: "key_openAboutUserchrome",
-        oncommand: `switchToTabHavingURI("about:userchrome", true)`,
-      });
+      let item = this.UC_API.Utils.createElement(
+        this.win.document,
+        "menuitem",
+        {
+          id: "menu_openUserChrome",
+          label: "UserChrome Manager",
+          accesskey: "U",
+          key: "key_openAboutUserchrome",
+          oncommand: `switchToTabHavingURI("about:userchrome", true)`,
+        }
+      );
       addonsItem.after(item);
 
       // Add button to the app menu
@@ -245,7 +249,7 @@ function initUserChromeNotifications() {
         this.win.document,
         "appMenu-extensions-themes-button"
       );
-      let button = this.utils.createElement(
+      let button = this.UC_API.Utils.createElement(
         addonsButton.ownerDocument,
         "toolbarbutton",
         {
@@ -259,14 +263,16 @@ function initUserChromeNotifications() {
       addonsButton.after(button);
 
       // Add a hotkey to open the manager
-      this.utils.registerHotkey(
-        { modifiers: "accel shift", key: "U", id: "key_openAboutUserchrome" },
-        win => {
+      this.UC_API.Hotkeys.define({
+        modifiers: "accel shift",
+        key: "U",
+        id: "key_openAboutUserchrome",
+        command: win => {
           if (win === this.win) {
             this.win.switchToTabHavingURI("about:userchrome", true);
           }
-        }
-      );
+        },
+      });
     }
 
     #banner;
@@ -277,15 +283,15 @@ function initUserChromeNotifications() {
   /** Singleton class to handle badge notifications. */
   class UserChromeNotifications {
     /**
-     * @param {Object} utils The _ucUtils object fx-autoconfig defines on each
+     * @param {Object} UC_API The UC_API object fx-autoconfig defines on each
      *   chrome window. This is used to get the script data and header parsing
      *   behavior. fx-autoconfig only exposes this to windows, so to use it from
      *   this module context we have to pass it in.
      */
-    constructor(utils) {
-      this.utils = utils;
+    constructor(UC_API) {
+      this.UC_API = UC_API;
       Services.obs.addObserver(this, lazy.UPDATE_CHANGED_TOPIC);
-      utils.getScriptData().forEach(script => {
+      UC_API.Scripts.getScriptData().forEach(script => {
         lazy.gScriptUpdater.getHandle(script).checkRemoteFile();
       });
       this.#updateBadge();
@@ -320,7 +326,7 @@ function initUserChromeNotifications() {
         if (!handle.remoteFile || handle.writing || handle.updateError) {
           return false;
         }
-        let remoteScriptData = this.utils.parseStringAsScriptInfo(
+        let remoteScriptData = this.UC_API.Scripts.parseStringAsScriptInfo(
           handle.filename,
           handle.remoteFile
         );
@@ -337,7 +343,7 @@ function initUserChromeNotifications() {
     }
 
     async #warnOnMismatchedVersions() {
-      if (!this.utils) return;
+      if (!this.UC_API) return;
       let chromeUri = Services.io.newURI(
         "chrome://userchrome/content/aboutuserchrome/src/aboutuserchrome.json"
       );
@@ -366,9 +372,9 @@ function initUserChromeNotifications() {
       }
 
       let scriptVersion = "unknown";
-      let script = this.utils
-        .getScriptData()
-        .find(script => script.name === "about:userchrome");
+      let script = this.UC_API.Scripts.getScriptData().find(
+        script => script.name === "about:userchrome"
+      );
       if (script) scriptVersion = script.version;
 
       let warning;

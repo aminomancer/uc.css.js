@@ -20,7 +20,6 @@ const { PREF_UPDATE_INTERVAL, PREF_NOTIFICATIONS_ENABLED } =
 export const SettingsView = () => {
   const {
     missingFxAutoconfig,
-    outdatedFxAutoconfig,
     ucjsEnabled,
     gBrowserHackEnabled,
     gBrowserHackRequired,
@@ -47,10 +46,7 @@ export const SettingsView = () => {
           <div className="main-heading">
             <h1 className="header-name">Settings</h1>
           </div>
-          <WarningBox
-            missingFxAutoconfig={missingFxAutoconfig}
-            outdatedFxAutoconfig={outdatedFxAutoconfig}
-          />
+          <WarningBox missingFxAutoconfig={missingFxAutoconfig} />
         </div>
       </div>
       <div id="main">
@@ -90,7 +86,8 @@ export const SettingsView = () => {
               </div>
               <a
                 href="https://github.com/MrOtherGuy/fx-autoconfig#startup-error"
-                target="_blank">
+                target="_blank"
+                rel="noreferrer">
                 Learn more
               </a>
             </div>

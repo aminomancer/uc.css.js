@@ -3,7 +3,7 @@ const { PREF_UPDATE_INTERVAL, PREF_NOTIFICATIONS_ENABLED } =
   ChromeUtils.importESModule(
     "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
   );
-const { _ucUtils: ucUtils } = ChromeUtils.importESModule(
+const { UC_API } = ChromeUtils.importESModule(
   "chrome://userchromejs/content/utils.sys.mjs"
 );
 
@@ -91,14 +91,11 @@ export class GlobalContextProvider extends React.Component {
     this.state = {
       path: window.history?.state?.path || DEFAULT_PATH,
       navigate: this.navigate,
-      restart: () => ucUtils?.restart(true),
+      restart: () => UC_API?.Runtime.restart(true),
       search: window.history?.state?.search || "",
       setSearch: this.setSearch,
-      missingFxAutoconfig: !ucUtils,
-      outdatedFxAutoconfig:
-        !ucUtils?.parseStringAsScriptInfo ||
-        ucUtils?.getScriptData.toString().startsWith("()"),
-      scripts: ucUtils?.getScriptData().map(script => ({
+      missingFxAutoconfig: !UC_API,
+      scripts: UC_API?.getScriptData().map(script => ({
         ...script,
         path: script.asFile().path,
       })),

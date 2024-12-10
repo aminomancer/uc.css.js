@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Toggle Menubar Hotkey
-// @version        1.1.6
+// @version        1.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Adds a hotkey (Alt+M by default) that toggles the menubar on and off. Unlike just pressing the Alt key, this keeps it open permanently until closed again by the hotkey, toolbar context menu, or customize menu. Requires [fx-autoconfig](https://github.com/MrOtherGuy/fx-autoconfig) — other script loaders will not work with this script.
@@ -18,17 +18,20 @@
     // key ID. don't change this.
     id: "key_toggleMenubar",
   };
-  let hotkeyRegistered = _ucUtils.registerHotkey(options, (win, key) => {
-    if (win === window) {
-      Services.obs.notifyObservers(
-        null,
-        "browser-set-toolbar-visibility",
-        JSON.stringify([
-          CustomizableUI.AREA_MENUBAR,
-          AutoHideMenubar._node.getAttribute("inactive"),
-        ])
-      );
-    }
+  let hotkeyRegistered = UC_API.Hotkeys.define({
+    ...options,
+    command: win => {
+      if (win === window) {
+        Services.obs.notifyObservers(
+          null,
+          "browser-set-toolbar-visibility",
+          JSON.stringify([
+            CustomizableUI.AREA_MENUBAR,
+            AutoHideMenubar._node.getAttribute("inactive"),
+          ])
+        );
+      }
+    },
   });
 
   function init() {

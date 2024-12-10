@@ -16,7 +16,7 @@ import { ScriptDetails } from "./ScriptDetails";
 const { gScriptUpdater } = ChromeUtils.importESModule(
   "chrome://userchrome/content/aboutuserchrome/modules/UCMSingletonData.sys.mjs"
 );
-const { _ucUtils: ucUtils } = ChromeUtils.importESModule(
+const { UC_API } = ChromeUtils.importESModule(
   "chrome://userchromejs/content/utils.sys.mjs"
 );
 
@@ -158,13 +158,13 @@ export const ScriptCard = ({
     [handle]
   );
   const toggleScript = useCallback(
-    () => ucUtils.toggleScript(script.filename),
+    () => UC_API.Scripts.toggleScript(script.filename),
     [script.filename]
   );
   const onNotification = useCallback(
     scriptHandle => {
       let remoteScriptData = scriptHandle.remoteFile
-        ? ucUtils.parseStringAsScriptInfo(
+        ? UC_API.Scripts.parseStringAsScriptInfo(
             scriptHandle.filename,
             scriptHandle.remoteFile
           )

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus.
@@ -47,44 +47,47 @@ class CopyCurrentURL {
       "@mozilla.org/widget/clipboardhelper;1",
       "nsIClipboardHelper"
     );
-    this.hotkey = _ucUtils.registerHotkey(this.config.shortcut, win => {
-      if (win === window) {
-        let val;
-        try {
-          let uri = win.gURLBar.makeURIReadable(win.gBrowser.currentURI);
-          if (uri.schemeIs("javascript") || uri.schemeIs("data")) {
-            val = win.gURLBar._lastValidURLStr || win.gURLBar.value;
-          } else {
-            val = uri.displaySpec;
-          }
-          if (val === "about:blank") {
+    this.hotkey = UC_API.Hotkeys.define({
+      ...this.config.shortcut,
+      command: win => {
+        if (win === window) {
+          let val;
+          try {
+            let uri = win.gURLBar.makeURIReadable(win.gBrowser.currentURI);
+            if (uri.schemeIs("javascript") || uri.schemeIs("data")) {
+              val = win.gURLBar._lastValidURLStr || win.gURLBar.value;
+            } else {
+              val = uri.displaySpec;
+            }
+            if (val === "about:blank") {
+              return;
+            }
+            if (win.UrlbarPrefs.get("decodeURLsOnCopy")) {
+              val = decodeURI(val);
+            }
+            if (!val) {
+              return;
+            }
+          } catch (error) {
             return;
           }
-          if (win.UrlbarPrefs.get("decodeURLsOnCopy")) {
-            val = decodeURI(val);
-          }
-          if (!val) {
-            return;
-          }
-        } catch (error) {
-          return;
-        }
-        this.ClipboardHelper.copyStringToClipboard(val, this.clipboard);
-        if (this.config["show confirmation hint"]) {
-          if (win.gURLBar.getAttribute("pageproxystate") == "valid") {
-            win.CustomHint?.show(win.gURLBar.inputField, "Copied", {
-              position: "after_start",
-              x: 16,
-            });
-          } else {
-            win.CustomHint?.show(
-              win.gIdentityHandler._identityIconBox,
-              "Copied",
-              { position: "bottomcenter topleft", y: 8 }
-            );
+          this.ClipboardHelper.copyStringToClipboard(val, this.clipboard);
+          if (this.config["show confirmation hint"]) {
+            if (win.gURLBar.getAttribute("pageproxystate") == "valid") {
+              win.CustomHint?.show(win.gURLBar.inputField, "Copied", {
+                position: "after_start",
+                x: 16,
+              });
+            } else {
+              win.CustomHint?.show(
+                win.gIdentityHandler._identityIconBox,
+                "Copied",
+                { position: "bottomcenter topleft", y: 8 }
+              );
+            }
           }
         }
-      }
+      },
     });
   }
 

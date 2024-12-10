@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:cfg
-// @version        1.2.7
+// @version        1.2.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -19,8 +19,8 @@ Compatible with my [appMenuAboutConfigButton][] script. That button will automat
 [aboutconfig module]: https://github.com/earthlng/aboutconfig
 [appMenuAboutConfigButton]: https://github.com/aminomancer/uc.css.js#app-menu-aboutconfig-button
 */
-// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/aboutCfg.uc.js
-// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/aboutCfg.uc.js
+// @downloadURL    https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/aboutCfg.sys.mjs
+// @updateURL      https://cdn.jsdelivr.net/gh/aminomancer/uc.css.js@master/JS/aboutCfg.sys.mjs
 // @license        This Source Code Form is subject to the terms of the Creative Commons Attribution-NonCommercial-ShareAlike International License, v. 4.0. If a copy of the CC BY-NC-SA 4.0 was not distributed with this file, You can obtain one at http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 // @backgroundmodule
 // ==/UserScript==
@@ -138,5 +138,3 @@ if (urlString) {
     AboutModuleFactory
   );
 }
-
-let EXPORTED_SYMBOLS = [];

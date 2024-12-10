@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Vertical Tabs Pane
-// @version        1.8.1
+// @version        1.8.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -2612,16 +2612,14 @@ When you collapse the pane with the unpin button, it collapses to a small width 
   }
 
   // make the hotkey (Ctrl+Alt+V by default)
-  if (config.hotkey.enabled && _ucUtils?.registerHotkey) {
-    _ucUtils.registerHotkey(
-      {
-        id: "key_toggleVerticalTabs",
-        modifiers: config.hotkey.modifiers,
-        key: config.hotkey.key,
-      },
-      (win, key) =>
-        Services.obs.notifyObservers(win, "vertical-tabs-pane-toggle")
-    );
+  if (config.hotkey.enabled && UC_API?.Hotkeys) {
+    UC_API.Hotkeys.define({
+      id: "key_toggleVerticalTabs",
+      modifiers: config.hotkey.modifiers,
+      key: config.hotkey.key,
+      command: win =>
+        Services.obs.notifyObservers(win, "vertical-tabs-pane-toggle"),
+    });
   }
 
   // make the main elements

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.5
+// @version        2.1.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -436,7 +436,7 @@
       let checkbox = panel
         .querySelector("#editBMPanel_newFolderBox")
         .appendChild(
-          _ucUtils.createElement(document, "checkbox", {
+          UC_API.Utils.createElement(document, "checkbox", {
             id: "editBookmarkPanel_persistLastLocation",
             label: "Remember last location",
             accesskey: "R",

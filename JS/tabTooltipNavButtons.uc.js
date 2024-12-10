@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.8
+// @version        1.2.9
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -332,7 +332,7 @@ class TabTooltipNav {
         .querySelector("#tabbrowser-tab-tooltip")
         .addEventListener("popupshowing", this);
     } else if (
-      !_ucUtils.getScriptData("urlbarTabUrlIndicator.uc.js")?.isEnabled
+      !UC_API.Scripts.getScriptData("urlbarTabUrlIndicator.uc.js")?.isEnabled
     ) {
       gBrowser.tabContainer.removeAttribute("tooltip");
     }

@@ -439,7 +439,7 @@ For linting/formatting, I use ESLint, Prettier, and Mozilla's ESLint plugin. All
 
 A manager for your userscripts. This allows you to automatically update scripts that include an `updateURL` or `downloadURL` field in their script metadata. Requires the content in [resources/aboutuserchrome](/resources/aboutuserchrome) to function. Visit `about:userchrome` to get started.
 
-#### [about:cfg](/JS/aboutCfg.uc.js):
+#### [about:cfg](/JS/aboutCfg.sys.mjs):
 
 Registers the old-school about:config page to the URL `about:cfg`. Intended for use with earthlng's [aboutconfig][] module.<details><summary>💬 **_More details..._**</summary>
 
@@ -1119,7 +1119,7 @@ When opening a new tab without selecting it, the tab will gain an attribute `not
 
 </details>
 
-#### [Update Notification Slayer](/JS/updateNotificationSlayer.uc.js):
+#### [Update Notification Slayer](/JS/updateNotificationSlayer.sys.mjs):
 
 Prevent "update available" notification popups; instead just create a badge on the app menu button (like the one that ordinarily appears once you dismiss the notification). This isn't required for the theme.<details><summary>💬 **_More details..._**</summary>
 
@@ -1276,11 +1276,11 @@ This script is entirely optional — some of my scripts take advantage of it, if
 
 </details>
 
-#### [Agent/Author Sheet Loader](/JS/userChromeAgentAuthorSheetLoader.uc.js):
+#### [Agent/Author Sheet Loader](/JS/userChromeAgentAuthorSheetLoader.sys.mjs):
 
 ✨ Required for loading [userChrome.ag.css](/userChrome.ag.css) and [userChrome.au.css](/userChrome.au.css), and therefore pretty much a non-negotiable requirement for duskFox. This script will actually load any file in the `chrome` folder that ends in `ag.css`, `au.css`, or `us.css`. Files ending in `au.css` will be loaded as author sheets, `ag.css` as agent sheets, and `us.css` as user sheets. User sheets are roughly equivalent to userChrome.css, so probably aren't necessary for anything, but the functionality is there in the unlikely event you ever need it. So you may add your own stylesheets simply by putting them in the `chrome` folder — no need to `@import` them. Stylesheets should be loaded in alphabetical order. Make sure you remove the files that come with fx-autoconfig in the `JS` folder, or you'll end up loading redundant stylesheets.
 
-#### [Browser Toolbox Stylesheet Loader](/JS/userChromeDevtoolsSheetLoader.uc.js):
+#### [Browser Toolbox Stylesheet Loader](/JS/userChromeDevtoolsSheetLoader.sys.mjs):
 
 ✨ Required for loading stylesheets into browser toolbox windows. If you want context menus in the devtools to look consistent with context menus elsewhere, grab this script. [See here](#styling-browser-toolbox-windows) for more info.
 
