@@ -272,7 +272,7 @@ function initUserChromeNotifications() {
             this.win.switchToTabHavingURI("about:userchrome", true);
           }
         },
-      });
+      }).autoAttach({ suppressOriginalKey: true });
     }
 
     #banner;

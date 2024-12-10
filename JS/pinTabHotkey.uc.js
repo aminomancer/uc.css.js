@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Pin Tab Hotkey
-// @version        1.1.2
+// @version        1.1.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Press Ctrl+Alt+P (or ⌘ ⌥ P on macOS) to pin/unpin selected tab(s). Configure by changing modifiers and key values below.
@@ -23,4 +23,4 @@ UC_API.Hotkeys.define({
         : gBrowser.pinMultiSelectedTabs();
     }
   },
-});
+}).autoAttach({ suppressOriginalKey: true });
