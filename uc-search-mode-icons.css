@@ -161,6 +161,22 @@ a rule for it. */
   &[engine="Reelgood"] {
     --search-engine-icon: url(chrome://userchrome/content/engines/reelgood.svg) !important;
   }
+
+  &[engine="Brave"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/brave.svg) !important;
+  }
+
+  &[engine="Firefox Add-ons"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/firefoxadd-ons.svg) !important;
+  }
+
+  &[engine="Etsy"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/etsy.svg) !important;
+  }
+
+  &[engine="Library Genesis"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/librarygenesis.svg) !important;
+  }
 }
 
 /* replace the contextMenuMods.uc.js icons for built-in engines */

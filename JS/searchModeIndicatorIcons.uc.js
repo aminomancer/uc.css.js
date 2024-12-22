@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.5.1
+// @version        1.5.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -133,6 +133,27 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (sss.sheetRegistered(uri, sss.AUTHOR_SHEET)) return;
       sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
     }
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      SearchUtils: "resource://gre/modules/SearchUtils.sys.mjs",
+    });
+    function getBuiltInEngineIcon(engine) {
+      let preferredWidth = 16;
+      if (!engine._iconMapObj) {
+        return undefined;
+      }
+      let availableWidths = Object.keys(engine._iconMapObj).map(k =>
+        parseInt(k)
+      );
+      if (!availableWidths.length) {
+        return undefined;
+      }
+      let bestWidth = lazy.SearchUtils.chooseIconSize(
+        preferredWidth,
+        availableWidths
+      );
+      return engine._iconMapObj[bestWidth];
+    }
     function handleDefaultEngine() {
       if (
         config[
@@ -178,7 +199,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
           let localIcon = findLocalEngineIcon(name);
           if (localIcon) return localIcon;
           let engine = Services.search.getEngineByName(name);
-          let installedIcon = engine?.iconURI?.spec;
+          let installedIcon = getBuiltInEngineIcon(engine);
           return installedIcon ? `url("${installedIcon}")` : false;
         }
         eval(
@@ -298,7 +319,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
                   engine._name === searchModeIndicatorFocused.textContent;
             let engine = engines.find(filterFn);
             // use the default icon if there is still no engine.
-            url = (engine && engine._iconURI?.spec) || defaultIcon;
+            url = (engine && getBuiltInEngineIcon(engine)) || defaultIcon;
           }
           // set a CSS property instead of setting icon directly so user can
           // modify it with userChrome.css
