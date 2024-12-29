@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Copy Current URL Hotkey
-// @version        1.2.7
+// @version        1.2.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Adds a new hotkey (Ctrl+Alt+C by default) that copies whatever is in the urlbar, even when it's not in focus.
@@ -88,7 +88,7 @@ class CopyCurrentURL {
           }
         }
       },
-    }).autoAttach({ suppressOriginalKey: true });
+    }).attachToWindow(window, { suppressOriginalKey: true });
   }
 
   get clipboard() {

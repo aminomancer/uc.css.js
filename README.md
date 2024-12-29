@@ -492,7 +492,7 @@ All the relevant CSS for this script is already included in and loaded by the sc
 
 #### [Vertical Tabs Pane](/JS/verticalTabsPane.uc.js):
 
-This script create a vertical pane across from the sidebar that functions like the vertical tabs pane in Microsoft Edge.<details><summary>💬 **_More details..._**</summary>
+This script create a vertical tabs pane. It's deprecated, as Firefox has a built-in vertical tabs pane now. It's just provided for those who are remaining on old Firefox versions.<details><summary>💬 **_More details..._**</summary>
 
 <img src="preview/prev-vertical-tabs-pane.webp"/>
 
