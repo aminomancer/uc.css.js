@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.4.0
+// @version        1.4.1
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of [Private Tab](https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js) by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
@@ -103,7 +103,7 @@ class PrivateTabManager {
     }
   }
 
-  exec() {
+  async exec() {
     if (PrivateBrowsingUtils.isWindowPrivate(window)) return;
     let openAll = document.getElementById(
       "placesContext_openBookmarkContainer:tabs"
@@ -165,7 +165,7 @@ class PrivateTabManager {
 
     if (location.href !== "chrome://browser/content/browser.xhtml") return;
 
-    UC_API.Hotkeys.define({
+    await UC_API.Hotkeys.define({
       modifiers: this.config.toggleModifiers,
       key: this.config.toggleHotkey,
       id: "togglePrivateTab-key",
@@ -174,9 +174,9 @@ class PrivateTabManager {
           win.privateTab.togglePrivate();
         }
       },
-    }).attachToWindow({ suppressOriginalKey: true });
+    }).attachToWindow(window, { suppressOriginalKey: true });
 
-    UC_API.Hotkeys.define({
+    await UC_API.Hotkeys.define({
       modifiers: this.config.newTabModifiers,
       key: this.config.newTabHotkey,
       id: "newPrivateTab-key",
@@ -185,7 +185,7 @@ class PrivateTabManager {
           win.privateTab.BrowserOpenTabPrivate();
         }
       },
-    }).attachToWindow({ suppressOriginalKey: true });
+    }).attachToWindow(window, { suppressOriginalKey: true });
 
     let toggleKey = document.getElementById("togglePrivateTab-key");
     let newPrivateTabKey = document.getElementById("newPrivateTab-key");
