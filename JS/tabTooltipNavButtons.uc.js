@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Tooltip Navigation Buttons
-// @version        1.2.9
+// @version        1.3.0
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -260,10 +260,6 @@ class TabTooltipNav {
   role="group"
   noautofocus="true"
   aria-labelledby="tab-nav-tooltip-label"
-  onpopupshowing="tabNavButtons.onPopupShowing(event);"
-  onpopupshown="tabNavButtons.onPopupShown(event);"
-  onpopuphidden="tabNavButtons.onPopupHidden(event);"
-  onmouseleave="tabNavButtons.onMouseleave(event);"
   consumeoutsideclicks="never">
   <hbox id="tab-nav-popup-body" class="panel-subview-body">
     ${this.config["Element order"]
@@ -274,24 +270,18 @@ class TabTooltipNav {
           id="tab-nav-back"
           class="toolbarbutton-1"
           tooltiptext='${l10n["Go Back (Single Tab)"]}'
-          oncommand="tabNavButtons.goBack(event)"
-          onclick="checkForMiddleClick(this, event);"
           context="tabBackForwardMenu"/>`;
           case "forward":
             return /* html */ `<toolbarbutton
           id="tab-nav-forward"
           class="toolbarbutton-1"
           tooltiptext='${l10n["Go Forward (Single Tab)"]}'
-          oncommand="tabNavButtons.goForward(event)"
-          onclick="checkForMiddleClick(this, event);"
           context="tabBackForwardMenu"/>`;
           case "reload":
             return /* html */ `<toolbarbutton
           id="tab-nav-reload"
           class="toolbarbutton-1"
-          tooltiptext='${l10n["Reload (Single Tab)"]}'
-          oncommand="tabNavButtons.reloadOrDuplicate(event)"
-          onclick="checkForMiddleClick(this, event);"/>`;
+          tooltiptext='${l10n["Reload (Single Tab)"]}'/>`;
           case "separator":
             return /* html */ `<separator id="tab-nav-separator" orient="vertical"/>`;
           case "text":
@@ -313,17 +303,41 @@ class TabTooltipNav {
       .join("\n")}
   </hbox>
 </panel>
-<menupopup
-  id="tabBackForwardMenu"
-  onpopupshowing="return tabNavButtons.fillHistoryMenu(event.target);"
-  onpopuphidden="tabNavButtons.onContextHidden();"
-  oncommand="tabNavButtons.gotoHistoryIndex(event); event.stopPropagation();"/>`;
+<menupopup id="tabBackForwardMenu"/>`;
     window.mainPopupSet.appendChild(
       MozXULElement.parseXULToFragment(this.markup)
     );
+    this.navPopup.addEventListener("popupshowing", e => this.onPopupShowing(e));
+    this.navPopup.addEventListener("popupshown", e => this.onPopupShown(e));
+    this.navPopup.addEventListener("popuphidden", e => this.onPopupHidden(e));
+    this.navPopup.addEventListener("mouseleave", e => this.onMouseleave(e));
     this.navPopup.removeAttribute("position");
     this.navPopup.removeAttribute("side");
     this.navPopup.removeAttribute("flip");
+    this.backButton.addEventListener("command", e => this.goBack(e));
+    this.backButton.addEventListener("click", e =>
+      checkForMiddleClick(this.backButton, e)
+    );
+    this.forwardButton.addEventListener("command", e => this.goForward(e));
+    this.forwardButton.addEventListener("click", e =>
+      checkForMiddleClick(this.forwardButton, e)
+    );
+    this.reloadButton.addEventListener("command", e =>
+      this.reloadOrDuplicate(e)
+    );
+    this.reloadButton.addEventListener("click", e =>
+      checkForMiddleClick(this.reloadButton, e)
+    );
+    this.tabBackForwardMenu.addEventListener("popupshowing", e =>
+      this.fillHistoryMenu(e.target)
+    );
+    this.tabBackForwardMenu.addEventListener("popuphidden", () =>
+      this.onContextHidden()
+    );
+    this.tabBackForwardMenu.addEventListener("command", e => {
+      this.gotoHistoryIndex(e);
+      e.stopPropagation();
+    });
     if (
       this.config["Show vanilla tooltip if modifier is not pressed"] &&
       /ctrl|alt|shift|meta|accel/.test(this.config["Modifier key"])
@@ -394,12 +408,12 @@ class TabTooltipNav {
       ? l10n["Reload (Multiselected)"]
       : l10n["Reload (Single Tab)"];
   }
-  onPopupShown(e) {
+  onPopupShown() {
     this.isOpen = true;
     this.captureKnownWidth();
     this.clearTimers();
   }
-  onPopupHidden(e) {
+  onPopupHidden() {
     this.isOpen = false;
     this.knownWidth = null;
     this.clearTimers();
@@ -407,7 +421,7 @@ class TabTooltipNav {
   // called when the context menu is closed for whatever reason. we
   // need to hide the whole nav popup if the context menu closes and
   // the mouse is now outside the valid bounds.
-  onContextHidden(e) {
+  onContextHidden() {
     this.menuOpen = false;
     this.onMouseleave();
   }

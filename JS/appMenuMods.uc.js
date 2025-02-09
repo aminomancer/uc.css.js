@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.4.6
+// @version        1.4.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu (the popup opened by clicking the hamburger button on the far right of the navbar). It adds a restart button to the app menu and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -56,47 +56,48 @@
         id: "appMenu-restart-button2",
         class: "subviewbutton",
         label: await strings.formatValue(["restart-button-label"]),
-        oncommand: /* javascript */ `
-          if (
-            event.shiftKey ||
-            (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey)
-          )
-            Services.appinfo.invalidateCachesOnRestart();
-          setTimeout(() => {
-            let cancelQuit = Cc["@mozilla.org/supports-PRBool;1"].createInstance(
-              Ci.nsISupportsPRBool
-            );
-            Services.obs.notifyObservers(
-              cancelQuit,
-              "quit-application-requested",
-              "restart"
-            );
-            Services.startup.quit(
-              Services.startup.eAttemptQuit | Services.startup.eRestart
-            );
-          }, 300);
-          PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
-          event.preventDefault();
-        `,
-        onclick: /* javascript */ `
-          if (event.button === 0) return;
+      });
+      restartButton.addEventListener("command", event => {
+        if (
+          event.shiftKey ||
+          (AppConstants.platform == "macosx" ? event.metaKey : event.ctrlKey)
+        ) {
           Services.appinfo.invalidateCachesOnRestart();
-          setTimeout(() => {
-            let cancelQuit = Cc["@mozilla.org/supports-PRBool;1"].createInstance(
-              Ci.nsISupportsPRBool
-            );
-            Services.obs.notifyObservers(
-              cancelQuit,
-              "quit-application-requested",
-              "restart"
-            );
-            Services.startup.quit(
-              Services.startup.eAttemptQuit | Services.startup.eRestart
-            );
-          }, 300);
-          PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
-          event.preventDefault();
-        `,
+        }
+        setTimeout(() => {
+          let cancelQuit = Cc["@mozilla.org/supports-PRBool;1"].createInstance(
+            Ci.nsISupportsPRBool
+          );
+          Services.obs.notifyObservers(
+            cancelQuit,
+            "quit-application-requested",
+            "restart"
+          );
+          Services.startup.quit(
+            Services.startup.eAttemptQuit | Services.startup.eRestart
+          );
+        }, 300);
+        PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
+        event.preventDefault();
+      });
+      restartButton.addEventListener("click", event => {
+        if (event.button === 0) return;
+        Services.appinfo.invalidateCachesOnRestart();
+        setTimeout(() => {
+          let cancelQuit = Cc["@mozilla.org/supports-PRBool;1"].createInstance(
+            Ci.nsISupportsPRBool
+          );
+          Services.obs.notifyObservers(
+            cancelQuit,
+            "quit-application-requested",
+            "restart"
+          );
+          Services.startup.quit(
+            Services.startup.eAttemptQuit | Services.startup.eRestart
+          );
+        }, 300);
+        PanelMultiView.forNode(this.closest("panelmultiview")).hidePopup();
+        event.preventDefault();
       });
       let exitButton = document.getElementById("appMenu-quit-button2");
       if (exitButton) {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.5
+// @version        2.1.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -144,16 +144,6 @@ class UndoListInTabmenu {
   constructor() {
     this.create = UC_API.Utils.createElement;
     this.config = UndoListInTabmenu.config;
-    XPCOMUtils.defineLazyPreferenceGetter(
-      this,
-      "closedTabsFromClosedWindowsEnabled",
-      "browser.sessionstore.closedTabsFromClosedWindows"
-    );
-    XPCOMUtils.defineLazyPreferenceGetter(
-      this,
-      "closedTabsFromAllWindowsEnabled",
-      "browser.sessionstore.closedTabsFromAllWindows"
-    );
     this.registerSheet();
     // set up context menu for TST, if it's installed. it'll set up even if TST
     // is disabled, since otherwise we'd have to listen for addon
@@ -290,10 +280,11 @@ class UndoListInTabmenu {
       "data-l10n-id": "menu-history-undo-window-menu",
     });
     undoItem.after(windowMenu);
-    windowMenu.appendChild(
-      this.create(document, "menupopup", {
-        onpopupshowing: `undoTabMenu.populateSubmenu(this, "Window");`,
-      })
+    let windowMenuPopup = windowMenu.appendChild(
+      this.create(document, "menupopup")
+    );
+    windowMenuPopup.addEventListener("popupshowing", e =>
+      this.populateSubmenu(e.target, "Window")
     );
     // Recently Closed Tabs
     let tabMenu = this.create(document, "menu", {
@@ -302,10 +293,9 @@ class UndoListInTabmenu {
       "data-l10n-id": "menu-history-undo-menu",
     });
     undoItem.after(tabMenu);
-    tabMenu.appendChild(
-      this.create(document, "menupopup", {
-        onpopupshowing: `undoTabMenu.populateSubmenu(this, "Tab");`,
-      })
+    let tabMenuPopup = tabMenu.appendChild(this.create(document, "menupopup"));
+    tabMenuPopup.addEventListener("popupshowing", e =>
+      this.populateSubmenu(e.target, "Tab")
     );
     // every time the context menu opens, handle access keys and enabling/disabling
     // of the menus. menus need to be hidden if there aren't any recently closed
@@ -387,9 +377,10 @@ class UndoListInTabmenu {
     context.appendChild(this.sidebarTabMenu);
 
     this.sidebarContextUndoListPopup = this.sidebarTabMenu.appendChild(
-      this.create(doc, "menupopup", {
-        onpopupshowing: `window.top.undoTabMenu.populateSidebarSubmenu(this, "Tab")`,
-      })
+      this.create(doc, "menupopup")
+    );
+    this.sidebarContextUndoListPopup.addEventListener("popupshowing", e =>
+      this.populateSidebarSubmenu(e.target, "Tab")
     );
 
     // Recently Closed Windows
@@ -406,9 +397,10 @@ class UndoListInTabmenu {
     context.appendChild(this.sidebarWindowMenu);
 
     this.sidebarUndoWindowPopup = this.sidebarWindowMenu.appendChild(
-      this.create(doc, "menupopup", {
-        onpopupshowing: `window.top.undoTabMenu.populateSidebarSubmenu(this, "Window")`,
-      })
+      this.create(doc, "menupopup")
+    );
+    this.sidebarUndoWindowPopup.addEventListener("popupshowing", e =>
+      this.populateSidebarSubmenu(e.target, "Window")
     );
   }
 
@@ -486,21 +478,11 @@ class UndoListInTabmenu {
     // need to create the elements *inside* the sidebar document or else they're
     // missing a bunch of class methods, like content optimizations. the only
     // way I could find to get them to render properly is to iterate over the
-    // fragment, building a new tree as we go. also, since the "oncommand"
-    // callbacks need access to global objects like gBrowser which don't exist
-    // in the context menu's scope, we need to use addEventListener instead of
-    // setting "oncommand" attributes. so when we get to "oncommand" we just
-    // parse its value into an anonymous function and attach it in THIS scope.
+    // fragment, building a new tree as we go.
     Object.values(fragment.children).forEach(item => {
       let newItem = popup.ownerDocument.createXULElement(item.tagName);
       Object.values(item.attributes).forEach(attribute => {
         if (attribute.name === "key") return;
-        if (attribute.name === "oncommand") {
-          return newItem.addEventListener(
-            "command",
-            new Function("event", attribute.value)
-          );
-        }
         newItem.setAttribute(attribute.name, attribute.value);
       });
       popup.appendChild(newItem);
@@ -509,6 +491,27 @@ class UndoListInTabmenu {
     popup.lastChild.accessKey = popup.lastChild.label.substr(0, 1) || "R";
   }
   modMethods() {
+    if (RecentlyClosedTabsAndWindowsMenuUtils._ucjsModded) return;
+    RecentlyClosedTabsAndWindowsMenuUtils._ucjsModded = true;
+
+    const lazy = {};
+    ChromeUtils.defineESModuleGetters(lazy, {
+      PlacesUIUtils: "resource:///modules/PlacesUIUtils.sys.mjs",
+      PrivateBrowsingUtils:
+        "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
+      SessionStore: "resource:///modules/sessionstore/SessionStore.sys.mjs",
+    });
+    XPCOMUtils.defineLazyPreferenceGetter(
+      lazy,
+      "closedTabsFromClosedWindowsEnabled",
+      "browser.sessionstore.closedTabsFromClosedWindows"
+    );
+    XPCOMUtils.defineLazyPreferenceGetter(
+      lazy,
+      "closedTabsFromAllWindowsEnabled",
+      "browser.sessionstore.closedTabsFromAllWindows"
+    );
+
     Object.defineProperty(RecentlyClosedTabsAndWindowsMenuUtils, "l10n", {
       configurable: true,
       enumerable: true,
@@ -535,7 +538,7 @@ class UndoListInTabmenu {
       let element = aDocument.createXULElement(aTagName);
       element.setAttribute("label", aMenuLabel);
       if (aClosedTab.image) {
-        const iconURL = PlacesUIUtils.getImageURL(aClosedTab.image);
+        const iconURL = lazy.PlacesUIUtils.getImageURL(aClosedTab.image);
         element.setAttribute("image", iconURL);
       }
       element.setAttribute("value", aIndex);
@@ -548,26 +551,32 @@ class UndoListInTabmenu {
           "class",
           "menuitem-iconic bookmark-item menuitem-with-favicon"
         );
+      } else if (aTagName == "toolbarbutton") {
+        element.setAttribute(
+          "class",
+          "subviewbutton subviewbutton-iconic bookmark-item"
+        );
       }
       element.classList.add("recently-closed-item");
 
       if (aIsWindowsFragment) {
-        element.setAttribute("oncommand", `undoCloseWindow("${aIndex}");`);
+        element.addEventListener("command", event =>
+          event.target.ownerGlobal.undoCloseWindow(aIndex)
+        );
       } else if (typeof aClosedTab.sourceClosedId == "number") {
         // sourceClosedId is used to look up the closed window to remove it when the tab is restored
         let { sourceClosedId } = aClosedTab;
         element.setAttribute("source-closed-id", sourceClosedId);
         element.setAttribute("value", aClosedTab.closedId);
-        element.removeAttribute("oncommand");
         element.addEventListener(
           "command",
           event => {
-            SessionStore.undoClosedTabFromClosedWindow(
+            lazy.SessionStore.undoClosedTabFromClosedWindow(
               { sourceClosedId },
               aClosedTab.closedId
             );
             if (event.button === 1) {
-              gBrowser.moveTabToEnd();
+              aDocument.ownerGlobal.gBrowser.moveTabToEnd();
             }
           },
           { once: true }
@@ -577,24 +586,24 @@ class UndoListInTabmenu {
         let { sourceWindowId } = aClosedTab;
         element.setAttribute("value", aIndex);
         element.setAttribute("source-window-id", sourceWindowId);
-        element.setAttribute(
-          "oncommand",
-          `undoCloseTab(${aIndex}, "${sourceWindowId}");if(event.button === 1){gBrowser.moveTabToEnd()};`
-        );
+        element.addEventListener("command", event => {
+          event.target.ownerGlobal.undoCloseTab(aIndex, sourceWindowId);
+          if (event.button === 1) {
+            aDocument.ownerGlobal.gBrowser.moveTabToEnd();
+          }
+        });
       }
 
-      let tabData;
-      tabData = aIsWindowsFragment ? aClosedTab : aClosedTab.state;
+      let tabData = aIsWindowsFragment ? aClosedTab : aClosedTab.state;
       let activeIndex = (tabData.index || tabData.entries.length) - 1;
       if (activeIndex >= 0 && tabData.entries[activeIndex]) {
         element.setAttribute("targetURI", tabData.entries[activeIndex].url);
       }
       if (aTagName != "menuitem") {
-        element.setAttribute(
-          "onclick",
-          `undoTabSubmenu.on${
-            aIsWindowsFragment ? "Window" : "Tab"
-          }ItemClick(event)`
+        element.addEventListener("click", e =>
+          aDocument.ownerGlobal.undoTabSubmenu[
+            `on${aIsWindowsFragment ? "Window" : "Tab"}ItemClick`
+          ](e)
         );
       }
       if (!forContext && aTagName != "menuitem") {
@@ -609,9 +618,10 @@ class UndoListInTabmenu {
           );
         }
       }
-      let identity = ContextualIdentityService?.getPublicIdentityFromId(
-        tabData.userContextId
-      );
+      let identity =
+        aDocument.ownerGlobal.ContextualIdentityService?.getPublicIdentityFromId(
+          tabData.userContextId
+        );
       if (identity && identity.color) {
         element.setAttribute("usercontextid", identity.userContextId);
         element.classList.add(`identity-color-${identity.color}`);
@@ -621,31 +631,32 @@ class UndoListInTabmenu {
     RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry = function (
       aDocument,
       aFragment,
-      aPrefixRestoreAll,
       aIsWindowsFragment,
       aRestoreAllLabel,
       aTagName
     ) {
       let restoreAllElements = aDocument.createXULElement(aTagName);
       restoreAllElements.classList.add("restoreallitem");
+      if (aTagName == "toolbarbutton") {
+        restoreAllElements.classList.add(
+          "subviewbutton",
+          "panel-subview-footer-button"
+        );
+      }
       restoreAllElements.setAttribute(
         "label",
-        RecentlyClosedTabsAndWindowsMenuUtils.l10n.formatValueSync(
-          aRestoreAllLabel
-        )
+        this.l10n.formatValueSync(aRestoreAllLabel)
       );
       restoreAllElements.addEventListener(
         "command",
         aIsWindowsFragment
-          ? RecentlyClosedTabsAndWindowsMenuUtils.onRestoreAllWindowsCommand
-          : RecentlyClosedTabsAndWindowsMenuUtils.onRestoreAllTabsCommand
+          ? this.onRestoreAllWindowsCommand
+          : this.onRestoreAllTabsCommand
       );
-      if (aPrefixRestoreAll) {
-        aFragment.insertBefore(restoreAllElements, aFragment.firstChild);
-      } else {
+      if (aTagName == "menuitem") {
         aFragment.appendChild(aDocument.createXULElement("menuseparator"));
-        aFragment.appendChild(restoreAllElements);
       }
+      aFragment.appendChild(restoreAllElements);
     };
     RecentlyClosedTabsAndWindowsMenuUtils.getWindowsFragment = function (
       aWindow,
@@ -653,18 +664,17 @@ class UndoListInTabmenu {
       aPrefixRestoreAll = false,
       forContext
     ) {
-      let closedWindowData = SessionStore.getClosedWindowData();
+      let closedWindowData = lazy.SessionStore.getClosedWindowData();
       let doc = aWindow.document;
       let fragment = doc.createDocumentFragment();
       if (closedWindowData.length) {
         for (let i = 0; i < closedWindowData.length; i++) {
           const { selected, tabs, title, isPopup } = closedWindowData[i];
           const selectedTab = tabs[selected - 1];
-          let menuLabel =
-            RecentlyClosedTabsAndWindowsMenuUtils.l10n.formatValueSync(
-              "recently-closed-undo-close-window-label",
-              { tabCount: tabs.length - 1, winTitle: title }
-            );
+          let menuLabel = this.l10n.formatValueSync(
+            "recently-closed-undo-close-window-label",
+            { tabCount: tabs.length - 1, winTitle: title }
+          );
           if (UndoListInTabmenu.config.l10n["Popup window label"] && isPopup) {
             menuLabel = `${menuLabel} ${UndoListInTabmenu.config.l10n["Popup window label"]}`;
           }
@@ -674,7 +684,7 @@ class UndoListInTabmenu {
             UndoListInTabmenu.config["Include popup windows"] ||
             !forContext
           ) {
-            RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
+            this.createEntry(
               aTagName,
               true,
               i,
@@ -687,10 +697,9 @@ class UndoListInTabmenu {
           }
         }
 
-        RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry(
+        this.createRestoreAllEntry(
           doc,
           fragment,
-          aPrefixRestoreAll,
           true,
           aTagName == "menuitem"
             ? "recently-closed-menu-reopen-all-windows"
@@ -707,23 +716,23 @@ class UndoListInTabmenu {
       forContext
     ) {
       let doc = aWindow.document;
-      const isPrivate = PrivateBrowsingUtils.isWindowPrivate(aWindow);
+      const isPrivate = lazy.PrivateBrowsingUtils.isWindowPrivate(aWindow);
       let fragment = doc.createDocumentFragment();
       let isEmpty = true;
       if (
-        SessionStore.getClosedTabCount({
+        lazy.SessionStore.getClosedTabCount({
           sourceWindow: aWindow,
           closedTabsFromClosedWindows: false,
         })
       ) {
         isEmpty = false;
-        const browserWindows = this.closedTabsFromAllWindowsEnabled
-          ? SessionStore.getWindows(aWindow)
+        const browserWindows = lazy.closedTabsFromAllWindowsEnabled
+          ? lazy.SessionStore.getWindows(aWindow)
           : [aWindow];
         for (const win of browserWindows) {
-          let closedTabs = SessionStore.getClosedTabDataForWindow(win);
+          let closedTabs = lazy.SessionStore.getClosedTabDataForWindow(win);
           for (let i = 0; i < closedTabs.length; i++) {
-            RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
+            this.createEntry(
               aTagName,
               false,
               i,
@@ -738,13 +747,14 @@ class UndoListInTabmenu {
 
         if (
           !isPrivate &&
-          this.closedTabsFromClosedWindowsEnabled &&
-          SessionStore.getClosedTabCountFromClosedWindows()
+          lazy.closedTabsFromClosedWindowsEnabled &&
+          lazy.SessionStore.getClosedTabCountFromClosedWindows()
         ) {
           isEmpty = false;
-          const closedTabs = SessionStore.getClosedTabDataFromClosedWindows();
+          const closedTabs =
+            lazy.SessionStore.getClosedTabDataFromClosedWindows();
           for (let i = 0; i < closedTabs.length; i++) {
-            RecentlyClosedTabsAndWindowsMenuUtils.createEntry(
+            this.createEntry(
               aTagName,
               false,
               i,
@@ -758,10 +768,9 @@ class UndoListInTabmenu {
         }
 
         if (!isEmpty) {
-          RecentlyClosedTabsAndWindowsMenuUtils.createRestoreAllEntry(
+          this.createRestoreAllEntry(
             doc,
             fragment,
-            aPrefixRestoreAll,
             false,
             aTagName == "menuitem"
               ? "recently-closed-menu-reopen-all-tabs"

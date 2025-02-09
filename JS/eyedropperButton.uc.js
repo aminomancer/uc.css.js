@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Eyedropper Button
-// @version        1.0.7
+// @version        1.0.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Adds a toolbar button that implements the color picker without launching the devtools. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. Also adds a customizable hotkey to do the same — by default, it's Ctrl+Shift+Y (or ⌘+⇧+Y on macOS)
@@ -26,8 +26,8 @@ class EyedropperButton {
     id: "key_eyedropper",
   };
   constructor() {
-    this.makeBundles();
     this.makeHotkey();
+    this.makeBundles();
     Services.obs.addObserver(this, "uc-eyedropper-started");
     if (gBrowserInit.delayedStartupFinished) this.afterLazyStartup();
     else Services.obs.addObserver(this, "browser-delayed-startup-finished");
@@ -60,22 +60,6 @@ class EyedropperButton {
       ))
     );
   }
-  // "Ctrl+Shift+Y"
-  get shortcutString() {
-    return (
-      this._shortcutString ||
-      (this._shortcutString = this.hotkey
-        ? ` (${ShortcutUtils.prettifyShortcut(this.keyEl)})`
-        : "")
-    );
-  }
-  // "Grab a color from the page (%S)"
-  get tooltipWithShortcut() {
-    return (
-      this._tooltipWithShortcut ||
-      (this._tooltipWithShortcut = this.tooltipString + this.shortcutString)
-    );
-  }
   get devToolsMenu() {
     return (
       this._devToolsMenu ||
@@ -88,15 +72,15 @@ class EyedropperButton {
       (this._mainMenuItem = document.getElementById("menu_eyedropper") || null)
     );
   }
-  get keyEl() {
-    return this._keyEl || (this._keyEl = window[this.shortcut.id]);
-  }
   makeHotkey() {
     this.hotkey = UC_API.Hotkeys.define({
       ...this.shortcut,
       command: win =>
         Services.obs.notifyObservers(win, "uc-eyedropper-started"),
-    }).attachToWindow(window, { suppressOriginalKey: true });
+    });
+    this.hotkeyPromise = this.hotkey.attachToWindow(window, {
+      suppressOriginalKey: true,
+    });
   }
   makeWidget() {
     if (CustomizableUI.getPlacementOfWidget("eyedropper-button", true)) return;
@@ -105,7 +89,12 @@ class EyedropperButton {
       type: "button",
       defaultArea: CustomizableUI.AREA_NAVBAR,
       label: this.labelString,
-      tooltiptext: this.tooltipWithShortcut,
+      tooltiptext: `${this.getString(
+        "inspector.eyedropper.label",
+        "inspector"
+      )} (${ShortcutUtils.prettifyShortcut(
+        document.getElementById(this.shortcut.id)
+      )})`,
       localized: false,
       onCommand: e => {
         Services.obs.notifyObservers(e.view, "uc-eyedropper-started");
@@ -119,13 +108,14 @@ class EyedropperButton {
     this.mainMenuItem.setAttribute("key", this.shortcut.id);
     this.mainMenuItem.removeAttribute("type");
   }
-  afterLazyStartup() {
+  async afterLazyStartup() {
     // Unfortunately this produces a benign console error in the devtools.
     // No way around it, but it doesn't actually prevent the tool from working.
     Services.obs.notifyObservers(
       PanelMultiView.getViewNode(document, "appmenu-developer-tools-view"),
       "web-developer-tools-view-showing"
     );
+    await this.hotkeyPromise;
     this.makeWidget();
     if (this.mainMenuItem) {
       this.setShortcutLabel();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Hide Tracking Protection Icon on Custom New Tab Page
-// @version        1.3.5
+// @version        1.3.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -66,11 +66,10 @@ But if the script is installed, it will restore the built-in behavior of hiding 
     }
     constructor() {
       const lazy = {};
-      ChromeUtils.defineModuleGetter(
-        lazy,
-        "ContentBlockingAllowList",
-        "resource://gre/modules/ContentBlockingAllowList.jsm"
-      );
+      ChromeUtils.defineESModuleGetters(lazy, {
+        ContentBlockingAllowList:
+          "resource://gre/modules/ContentBlockingAllowList.sys.mjs",
+      });
       XPCOMUtils.defineLazyPreferenceGetter(
         this,
         "hideBookmarks",

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Floating Sidebar Resizer
-// @version        1.3.4
+// @version        1.3.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -36,8 +36,6 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
     // invisible little bar by which to drag the sidebar to resize it
     let resizer = document.createElement("div");
     let frame = false;
-    let startWidth;
-    let startX;
 
     function initDrag(e) {
       // this is not directly visible since the element has no background or
@@ -46,11 +44,6 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
       resizer.style.width = "200%";
       // we want the resizer to expand massively in both directions.
       resizer.style.marginInline = "-100%";
-      startX = e.screenX;
-      startWidth = parseInt(
-        document.defaultView.getComputedStyle(box).width,
-        10
-      );
       document.documentElement.addEventListener("mousemove", doDrag, true);
       document.documentElement.addEventListener("mouseup", stopDrag);
     }
@@ -62,9 +55,10 @@ It's sort of like plucking the sidebar out of the flexbox. The separator moves a
       frame = true;
       requestAnimationFrame(() => {
         if (window.SidebarController._positionStart) {
-          box.style.width = `${startWidth + e.screenX - startX}px`;
+          // use pixel values so we can memoize them in prefs
+          box.style.width = `${e.clientX}px`;
         } else {
-          box.style.width = `${startWidth - e.screenX + startX}px`;
+          box.style.width = `${window.innerWidth - e.clientX}px`;
         }
         frame = false;
       });

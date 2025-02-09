@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.6
+// @version        2.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -311,15 +311,18 @@
       );
     }
     anchorBookmarksTooltip() {
-      BookmarksEventHandler.fillInBHTooltip = function (aDocument, aEvent) {
+      BookmarksEventHandler.fillInBHTooltip = function (aTooltip, aEvent) {
         var node;
         var cropped = false;
         var targetURI;
-        let tooltip = aEvent.target;
-        if (tooltip.triggerNode.localName == "treechildren") {
-          var tree = tooltip.triggerNode.parentNode;
+
+        if (aTooltip.triggerNode.localName == "treechildren") {
+          var tree = aTooltip.triggerNode.parentNode;
           var cell = tree.getCellAt(aEvent.clientX, aEvent.clientY);
-          if (cell.row == -1) return false;
+          if (cell.row == -1) {
+            aEvent.preventDefault();
+            return;
+          }
           node = tree.view.nodeForTreeIndex(cell.row);
           cropped = tree.isCellCropped(cell.row, cell.col);
           // get coordinates for the cell in a tree.
@@ -329,17 +332,37 @@
             "cell"
           );
         } else {
-          var tooltipNode = tooltip.triggerNode;
-          if (tooltipNode._placesNode) node = tooltipNode._placesNode;
-          else targetURI = tooltipNode.getAttribute("targetURI");
+          // Check whether the tooltipNode is a Places node.
+          // In such a case use it, otherwise check for targetURI attribute.
+          var tooltipNode = aTooltip.triggerNode;
+          if (tooltipNode._placesNode) {
+            node = tooltipNode._placesNode;
+          } else {
+            // This is a static non-Places node.
+            targetURI = tooltipNode.getAttribute("targetURI");
+          }
         }
-        if (!node && !targetURI) return false;
+
+        if (!node && !targetURI) {
+          aEvent.preventDefault();
+          return;
+        }
+
+        // Show node.label as tooltip's title for non-Places nodes.
         var title = node ? node.title : tooltipNode.label;
+
+        // Show URL only for Places URI-nodes or nodes with a targetURI attribute.
         var url;
         if (targetURI || PlacesUtils.nodeIsURI(node)) {
           url = targetURI || node.uri;
         }
-        if (!cropped && !url) return false;
+
+        // Show tooltip for containers only if their title is cropped.
+        if (!cropped && !url) {
+          aEvent.preventDefault();
+          return;
+        }
+
         aEvent.target.setAttribute("position", "after_start");
         if (tooltipNode) {
           aEvent.target.moveToAnchor(tooltipNode, "after_start");
@@ -350,13 +373,21 @@
             cellCoords.bottom + tree.screenY
           );
         }
+
         let tooltipTitle = aEvent.target.querySelector(".places-tooltip-title");
         tooltipTitle.hidden = !title || title == url;
-        if (!tooltipTitle.hidden) tooltipTitle.textContent = title;
+        if (!tooltipTitle.hidden) {
+          tooltipTitle.textContent = title;
+        }
+
         let tooltipUrl = aEvent.target.querySelector(".places-tooltip-uri");
         tooltipUrl.hidden = !url;
-        if (!tooltipUrl.hidden) tooltipUrl.value = url;
-        return true;
+        if (!tooltipUrl.hidden) {
+          // Use `value` instead of `textContent` so cropping will apply
+          tooltipUrl.value = url;
+        }
+
+        // Show tooltip.
       };
     }
     modCtrlTabMethods() {
@@ -442,9 +473,14 @@
             accesskey: "R",
             tooltiptext:
               "Update the default bookmark folder when you change it. If unchecked, the folder chosen when this was checked will remain the default folder indefinitely.",
-            oncommand: `Services.prefs.setBoolPref("userChrome.bookmarks.editDialog.persistLastLocation", this.checked)`,
           })
         );
+      checkbox.addEventListener("command", () =>
+        Services.prefs.setBoolPref(
+          "userChrome.bookmarks.editDialog.persistLastLocation",
+          checkbox.checked
+        )
+      );
       panel.addEventListener("popupshowing", e => {
         if (e.target !== panel) return;
         let pref = Services.prefs.getBoolPref(
@@ -467,10 +503,13 @@
       let indicator = document.querySelector(
         ".private-browsing-indicator-with-label"
       );
-      let markup = /* html */ `<toolbarbutton class="private-browsing-indicator-with-label"
-                                data-l10n-id="private-browsing-indicator-tooltip"
-                                oncommand="openHelpLink('private-browsing-myths')" />`;
-      indicator.replaceWith(MozXULElement.parseXULToFragment(markup));
+      let fragment = MozXULElement.parseXULToFragment(
+        /* html */ `<toolbarbutton class="private-browsing-indicator-with-label" data-l10n-id="private-browsing-indicator-tooltip" />`
+      );
+      fragment.firstElementChild.addEventListener("command", () =>
+        openHelpLink("private-browsing-myths")
+      );
+      indicator.replaceWith(fragment);
     }
     permsPopupInFullscreen() {
       gPermissionPanel._initializePopup();
@@ -496,9 +535,9 @@
     }
     containerIconsOnMultiselectedTabs() {
       const lazy = {};
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
+      ChromeUtils.defineESModuleGetters(lazy, {
         ContextualIdentityService:
-          "resource://gre/modules/ContextualIdentityService.jsm",
+          "resource://gre/modules/ContextualIdentityService.sys.mjs",
       });
       if (lazy.ContextualIdentityService.hasOwnProperty("setTabStyle")) return;
       lazy.ContextualIdentityService.setTabStyle = function (tab) {

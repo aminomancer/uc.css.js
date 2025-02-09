@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore pre-Proton Tab Sound Button
-// @version        2.4.3
+// @version        2.4.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -205,8 +205,8 @@ override chrome://browser/content/tabbrowser/tab.js ../resources/tabMods.uc.js
       attributeName = "tooltiptext";
       args = { tabCount };
       align = rect.right - tabRect.left < 250;
-    } else if (tab._overPlayingIcon) {
-      let icon = tab.soundPlayingIcon || tab.overlayIcon;
+    } else if (tab._overPlayingIcon || tab._overAudioButton) {
+      let icon = tab.audioButton || tab.overlayIcon;
       let rect = windowUtils.getBoundsWithoutFlushing(icon);
       args = { tabCount };
       if (contextTabInSelection) {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           All Tabs Menu Expansion Pack
-// @version        2.1.9
+// @version        2.2.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -38,11 +38,9 @@ All the relevant CSS for this is already included in and loaded by the script. I
   let reversePref = "userChrome.tabs.all-tabs-menu.reverse-order";
   let skipShowAllPref = "userChrome.ctrlTab.skip-show-all-button";
   const lazy = {};
-  ChromeUtils.defineModuleGetter(
-    lazy,
-    "TabsPanel",
-    "resource:///modules/TabsList.jsm"
-  );
+  ChromeUtils.defineESModuleGetters(lazy, {
+    TabsPanel: "resource:///modules/TabsList.sys.mjs",
+  });
 
   /**
    * create a DOM node with given parameters
@@ -358,7 +356,7 @@ All the relevant CSS for this is already included in and loaded by the script. I
             icon.setAttribute("type", "local-page");
             icon.hidden = false;
             return;
-          case "about":
+          case "about": {
             let pathQueryRef = docURI?.pathQueryRef;
             if (
               pathQueryRef &&
@@ -376,6 +374,7 @@ All the relevant CSS for this is already included in and loaded by the script. I
             icon.setAttribute("type", "about-page");
             icon.hidden = false;
             return;
+          }
           case "moz-extension":
             icon.setAttribute("type", "extension-page");
             icon.hidden = false;
@@ -640,13 +639,14 @@ All the relevant CSS for this is already included in and loaded by the script. I
           this._tabAttrModified(e.target);
           break;
         case "TabHide":
-        case "TabShow":
+        case "TabShow": {
           this._tabAttrModified(e.target);
           let item = this.tabToElement.get(e.target);
           if (item) {
             item.scrollIntoView({ block: "nearest", behavior: "smooth" });
           }
           break;
+        }
         case "TabClose":
           this._tabClose(e.target);
           break;

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Debug Extension in Toolbar Context Menu
-// @version        1.5.2
+// @version        1.5.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -158,28 +158,42 @@ class DebugExtension {
   // enable/disable menu items depending on whether the clicked extension has
   // pages available to open.
   handleEvent(e) {
-    if (e.target !== e.currentTarget) return;
-    let popup = e.target;
-    let id = this.getExtensionId(popup);
-    if (!id) return;
-    let { extension } = WebExtensionPolicy.getByID(id);
-    let actions = new Map();
-    for (let type of this.actionTypes) {
-      actions.set(type, this.getActionURL(extension, type));
-    }
-    let { classPrefix } = this.getMenuDetails(popup);
-    if (popup.className.includes("Submenu-Popup")) {
-      actions.forEach((url, type) => {
-        popup.querySelector(`.${classPrefix}-${type}`).disabled = !url;
-      });
-    } else {
-      popup.querySelector(`.${classPrefix}-ViewDocs-Submenu`).disabled = [
-        ...actions.values(),
-      ].every(url => !url);
-      popup.querySelector(`.${classPrefix}-ViewSource`).disabled =
-        extension.addonData.isSystem ||
-        extension.addonData.builtIn ||
-        extension.addonData.temporarilyInstalled;
+    let { target } = e;
+    switch (e.type) {
+      case "popupshowing": {
+        if (target !== e.currentTarget) return;
+        let popup = target;
+        let id = this.getExtensionId(popup);
+        if (!id) return;
+        let { extension } = WebExtensionPolicy.getByID(id);
+        let actions = new Map();
+        for (let type of this.actionTypes) {
+          actions.set(type, this.getActionURL(extension, type));
+        }
+        let { classPrefix } = this.getMenuDetails(popup);
+        if (popup.className.includes("Submenu-Popup")) {
+          actions.forEach((url, type) => {
+            popup.querySelector(`.${classPrefix}-${type}`).disabled = !url;
+          });
+        } else {
+          popup.querySelector(`.${classPrefix}-ViewDocs-Submenu`).disabled = [
+            ...actions.values(),
+          ].every(url => !url);
+          popup.querySelector(`.${classPrefix}-ViewSource`).disabled =
+            extension.addonData.isSystem ||
+            extension.addonData.builtIn ||
+            extension.addonData.temporarilyInstalled;
+        }
+        break;
+      }
+      case "command": {
+        this.onCommand(
+          e,
+          target.parentElement,
+          target.getAttribute("page-type")
+        );
+        break;
+      }
     }
   }
   getMenuDetails(popup) {
@@ -239,12 +253,13 @@ class DebugExtension {
     let { contexttype, classPrefix } = this.getMenuDetails(popup);
     let item = document.createXULElement("menuitem");
     this.maybeSetAttributes(item, {
+      "page-type": type,
       class: `${classPrefix}-${type}`,
       label: this.config[type].label,
       accesskey: this.config[type].accesskey,
-      oncommand: `debugExtensionMenu.onCommand(event, this.parentElement, "${type}")`,
       contexttype,
     });
+    item.addEventListener("command", this);
     popup.appendChild(item);
     return item;
   }

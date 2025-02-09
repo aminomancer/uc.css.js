@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Open Link in Unloaded Tab (context menu item)
-// @version        1.5.6
+// @version        1.5.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -54,8 +54,8 @@ const unloadedTabMenuL10n = {
 
 class UnloadedTabMenuBase {
   constructor() {
-    XPCOMUtils.defineLazyModuleGetters(this, {
-      E10SUtils: `resource://gre/modules/E10SUtils.jsm`,
+    ChromeUtils.defineESModuleGetters(this, {
+      E10SUtils: "resource://gre/modules/E10SUtils.sys.mjs",
     });
 
     this.useLinkPref = `userChrome.openLinkInUnloadedTab.use_link_text_as_tab_title_when_unknown`;
@@ -71,8 +71,12 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openTab(unloadedTabMenu.getActivePlacesView(this.parentElement).selectedNode)`,
     });
+    this.placesMenuOpenUnloaded.addEventListener("command", e =>
+      this.openTab(
+        this.getActivePlacesView(e.target.parentElement).selectedNode
+      )
+    );
     this.placesMenuOpenNewTab.after(this.placesMenuOpenUnloaded);
 
     this.placesMenuOpenAllUnloaded = this.create(document, "menuitem", {
@@ -81,8 +85,10 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openSelectedTabs(this.parentElement)`,
     });
+    this.placesMenuOpenAllUnloaded.addEventListener("command", e =>
+      this.openSelectedTabs(e.target.parentElement)
+    );
     this.placesMenuOpenContainer?.after(this.placesMenuOpenAllUnloaded);
 
     this.placesMenuOpenAllLinksUnloaded = this.create(document, "menuitem", {
@@ -91,8 +97,10 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openSelectedTabs(this.parentElement)`,
     });
+    this.placesMenuOpenAllLinksUnloaded.addEventListener("command", e =>
+      this.openSelectedTabs(e.target.parentElement)
+    );
     this.placesMenuOpenAllLinks.after(this.placesMenuOpenAllLinksUnloaded);
 
     this.placesContextMenu.addEventListener("popupshowing", this);
@@ -105,8 +113,10 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openAllSyncedFromDevice()`,
     });
+    this.syncedMenuOpenAllUnloaded.addEventListener("command", () =>
+      this.openAllSyncedFromDevice()
+    );
     this.syncedMenuOpenAll.after(this.syncedMenuOpenAllUnloaded);
 
     this.syncedMenuOpenUnloaded = this.create(document, "menuitem", {
@@ -115,8 +125,10 @@ class UnloadedTabMenuBase {
       accesskey: unloadedTabMenuL10n.accessKey,
       disabled: true,
       hidden: true,
-      oncommand: `unloadedTabMenu.openSyncedTabUnloaded()`,
     });
+    this.syncedMenuOpenUnloaded.addEventListener("command", () =>
+      this.openSyncedTabUnloaded()
+    );
     this.syncedMenuOpenTab.after(this.syncedMenuOpenUnloaded);
 
     this.syncedContextMenu.addEventListener("popupshowing", this);
@@ -126,8 +138,13 @@ class UnloadedTabMenuBase {
       label: unloadedTabMenuL10n.openLink,
       accesskey: unloadedTabMenuL10n.accessKey,
       hidden: true,
-      oncommand: `unloadedTabMenu.openTab({url: gContextMenu.linkURL}, {fromContent: true, linkText: gContextMenu.linkTextStr})`,
     });
+    this.contentMenuOpenLinkUnloaded.addEventListener("command", () =>
+      this.openTab(
+        { url: gContextMenu.linkURL },
+        { fromContent: true, linkText: gContextMenu.linkTextStr }
+      )
+    );
     this.contentMenuOpenLink.after(this.contentMenuOpenLinkUnloaded);
     this.contentContextMenu.addEventListener("popupshowing", this);
     this.contentContextMenu.addEventListener("popuphidden", this);

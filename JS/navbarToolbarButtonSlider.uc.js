@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Navbar Toolbar Button Slider
-// @version        3.0.0
+// @version        3.0.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -163,9 +163,6 @@ class NavbarToolbarSlider {
   }
   handleEvent(e) {
     switch (e.type) {
-      case "popupshowing":
-        this.onPopupshowing(e);
-        break;
       case "unload":
         removeEventListener("unload", this, false);
         Services.prefs.removeObserver("userChrome.toolbarSlider", this);
@@ -213,7 +210,6 @@ class NavbarToolbarSlider {
   attachListeners() {
     addEventListener("unload", this, false);
     Services.prefs.addObserver("userChrome.toolbarSlider", this);
-    this.contextMenu.addEventListener("popupshowing", this);
   }
   modifyMethods() {
     const lazy = {};
@@ -236,6 +232,27 @@ class NavbarToolbarSlider {
       );
       ToolbarContextMenu._modifiedByNavbarToolbarSlider = true;
     }
+
+    let moveToPanel = document.getElementById("toolbar-context-move-to-panel");
+    let removeFromToolbar = document.getElementById(
+      "toolbar-context-remove-from-toolbar"
+    );
+    moveToPanel.addEventListener("command", e => {
+      let popup = e.target.parentElement;
+      let button = this.validWidget(popup);
+      if (button && button.parentElement === this.inner) {
+        this.addToPanel(button, "toolbar-context-menu");
+        e.stopPropagation();
+      }
+    });
+    removeFromToolbar.addEventListener("command", e => {
+      let popup = e.target.parentElement;
+      let button = this.validWidget(popup);
+      if (button && button.parentElement === this.inner) {
+        this.removeFromArea(button, "toolbar-context-menu");
+        e.stopPropagation();
+      }
+    });
   }
   setupPrefs() {
     const { prefs } = Services;
@@ -479,56 +496,6 @@ class NavbarToolbarSlider {
     } else if (aWindow.CustomizationHandler.isCustomizing()) {
       this.wrapAll([...this.widgets].filter(this.filterFn, this), this.inner);
     }
-  }
-  /**
-   * when the context menu is showing, we need to do things differently if it
-   * was called on a button inside the slider vs. a button outside of the slider.
-   * @param {object} e (event => "popupshowing")
-   * @returns (nothing)
-   */
-  onPopupshowing(e) {
-    let popup = e.target;
-    let button = this.validWidget(popup);
-    let moveToPanel = popup.querySelector(".customize-context-moveToPanel");
-    let removeFromToolbar = popup.querySelector(
-      ".customize-context-removeFromToolbar"
-    );
-    if (!(moveToPanel && removeFromToolbar)) return;
-    // if the parent element is not the slider, then make the context menu work as normal and bail.
-    if (!button || button.parentElement !== this.inner) {
-      moveToPanel.setAttribute(
-        "oncommand",
-        "gCustomizeMode.addToPanel(this.parentNode.triggerNode, 'toolbar-context-menu')"
-      );
-      removeFromToolbar.setAttribute(
-        "oncommand",
-        "gCustomizeMode.removeFromArea(this.parentNode.triggerNode, 'toolbar-context-menu')"
-      );
-      return;
-    }
-    // if a non-removable system button got into the slider somehow, then disable these commands
-    let movable =
-      button && button.id && CustomizableUI.isWidgetRemovable(button);
-    if (movable) {
-      if (CustomizableUI.isSpecialWidget(button.id)) {
-        moveToPanel.setAttribute("disabled", true);
-      } else {
-        moveToPanel.removeAttribute("disabled");
-      }
-      removeFromToolbar.removeAttribute("disabled");
-    } else {
-      moveToPanel.setAttribute("disabled", true);
-      removeFromToolbar.setAttribute("disabled", true);
-    }
-    // override the commands
-    moveToPanel.setAttribute(
-      "oncommand",
-      "navbarToolbarSlider.addToPanel(navbarToolbarSlider.validWidget(this.parentNode), 'toolbar-context-menu')"
-    );
-    removeFromToolbar.setAttribute(
-      "oncommand",
-      "navbarToolbarSlider.removeFromArea(navbarToolbarSlider.validWidget(this.parentNode), 'toolbar-context-menu')"
-    );
   }
   /**
    * sometimes the context menu is invoked on a toolbar button that's not actually
@@ -921,5 +888,7 @@ class NavbarToolbarSlider {
     sss.loadAndRegisterSheet(uri, sss.AUTHOR_SHEET);
   }
 }
+
+document.head.querySelector("meta").content = "script-src-attr 'unsafe-inline'";
 
 window.navbarToolbarSlider = new NavbarToolbarSlider();

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Unread Tab Mods
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -185,9 +185,8 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
         UnreadTabsBase.config["Mark Tab as Read Label"]
       );
       this.markAsReadMenuitem.setAttribute("id", "context-markAsRead");
-      this.markAsReadMenuitem.setAttribute(
-        "oncommand",
-        `unreadTabMods._onCommand()`
+      this.markAsReadMenuitem.addEventListener("command", () =>
+        this._onCommand()
       );
       context
         .querySelector("#context_duplicateTabs")
@@ -199,9 +198,8 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
         UnreadTabsBase.config["Mark Tab as Unread Label"]
       );
       this.markAsUnreadMenuitem.setAttribute("id", "context-markAsUnread");
-      this.markAsUnreadMenuitem.setAttribute(
-        "oncommand",
-        `unreadTabMods._onCommand(true)`
+      this.markAsUnreadMenuitem.addEventListener("command", () =>
+        this._onCommand(true)
       );
       this.markAsReadMenuitem.after(this.markAsUnreadMenuitem);
 

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:userchrome
-// @version        1.1.9
+// @version        1.2.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -272,7 +272,7 @@ function initUserChromeNotifications() {
             this.win.switchToTabHavingURI("about:userchrome", true);
           }
         },
-      }).autoAttach({ suppressOriginalKey: true });
+      }).attachToWindow(this.win, { suppressOriginalKey: true });
     }
 
     #banner;

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.8.0
+// @version        1.8.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -461,11 +461,11 @@ export class SearchSelectionShortcutParent extends JSWindowActorParent {
       locationURL,
       locationHost
     );
-    win.BrowserSearch._loadSearch(
+    lazy.SearchUIUtils._loadSearch(
+      win,
       text,
       where,
-      false,
-      null,
+      lazy.PrivateBrowsingUtils.isWindowPrivate(win),
       principal,
       csp,
       options.inBackground,
@@ -523,6 +523,7 @@ if (Services.appinfo.processType === Services.appinfo.PROCESS_TYPE_DEFAULT) {
   ChromeUtils.defineESModuleGetters(lazy, {
     BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.sys.mjs",
     PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
+    SearchUIUtils: "resource:///modules/SearchUIUtils.sys.mjs",
   });
   XPCOMUtils.defineLazyPreferenceGetter(
     lazy,

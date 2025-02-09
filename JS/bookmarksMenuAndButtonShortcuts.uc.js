@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.4.0
+// @version        1.4.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason.
@@ -72,11 +72,13 @@ const ucBookmarksShortcuts = {
       id: "BMB_bookmarkThisPage",
       label: "",
       class: "menuitem-iconic subviewbutton",
-      onclick: "ucBookmarksShortcuts.updateMenuItem()",
-      oncommand: "BookmarkingUI.onStarCommand(event);",
       key: "addBookmarkAsKb",
       image: "chrome://browser/skin/bookmark-hollow.svg",
     });
+    this.bookmarkTab.addEventListener("click", this.updateMenuItem);
+    this.bookmarkTab.addEventListener("command", e =>
+      BookmarkingUI.onStarCommand(e)
+    );
     popup.insertBefore(this.bookmarkTab, popup.firstElementChild);
     popup.addEventListener("popupshowing", this.updateMenuItem);
     this.bookmarkTab.setAttribute(
@@ -123,16 +125,10 @@ const ucBookmarksShortcuts = {
     Services.prefs.lockPref(
       "browser.bookmarks.editDialog.confirmationHintShowCount"
     );
-    BookmarkingUI.button.setAttribute(
-      "onclick",
-      "ucBookmarksShortcuts.bookmarkClick(event)"
-    );
+    BookmarkingUI.button?.addEventListener("click", e => this.bookmarkClick(e));
     CustomizableUI.getWidget("library-button")
       .forWindow(window)
-      .node?.setAttribute(
-        "onclick",
-        "ucBookmarksShortcuts.bookmarkClick(event)"
-      );
+      .node?.addEventListener("click", e => this.bookmarkClick(e));
     this.addMenuitems(node.querySelector("#BMB_bookmarksPopup"));
     gBrowser.addTabsProgressListener(this);
     PlacesUtils.observers.addListener(

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.8.0
+// @version        1.8.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -634,9 +634,7 @@ class UrlbarMods {
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
         UrlbarResult: "resource:///modules/UrlbarResult.sys.mjs",
         UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
-      });
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        SyncedTabs: "resource://services-sync/SyncedTabs.jsm",
+        SyncedTabs: "resource://services-sync/SyncedTabs.sys.mjs",
       });
       const { UrlbarUtils } = ChromeUtils.importESModule(
         "resource:///modules/UrlbarUtils.sys.mjs"
@@ -653,6 +651,9 @@ class UrlbarMods {
     if (src2 && !src2.includes("result.payload.clientType")) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
+        BrowserWindowTracker:
+          "resource:///modules/BrowserWindowTracker.sys.mjs",
+        ObjectUtils: "resource://gre/modules/ObjectUtils.sys.mjs",
         L10nCache: "resource:///modules/UrlbarUtils.sys.mjs",
         UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
         UrlbarProviderTopSites:
@@ -662,10 +663,6 @@ class UrlbarMods {
         UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.sys.mjs",
         UrlbarTokenizer: "resource:///modules/UrlbarTokenizer.sys.mjs",
         UrlbarUtils: "resource:///modules/UrlbarUtils.sys.mjs",
-      });
-      XPCOMUtils.defineLazyModuleGetters(lazy, {
-        BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.jsm",
-        ObjectUtils: "resource://gre/modules/ObjectUtils.jsm",
       });
       eval(
         `gURLBar.view._updateRow = function ${src2

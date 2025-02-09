@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu about:config Button
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -106,10 +106,18 @@ By default the script will open to that link, so if you don't have that module i
       id: "appMenu-advanced-settings-button",
       class: "subviewbutton",
       label: advancedPrefsLabel,
-      oncommand: `openTrustedLinkIn(this.preferredURL, gBrowser.currentURI.spec === AboutNewTab.newTabURL || gBrowser.currentURI.spec === HomePage.get(window) ? "current" : "tab")`,
     })) {
       prefsButton.setAttribute(key, val);
     }
+    prefsButton.addEventListener("command", () => {
+      openTrustedLinkIn(
+        this.preferredURL,
+        gBrowser.currentURI.spec === AboutNewTab.newTabURL ||
+          gBrowser.currentURI.spec === HomePage.get(window)
+          ? "current"
+          : "tab"
+      );
+    });
     // place after the built-in "Settings" button
     settingsButton.after(prefsButton);
   }

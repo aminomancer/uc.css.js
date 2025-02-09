@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.5.2
+// @version        1.5.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -203,12 +203,12 @@ This doesn't change anything about the layout so you may want to tweak some thin
           return installedIcon ? `url("${installedIcon}")` : false;
         }
         eval(
-          `BrowserSearch._setURLBarPlaceholder = function ${BrowserSearch._setURLBarPlaceholder
+          `gURLBar._setPlaceholder = function ${gURLBar._setPlaceholder
             .toSource()
-            .replace(/^_setURLBarPlaceholder/, "")
+            .replace(/^_setPlaceholder/, "")
             .replace(
               /\}$/,
-              `  let icon = findEngineIcon(name);\n    if (icon) document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
+              `  let icon = findEngineIcon(name);\n    if (icon) this.document.documentElement.style.setProperty("--default-search-identity-icon", icon);\n    else this.document.documentElement.style.removeProperty("--default-search-identity-icon");\n}`
             )}`
         );
       }
@@ -219,11 +219,11 @@ This doesn't change anything about the layout so you may want to tweak some thin
       if (config["Engine name word limit"] > 0) {
         placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
       }
-      if (BrowserSearch._updateURLBarPlaceholder.name) {
+      if (gURLBar._updatePlaceholder.name) {
         eval(
-          `BrowserSearch._updateURLBarPlaceholder = function ${BrowserSearch._updateURLBarPlaceholder
+          `gURLBar._updatePlaceholder = function ${gURLBar._updatePlaceholder
             .toSource()
-            .replace(/^_updateURLBarPlaceholder/, "")
+            .replace(/^_updatePlaceholder/, "")
             .replace(/engine\.isAppProvided/, placeholderString)}`
         );
       }
@@ -238,7 +238,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
             )}`
         );
       }
-      BrowserSearch.initPlaceHolder();
+      gURLBar.initPlaceHolder();
     }
     async function searchModeCallback(mus, _observer) {
       for (let mu of mus) {

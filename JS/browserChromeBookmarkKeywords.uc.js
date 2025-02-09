@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.8
+// @version        1.1.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -133,8 +133,8 @@ Be careful when using this, of course. You always need to take care when using J
 
     if (UrlbarProviderBookmarkKeywords.BCBK_modified) return;
 
-    const { KeywordUtils } = ChromeUtils.import(
-      "resource://gre/modules/KeywordUtils.jsm"
+    const { KeywordUtils } = ChromeUtils.importESModule(
+      "resource://gre/modules/KeywordUtils.sys.mjs"
     );
     const { UrlbarProvider } = ChromeUtils.importESModule(
       "resource:///modules/UrlbarUtils.sys.mjs"

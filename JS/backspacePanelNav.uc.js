@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Backspace Panel Navigation
-// @version        1.1.3
+// @version        1.1.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Press backspace to navigate back/forward in popup panels.
@@ -12,6 +12,23 @@
 (function () {
   function init() {
     const pc = Object.getPrototypeOf(PanelView.forNode(PanelUI.mainView));
+    function isNavigableWithTabOnly(element) {
+      let tag = element.localName;
+      return (
+        tag == "menulist" ||
+        tag == "select" ||
+        tag == "radiogroup" ||
+        tag == "input" ||
+        tag == "textarea" ||
+        // Allow tab to reach embedded documents.
+        tag == "browser" ||
+        tag == "iframe" ||
+        // This is currently needed for the unified extensions panel to allow
+        // users to use up/down arrow to more quickly move between the extension
+        // items. See Bug 1784118
+        element.dataset?.navigableWithTabOnly === "true"
+      );
+    }
     eval(
       `pc.keyNavigation = function ${pc.keyNavigation
         .toSource()
@@ -19,6 +36,7 @@
         .replace(/\)$/, "")
         .replace(/^keyNavigation\s*/, "")
         .replace(/^function\s*/, "")
+        .replace(/#isNavigableWithTabOnly/, isNavigableWithTabOnly)
         .replace(
           /(case \"ArrowLeft\"\:)/,
           `case "Backspace":

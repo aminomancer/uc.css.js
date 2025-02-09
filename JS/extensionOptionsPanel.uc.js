@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Extension Options Panel
-// @version        1.9.1
+// @version        1.9.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    This script creates a toolbar button that opens a popup panel where extensions can be configured, disabled, uninstalled, etc. Each extension gets its own button in the panel. Clicking an extension's button leads to a subview where you can jump to the extension's options, disable or enable the extension, uninstall it, configure automatic updates, disable/enable it in private browsing, view its source code in whatever program is associated with `.xpi` files, open the extension's homepage, or copy the extension's ID. The panel can also be opened from the App Menu, using the built-in "Add-ons and themes" button. Since v1.8, themes will also be listed in the panel. Hovering a theme will show a tooltip with a preview/screenshot of the theme, and clicking the theme will toggle it on or off. There are several translation and configuration options directly below.
@@ -256,9 +256,10 @@ class ExtensionOptionsWidget {
   }
 
   constructor() {
-    XPCOMUtils.defineLazyModuleGetters(this, {
-      ExtensionPermissions: "resource://gre/modules/ExtensionPermissions.jsm",
-      BuiltInThemes: "resource:///modules/BuiltInThemes.jsm",
+    ChromeUtils.defineESModuleGetters(this, {
+      ExtensionPermissions:
+        "resource://gre/modules/ExtensionPermissions.sys.mjs",
+      BuiltInThemes: "resource:///modules/BuiltInThemes.sys.mjs",
     });
     ChromeUtils.defineLazyGetter(this, "extBundle", function () {
       return Services.strings.createBundle(
@@ -338,13 +339,16 @@ class ExtensionOptionsWidget {
 
           // create the theme preview tooltip
           if (eop.config["Show theme preview tooltips"]) {
-            aDoc
+            let tooltip = aDoc
               .getElementById("mainPopupSet")
               .appendChild(
                 aDoc.defaultView.MozXULElement.parseXULToFragment(
-                  `<tooltip id="eom-theme-preview-tooltip" noautohide="true" orient="vertical" onpopupshowing="extensionOptionsPanel.onTooltipShowing(event);"><vbox id="eom-theme-preview-box"><html:img id="eom-theme-preview-canvas"></html:img></vbox></tooltip>`
+                  `<tooltip id="eom-theme-preview-tooltip" noautohide="true" orient="vertical"><vbox id="eom-theme-preview-box"><html:img id="eom-theme-preview-canvas"></html:img></vbox></tooltip>`
                 )
               );
+            tooltip.addEventListener("popupshowing", e =>
+              eop.onTooltipShowing(e)
+            );
           }
 
           eop.fluentSetup(aDoc).then(() => eop.swapAddonsButton(aDoc));
@@ -408,17 +412,18 @@ class ExtensionOptionsWidget {
     let win = aDoc.defaultView;
     win.PanelUI._initialized ||
       win.PanelUI.init(shouldSuppressPopupNotifications);
-    this.setAttributes(
-      win.PanelUI.mainView.querySelector("#appMenu-extensions-themes-button") ||
-        win.PanelUI.mainView.querySelector("#appMenu-addons-button"),
-      {
-        command: 0,
-        key: 0,
-        shortcut: 0,
-        class: "subviewbutton subviewbutton-nav",
-        oncommand: "PanelUI.showSubView('PanelUI-eom', this);",
-        closemenu: "none",
-      }
+    let el = win.PanelUI.mainView.querySelector(
+      "#appMenu-extensions-themes-button, #appMenu-addons-button"
+    );
+    this.setAttributes(el, {
+      command: 0,
+      key: 0,
+      shortcut: 0,
+      class: "subviewbutton subviewbutton-nav",
+      closemenu: "none",
+    });
+    el.addEventListener("command", () =>
+      win.PanelUI.showSubView("PanelUI-eom", el)
     );
   }
 
@@ -510,11 +515,13 @@ class ExtensionOptionsWidget {
               label: addon.name + (showVersion ? ` ${addon.version}` : ""),
               class:
                 "subviewbutton subviewbutton-iconic subviewbutton-nav eom-addon-button",
-              oncommand: "extensionOptionsPanel.showSubView(event, this)",
               closemenu: "none",
               "addon-type": "extension",
               "data-extensionid": addon.id,
             })
+          );
+          subviewbutton.addEventListener("command", e =>
+            this.showSubView(e, subviewbutton)
           );
           if (!addon.isActive) subviewbutton.classList.add("disabled");
           // set the icon using CSS variables and list-style-image so that user stylesheets can override the icon URL.
@@ -582,11 +589,18 @@ class ExtensionOptionsWidget {
         class: "subviewbutton subviewbutton-iconic",
         label: l10n["Download addons label"],
         image: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 68 68" style="border-radius:3px"><path fill="context-fill" fill-opacity="context-fill-opacity" d="M0 0v68h68V0H0zm61.8 49H49.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h3.9v6.4H30.5V32.4c0-5.1-1.7-7-5-7-4 0-5.6 2.9-5.6 6.9v10.2h5.6v6.4h-18v-6.4h3.9V26H7.5v-6.4h12.3V24c1.8-3.1 4.8-5 8.9-5 4.2 0 8.1 2 9.5 6.3 1.6-3.9 4.9-6.3 9.5-6.3 5.3 0 10.1 3.2 10.1 10.1v13.5h4V49z"/></svg>`,
-        oncommand: `switchToTabHavingURI(Services.urlFormatter.formatURLPref("extensions.getAddons.link.url"), true, {
-                    inBackground: false,
-                    triggeringPrincipal: Services.scriptSecurityManager.getSystemPrincipal(),
-                });`,
       })
+    );
+    getAddonsButton.addEventListener("command", e =>
+      win.switchToTabHavingURI(
+        Services.urlFormatter.formatURLPref("extensions.getAddons.link.url"),
+        true,
+        {
+          inBackground: false,
+          triggeringPrincipal:
+            Services.scriptSecurityManager.getSystemPrincipal(),
+        }
+      )
     );
 
     let hasExtensions = !!body.querySelector(
@@ -608,7 +622,7 @@ class ExtensionOptionsWidget {
     // make a footer button that leads to about:addons
     if (view.querySelector("#eom-allAddonsButton")) return;
     view.appendChild(doc.createXULElement("toolbarseparator"));
-    view.appendChild(
+    let footerButton = view.appendChild(
       this.create(doc, "toolbarbutton", {
         label: l10n["Addons page label"],
         id: "eom-allAddonsButton",
@@ -616,8 +630,10 @@ class ExtensionOptionsWidget {
         image: this.config["Icon URL"],
         key: "key_openAddons",
         shortcut: win.ShortcutUtils.prettifyShortcut(win.key_openAddons),
-        oncommand: `BrowserOpenAddonsMgr("addons://list/extension")`,
       })
+    );
+    footerButton.addEventListener("command", () =>
+      win.BrowserOpenAddonsMgr("addons://list/extension")
     );
   }
 
@@ -1035,7 +1051,7 @@ class ExtensionOptionsWidget {
       case 3:
         win.switchToTabHavingURI(addon.optionsURL, true);
         break;
-      case 1:
+      case 1: {
         let windows = win.Services.wm.getEnumerator(null);
         while (windows.hasMoreElements()) {
           let win2 = windows.getNext();
@@ -1052,6 +1068,7 @@ class ExtensionOptionsWidget {
           features += ",dialog=no";
         }
         win.openDialog(addon.optionsURL, addon.id, features);
+      }
     }
   }
 
@@ -1123,45 +1140,39 @@ class ExtensionOptionsWidget {
   margin-inline-start: 8px;
   font-style: italic;
 }
-.eom-addon-button[message-type="warning"] {
-  background-color: var(--eom-warning-bg, hsla(48, 100%, 66%, 0.15));
-}
-.eom-addon-button[message-type="warning"]:not([disabled], [open], :active):is(
-    :hover
-  ) {
-  background-color: var(
-    --eom-warning-bg-hover,
-    color-mix(in srgb, currentColor 8%, hsla(48, 100%, 66%, 0.18))
-  );
-}
-.eom-addon-button[message-type="warning"]:not([disabled]):is(
-    [open],
-    :hover:active
-  ) {
-  background-color: var(
-    --eom-warning-bg-active,
-    color-mix(in srgb, currentColor 15%, hsla(48, 100%, 66%, 0.2))
-  );
-}
-.eom-addon-button[message-type="error"] {
-  background-color: var(--eom-error-bg, hsla(2, 100%, 66%, 0.15));
-}
-.eom-addon-button[message-type="error"]:not([disabled], [open], :active):is(
-    :hover
-  ) {
-  background-color: var(
-    --eom-error-bg-hover,
-    color-mix(in srgb, currentColor 8%, hsla(2, 100%, 66%, 0.18))
-  );
-}
-.eom-addon-button[message-type="error"]:not([disabled]):is(
-    [open],
-    :hover:active
-  ) {
-  background-color: var(
-    --eom-error-bg-active,
-    color-mix(in srgb, currentColor 15%, hsla(2, 100%, 66%, 0.2))
-  );
+.eom-addon-button:is(toolbarbutton.subviewbutton) {
+  &[message-type="warning"] {
+    background-color: var(--eom-warning-bg, hsla(48, 100%, 66%, 0.15));
+
+    &:not([disabled], [open], :active):is(:hover) {
+      background-color: var(
+        --eom-warning-bg-hover,
+        color-mix(in srgb, currentColor 8%, hsla(48, 100%, 66%, 0.18))
+      );
+    }
+    &:not([disabled]):is([open], :hover:active) {
+      background-color: var(
+        --eom-warning-bg-active,
+        color-mix(in srgb, currentColor 15%, hsla(48, 100%, 66%, 0.2))
+      );
+    }
+  }
+  &[message-type="error"] {
+    background-color: var(--eom-error-bg, hsla(2, 100%, 66%, 0.15));
+
+    &:not([disabled], [open], :active):is(:hover) {
+      background-color: var(
+        --eom-error-bg-hover,
+        color-mix(in srgb, currentColor 8%, hsla(2, 100%, 66%, 0.18))
+      );
+    }
+    &:not([disabled]):is([open], :hover:active) {
+      background-color: var(
+        --eom-error-bg-active,
+        color-mix(in srgb, currentColor 15%, hsla(2, 100%, 66%, 0.2))
+      );
+    }
+  }
 }
 .eom-radio-hbox {
   padding-block: 4px;
