@@ -202,6 +202,10 @@ menupopup {
   --cfr-button-addons-icon: url(chrome://userchrome/content/material/extension.svg) !important;
   --cfr-button-features-icon: url(chrome://userchrome/content/skin/tip.svg) !important;
   --cfr-button-highlights-icon: url(chrome://global/skin/icons/highlights.svg) !important;
+
+  --content-area-shadow: none !important;
+  --chrome-content-separator-color: var(--arrowpanel-border-color) !important;
+  --browser-area-z-index-tabbox: 3 !important;
 }
 
 :root[lwthemetextcolor="bright"] {

@@ -98,6 +98,7 @@ menuitem#sanitizeItem > .menu-text,
 #context-searchselect .menu-text,
 #context-searchselect-private .menu-text,
 #context-translate-selection .menu-text,
+#context-ask-chat > .menu-text,
 #menu_find .menu-text,
 #menu_findAgain .menu-text,
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap) .menu-text,
@@ -499,6 +500,7 @@ menuitem#sanitizeItem::before,
 #context-searchselect::before,
 #context-searchselect-private::before,
 #context-translate-selection::before,
+#context-ask-chat::before,
 #menu_find::before,
 #menu_findAgain::before,
 :is(menuitem#textfieldDirection-swap, #context-bidi-text-direction-toggle, #context-bidi-page-direction-toggle, #documentDirection-swap)::before,
@@ -1262,6 +1264,10 @@ menuitem.unified-extensions-context-menu-move-widget-down::before {
 
 #context-translate-selection::before {
   background-image: url(chrome://browser/skin/translations.svg);
+}
+
+#context-ask-chat::before {
+  background-image: url(chrome://userchrome/content/engines/chatgpt.svg);
 }
 
 #menu_findAgain::before {

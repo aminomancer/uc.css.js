@@ -9,9 +9,7 @@ import { AppConstants } from "resource://gre/modules/AppConstants.sys.mjs";
 const lazy = {};
 ChromeUtils.defineESModuleGetters(lazy, {
   FileUtils: "resource://gre/modules/FileUtils.sys.mjs",
-});
-XPCOMUtils.defineLazyModuleGetters(lazy, {
-  NetUtil: "resource://gre/modules/NetUtil.jsm",
+  NetUtil: "resource://gre/modules/NetUtil.sys.mjs",
 });
 XPCOMUtils.defineLazyServiceGetters(lazy, {
   gUpdateTimerManager: [

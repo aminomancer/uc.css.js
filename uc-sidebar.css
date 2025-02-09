@@ -11,9 +11,6 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
   position: relative !important;
 }
 
-#tabbrowser-tabbox {
-  z-index: revert !important;
-}
 
 #sidebar-box {
   --sidebar-background-color: var(--ui-secondary-bg) !important;
@@ -24,7 +21,7 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
   bottom: 0 !important;
   left: 0 !important;
   right: auto !important;
-  z-index: 1 !important;
+  z-index: 4 !important;
   flex-direction: column !important;
   box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
 }
@@ -535,7 +532,7 @@ trees so it is relatively safe to collapse them. */
 #vertical-tabs-pane:not([unpinned]) ~ #vertical-tabs-splitter {
   position: absolute !important;
   /* draw above the app content */
-  z-index: 2;
+  z-index: 5;
   /* we have to make it bigger so we can add negative spread to the shadow. so it matches the sidebar shadow */
   width: 38px !important;
   margin-inline-start: -38px !important;

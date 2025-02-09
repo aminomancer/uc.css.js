@@ -465,7 +465,7 @@ Makes some minor modifications to the app menu, aka the hamburger menu. It adds 
 
 #### [All Tabs Menu Expansion Pack](/JS/allTabsMenuExpansionPack.uc.js):
 
-This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar.<details><summary>💬 **_More details..._**</summary>
+This script adds several new features to the "all tabs menu" to help it catch up to the functionality of the regular tabs bar. This is deprecated as of Fx 137, since most of the features have been implemented in Firefox now. <details><summary>💬 **_More details..._**</summary>
 
 <img src="preview/prev-alltabs-xpac.webp"/>
 
@@ -1040,7 +1040,7 @@ So, this gives you some capabilities not already available in Firefox. In partic
 
 #### [Tab Thumbnail Tooltip](/JS/tabThumbnailTooltip.uc.js):
 
-Show a large thumbnail image to preview tab content when hovering a tab. Made [by request](https://github.com/aminomancer/uc.css.js/issues/29).
+Show a large thumbnail image to preview tab content when hovering a tab. Made [by request](https://github.com/aminomancer/uc.css.js/issues/29). This is deprecated, because Firefox has this feature natively now.
 
 #### [Tab Tooltip Navigation Buttons](/JS/tabTooltipNavButtons.uc.js):
 

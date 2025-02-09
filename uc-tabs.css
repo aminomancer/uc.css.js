@@ -10,8 +10,12 @@
   background-color: var(--lwt-accent-color) !important;
 }
 
+.tab-content {
+  overflow: hidden !important;
+}
+
 /* different tab background colors in various states */
-.tabbrowser-tab:not([selected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab:not([selected]):is(:hover, [open]) .tab-background {
   background: var(--uc-tab-hover) !important;
 }
 
@@ -19,21 +23,30 @@
   background: var(--uc-tab-selected) !important;
 }
 
-.tabbrowser-tab:focus:not([aria-activedescendant]) > .tab-stack > .tab-background,
-.tabbrowser-tab.keyboard-focused-tab[selected] > .tab-stack > .tab-background {
-  background: var(--uc-tab-focused-hover) !important;
-}
-
-.tabbrowser-tab:not([selected], [multiselected], :hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab:not([selected], [multiselected], :hover, [open]) .tab-background {
   background: var(--uc-tab-background) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected], :hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab[multiselected]:not([selected], :hover, [open]) .tab-background {
   background: var(--uc-tab-multi) !important;
 }
 
-.tabbrowser-tab[multiselected]:not([selected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background {
+.tabbrowser-tab[multiselected]:not([selected]):is(:hover, [open]) .tab-background {
   background: var(--uc-tab-multi-hover) !important;
+}
+
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus {
+  &:not([selected]) > .tab-stack > .tab-background {
+    background: var(--uc-tab-hover) !important;
+  }
+
+  &[selected] > .tab-stack > .tab-background {
+    background: var(--uc-tab-focused-hover) !important;
+  }
+
+  &[multiselected]:not([selected]) > .tab-stack > .tab-background {
+    background: var(--uc-tab-multi-hover) !important;
+  }
 }
 
 /* block our animations while tabs are being dragged & dropped */
@@ -52,18 +65,15 @@
   box-shadow: 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2), 0px 0px 5px 0px hsla(0, 0%, 0%, 0.1);
 } */
 
-.tabbrowser-tab:not([selected], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) .tab-background,
-.tabbrowser-tab[multiselected] .tab-background {
+.tabbrowser-tab:not([selected], [multiselected]):is(:hover, [open]) .tab-background,
+.tabbrowser-tab[multiselected] .tab-background,
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus:not([selected], [multiselected]) .tab-background {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.25) !important;
 }
 
 .tabbrowser-tab[selected] .tab-background,
 .tabbrowser-tab[multiselected][selected] .tab-background {
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
-}
-
-.tabbrowser-tab:focus:not([aria-activedescendant]) .tab-background {
-  box-shadow: 0px 0px 25px 3px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
 }
 
 .tabbrowser-tab .tab-context-line {
@@ -121,38 +131,6 @@
 
 .tab-content[pinned] {
   padding: 0 var(--tab-inline-padding) !important;
-}
-
-/* a bunch of rules I might revisit in the future. minified since this is
-really just a backup. these make it so that the tab highlight line on
-container tabs only shows when the tab strip (or the tab itself) is being
-hovered. I used these rules for a long time but I realized although it might
-be aesthetically less jarring, it makes it harder to find your container
-tabs, which could represent a security risk if you accidentally use the
-wrong container because you couldn't find the tab you were looking for. */
-/* .tabbrowser-tab[usercontextid] .tab-context-line{opacity:0!important;transition:none!important;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid] .tab-context-line,.tabbrowser-tab[usercontextid]:is(:hover,[selected],[multiselected],.keyboard-focused-tab,[open]) .tab-context-line{transform:none;opacity:1!important;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::before,.tabbrowser-tab[usercontextid]:is(:hover,.keyboard-focused-tab,[selected],[visuallyselected],[open]):not([multiselected]) .tab-stack::before{left:-4.6px;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::after,.tabbrowser-tab[usercontextid]:is(:hover,.keyboard-focused-tab,[selected],[visuallyselected],[open]):not([multiselected]) .tab-stack::after{right:-4.6px;}#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::after,#tabbrowser-tabs:is(:hover,:focus-within) .tabbrowser-tab[usercontextid]:not([multiselected]) .tab-stack::before,.tabbrowser-tab[usercontextid]:is([selected],:hover,.keyboard-focused-tab,[open]) .tab-stack::after,.tabbrowser-tab[usercontextid]:is([selected],:hover,.keyboard-focused-tab,[open]) .tab-stack::before{background-image:linear-gradient(0deg,var(--identity-tab-color) 0,var(--identity-tab-color) 1px,var(--tab-bg-current) 1px);} */
-
-/* the corners inherit these variables from the tab,
-just like they do with --identity-tab-color */
-.tabbrowser-tab:not([selected], [pinned]) {
-  --tab-bg-current: var(--lwt-accent-color);
-}
-
-.tabbrowser-tab[selected],
-.tabbrowser-tab[pinned]:not([selected]) {
-  --tab-bg-current: var(--toolbar-bgcolor);
-}
-
-.tabbrowser-tab:not([selected], [pinned], [multiselected]):is(:hover, .keyboard-focused-tab, [open]) {
-  --tab-bg-current: hsl(233, 55%, 8%);
-}
-
-.tabbrowser-tab[multiselected]:not([selected], [pinned]) {
-  --tab-bg-current: hsl(233, 53%, 8%);
-}
-
-.tabbrowser-tab[multiselected]:not([selected], [pinned]):is(:hover, .keyboard-focused-tab, [open]) {
-  --tab-bg-current: hsl(233, 51%, 10%);
 }
 
 /* style the loading burst that triggers when tab loading finishes */
@@ -213,13 +191,13 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
 }
 
 .tab-icon-sound {
-  display: -moz-inline-box !important;
+  --tab-icon-end-margin: 0 !important;
+  display: block !important;
   list-style-image: none !important;
   background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
   background-size: 12px !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  list-style-image: none !important;
   -moz-context-properties: fill, fill-opacity !important;
   order: 2 !important;
   fill-opacity: 0.6 !important;
@@ -256,17 +234,20 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
   color: var(--uc-menu-semi-disabled-color) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) :is(.tab-icon-sound, .tab-close-button) {
+.tabbrowser-tab:is(:hover, [open]) :is(.tab-icon-sound, .tab-close-button),
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-sound, .tab-close-button) {
   opacity: 1 !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) :is(.tab-icon-sound, .tab-close-button):hover:active {
+.tabbrowser-tab:is(:hover, [open]) :is(.tab-icon-sound, .tab-close-button):hover:active,
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-sound, .tab-close-button):hover:active {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need
 to follow the restore tab sound button instructions on my repo's readme */
-.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture] {
+#tabbrowser-tabs:not([tablist-has-focus]) .tabbrowser-tab:not(:hover, [open]) .tab-icon-sound[pictureinpicture],
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab:not(.tablist-keyboard-focus) .tab-icon-sound[pictureinpicture] {
   background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
   background-size: 12px !important;
   background-position: center !important;
@@ -278,7 +259,8 @@ to follow the restore tab sound button instructions on my repo's readme */
   opacity: 1 !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying],
+.tabbrowser-tab:is(:hover, [open]) .tab-icon-sound[pictureinpicture][soundplaying],
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound[pictureinpicture][soundplaying],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {
   background-size: 12px !important;
@@ -288,13 +270,17 @@ to follow the restore tab sound button instructions on my repo's readme */
   border-radius: var(--tab-button-border-radius, 2px) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying] {
+.tabbrowser-tab:is(:hover, [open]) .tab-icon-sound[pictureinpicture][soundplaying],
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound[pictureinpicture][soundplaying] {
   background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][muted],
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [open]) .tab-icon-sound[pictureinpicture][soundplaying][muted] {
-  background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
+.tabbrowser-tab:is(:hover, [open]) .tab-icon-sound,
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound {
+  &[pictureinpicture][muted],
+  &[pictureinpicture][soundplaying][muted] {
+    background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
+  }
 }
 
 .tab-icon-sound {
@@ -317,8 +303,8 @@ muted, but only shows on the selected tab if 1) the tab is muted, or 2) the tabs
 area is hovered. so in other words it won't show if audio is playing until you
 hover the general area of the tabs, but will show if audio is muted. */
 
-/* #tabbrowser-tabs:not(:hover, :focus-within, :focus) .tabbrowser-tab[visuallyselected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]), */
-#tabbrowser-tabs:not(:hover, :focus-within, :focus) .tabbrowser-tab:not([open]) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+/* #tabbrowser-tabs:not(:hover, [tablist-has-focus]) .tabbrowser-tab[selected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]), */
+#tabbrowser-tabs:not(:hover, [tablist-has-focus]) .tabbrowser-tab:not([open]) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateX(16px) scale(0.5) !important;
@@ -369,7 +355,8 @@ hover the general area of the tabs, but will show if audio is muted. */
 }
 
 /* tab buttons are animated with opacity and transformation */
-.tabbrowser-tab:not(:hover, .keyboard-focused-tab, [tabdrop-samewindow], [open]) .tab-close-button {
+#tabbrowser-tabs:not([tablist-has-focus]) .tabbrowser-tab:not(:hover, [tabdrop-samewindow], [open]) .tab-close-button,
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab:not(.tablist-keyboard-focus) .tab-close-button {
   transform: translateX(-15px) scale(0.5) !important;
 }
 
@@ -388,7 +375,8 @@ hover the general area of the tabs, but will show if audio is muted. */
   position: relative !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [busy], [open]) :is(.tab-icon-image, .tab-sharing-icon-overlay) {
+.tabbrowser-tab:is(:hover, [busy], [open]) :is(.tab-icon-image, .tab-sharing-icon-overlay),
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-image, .tab-sharing-icon-overlay) {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateX(25px) scale(0.5) !important;
@@ -405,7 +393,8 @@ hover the general area of the tabs, but will show if audio is muted. */
   transform: translateX(-15px) scale(0.5) !important;
 }
 
-.tabbrowser-tab:is(:hover, .keyboard-focused-tab, [tabdrop-samewindow], [open]) .tab-throbber {
+.tabbrowser-tab:is(:hover, [tabdrop-samewindow], [open]) .tab-throbber,
+#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-throbber {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateX(25px) scale(0.5) !important;
@@ -586,4 +575,5 @@ doesn't overlap with the right side of the label at all, which is where the
 overflowing mask is applied. so we make the mask size constant. */
 .tabbrowser-tab {
   --tab-label-mask-size: 2em !important;
+  --tab-min-width: inherit !important;
 }

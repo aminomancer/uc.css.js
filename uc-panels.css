@@ -20,7 +20,7 @@ panel {
 }
 
 /* hide the outline shown on panels when transitioning from subview to subview */
-/* see here: https://searchfox.org/mozilla-central/rev/ec3889f74d6b5695833280f4370ca0e9ba59a3e4/browser/components/customizableui/PanelMultiView.jsm#1047 */
+/* see here: https://searchfox.org/mozilla-central/rev/09112edd051eaaac350e035b40661514fd1206ac/browser/components/customizableui/PanelMultiView.sys.mjs#1068 */
 panelview {
   outline: none !important;
 }
@@ -1472,6 +1472,10 @@ toolbar button slider script. but just in case) */
 #addon-webext-perm-list,
 #addon-webext-perm-single-entry {
   margin-block-start: 6px !important;
+}
+
+ul.webext-perm-domains-list {
+  margin-inline-start: revert !important;
 }
 
 :is(#identity-popup-mainView-panel-header, #permission-popup-mainView-panel-header, #protections-popup-mainView-panel-header) span,

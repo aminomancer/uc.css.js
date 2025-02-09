@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tab Mods — tabbrowser-tab class definition mods
-// @version        1.4.3
+// @version        1.4.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Restore the tab sound button and other aspects of the tab that (imo) were better before Proton.
@@ -32,21 +32,15 @@
             <image class="tab-icon-overlay" role="presentation"/>
           </stack>
           <vbox class="tab-label-container"
-                onoverflow="this.setAttribute('textoverflow', 'true');"
-                onunderflow="this.removeAttribute('textoverflow');"
                 align="start"
                 pack="center"
                 flex="1">
             <label class="tab-text tab-label" role="presentation"/>
             <hbox class="tab-secondary-label">
-              <label class="tab-icon-sound-label tab-icon-sound-playing-label" data-l10n-id="browser-tab-audio-playing2" role="presentation"/>
-              <label class="tab-icon-sound-label tab-icon-sound-muted-label" data-l10n-id="browser-tab-audio-muted2" role="presentation"/>
-              <label class="tab-icon-sound-label tab-icon-sound-blocked-label" data-l10n-id="browser-tab-audio-blocked" role="presentation"/>
               <label class="tab-icon-sound-label tab-icon-sound-pip-label" data-l10n-id="browser-tab-audio-pip" role="presentation"/>
-              <label class="tab-icon-sound-label tab-icon-sound-tooltip-label" role="presentation"/>
             </hbox>
           </vbox>
-          <image class="tab-icon-sound" role="button" keyNav="false"/>
+          <image class="tab-icon-sound tab-audio-button" role="button" keyNav="false"/>
         </hbox>
       </stack>
       `;
@@ -62,6 +56,7 @@
       this.addEventListener("mouseup", this);
       this.addEventListener("click", this);
       this.addEventListener("dblclick", this, true);
+      this.addEventListener("animationstart", this);
       this.addEventListener("animationend", this);
       this.addEventListener("focus", this);
       this.addEventListener("AriaFocus", this);
@@ -95,24 +90,24 @@
         ".tab-content":
           "pinned,selected=visuallyselected,multiselected,titlechanged,attention",
         ".tab-icon-stack":
-          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,indicator-replaces-favicon",
+          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked",
         ".tab-throbber":
           "fadein,pinned,busy,progress,selected=visuallyselected",
         ".tab-icon-pending":
           "fadein,pinned,busy,progress,selected=visuallyselected,pendingicon",
         ".tab-icon-image":
-          "src=image,triggeringprincipal=iconloadingprincipal,requestcontextid,fadein,pinned,selected=visuallyselected,busy,crashed,sharing,pictureinpicture",
+          "src=image,triggeringprincipal=iconloadingprincipal,requestcontextid,fadein,pinned,selected=visuallyselected,busy,crashed,sharing,pictureinpicture,pending",
         ".tab-sharing-icon-overlay": "sharing,selected=visuallyselected,pinned",
         ".tab-icon-overlay":
-          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,indicator-replaces-favicon",
+          "sharing,pictureinpicture,crashed,busy,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked",
+        ".tab-audio-button":
+          "crashed,soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,pictureinpicture",
         ".tab-label-container":
           "pinned,selected=visuallyselected,labeldirection",
         ".tab-label":
           "text=label,accesskey,fadein,pinned,selected=visuallyselected,attention",
-        ".tab-icon-sound":
-          "soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,pictureinpicture",
         ".tab-label-container .tab-secondary-label":
-          "soundplaying,soundplaying-scheduledremoval,pinned,muted,blocked,selected=visuallyselected,activemedia-blocked,pictureinpicture",
+          "pinned,blocked,selected=visuallyselected,pictureinpicture",
         ".tab-close-button": "fadein,pinned,selected=visuallyselected",
       };
     }
@@ -135,6 +130,10 @@
       if (!("_lastAccessed" in this)) {
         this.updateLastAccessed();
       }
+
+      let labelContainer = this.querySelector(".tab-label-container");
+      labelContainer.addEventListener("overflow", this);
+      labelContainer.addEventListener("underflow", this);
 
       let cardPreviewInit = () => {
         if (this.container._showCardPreviews) {
@@ -205,6 +204,17 @@
       }
     }
 
+    #elementIndex;
+    get elementIndex() {
+      // Make sure the index is up to date.
+      this.container.ariaFocusableItems;
+      return this.#elementIndex;
+    }
+
+    set elementIndex(index) {
+      this.#elementIndex = index;
+    }
+
     get owner() {
       let owner = this._owner?.deref();
       if (owner && !owner.closing) {
@@ -214,11 +224,7 @@
     }
 
     set owner(owner) {
-      if (owner) {
-        this._owner = new WeakRef(owner);
-      } else {
-        this._owner = null;
-      }
+      this._owner = owner ? new WeakRef(owner) : null;
     }
 
     get container() {
@@ -232,15 +238,6 @@
 
       this.toggleAttribute("attention", val);
       gBrowser._tabAttrModified(this, ["attention"]);
-    }
-
-    set undiscardable(val) {
-      if (val == this.hasAttribute("undiscardable")) {
-        return;
-      }
-
-      this.toggleAttribute("undiscardable", val);
-      gBrowser._tabAttrModified(this, ["undiscardable"]);
     }
 
     set _visuallySelected(val) {
@@ -318,6 +315,15 @@
       return this.hasAttribute("undiscardable");
     }
 
+    set undiscardable(val) {
+      if (val == this.hasAttribute("undiscardable")) {
+        return;
+      }
+
+      this.toggleAttribute("undiscardable", val);
+      gBrowser._tabAttrModified(this, ["undiscardable"]);
+    }
+
     get isEmpty() {
       // Determines if a tab is "empty", usually used in the context of determining
       // if it's ok to close the tab.
@@ -383,19 +389,19 @@
     }
 
     get _overPlayingIcon() {
-      return (
-        this.soundPlayingIcon?.matches(":hover") ||
-        (this.overlayIcon?.matches(":hover") &&
-          (this.soundPlaying || this.muted || this.activeMediaBlocked))
-      );
+      return this.overlayIcon?.matches(":hover");
     }
 
-    get soundPlayingIcon() {
-      return this.querySelector(".tab-icon-sound");
+    get _overAudioButton() {
+      return this.audioButton?.matches(":hover");
     }
 
     get overlayIcon() {
       return this.querySelector(".tab-icon-overlay");
+    }
+
+    get audioButton() {
+      return this.querySelector(".tab-audio-button");
     }
 
     get throbber() {
@@ -480,7 +486,7 @@
         id = "tabbrowser-close-tabs-button";
         attributeName = "tooltiptext";
         args = { tabCount };
-      } else if (tab._overPlayingIcon) {
+      } else if (tab._overPlayingIcon || tab._overAudioButton) {
         args = { tabCount };
         if (contextTabInSelection) {
           id = linkedBrowser.audioMuted
@@ -524,24 +530,6 @@
       if (event.target.classList.contains("tab-close-button")) {
         this.mOverCloseButton = true;
       }
-      if (this._overPlayingIcon) {
-        const selectedTabs = gBrowser.selectedTabs;
-        const contextTabInSelection = selectedTabs.includes(this);
-        const affectedTabsLength = contextTabInSelection
-          ? selectedTabs.length
-          : 1;
-        let stringID;
-        if (this.hasAttribute("activemedia-blocked")) {
-          stringID = "browser-tab-unblock";
-        } else {
-          stringID = this.linkedBrowser.audioMuted
-            ? "browser-tab-unmute"
-            : "browser-tab-mute";
-        }
-        this.setSecondaryTabTooltipLabel(stringID, {
-          count: affectedTabsLength,
-        });
-      }
 
       this._updatePreviewPanelText();
 
@@ -563,12 +551,6 @@
     on_mouseout(event) {
       if (event.target.classList.contains("tab-close-button")) {
         this.mOverCloseButton = false;
-      }
-      if (
-        event.target == this.overlayIcon ||
-        event.target == this.soundPlayingIcon
-      ) {
-        this.setSecondaryTabTooltipLabel(null);
       }
 
       // If the new target is not part of this tab then this is a mouseleave event.
@@ -609,8 +591,8 @@
         this.style.MozUserFocus = "ignore";
       } else if (
         event.target.classList.contains("tab-close-button") ||
-        event.target.classList.contains("tab-icon-sound") ||
-        event.target.classList.contains("tab-icon-overlay")
+        event.target.classList.contains("tab-icon-overlay") ||
+        event.target.classList.contains("tab-audio-button")
       ) {
         eventMaySelectTab = false;
       }
@@ -672,29 +654,28 @@
         return;
       }
 
-      let onClose = event.target.classList.contains("tab-close-button");
-      let onSound = event.target.classList.contains("tab-icon-sound");
-      let onOverlay = event.target.classList.contains("tab-icon-overlay");
-
       if (
         gBrowser.multiSelectedTabsCount > 0 &&
-        !onClose &&
-        !onSound &&
-        !onOverlay
+        !event.target.classList.contains("tab-close-button") &&
+        !event.target.classList.contains("tab-icon-overlay") &&
+        !event.target.classList.contains("tab-audio-button")
       ) {
         // Tabs were previously multi-selected and user clicks on a tab
         // without holding Ctrl/Cmd Key
         gBrowser.clearMultiSelectedTabs();
       }
 
-      if (onSound || onOverlay) {
+      if (
+        event.target.classList.contains("tab-icon-overlay") ||
+        event.target.classList.contains("tab-audio-button")
+      ) {
         if (this.activeMediaBlocked) {
           if (this.multiselected) {
             gBrowser.resumeDelayedMediaOnMultiSelectedTabs(this);
           } else {
             this.resumeDelayedMedia();
           }
-        } else if (onSound || this.soundPlaying || this.muted) {
+        } else if (this.soundPlaying || this.muted) {
           if (this.multiselected) {
             gBrowser.toggleMuteAudioOnMultiSelectedTabs(this);
           } else {
@@ -704,7 +685,7 @@
         return;
       }
 
-      if (onClose) {
+      if (event.target.classList.contains("tab-close-button")) {
         if (this.multiselected) {
           gBrowser.removeMultiSelectedTabs();
         } else {
@@ -735,7 +716,7 @@
         this._selectedOnFirstMouseDown &&
         this.selected &&
         !(
-          event.target.classList.contains("tab-icon-sound") ||
+          event.target.classList.contains("tab-audio-button") ||
           event.target.classList.contains("tab-icon-overlay")
         )
       ) {
@@ -743,6 +724,21 @@
           animate: true,
           triggeringEvent: event,
         });
+      }
+    }
+
+    on_animationstart(event) {
+      if (!event.animationName.startsWith("tab-throbber-animation")) {
+        return;
+      }
+      // The animation is on a pseudo-element so we need to use `subtree: true`
+      // to get our hands on it.
+      for (let animation of event.target.getAnimations({ subtree: true })) {
+        if (animation.animationName === event.animationName) {
+          // Ensure all tab throbber animations are synchronized by sharing an
+          // start time.
+          animation.startTime = 0;
+        }
       }
     }
 
@@ -776,27 +772,6 @@
         this.linkedBrowser.unselectedTabHover(false);
       }
       this.dispatchEvent(new CustomEvent("TabHoverEnd", { bubbles: true }));
-    }
-
-    setSecondaryTabTooltipLabel(l10nID, l10nArgs) {
-      this.querySelector(".tab-secondary-label").toggleAttribute(
-        "showtooltip",
-        l10nID
-      );
-
-      const tooltipEl = this.querySelector(".tab-icon-sound-tooltip-label");
-
-      if (l10nArgs) {
-        tooltipEl.setAttribute("data-l10n-args", JSON.stringify(l10nArgs));
-      } else {
-        tooltipEl.removeAttribute("data-l10n-args");
-      }
-      if (l10nID) {
-        tooltipEl.setAttribute("data-l10n-id", l10nID);
-      } else {
-        tooltipEl.removeAttribute("data-l10n-id");
-      }
-      // TODO(Itiel): Maybe simplify this when bug 1830989 lands
     }
 
     resumeDelayedMedia() {
@@ -863,6 +838,14 @@
 
     on_AriaFocus() {
       this.updateA11yDescription();
+    }
+
+    on_overflow(event) {
+      event.currentTarget.toggleAttribute("textoverflow", true);
+    }
+
+    on_underflow(event) {
+      event.currentTarget.removeAttribute("textoverflow");
     }
   }
 

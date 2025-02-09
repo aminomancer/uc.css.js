@@ -590,7 +590,8 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView-row:not([has-action]) .urlbarView-title:has(strong),
 .urlbarView-row .urlbarView-tag,
 .urlbarView-row:where([type="tabtosearch"], [type="tokenaliasengine"], [type="tip"]) .urlbarView-title,
-.urlbarView-row:not([has-url]) .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"],
+/* .urlbarView-row:not([has-url]) .urlbarView-title[data-l10n-id="urlbar-result-action-search-w-engine"], */
+.urlbarView-row[type="search_engine"]:not([has-url]) .urlbarView-title,
 .urlbarView-tail-prefix,
 .urlbarView-dynamic-weather-bottom {
   font-weight: var(--urlbar-result-strong-font-weight, 500) !important;

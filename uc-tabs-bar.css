@@ -430,17 +430,13 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
 }
 
 .all-tabs-item {
-  &:is([selected], [multiselected], [usercontextid]) .all-tabs-button {
-    background-image: linear-gradient(to right, var(--main-stripe-color) 0, var(--main-stripe-color) 4px, transparent 4px) !important;
-  }
-
   &[selected] {
     font-weight: normal !important;
     background-color: var(--arrowpanel-dimmed-further) !important;
     --main-stripe-color: var(--arrowpanel-dimmed-even-further);
   }
 
-  &[usercontextid]:not([multiselected]) {
+  &:not([multiselected]) > .all-tabs-container-indicator {
     --main-stripe-color: var(--identity-tab-color);
   }
 
@@ -472,6 +468,10 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
     }
   }
 
+  .all-tabs-button {
+    background: none !important;
+  }
+
   .all-tabs-secondary-button {
     width: 18px;
     height: 18px;
@@ -485,7 +485,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
     display: flex !important;
     position: relative !important;
 
-    &[toggle-mute] {
+    &.all-tabs-mute-button {
       list-style-image: none !important;
       background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
       background-size: 14px !important;
@@ -532,7 +532,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
       margin-inline-start: 0 !important;
     }
 
-    &[close-button] {
+    &.all-tabs-close-button {
       fill-opacity: 0 !important;
       transform: translateX(14px);
       opacity: 0 !important;
@@ -552,6 +552,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
       fill: inherit !important;
       fill-opacity: inherit !important;
       -moz-context-properties: inherit !important;
+      margin: 0 !important;
     }
 
     > label:empty {
@@ -560,7 +561,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
   }
 
   .all-tabs-secondary-button,
-  &:is(:hover, :focus-within) .all-tabs-secondary-button[close-button] {
+  &:is(:hover, :focus-within) .all-tabs-secondary-button.all-tabs-close-button {
     &:is(:hover, :focus):not([disabled]) {
       background-color: var(--arrowpanel-dimmed) !important;
       opacity: 1 !important;
@@ -572,7 +573,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
     }
   }
 
-  &:is(:hover, :focus-within) .all-tabs-secondary-button[toggle-mute] {
+  &:is(:hover, :focus-within) .all-tabs-secondary-button.all-tabs-mute-button {
     transform: translateX(48px);
   }
 
@@ -582,7 +583,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
     border-radius: 0 !important;
   }
 
-  &:is(:hover, :focus-within) .all-tabs-secondary-button[close-button] {
+  &:is(:hover, :focus-within) .all-tabs-secondary-button.all-tabs-close-button {
     transform: none !important;
     opacity: 0.7 !important;
     margin-inline-start: 0 !important;
