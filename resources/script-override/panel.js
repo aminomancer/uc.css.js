@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Restore Arrowpanel Arrows
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Necessary for use with restorePreProtonArrowpanels.uc.js.
@@ -25,7 +25,7 @@
                 <box class="panel-arrowbox" part="arrowbox">
                   <image class="panel-arrow" part="arrow" />
                 </box>
-                <html:slot part="content" />
+                <html:slot part="content"/>
               </vbox>`;
     }
 
@@ -98,10 +98,12 @@
         return;
       }
 
-      this.shadowRoot.appendChild(this.constructor.fragment);
-      if (this.hasAttribute("neverhidden")) {
-        this.panelContent.style.display = "";
+      let fragment = this.constructor.fragment;
+      if (!this.hasAttribute("neverhidden")) {
+        let slot = fragment.querySelector("[part=content]");
+        slot.style.setProperty("display", "none", "important");
       }
+      this.shadowRoot.appendChild(fragment);
     }
 
     get panelContent() {
@@ -126,8 +128,14 @@
       super.removeAttribute(name);
     }
 
+    // Panels that are technically type=arrow but should not have arrows.
+    exceptedIds = ["selection-shortcut-action-panel"];
+
     get isArrowPanel() {
-      return this.getAttribute("type") == "arrow";
+      return (
+        this.getAttribute("type") == "arrow" &&
+        !this.exceptedIds.includes(this.id)
+      );
     }
 
     get noOpenOnAnchor() {
@@ -193,6 +201,10 @@
           this.setAttribute("side", "top");
         }
       }
+
+      // This method isn't implemented by panel.js, but it can be added to
+      // individual instances that need to show an arrow.
+      this.setArrowPosition?.(event);
     }
 
     on_popupshowing(event) {
@@ -200,7 +212,7 @@
         this.panelContent.style.display = "";
       }
       if (this.isArrowPanel && event.target == this) {
-        if (this.anchorNode) {
+        if (this.anchorNode && !this.noOpenOnAnchor) {
           let anchorRoot =
             this.anchorNode.closest("toolbarbutton, .anchor-root") ||
             this.anchorNode;
@@ -247,7 +259,6 @@
         );
         if (!this._prevFocus.get()) {
           this._prevFocus = Cu.getWeakReference(document.activeElement);
-          return;
         }
       } catch (ex) {
         this._prevFocus = Cu.getWeakReference(document.activeElement);
@@ -279,7 +290,7 @@
           this.setAttribute("animate", "cancel");
         }
 
-        if (this.anchorNode) {
+        if (this.anchorNode && !this.noOpenOnAnchor) {
           let anchorRoot =
             this.anchorNode.closest("toolbarbutton, .anchor-root") ||
             this.anchorNode;

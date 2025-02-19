@@ -467,7 +467,7 @@ menuitem[default="true"] {
 }
 
 /* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
-@media (-moz-bool-pref: "userChrome.contextmenu.reduce-menuseparators") {
+@media (-moz-pref: "userChrome.contextmenu.reduce-menuseparators") {
   #contentAreaContextMenu > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
     display: none !important;
   }

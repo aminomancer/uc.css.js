@@ -163,7 +163,7 @@ tooltip .uc-tooltip-box {
   and 2) we can't differentiate between secure pages and local pages, system
   pages, etc. so the lock icon could be misleading. for that reason i disabled it
   but maybe someone else wants it. it does look kinda cool i guess. */
-  @media (-moz-bool-pref: "userChrome.tabs.tooltip.always-show-lock-icon") {
+  @media (-moz-pref: "userChrome.tabs.tooltip.always-show-lock-icon") {
     display: flex !important;
   }
 }
@@ -553,7 +553,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
   outline-offset: unset !important;
 }
 
-@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+@media (-moz-pref: "userChrome.css.mac-ui-fonts") {
   @-moz-document regexp("^chrome:(?!\/\/devtools).*") {
     /* for most 12px stuff */
     html:root,
@@ -777,7 +777,7 @@ toolbar .toolbarbutton-1:focus-visible > .toolbarbutton-badge-stack,
 }
 
 /* remove tooltip borders if pref is enabled */
-@media (-moz-bool-pref: "userChrome.css.remove-tooltip-borders") {
+@media (-moz-pref: "userChrome.css.remove-tooltip-borders") {
   tooltip > description,
   tooltip .uc-tooltip-box,
   .places-tooltip-box,

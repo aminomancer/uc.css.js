@@ -2172,8 +2172,32 @@ of moz-document in stylesheets with file:// urls */
     margin: 0;
   }
 
-  #tab-preview-panel::part(arrowbox) {
+  #tab-preview-panel::part(arrowbox),
+  #selection-shortcut-action-panel::part(arrowbox),
+  #chat-shortcuts-options-panel::part(arrowbox),
+  #feature-callout::part(arrowbox) {
     display: none;
+  }
+
+  #selection-shortcut-action-panel {
+    --panel-subview-body-padding: var(--panel-subview-body-padding-magnitude);
+    transform: none !important;
+    margin: revert !important;
+  }
+
+  #chat-shortcuts-options-panel {
+    margin-inline: 0 !important;
+    margin-top: calc(2px - (2 * var(--panel-shadow-margin))) !important;
+    margin-bottom: 0 !important;
+  }
+
+  #ai-action-button {
+    --button-min-height: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
+    --button-size-icon: calc(2 * var(--toolbarbutton-inner-padding) + 16px);
+    --button-border-radius: var(--toolbarbutton-border-radius);
+    --button-padding-icon: var(--toolbarbutton-inner-padding);
+    --icon-size-default: 16px;
+    margin: 0;
   }
 
   @-moz-document url("chrome://mozapps/content/downloads/unknownContentType.xhtml"),

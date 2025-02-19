@@ -443,7 +443,7 @@ and a few elements like checkboxes */
     color: var(--low-warning-text-color) !important;
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     menupopup {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -455,7 +455,7 @@ and a few elements like checkboxes */
     }
   }
 
-  @media (-moz-bool-pref: "userChrome.css.remove-menu-borders") {
+  @media (-moz-pref: "userChrome.css.remove-menu-borders") {
     .menupopup-arrowscrollbox {
       border: none !important;
     }

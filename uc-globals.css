@@ -450,7 +450,7 @@ toolbar panel,
 }
 
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
-@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+@media (-moz-pref: "userChrome.css.mac-ui-fonts") {
   :root {
     --uc-font-weight-extrabold: 600;
     --uc-font-weight-bold: 500;
@@ -459,7 +459,7 @@ toolbar panel,
   }
 }
 
-@media (-moz-bool-pref: "userChrome.css.menupopup-shadows") {
+@media (-moz-pref: "userChrome.css.menupopup-shadows") {
   :root {
     --menupopup-inner-box-margin: 4px !important;
     --panel-inner-box-margin: 4px;
@@ -468,7 +468,7 @@ toolbar panel,
   }
 }
 
-@media (-moz-bool-pref: "userChrome.tabs.drag-scrolling.enabled") {
+@media (-moz-pref: "userChrome.tabs.drag-scrolling.enabled") {
   :root {
     --tab-scrollbuttons-display: flex;
   }

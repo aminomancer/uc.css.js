@@ -39,13 +39,13 @@ tooltip > description {
   margin: 0;
 }
 
-@media (-moz-bool-pref: "userChrome.css.remove-tooltip-borders") {
+@media (-moz-pref: "userChrome.css.remove-tooltip-borders") {
   tooltip > description {
     border: none;
   }
 }
 
-@media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+@media (-moz-pref: "userChrome.css.mac-ui-fonts") {
   tooltip {
     font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif;
     font-kerning: normal;

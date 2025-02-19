@@ -748,7 +748,7 @@
       outline: 1px solid var(--global-focus-outline-color) !important;
     }
 
-    @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+    @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
       body {
         font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
@@ -1154,7 +1154,7 @@
     text-shadow: 0.5px 0.5px 0.5px black, 0 0 1px black, 0 0 1px black !important;
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
       font-weight: var(--uc-font-weight-bold) !important;
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
@@ -1164,7 +1164,7 @@
 }
 
 @-moz-document regexp("^(about:|chrome:\/\/).*") {
-  @media (-moz-bool-pref: "userChrome.css.hide-promotion") {
+  @media (-moz-pref: "userChrome.css.hide-promotion") {
     .promo,
     .vpn-banner {
       display: none !important;

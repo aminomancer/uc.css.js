@@ -502,7 +502,7 @@ toolbarbutton.bookmark-item:not(.subviewbutton) {
   color: var(--uc-parent-link-color-active) !important;
 }
 
-@media (-moz-bool-pref: "userChrome.bookmarks-toolbar.icons-only") {
+@media (-moz-pref: "userChrome.bookmarks-toolbar.icons-only") {
   #PersonalToolbar toolbarbutton.bookmark-item:not(.subviewbutton, [id]) {
     margin-inline: 2px !important;
     padding: 0 !important;

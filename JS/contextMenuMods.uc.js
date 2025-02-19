@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.8
+// @version        1.0.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -178,22 +178,22 @@
       originalMenu.remove();
       originalMenuPrivate.remove();
 
-      originalMenu = this.contextMenu.querySelector("#context-searchselect");
-      originalMenuPrivate = this.contextMenu.querySelector(
+      let newMenu = this.contextMenu.querySelector("#context-searchselect");
+      let newMenuPrivate = this.contextMenu.querySelector(
         "#context-searchselect-private"
       );
-      originalMenu.addEventListener("command", e => {
-        let { searchTerms, usePrivate, principal, csp } = originalMenu;
+      newMenu.addEventListener("command", e => {
+        let { searchTerms, usePrivate, principal, csp } = newMenu;
         this.search(searchTerms, usePrivate, principal, csp, e);
       });
-      originalMenu.addEventListener("popupshowing", e =>
+      newMenu.addEventListener("popupshowing", e =>
         gContextMenu.createSearchMenu(e)
       );
-      originalMenuPrivate.addEventListener("command", e => {
-        let { searchTerms, principal, csp } = originalMenuPrivate;
+      newMenuPrivate.addEventListener("command", e => {
+        let { searchTerms, principal, csp } = newMenuPrivate;
         this.search(searchTerms, true, principal, csp, e);
       });
-      originalMenuPrivate.addEventListener("popupshowing", e =>
+      newMenuPrivate.addEventListener("popupshowing", e =>
         gContextMenu.createSearchMenu(e)
       );
     }
@@ -251,7 +251,7 @@
             let menuItemPrivate = document.getElementById(
               "context-searchselect-private"
             );
-            if (!Services.search.isInitialized) {
+            if (!Services.search.hasSuccessfullyInitialized) {
               menuItem.hidden = true;
               menuItemPrivate.hidden = true;
               return;

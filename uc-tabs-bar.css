@@ -674,7 +674,7 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
 
 /* move titlebar buttons to the left on macOS and linux
 or if the user sets a pref */
-@media (-moz-platform: macos), (-moz-platform: linux), (-moz-bool-pref: "userChrome.css.titlebar-buttons-on-left") {
+@media (-moz-platform: macos), (-moz-platform: linux), (-moz-pref: "userChrome.css.titlebar-buttons-on-left") {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
     order: 0 !important;

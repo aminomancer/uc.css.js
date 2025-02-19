@@ -22,7 +22,7 @@
     border-radius: 3px !important;
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="simple-translate@sienori"] body {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;

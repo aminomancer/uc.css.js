@@ -555,7 +555,7 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true:
 "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
-@media (-moz-bool-pref: "userChrome.tabs.pinned-tabs.close-buttons.disabled") {
+@media (-moz-pref: "userChrome.tabs.pinned-tabs.close-buttons.disabled") {
   .tabbrowser-tab[pinned] .tab-close-button {
     display: none !important;
   }

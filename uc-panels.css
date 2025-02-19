@@ -30,7 +30,7 @@ panelview {
 }
 
 /* allow panel height to flex and animate */
-@media (-moz-bool-pref: "userChrome.panels.allow-height-flex") {
+@media (-moz-pref: "userChrome.panels.allow-height-flex") {
   panelview {
     min-height: revert !important;
     max-height: revert !important;
@@ -199,7 +199,7 @@ no longer necessary after modern flexbox emulation. */
 }
 
 /* protect the arrowpanel animations from future updates */
-@media (-moz-bool-pref: "xul.panel-animations.enabled") {
+@media (-moz-pref: "xul.panel-animations.enabled") {
   @media (prefers-reduced-motion: no-preference) {
     @media (-moz-platform: macos) {
       panel[type="arrow"],

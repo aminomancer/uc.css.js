@@ -892,7 +892,7 @@ by underlining them (requires urlbarMods.uc.js) */
 
 /* the animation's framerate can stall when loading really heavy pages.
 so you might wanna turn the animation off. I might even make it off by default. */
-@media (-moz-bool-pref: "userChrome.urlbar-results.disable_animation") {
+@media (-moz-pref: "userChrome.urlbar-results.disable_animation") {
   #urlbar[breakout][breakout-extend] .urlbarView,
   #urlbar[breakout][breakout-extend] #urlbar-background {
     animation: none !important;
@@ -968,7 +968,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
   box-sizing: border-box !important;
 }
 
-@media (-moz-bool-pref: "userChrome.urlbar-results.hide-help-button") {
+@media (-moz-pref: "userChrome.urlbar-results.hide-help-button") {
   .urlbarView-help {
     display: none !important;
   }

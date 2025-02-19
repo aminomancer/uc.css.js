@@ -570,7 +570,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
     color: inherit !important;
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     .box {
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -1067,7 +1067,7 @@ rtl languages. adjust the border radius accordingly */
     margin-inline: 8px !important;
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     #commonDialogWindow[dialogroot] {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -1185,7 +1185,7 @@ rtl languages. adjust the border radius accordingly */
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     .header,
     #location {
       font-weight: var(--uc-font-weight-extrabold, 500) !important;
@@ -1542,7 +1542,7 @@ rtl languages. adjust the border radius accordingly */
     }
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     :root[dialogroot],
     :root[dialogroot] dialog,
     :root[dialogroot] body {
@@ -2245,7 +2245,7 @@ link[href="chrome://global/content/printPagination.css"]
     background-image: url(chrome://userchrome/content/notifications/microphone.svg);
   }
 
-  @media (-moz-bool-pref: "userChrome.css.mac-ui-fonts") {
+  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
     strong,
     .header,
     .permissionLabel {
