@@ -55,7 +55,8 @@
     min-height: 44px !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="notes@mozilla.com"],
     :root[uc-extension-id="notes@mozilla.com"] body {
       --ck-font-face: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
@@ -278,7 +279,7 @@
 
   :root[uc-extension-id="notes@mozilla.com"] #notes .drag-n-drop-focus,
   :root[uc-extension-id="notes@mozilla.com"] #notes .drag-n-drop-focus .ck-editor__editable {
-    border-color: var(--in-content-box-border-color) !important;
+    /* border-color: var(--in-content-box-border-color) !important; */
     box-shadow: inset 0 0 0 1px var(--in-content-box-border-color) !important;
     border: none !important;
     background-color: var(--in-content-box-background-odd) !important;

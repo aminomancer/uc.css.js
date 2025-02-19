@@ -23,6 +23,7 @@
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "0.2.2",
     "@parcel/transformer-sass": "2.8.2",
+    "@stylistic/stylelint-plugin": "3.1.0",
     "eslint": "8.57.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-eslint-plugin": "5.4.0",
@@ -47,6 +48,9 @@
     "react-dom": "18.2.0",
     "react-markdown": "8.0.4",
     "react-syntax-highlighter": "15.5.0",
-    "remark-breaks": "3.0.2"
+    "remark-breaks": "3.0.2",
+    "stylelint": "16.11.0",
+    "stylelint-config-recommended": "14.0.1",
+    "stylelint-config-standard-scss": "13.1.0"
   }
 }

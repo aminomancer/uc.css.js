@@ -85,7 +85,7 @@ tabmodalprompt * {
   border-color: var(--uc-menu-border-color) !important;
 
   color: var(--uc-parent-page-color) !important;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25), 0 0 5px -1px rgba(0, 0, 0, 0.125) !important;
 }
 
 .tabmodalprompt-mainContainer textbox {
@@ -570,7 +570,8 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
     color: inherit !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     .box {
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -699,10 +700,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
 .pointerlockfswarning {
   align-items: center;
   background: rgba(45, 62, 72, 0.9);
-  border: 2px solid currentColor;
-  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  color: #fafafa;
   padding: 24px 16px;
   font: message-box;
 
@@ -718,7 +716,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   border: 1px solid var(--uc-menu-border-color) !important;
 
   color: var(--arrowpanel-color) !important;
-  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25), 0px 0px 5px -1px rgba(0, 0, 0, 0.125) !important;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25), 0 0 5px -1px rgba(0, 0, 0, 0.125) !important;
   transition-property: transform, opacity !important;
   transition-timing-function: cubic-bezier(0.43, 0, 0.38, 1), cubic-bezier(0.43, 0, 0.38, 1) !important;
   transition-duration: 0.5s, 0.4s !important;
@@ -757,7 +755,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
 :is(.tab-prompt-dialog, #window-modal-dialog, .content-prompt-dialog) .dialogBox:not(.fullScreen, .spotlightBox) {
   /* tab-prompt-dialogs are anchored to the top of the browser content area.
   this makes them look like they emerge from under the navbar. */
-  margin-top: 0px !important;
+  margin-top: 0 !important;
   border: 1px solid var(--arrowpanel-border-color);
 }
 
@@ -1067,7 +1065,8 @@ rtl languages. adjust the border radius accordingly */
     margin-inline: 8px !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     #commonDialogWindow[dialogroot] {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -1185,7 +1184,8 @@ rtl languages. adjust the border radius accordingly */
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     .header,
     #location {
       font-weight: var(--uc-font-weight-extrabold, 500) !important;
@@ -1472,7 +1472,7 @@ rtl languages. adjust the border radius accordingly */
   .tree-input[type="text"] {
     background-color: var(--purple-40) !important;
     border: none !important;
-    padding: 1px 0px !important;
+    padding: 1px 0 !important;
     margin-top: -1px !important;
     margin-inline: -4px 3px !important;
     width: auto !important;
@@ -1542,7 +1542,8 @@ rtl languages. adjust the border radius accordingly */
     }
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[dialogroot],
     :root[dialogroot] dialog,
     :root[dialogroot] body {
@@ -2245,7 +2246,8 @@ link[href="chrome://global/content/printPagination.css"]
     background-image: url(chrome://userchrome/content/notifications/microphone.svg);
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     strong,
     .header,
     .permissionLabel {

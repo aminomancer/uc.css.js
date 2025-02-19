@@ -12,7 +12,8 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
 }
 
 @-moz-document regexp("^moz-extension://.*/popup/index.html.*") {
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="{446900e4-71c2-419f-a6a7-df9c091e268b}"] :where(body, input, button) {
       font-family: SF Pro, SF Arabic, Segoe UI, sans-serif !important;
     }
@@ -34,7 +35,7 @@ iframe#bit-notification-bar-iframe[src^="moz-extension://"] {
     padding-inline: 8px !important;
     grid-template-columns: max-content auto max-content !important;
     grid-column-gap: 8px !important;
-    border-color: var(--in-content-border-color-dim) !important;
+    /* border-color: var(--in-content-border-color-dim) !important; */
     border: none !important;
   }
 

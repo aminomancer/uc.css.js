@@ -30,7 +30,8 @@ panelview {
 }
 
 /* allow panel height to flex and animate */
-@media (-moz-pref: "userChrome.panels.allow-height-flex") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.panels.allow-height-flex") {
   panelview {
     min-height: revert !important;
     max-height: revert !important;
@@ -199,7 +200,8 @@ no longer necessary after modern flexbox emulation. */
 }
 
 /* protect the arrowpanel animations from future updates */
-@media (-moz-pref: "xul.panel-animations.enabled") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("xul.panel-animations.enabled") {
   @media (prefers-reduced-motion: no-preference) {
     @media (-moz-platform: macos) {
       panel[type="arrow"],
@@ -298,7 +300,6 @@ no longer necessary after modern flexbox emulation. */
   background-color: transparent;
   -moz-context-properties: fill, fill-opacity !important;
   fill-opacity: 0.6;
-  border-radius: var(--arrowpanel-menuitem-border-radius) !important;
   padding: var(--arrowpanel-menuitem-padding) !important;
   min-height: revert !important;
   border-radius: var(--arrowpanel-menuitem-border-radius) !important;
@@ -385,7 +386,7 @@ no longer necessary after modern flexbox emulation. */
 }
 
 #protections-popup-category-list {
-  margin-top: 0px !important;
+  margin-top: 0 !important;
 }
 
 #protections-popup-blocking-section-header,
@@ -1771,7 +1772,6 @@ ul.webext-perm-domains-list {
 }
 
 .footer-button.screenshot-button {
-  background-color: var(--button-bgcolor, color-mix(in srgb, currentColor 13%, transparent)) !important;
   color: var(--uc-content-page-color) !important;
   background-color: transparent !important;
   margin: 0 !important;

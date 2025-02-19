@@ -551,7 +551,7 @@
     }
 
     .stp_button_wide .stp_button {
-      margin-block: -2px 0px !important;
+      margin-block: -2px 0 !important;
       margin-inline: -6px !important;
       border-radius: 4px !important;
     }
@@ -748,7 +748,8 @@
       outline: 1px solid var(--global-focus-outline-color) !important;
     }
 
-    @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+    /* stylelint-disable-next-line media-query-no-invalid */
+    @media -moz-pref("userChrome.css.mac-ui-fonts") {
       body {
         font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
         font-kerning: normal !important;
@@ -798,7 +799,6 @@
       --box-background: var(--in-content-bg-dark) !important;
       --box-border-color: var(--button-bg-active) !important;
       --shadow-var: 0 0 5px hsla(0, 0%, 0%, 0.08), 0 0 8px hsla(0, 0%, 0%, 0.05);
-      --button-color: var(--plaintext-color);
       --button-bg: var(--uc-content-button-background);
       --button-bg-hover: var(--uc-content-button-background-hover);
       --button-bg-active: var(--uc-content-button-background-active);
@@ -1154,7 +1154,8 @@
     text-shadow: 0.5px 0.5px 0.5px black, 0 0 1px black, 0 0 1px black !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="screenshots@mozilla.org"] .pixel-dimensions {
       font-weight: var(--uc-font-weight-bold) !important;
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
@@ -1164,7 +1165,8 @@
 }
 
 @-moz-document regexp("^(about:|chrome:\/\/).*") {
-  @media (-moz-pref: "userChrome.css.hide-promotion") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.hide-promotion") {
     .promo,
     .vpn-banner {
       display: none !important;

@@ -30,7 +30,7 @@
     letter-spacing: inherit !important;
     padding: var(--menupopup-inner-padding-magnitude) !important;
     padding-top: 0 !important;
-    min-inline-size: 0px !important;
+    min-inline-size: 0 !important;
     inline-size: calc(var(--overflow-size) + 249px) !important;
     max-inline-size: 300px !important;
     box-sizing: border-box !important;
@@ -112,7 +112,8 @@
     inline-size: 16px !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="@testpilot-containers"] body {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -543,7 +544,7 @@
   }
 
   :root[uc-extension-id="@testpilot-containers"] .menu-arrow {
-    padding: 0px !important;
+    padding: 0 !important;
     min-width: 0 !important;
     width: var(--menu-right-size) !important;
     height: var(--menu-right-size) !important;
@@ -596,7 +597,6 @@
     filter: none !important;
     cursor: default !important;
     border-radius: var(--context-menuitem-border-radius) !important;
-    background-color: transparent;
   }
 
   :root[uc-extension-id="@testpilot-containers"] .btn-return:is(:hover, :focus-visible, :-moz-focusring) {
@@ -994,7 +994,8 @@
     inset-inline-start: 8px !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="@testpilot-containers"] body {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;

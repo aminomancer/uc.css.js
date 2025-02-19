@@ -12,12 +12,12 @@
     cursor: default;
     text-decoration: none;
 
-    &[name="scripts"] {
-      background-image: url("chrome://browser/skin/trending.svg");
+    &[name='scripts'] {
+      background-image: url('chrome://browser/skin/trending.svg');
     }
 
-    &[name="settings"] {
-      background-image: url("chrome://global/skin/icons/settings.svg");
+    &[name='settings'] {
+      background-image: url('chrome://global/skin/icons/settings.svg');
     }
   }
 }
@@ -67,7 +67,7 @@
 
         .textbox-search-sign {
           width: 12px;
-          background: url("chrome://global/skin/icons/search-textbox.svg") no-repeat center/contain;
+          background: url('chrome://global/skin/icons/search-textbox.svg') no-repeat center/contain;
           margin-inline-end: 5px;
           pointer-events: none;
 
@@ -82,8 +82,7 @@
           min-height: revert;
           min-width: revert;
           width: 14px;
-          background-size: 14px;
-          background: url("resource://content-accessible/searchfield-cancel.svg") no-repeat center/14px;
+          background: url('resource://content-accessible/searchfield-cancel.svg') no-repeat center/14px;
           margin-inline-start: 5px;
 
           &:not([disabled]) {
@@ -223,38 +222,36 @@
       display: flex;
       flex-flow: row nowrap;
       overflow: hidden;
-      margin: calc(var(--card-padding) * -1);
-      margin-top: var(--card-padding);
       border-radius: 4px;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
       margin: 8px calc(var(--card-padding) * -1) calc(var(--card-padding) * -1);
-      --info-icon-url: url("chrome://global/skin/icons/info-filled.svg");
-      --warn-icon-url: url("chrome://global/skin/icons/warning.svg");
-      --success-icon-url: url("chrome://global/skin/icons/check.svg");
-      --error-icon-url: url("chrome://global/skin/icons/error.svg");
+      --info-icon-url: url('chrome://global/skin/icons/info-filled.svg');
+      --warn-icon-url: url('chrome://global/skin/icons/warning.svg');
+      --success-icon-url: url('chrome://global/skin/icons/check.svg');
+      --error-icon-url: url('chrome://global/skin/icons/error.svg');
       --icon-size: 16px;
       --message-bar-background-color: var(--in-content-box-info-background);
       --message-bar-text-color: var(--in-content-text-color);
       --message-bar-icon-url: var(--info-icon-url);
 
-      &[type="warning"] {
-        --message-bar-background-color: hsla(48, 100%, 66%, 0.2);
+      &[type='warning'] {
+        --message-bar-background-color: hsla(48deg, 100%, 66%, 20%);
         --message-bar-icon-url: var(--warn-icon-url);
       }
 
-      &[type="success"] {
-        --message-bar-background-color: hsla(119, 80%, 66%, 0.2);
+      &[type='success'] {
+        --message-bar-background-color: hsla(119deg, 80%, 66%, 20%);
         --message-bar-icon-url: var(--success-icon-url);
       }
 
-      &[type="error"] {
-        --message-bar-background-color: hsla(2, 100%, 66%, 0.15);
+      &[type='error'] {
+        --message-bar-background-color: hsla(2deg, 100%, 66%, 15%);
         --message-bar-icon-url: var(--error-icon-url);
       }
 
-      &[type="critical"] {
-        --message-bar-background-color: hsla(0, 100%, 60%, 0.25);
+      &[type='critical'] {
+        --message-bar-background-color: hsla(0deg, 100%, 60%, 25%);
         --message-bar-icon-url: var(--error-icon-url);
       }
 
@@ -372,7 +369,7 @@
               background: var(--in-content-box-background-odd);
               padding: 0.15em 0.4em;
               border-radius: 4px;
-              font-family: "Fira Code", "Fira Mono", SFMono-Regular, SF Mono, Menlo, Consolas, "DejaVu Sans Mono", Liberation Mono, ui-monospace, monospace;
+              font-family: 'Fira Code', 'Fira Mono', SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', ui-monospace, monospace;
               white-space: break-spaces;
             }
           }
@@ -420,7 +417,7 @@
       box-shadow: var(--card-shadow);
     }
 
-    &[active="false"]:not([expanded], :hover) {
+    &[active='false']:not([expanded], :hover) {
       opacity: 0.6;
     }
 
@@ -435,6 +432,7 @@
       &[focused] {
         outline: none;
         --card-outline-color: color-mix(in srgb, var(--in-content-accent-color) 70%, transparent);
+
         box-shadow: var(--card-shadow), 0 0 0 5px var(--card-outline-color);
       }
 
@@ -592,20 +590,22 @@
 
 // copied from toggle-button.css (which has been replaced with a storybook
 // component that we can't use with React, moz-toggle)
-input[type="checkbox"].toggle-button {
+input[type='checkbox'].toggle-button {
   --button-height: 16px;
   --button-half-height: 8px;
   --button-width: 26px;
   --button-border-width: 1px;
+
   /* dot-size = button-height - 2*dot-margin - 2*button-border-width */
   --dot-size: 10px;
   --dot-margin: 2px;
+
   /* --dot-transform-x = button-width - 2*dot-margin - dot-size - 2*button-border-width */
   --dot-transform-x: 10px;
-  --border-color: hsla(210,4%,10%,.14);
+  --border-color: hsla(210deg,4%,10%,14%);
 }
 
-input[type="checkbox"].toggle-button {
+input[type='checkbox'].toggle-button {
   appearance: none;
   padding: 0;
   margin: 0;
@@ -617,35 +617,35 @@ input[type="checkbox"].toggle-button {
   box-sizing: border-box;
 }
 
-input[type="checkbox"].toggle-button:enabled:hover {
+input[type='checkbox'].toggle-button:enabled:hover {
   background: var(--in-content-button-background-hover);
   border-color: var(--border-color);
 }
 
-input[type="checkbox"].toggle-button:enabled:active {
+input[type='checkbox'].toggle-button:enabled:active {
   background: var(--in-content-button-background-active);
   border-color: var(--border-color);
 }
 
-input[type="checkbox"].toggle-button:checked {
+input[type='checkbox'].toggle-button:checked {
   background: var(--in-content-primary-button-background);
   border-color: var(--in-content-primary-button-background-hover);
 }
 
-input[type="checkbox"].toggle-button:checked:hover {
+input[type='checkbox'].toggle-button:checked:hover {
   background: var(--in-content-primary-button-background-hover);
   border-color: var(--in-content-primary-button-background-active);
 }
 
-input[type="checkbox"].toggle-button:checked:active {
+input[type='checkbox'].toggle-button:checked:active {
   background: var(--in-content-primary-button-background-active);
   border-color: var(--in-content-primary-button-background-active);
 }
 
-input[type="checkbox"].toggle-button::before {
+input[type='checkbox'].toggle-button::before {
   display: block;
-  content: "";
-  background: #fff;
+  content: '';
+  background: #FFF;
   height: var(--dot-size);
   width: var(--dot-size);
   margin: var(--dot-margin);
@@ -655,11 +655,11 @@ input[type="checkbox"].toggle-button::before {
   transform: translate(0, calc(50% - var(--dot-size) / 2));
 }
 
-input[type="checkbox"].toggle-button:checked::before {
+input[type='checkbox'].toggle-button:checked::before {
   transform: translate(var(--dot-transform-x), calc(50% - var(--dot-size) / 2));
 }
 
-input[type="checkbox"].toggle-button:-moz-locale-dir(rtl)::before,
-input[type="checkbox"].toggle-button:dir(rtl)::before {
+input[type='checkbox'].toggle-button:-moz-locale-dir(rtl)::before,
+input[type='checkbox'].toggle-button:dir(rtl)::before {
   scale: -1;
 }

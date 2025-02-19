@@ -117,7 +117,7 @@ it also changes the appearance of the one-offs in the searchbar. */
 
     .toolbarbutton-badge {
       justify-self: start !important;
-      margin: 0px -5.5px !important;
+      margin: 0 -5.5px !important;
     }
   }
 

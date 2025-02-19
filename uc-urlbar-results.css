@@ -276,7 +276,7 @@ by underlining them (requires urlbarMods.uc.js) */
 }
 
 .urlbarView-type-icon {
-  margin-inline: 0px !important;
+  margin-inline: 0 !important;
   position: relative !important;
   align-self: center !important;
   min-width: 16px !important;
@@ -308,7 +308,7 @@ by underlining them (requires urlbarMods.uc.js) */
   align-self: center !important;
   stroke: none !important;
   background: url(chrome://userchrome/content/skin/tab.svg) no-repeat !important;
-  background-position: 0px 0px !important;
+  background-position: 0 0 !important;
   background-size: contain !important;
 }
 
@@ -400,7 +400,7 @@ by underlining them (requires urlbarMods.uc.js) */
 .urlbarView[actionoverride] .urlbarView-row[type="switchtab"] .urlbarView-type-icon {
   background: url(chrome://userchrome/content/skin/forward.svg) no-repeat !important;
   background-size: 90% !important;
-  background-position: 0px 1.5px !important;
+  background-position: 0 1.5px !important;
 }
 
 .urlbarView[actionoverride] .urlbarView-row[type="switchtab"] .urlbarView-type-icon:-moz-locale-dir(rtl) {
@@ -481,8 +481,8 @@ by underlining them (requires urlbarMods.uc.js) */
 
 .urlbarView .urlbarView-row[type="tip"] {
   border: none !important;
-  padding-block: 0px 0px !important;
-  padding-inline: 0px 0px !important;
+  padding-block: 0 0 !important;
+  padding-inline: 0 0 !important;
   padding: 0 !important;
   justify-items: center !important;
   align-items: center !important;
@@ -791,7 +791,7 @@ by underlining them (requires urlbarMods.uc.js) */
 #urlbar[breakout][breakout-extend] > .urlbar-input-container,
 #urlbar .urlbar-input-container {
   height: var(--urlbar-height) !important;
-  padding: 0px !important;
+  padding: 0 !important;
   border-radius: var(--toolbarbutton-border-radius);
 }
 
@@ -892,7 +892,8 @@ by underlining them (requires urlbarMods.uc.js) */
 
 /* the animation's framerate can stall when loading really heavy pages.
 so you might wanna turn the animation off. I might even make it off by default. */
-@media (-moz-pref: "userChrome.urlbar-results.disable_animation") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.urlbar-results.disable_animation") {
   #urlbar[breakout][breakout-extend] .urlbarView,
   #urlbar[breakout][breakout-extend] #urlbar-background {
     animation: none !important;
@@ -968,7 +969,8 @@ so you might wanna turn the animation off. I might even make it off by default. 
   box-sizing: border-box !important;
 }
 
-@media (-moz-pref: "userChrome.urlbar-results.hide-help-button") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.urlbar-results.hide-help-button") {
   .urlbarView-help {
     display: none !important;
   }

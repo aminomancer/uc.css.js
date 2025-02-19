@@ -57,7 +57,8 @@
     opacity: revert !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="{4d567245-e70d-466a-bb2f-390fc7fb25c2}"i] body {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;

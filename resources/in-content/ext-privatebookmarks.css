@@ -303,7 +303,8 @@
     fill: var(--purple-30) !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="private-bookmarks@rharel"] * {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
     }

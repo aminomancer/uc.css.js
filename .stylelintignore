@@ -1,0 +1,5 @@
+# Always ignore node_modules.
+**/node_modules/
+
+# generated
+resources/aboutuserchrome/aboutuserchrome.css

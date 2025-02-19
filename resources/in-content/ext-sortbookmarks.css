@@ -205,7 +205,8 @@
     outline: none !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="sort-bookmarks@heftig"] * {
       font-family: -apple-system, BlinkMacSystemFont, SF Pro Text, "segoe ui", "helvetica neue", helvetica, ubuntu, roboto, noto, arial, sans-serif;
     }

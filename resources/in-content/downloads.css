@@ -116,7 +116,7 @@
   }
 
   #downloadsPanel-blockedSubview > vbox {
-    margin: 0px var(--uc-arrowpanel-menuitem-margin-inline) !important;
+    margin: 0 var(--uc-arrowpanel-menuitem-margin-inline) !important;
   }
 
   .downloadsPanel-blockedSubview-title-box {

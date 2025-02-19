@@ -23,7 +23,8 @@ intended for the new theme, go to settings > devtools > apply new theme. */
     scrollbar-color: var(--uc-panel-button-solid) var(--uc-panel-box-solid) !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     :root[uc-extension-id="addon@darkreader.org"] * {
       font-family: SF Pro Display, SF Arabic, Segoe UI, sans-serif;
       font-kerning: normal;
@@ -241,7 +242,6 @@ intended for the new theme, go to settings > devtools > apply new theme. */
   }
 
   :root[uc-extension-id="addon@darkreader.org"] .news-section__close {
-    color: inherit !important;
     cursor: default !important;
     background: url(chrome://userchrome/content/in-content/darkreader-close.svg) center/16px no-repeat !important;
     color: transparent !important;

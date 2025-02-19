@@ -177,7 +177,7 @@ and a few elements like checkboxes */
 
   .menu-right {
     appearance: none !important;
-    padding: 0px !important;
+    padding: 0 !important;
     margin-right: var(--menu-right-margin) !important;
     min-width: 0 !important;
     width: var(--menu-right-size) !important;
@@ -443,7 +443,8 @@ and a few elements like checkboxes */
     color: var(--low-warning-text-color) !important;
   }
 
-  @media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
     menupopup {
       font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
       font-kerning: normal !important;
@@ -455,7 +456,8 @@ and a few elements like checkboxes */
     }
   }
 
-  @media (-moz-pref: "userChrome.css.remove-menu-borders") {
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media -moz-pref("userChrome.css.remove-menu-borders") {
     .menupopup-arrowscrollbox {
       border: none !important;
     }

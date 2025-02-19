@@ -68,12 +68,12 @@
 .tabbrowser-tab:not([selected], [multiselected]):is(:hover, [open]) .tab-background,
 .tabbrowser-tab[multiselected] .tab-background,
 #tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus:not([selected], [multiselected]) .tab-background {
-  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.25) !important;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1), 0 0 15px 0 hsla(0, 0%, 0%, 0.25) !important;
 }
 
 .tabbrowser-tab[selected] .tab-background,
 .tabbrowser-tab[multiselected][selected] .tab-background {
-  box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.1), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.35) !important;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1), 0 0 15px 0 hsla(0, 0%, 0%, 0.35) !important;
 }
 
 .tabbrowser-tab .tab-context-line {
@@ -469,10 +469,12 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
     content: "" !important;
     display: flex !important;
     -moz-context-properties: fill, fill-opacity !important;
+    /* stylelint-disable declaration-block-no-duplicate-properties */
     width: 16px !important;
     height: 16px !important;
     animation: none !important;
     background-position: center !important;
+    /* stylelint-enable declaration-block-no-duplicate-properties */
     background-repeat: no-repeat !important;
     fill: inherit !important;
 
@@ -555,7 +557,8 @@ thing with the all-tabs-menu loading icons in the next ruleset below. */
 doesn't hide the close button since the tab doesn't get shrunk in that case.
 this requires you to make a pref in about:config and set it to true:
 "userChrome.tabs.pinned-tabs.close-buttons.disabled" */
-@media (-moz-pref: "userChrome.tabs.pinned-tabs.close-buttons.disabled") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.tabs.pinned-tabs.close-buttons.disabled") {
   .tabbrowser-tab[pinned] .tab-close-button {
     display: none !important;
   }

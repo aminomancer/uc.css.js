@@ -23,7 +23,7 @@ appearance of the built-in sidebars, e.g. bookmarks, history, etc. */
   right: auto !important;
   z-index: 4 !important;
   flex-direction: column !important;
-  box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+  box-shadow: 0 0 8px -4px hsla(240, 4%, 0%, 0.6), 0 0 15px 0 hsla(0, 0%, 0%, 0.2) !important;
 }
 
 /* for addon sidebars, use gray colors for the header instead of indigo.
@@ -43,7 +43,7 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
 #sidebar-header {
   top: 0 !important;
   padding: 6px !important;
-  border-bottom: 0px solid transparent !important;
+  border-bottom: 0 solid transparent !important;
   background-color: var(--sidebar-background-color) !important;
   color: inherit !important;
   font-size: 1.2em !important;
@@ -100,7 +100,6 @@ for use with tooltipStyler.uc.js - won't do anything without that script. */
   background-color: var(--search-box-color) !important;
   border-radius: var(--general-button-border-radius) !important;
   padding-block: 0 !important;
-  transition: 300ms background-color !important;
   color: currentColor !important;
   min-height: 25px !important;
   margin: 0 !important;
@@ -450,7 +449,7 @@ trees so it is relatively safe to collapse them. */
   }
 
   .content-header {
-    border-bottom: 0px solid transparent !important;
+    border-bottom: 0 solid transparent !important;
     background-color: var(--ui-secondary-bg) !important;
     color: inherit !important;
   }
@@ -526,7 +525,7 @@ trees so it is relatively safe to collapse them. */
 
 /* vertical tabs pane shadow */
 #vertical-tabs-pane[unpinned] {
-  box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2) !important;
+  box-shadow: 0 0 8px -4px hsla(240, 4%, 0%, 0.6), 0 0 15px 0 hsla(0, 0%, 0%, 0.2) !important;
 }
 
 #vertical-tabs-pane:not([unpinned]) ~ #vertical-tabs-splitter {
@@ -536,7 +535,7 @@ trees so it is relatively safe to collapse them. */
   /* we have to make it bigger so we can add negative spread to the shadow. so it matches the sidebar shadow */
   width: 38px !important;
   margin-inline-start: -38px !important;
-  box-shadow: 0px 0px 8px -4px hsla(240, 4%, 0%, 0.6), 0px 0px 15px 0px hsla(0, 0%, 0%, 0.2);
+  box-shadow: 0 0 8px -4px hsla(240, 4%, 0%, 0.6), 0 0 15px 0 hsla(0, 0%, 0%, 0.2);
   /* we need to use clip-path for a few reasons...
     1) stop the shadow from drawing on the pane
        (the splitter is above the pane in z-dimension)

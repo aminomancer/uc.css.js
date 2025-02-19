@@ -172,7 +172,7 @@ menupopup.in-menulist menugroup {
 #ContentSelectDropdown > menupopup .menu-right,
 menupopup.in-menulist .menu-right {
   appearance: none !important;
-  padding: 0px !important;
+  padding: 0 !important;
   margin-right: var(--menu-right-margin) !important;
   min-width: 0 !important;
   width: var(--menu-right-size) !important;
@@ -409,7 +409,8 @@ menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-iconic
   display: none;
 }
 
-@media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.css.mac-ui-fonts") {
   #ContentSelectDropdown,
   menupopup.in-menulist {
     font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif !important;
@@ -423,7 +424,8 @@ menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-iconic
   }
 }
 
-@media (-moz-pref: "userChrome.css.remove-menu-borders") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.css.remove-menu-borders") {
   link[href="chrome://global/skin/global.css"] ~ .menupopup-arrowscrollbox {
     border: none !important;
   }

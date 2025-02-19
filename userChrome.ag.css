@@ -39,13 +39,15 @@ tooltip > description {
   margin: 0;
 }
 
-@media (-moz-pref: "userChrome.css.remove-tooltip-borders") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.css.remove-tooltip-borders") {
   tooltip > description {
     border: none;
   }
 }
 
-@media (-moz-pref: "userChrome.css.mac-ui-fonts") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.css.mac-ui-fonts") {
   tooltip {
     font-family: SF Pro Text, SF Arabic, Segoe UI, sans-serif;
     font-kerning: normal;
@@ -134,7 +136,6 @@ html|input[type="number"]::-moz-number-spin-down {
   background-size: 8px;
   background-position: center top;
   background-repeat: no-repeat;
-  -moz-context-properties: fill;
   fill: currentColor;
   fill-opacity: 0.6;
   appearance: none;

@@ -31,7 +31,7 @@
     background-color: var(--global-selection-bgcolor) !important;
     color: var(--global-selection-color) !important;
     background-image: none;
-    box-shadow: var(--global-selection-bgcolor) 0px 0px 0px 2px !important;
+    box-shadow: var(--global-selection-bgcolor) 0 0 0 2px !important;
   }
 }
 

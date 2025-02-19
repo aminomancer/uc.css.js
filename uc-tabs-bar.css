@@ -250,13 +250,13 @@ overflowing tabs don't draw shadows on the special new tab button */
 .titlebar-max,
 .titlebar-restore {
   appearance: none !important;
-  padding: 0px !important;
+  padding: 0 !important;
   padding-left: 7px !important;
   padding-right: 7px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/maximize.svg) !important;
 
@@ -281,13 +281,13 @@ overflowing tabs don't draw shadows on the special new tab button */
 
 .titlebar-min {
   appearance: none !important;
-  padding: 0px !important;
+  padding: 0 !important;
   padding-left: 7px !important;
   padding-right: 7px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/minimize.svg) !important;
 
@@ -299,13 +299,13 @@ overflowing tabs don't draw shadows on the special new tab button */
 
 .titlebar-close {
   appearance: none !important;
-  padding: 0px !important;
+  padding: 0 !important;
   padding-left: 7px !important;
   padding-right: 7px !important;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   background-color: transparent !important;
   list-style-image: url(chrome://userchrome/content/window/close.svg) !important;
 
@@ -533,7 +533,6 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
     }
 
     &.all-tabs-close-button {
-      fill-opacity: 0 !important;
       transform: translateX(14px);
       opacity: 0 !important;
       margin-inline-start: -23px !important;
@@ -674,7 +673,8 @@ toolbarbutton.private-browsing-indicator-with-label:is(:hover:active, [open]) > 
 
 /* move titlebar buttons to the left on macOS and linux
 or if the user sets a pref */
-@media (-moz-platform: macos), (-moz-platform: linux), (-moz-pref: "userChrome.css.titlebar-buttons-on-left") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media (-moz-platform: macos), (-moz-platform: linux), -moz-pref("userChrome.css.titlebar-buttons-on-left") {
   .titlebar-buttonbox-container,
   #toolbar-menubar > .titlebar-buttonbox-container {
     order: 0 !important;

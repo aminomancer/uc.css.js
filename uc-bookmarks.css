@@ -220,14 +220,14 @@
   appearance: none !important;
   line-height: normal !important;
   padding-block: 2px 3px;
-  padding-inline-start: 0px !important;
+  padding-inline-start: 0 !important;
   padding-inline-end: 2px;
   color: var(--toolbar-color) !important;
   border: none !important;
 }
 
 #editBookmarkPanel menulist menupopup {
-  padding: 0px !important;
+  padding: 0 !important;
   margin: 0 !important;
   --menupopup-inner-padding: 0 !important;
   --context-menuitem-border-radius: 0 !important;

@@ -97,7 +97,8 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 }
 
 /* The (deprecated) custom theme */
-@media (-moz-pref: "userChrome.css.wikipedia.dark-theme-enabled") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.css.wikipedia.dark-theme-enabled") {
   @-moz-document regexp("^https?:\/\/(?!m\.)(?:[a-zA-Z]{1,3}\-)?(?:[a-zA-Z]{1,3}\.)?(?:wikipedia|wikimedia)\.org.*$") {
     /* latin-ext */
     @font-face {
@@ -477,7 +478,6 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     #mw-head #searchform > div {
-      position: absolute !important;
       top: -30px !important;
       right: 0 !important;
       border: none !important;
@@ -502,7 +502,6 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-size: 1rem !important;
       color: inherit !important;
       background: none !important;
-      border: none !important;
       margin: unset !important;
       box-shadow: none !important;
       border: none !important;
@@ -676,7 +675,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-weight: normal !important;
       font-size: 28px !important;
       text-transform: uppercase !important;
-      letter-spacing: 0px !important;
+      letter-spacing: 0 !important;
       color: hsl(0, 0%, 93.3%) !important;
       pointer-events: none !important;
     }
@@ -694,7 +693,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-weight: normal !important;
       font-size: 28px !important;
       text-transform: uppercase !important;
-      letter-spacing: 0px !important;
+      letter-spacing: 0 !important;
       color: hsl(0, 0%, 93.3%) !important;
     }
 
@@ -721,7 +720,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     #mw-navigation #mw-panel {
       position: fixed !important;
       font-size: 18px !important;
-      top: 0px !important;
+      top: 0 !important;
       height: 100% !important;
       overflow-y: auto !important;
       padding: 0 !important;
@@ -1039,7 +1038,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     #bodyContent table.infobox * table.infobox {
-      margin-left: 0px !important;
+      margin-left: 0 !important;
       box-shadow: none !important;
     }
 
@@ -1058,7 +1057,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       top: -3px !important;
       padding: 4px 6px 3px !important;
       background: var(--uc-wiki-panel-bg) !important;
-      border-radius: 0px !important;
+      border-radius: 0 !important;
       border: 1px solid hsl(214.3, 7.4%, 18.6%) !important;
       visibility: collapse !important;
     }
@@ -1619,7 +1618,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     } */
 
     #bodyContent #toc > ul > li > ul > li ul {
-      padding-top: 0px !important;
+      padding-top: 0 !important;
     }
 
     #bodyContent #toc > ul > li > a:hover {
@@ -1949,7 +1948,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     #bodyContent .wikiEditor-ui-toolbar :is(h1, h2, h3, h4, h5) {
-      margin-block: 0px !important;
+      margin-block: 0 !important;
       padding-block: 0 !important;
     }
 
@@ -1987,7 +1986,6 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       width: 100% !important;
       border: 1px solid var(--uc-wiki-popup-border-color) !important;
       border-radius: 0 0 4px 4px !important;
-      background-color: #fff;
       z-index: 1;
       background-color: var(--uc-wiki-popup-bg) !important;
       overflow: auto !important;
@@ -2505,7 +2503,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .mwe-popups.mwe-popups-is-not-tall.mwe-popups-image-pointer .mwe-popups-extract {
-      padding-top: 0px !important;
+      padding-top: 0 !important;
       margin-top: 16px !important;
       margin-bottom: 16px !important;
     }
@@ -2821,7 +2819,6 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     .mw-interlanguage-selector.mw-ui-button {
       background-color: hsla(0, 0%, 100%, 0.075) !important;
       color: hsla(0, 0%, 100%, 0.75) !important;
-      border-color: transparent !important;
       border: none !important;
       filter: contrast(0%) brightness(180%) !important;
       clear: both !important;
@@ -2834,7 +2831,6 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     .mw-interlanguage-selector.mw-ui-button:active {
       background-color: hsla(0, 0%, 0%, 0.2) !important;
       color: #fff !important;
-      border-color: transparent !important;
       border: none !important;
     }
 
@@ -2865,8 +2861,8 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       background: transparent !important;
       transform: none !important;
       bottom: -8px !important;
-      height: 0px !important;
-      width: 0px !important;
+      height: 0 !important;
+      width: 0 !important;
       margin-left: -3px !important;
     }
 
@@ -2900,7 +2896,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-size: 14px !important;
       width: 1.5em !important;
       height: 1.5em !important;
-      padding: 0px !important;
+      padding: 0 !important;
       margin-top: -1px !important;
       margin-right: -4px !important;
       background-position: 50% 80% !important;
@@ -2943,7 +2939,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     .mw-mmv-image-metadata {
       border-top: none !important;
       background-color: hsla(0, 0%, 7.5%, 0.9) !important;
-      padding-top: 0px !important;
+      padding-top: 0 !important;
     }
 
     .mw-mmv-untruncated .mw-mmv-image-metadata {
@@ -3153,11 +3149,11 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .clade tbody tr td {
-      border-radius: 0px !important;
+      border-radius: 0 !important;
     }
 
     table.collapsible.collapsed.mw-collapsible.mw-made-collapsible tbody tr td {
-      border-radius: 0px !important;
+      border-radius: 0 !important;
     }
 
     .wikitable tbody tr td table tbody tr th {
@@ -3165,7 +3161,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .vertical-navbox > tbody tr td {
-      border-radius: 0px !important;
+      border-radius: 0 !important;
     }
 
     :where(th, tr)[style*="background:"]:not([style*="color:"], .infobox-subheader) {
@@ -3174,7 +3170,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .navbox-list {
-      border-radius: 0px !important;
+      border-radius: 0 !important;
       border-color: transparent !important;
     }
 
@@ -3275,7 +3271,6 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     #mw-navigation .portal ul li {
       clear: both !important;
       cursor: pointer !important;
-      width: min-content !important;
       text-overflow: clip !important;
       white-space: nowrap !important;
       padding: 3px 8px 3.5px 8px !important;
@@ -3373,7 +3368,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       background-color: hsl(4, 2%, 2.5%) !important;
       border: none !important;
       border-radius: 3px !important;
-      box-shadow: 0 0px 5px -1px hsla(0, 0%, 0%, 0.25) !important;
+      box-shadow: 0 0 5px -1px hsla(0, 0%, 0%, 0.25) !important;
     }
 
     .oo-ui-menuOptionWidget.oo-ui-optionWidget {
@@ -3789,7 +3784,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .mw-mmv-options-text-body {
-      margin-top: 0px !important;
+      margin-top: 0 !important;
       margin-bottom: -1px !important;
       font-size: 13px !important;
       font-style: italic !important;
@@ -3888,7 +3883,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     .mwe-popups-settings-icon {
       position: fixed;
-      padding: 0px !important;
+      padding: 0 !important;
       float: left !important;
       margin-left: -2px !important;
       margin-top: -23px !important;
@@ -3944,7 +3939,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     body .ui-dialog .ttmlStyled {
-      letter-spacing: 0em !important;
+      letter-spacing: 0 !important;
     }
 
     body .ui-dialog-titlebar,
@@ -3957,7 +3952,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       font-size: 18px !important;
       padding: 5px !important;
       padding-left: 15px !important;
-      padding-bottom: 0px !important;
+      padding-bottom: 0 !important;
     }
 
     body .ui-dialog {
@@ -4050,7 +4045,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
       bottom: 4px !important;
       border: none !important;
       background: hsla(0, 0%, 100%, 0.2) !important;
-      box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.2), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
+      box-shadow: 0 0 10px 0 hsla(0, 0%, 0%, 0.2), 0 0 2px 0 hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) {
@@ -4069,17 +4064,17 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-handle {
       border: none !important;
-      top: 0px !important;
+      top: 0 !important;
       height: 9.5px !important;
       width: 9.5px !important;
       background-image: none !important;
       /*! background: hsl(0, 0%, 80.4%) !important; */
-      box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.1), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
+      box-shadow: 0 0 10px 0 hsla(0, 0%, 0%, 0.1), 0 0 2px 0 hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .ui-widget-header.ui-helper-clearfix.control-bar:not(.block) .ui-slider-handle:is(:hover) {
       background: hsl(0, 0%, 96.1%) !important;
-      box-shadow: 0 0 10px 0px hsla(0, 0%, 0%, 0.1), 0 0 2px 0px hsla(0, 0%, 0%, 0.2) !important;
+      box-shadow: 0 0 10px 0 hsla(0, 0%, 0%, 0.1), 0 0 2px 0 hsla(0, 0%, 0%, 0.2) !important;
     }
 
     .k-player,
@@ -4137,7 +4132,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .suggestions-special {
-      margin-top: 0px !important;
+      margin-top: 0 !important;
     }
 
     .suggestions-special .special-label {
@@ -4192,7 +4187,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .mw-mmv-permission-box .mw-mmv-permission-text .mw-mmv-permission-text-fader a {
-      padding: 0px 0 0 2em !important;
+      padding: 0 0 0 2em !important;
       background-color: transparent !important;
       background-image: linear-gradient(to right, #0000 0%, hsl(0, 0%, 9.4%) 25%) !important;
       font-size: 1em !important;
@@ -4248,7 +4243,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
 
     /* more border radius fixes */
     table.infobox > tbody > tr > td {
-      border-radius: 0px !important;
+      border-radius: 0 !important;
     }
 
     /* fix audio pronunciation images */
@@ -4432,7 +4427,7 @@ Again, I recommend leaving this disabled and just using the Vector 2022 theme an
     }
 
     .tracklist tbody tr td {
-      border-radius: 0px !important;
+      border-radius: 0 !important;
     }
 
     .tracklist * > tr:nth-of-type(odd) {

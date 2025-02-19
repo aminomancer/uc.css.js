@@ -120,7 +120,8 @@ toolbarpaletteitem[place="palette"] > #search-container {
   outline: none !important;
 }
 
-@media (-moz-pref: "userChrome.urlbar.focus-ring-enabled") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.urlbar.focus-ring-enabled") {
   #urlbar .urlbar-input-container
   #searchbar {
     outline: 0 solid transparent !important;
@@ -409,7 +410,8 @@ installed. the screenshot action already hides itself on system pages and
 extension pages, but CSS hides it faster and avoids flickering.
 :not([aria-label]) handles the few milliseconds when a new window is opened and
 the NTP/home page hasn't opened yet. */
-@media (-moz-pref: "userChrome.urlbar.hide-bookmarks-button-on-system-pages") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.urlbar.hide-bookmarks-button-on-system-pages") {
   #tracking-protection-icon-container:is([hidden], :not([aria-label])) ~ #identity-box:not(.chromeUI, .localResource) ~ #page-action-buttons > #reader-mode-button[hidden] ~ :is(#star-button-box, #pageAction-urlbar-screenshot) {
     visibility: collapse;
   }
@@ -520,7 +522,7 @@ the NTP/home page hasn't opened yet. */
 #identity-box:not(.chromeUI),
 #identity-box[pageproxystate="invalid"] {
   margin-inline-start: 1.5px !important;
-  padding-inline-start: 0px !important;
+  padding-inline-start: 0 !important;
 }
 
 #identity-icon-box {
@@ -1138,7 +1140,6 @@ for some window scaling factors. */
   padding-inline-start: 7px !important;
   color: var(--toolbar-field-color, black) !important;
   opacity: var(--urlbar-icon-fill-opacity, 0.6) !important;
-  font-weight: var(--urlbar-base-font-weight, 400);
   font-size: inherit !important;
   font-weight: var(--urlbar-base-font-weight, 400);
 }
@@ -1147,7 +1148,7 @@ for some window scaling factors. */
 #urlbar-search-mode-indicator-title {
   color: var(--toolbar-field-color, black) !important;
   opacity: var(--urlbar-icon-fill-opacity, 0.6) !important;
-  padding-inline: 0px !important;
+  padding-inline: 0 !important;
   font-size: inherit !important;
   font-weight: var(--urlbar-base-font-weight, 400);
 }
@@ -1174,7 +1175,8 @@ for some window scaling factors. */
   margin-inline-end: revert !important;
 }
 
-@media (-moz-pref: "userChrome.urlbar.hide-pointless-icons") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.urlbar.hide-pointless-icons") {
   #eme-notification-icon {
     display: none;
   }

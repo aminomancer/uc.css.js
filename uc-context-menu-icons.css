@@ -683,7 +683,7 @@ menuitem.unified-extensions-context-menu-Options::before,
   height: 16px;
   min-width: 16px;
   min-height: 16px;
-  padding-inline: 0px;
+  padding-inline: 0;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;

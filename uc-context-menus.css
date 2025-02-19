@@ -92,7 +92,7 @@ moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
   stroke: var(--update-badge-color) !important;
   height: 12px !important;
   width: 12px !important;
-  margin-inline: -12px 0px !important;
+  margin-inline: -12px 0 !important;
   margin-top: -13px !important;
 }
 
@@ -111,7 +111,7 @@ menupopup:is(:not([type="arrow"]), [placespopup]) menugroup {
 
 menupopup:is(:not([type="arrow"]), [placespopup]) .menu-right {
   appearance: none !important;
-  padding: 0px !important;
+  padding: 0 !important;
   margin-inline-end: var(--menu-right-margin) !important;
   min-width: 0 !important;
   width: var(--menu-right-size) !important;
@@ -467,7 +467,8 @@ menuitem[default="true"] {
 }
 
 /* a way to reduce the number of menuseparators in the context menu, if they feel excessive */
-@media (-moz-pref: "userChrome.contextmenu.reduce-menuseparators") {
+/* stylelint-disable-next-line media-query-no-invalid */
+@media -moz-pref("userChrome.contextmenu.reduce-menuseparators") {
   #contentAreaContextMenu > menuseparator[id]:not(#context-sep-open, #context-media-sep-commands, #context-sep-copylink, #spell-suggestions-separator, #context-sep-selectall) {
     display: none !important;
   }
