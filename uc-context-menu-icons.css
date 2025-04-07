@@ -1048,6 +1048,14 @@ menupopup#viewSidebarMenu #menu_tabsSidebar:is([type="checkbox"], [type="radio"]
   background-image: url(chrome://userchrome/content/skin/synced-tabs.svg);
 }
 
+menupopup#viewSidebarMenu #menu_genaiChatSidebar:is([type="checkbox"], [type="radio"]):not([checked="true"]) {
+  list-style-image: url(chrome://browser/content/genai/assets/brands/chatgpt.svg) !important;
+}
+
+#sidebarMenu-popup > menuitem#sidebar-switcher-genai-chat:is([type="checkbox"], [type="radio"]):not([checked="true"])::before {
+  background-image: url(chrome://browser/content/genai/assets/brands/chatgpt.svg);
+}
+
 #sidebarMenu-popup > menuitem[data-l10n-id="sidebar-menu-close"]::before {
   background-image: url(chrome://userchrome/content/close-big.svg);
 }

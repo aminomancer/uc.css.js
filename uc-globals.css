@@ -19,7 +19,8 @@ but other than that these variables should be available everywhere. */
   font-feature-settings: "cv14", "cv19", "cv30", "ss01", "ss02", "ss05", "ss07", "ss09";
 }
 
-:root {
+:root,
+.anonymous-content-host {
   --ui-text-10: hsla(0, 0%, 100%, 0.1);
   --ui-text-20: hsla(0, 0%, 100%, 0.2);
   --ui-text-30: hsla(0, 0%, 100%, 0.3);
@@ -176,7 +177,7 @@ but other than that these variables should be available everywhere. */
   if your search engine is displayed in non-latin characters then use exactly
   those characters when naming the icon file. if the script still doesn't work,
   you can override this directly in custom-chrome.css by adding this rule:
-  :root{
+  :root, .anonymous-content-host{
     --default-search-identity-icon: url(chrome://userchrome/content/engines/my-engine-icon.svg) !important;
   }
   */
@@ -419,15 +420,15 @@ but other than that these variables should be available everywhere. */
   --uc-switch-off-hover-border: hsl(233, 15%, 32%);
 
   accent-color: var(--global-focus-outline-color);
-}
 
-:root[fxastatus="not_configured"] {
-  --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
-}
+  &[fxastatus="not_configured"] {
+    --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-empty-big.svg);
+  }
 
-:root[fxastatus="login-failed"],
-:root[fxastatus="unverified"] {
-  --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-alert-big.svg);
+  &[fxastatus="login-failed"],
+  &[fxastatus="unverified"] {
+    --fxa-ui-img: url(chrome://userchrome/content/fxa/avatar-alert-big.svg);
+  }
 }
 
 menupopup,
@@ -452,7 +453,8 @@ toolbar panel,
 /* SF Pro is a bit heavier than Segoe UI so adjust font weights on certain elements */
 /* stylelint-disable-next-line media-query-no-invalid */
 @media -moz-pref("userChrome.css.mac-ui-fonts") {
-  :root {
+  :root,
+  .anonymous-content-host {
     --uc-font-weight-extrabold: 600;
     --uc-font-weight-bold: 500;
     --uc-font-weight-semibold: 400;
@@ -462,7 +464,8 @@ toolbar panel,
 
 /* stylelint-disable-next-line media-query-no-invalid */
 @media -moz-pref("userChrome.css.menupopup-shadows") {
-  :root {
+  :root,
+  .anonymous-content-host {
     --menupopup-inner-box-margin: 4px !important;
     --panel-inner-box-margin: 4px;
     --uc-menupopup-shadow: var(--tooltip-box-shadow) !important;
@@ -472,7 +475,8 @@ toolbar panel,
 
 /* stylelint-disable-next-line media-query-no-invalid */
 @media -moz-pref("userChrome.tabs.drag-scrolling.enabled") {
-  :root {
+  :root,
+  .anonymous-content-host {
     --tab-scrollbuttons-display: flex;
   }
 }

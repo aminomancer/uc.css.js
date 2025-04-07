@@ -5,6 +5,7 @@
  * or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA. */
 
 :root,
+.anonymous-content-host,
 tooltip {
   --in-content-bg-dark: #19191b;
   --in-content-bg-darker: #151517;
@@ -24,7 +25,8 @@ tooltip {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root,
+  .anonymous-content-host {
     --transparent-img-background: center/16px repeat hsla(0, 0%, 20%) url(chrome://userchrome/content/checker-dark.svg);
   }
 }

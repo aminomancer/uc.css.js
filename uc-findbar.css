@@ -71,8 +71,8 @@ findbar[hidden] {
   transition-duration: 0.3s, 0.2s, 0.2s, 0.2s, 0.2s !important;
 }
 
-#sidebar-wrapper:has(#sidebar-box[hidden="true"]) ~ #tabbrowser-tabbox findbar,
-#sidebar-wrapper:not([positionend]) ~ #tabbrowser-tabbox findbar {
+#sidebar-box[hidden] ~ #tabbrowser-tabbox findbar,
+#sidebar-box:not([sidebar-positionend]) ~ #tabbrowser-tabbox findbar {
   left: auto !important;
   right: 1.5em !important;
 }
@@ -86,8 +86,8 @@ findbar[hidden] {
     border-radius: 0 !important;
   }
 
-  #sidebar-wrapper:has(#sidebar-box[hidden="true"]) ~ #tabbrowser-tabbox findbar,
-  #sidebar-wrapper:not([positionend]) ~ #tabbrowser-tabbox findbar {
+  #sidebar-box[hidden] ~ #tabbrowser-tabbox findbar,
+  #sidebar-box:not([sidebar-positionend]) ~ #tabbrowser-tabbox findbar {
     right: 0 !important;
   }
 }

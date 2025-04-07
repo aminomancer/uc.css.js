@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.8.1
+// @version        1.8.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -811,7 +811,8 @@ class UrlbarMods {
   oneOffEngineAttributes() {
     const lazy = {};
     ChromeUtils.defineESModuleGetters(lazy, {
-      SearchOneOffs: "resource:///modules/SearchOneOffs.sys.mjs",
+      SearchOneOffs:
+        "moz-src:///browser/components/search/SearchOneOffs.sys.mjs",
       UrlbarSearchOneOffs: "resource:///modules/UrlbarSearchOneOffs.sys.mjs",
     });
     lazy.SearchOneOffs.prototype.setTooltipForEngineButton = function (button) {

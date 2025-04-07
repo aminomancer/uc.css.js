@@ -12,6 +12,7 @@ tabmodalprompt {
   --in-content-page-background: transparent !important;
   --in-content-page-color: var(--uc-parent-page-color) !important;
   --in-content-box-background: var(--dialog-box-bgcolor) !important;
+  --background-color-box: var(--dialog-box-bgcolor) !important;
   --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
   --in-content-box-border-color: var(--dialog-box-border-color) !important;
   --in-content-button-background: var(--arrowpanel-dimmed) !important;
@@ -816,6 +817,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-page-background: var(--ui-quaternary-bg) !important;
     --in-content-page-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
+    --background-color-box: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
     --in-content-box-border-color: var(--dialog-box-border-color) !important;
     --in-content-button-background: var(--arrowpanel-dimmed) !important;
@@ -1096,6 +1098,7 @@ rtl languages. adjust the border radius accordingly */
     --in-content-page-background: var(--uc-content-page-background) !important;
     --in-content-page-color: var(--uc-content-page-color) !important;
     --in-content-box-background: var(--uc-content-box-background) !important;
+    --background-color-box: var(--uc-content-box-background) !important;
     --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
     --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
     --in-content-box-border-color: var(--uc-content-box-border-color) !important;

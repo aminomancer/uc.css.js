@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Invert PDF Button
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add a new button to Firefox's PDF.js viewer toolbar. It inverts the PDF colors to provide a dark mode.
@@ -51,6 +51,10 @@ export class InvertPDFButtonChild extends JSWindowActorChild {
       "userChrome.invertPDFButton.inverted",
       false
     );
+    this.filter = Services.prefs.getStringPref(
+      "userChrome.invertPDFButton.filter",
+      InvertPDFButtonChild.config.filter
+    );
     if (inverted) {
       this.invertPDF();
     } else {
@@ -87,7 +91,6 @@ export class InvertPDFButtonChild extends JSWindowActorChild {
   addStyles() {
     if (!this.document.getElementById("editorInvertStyles")) {
       const {
-        filter,
         icons: { invert, uninvert },
         highlightColors,
       } = InvertPDFButtonChild.config;
@@ -107,7 +110,7 @@ export class InvertPDFButtonChild extends JSWindowActorChild {
           .editToolbar,
           .freeTextEditor,
           .inkEditorCanvas {
-            filter: ${filter};
+            filter: ${this.filter};
           }
 
           .highlight {
@@ -131,7 +134,7 @@ export class InvertPDFButtonChild extends JSWindowActorChild {
           .annotationEditorLayer :is(.freeTextEditor, .inkEditor, .stampEditor) {
             &.selectedEditor::before,
             & > .resizers {
-              filter: ${filter};
+              filter: ${this.filter};
             }
           }
         }`;
@@ -177,6 +180,13 @@ if (Services.appinfo.processType === Services.appinfo.PROCESS_TYPE_DEFAULT) {
   Services.prefs
     .getDefaultBranch("")
     .setBoolPref("userChrome.invertPDFButton.inverted", false);
+
+  Services.prefs
+    .getDefaultBranch("")
+    .setStringPref(
+      "userChrome.invertPDFButton.filter",
+      InvertPDFButtonChild.config.filter
+    );
 
   let esModuleURI = import.meta.url;
   ChromeUtils.registerWindowActor("InvertPDFButton", {

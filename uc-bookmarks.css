@@ -507,7 +507,7 @@ richlistbox[id]:not(#categories) > richlistitem[selected] {
   list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
-#BMB_viewBookmarksSidebar[positionend="true"] {
+#BMB_viewBookmarksSidebar[sidebar-positionend] {
   list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 
@@ -532,7 +532,7 @@ menuitem.subviewbutton-iconic > .toolbarbutton-text,
   -moz-context-properties: fill, fill-opacity, stroke !important;
 }
 
-#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)[positionend="true"]::before {
+#BMB_viewBookmarksSidebar:not(.menuitem-iconic, .menu-iconic)[sidebar-positionend]::before {
   background-image: url(chrome://userchrome/content/skin/sidebars-right.svg) !important;
 }
 

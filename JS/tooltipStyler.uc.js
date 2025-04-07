@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Tooltip Styler
-// @version        1.1.6
+// @version        1.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Allows you to style a tooltip in the chrome window based on which node triggered it. [duskFox](https://github.com/aminomancer/uc.css.js) uses this to make certain tooltips and popups gray instead of indigo, since we have gray system pages. If you want to use this for custom purposes, you'll need to edit the script and add CSS to your _agent_ sheet like `tooltip[backdrop-color"red"] {...}`
@@ -66,6 +66,13 @@
       let popup = e.originalTarget;
       let color;
       let { id, localName, triggeringBrowser } = popup;
+      if (
+        id === "contentAreaContextMenu" &&
+        !triggeringBrowser &&
+        gContextMenu
+      ) {
+        triggeringBrowser = gContextMenu.browser;
+      }
       switch (localName) {
         case "tooltip":
         case "menupopup": {

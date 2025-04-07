@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Bookmarks Menu & Button Shortcuts
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Adds some shortcuts for bookmarking pages. First, middle-clicking the bookmarks or library toolbar button will bookmark the current tab, or un-bookmark it if it's already bookmarked. Second, a menu item is added to the bookmarks toolbar button's popup, which bookmarks the current tab, or, if the page is already bookmarked, opens the bookmark editor popup. These are added primarily so that bookmarks can be added or removed with a single click, and can still be quickly added even if the bookmark page action is hidden for whatever reason.
@@ -139,7 +139,7 @@ const ucBookmarksShortcuts = {
         }
       }
     );
-    // set the "positionend" attribute on the view bookmarks sidebar menuitem.
+    // set the "sidebar-positionend" attribute on the view bookmarks sidebar menuitem.
     // this way we can swap between the left/right sidebar icons based on which
     // side the sidebar is on, like the sidebar toolbar widget does.
     let sidebarItem = node.querySelector("#BMB_viewBookmarksSidebar");
@@ -147,7 +147,7 @@ const ucBookmarksShortcuts = {
       sidebarItem.appendChild(
         this.create(document, "observes", {
           element: "sidebar-box",
-          attribute: "positionend",
+          attribute: "sidebar-positionend",
         })
       );
     }

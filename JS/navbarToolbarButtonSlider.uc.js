@@ -889,6 +889,11 @@ class NavbarToolbarSlider {
   }
 }
 
-document.head.querySelector("meta").content = "script-src-attr 'unsafe-inline'";
+(function () {
+  let csp = document.head.querySelector("meta");
+  if (csp) {
+    csp.content = "script-src-attr 'unsafe-inline'";
+  }
+})();
 
 window.navbarToolbarSlider = new NavbarToolbarSlider();

@@ -67,6 +67,10 @@ a rule for it. */
     --search-engine-icon: url(chrome://userchrome/content/engines/kagi.svg) !important;
   }
 
+  &[engine="Kagi Translate"] {
+    --search-engine-icon: url(chrome://userchrome/content/engines/kagitranslate.svg) !important;
+  }
+
   /* baidu */
   &[engine="Baidu"],
   &[engine="Baidu Search"],

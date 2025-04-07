@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.0.9
+// @version        1.1.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -15,7 +15,7 @@
   ChromeUtils.defineESModuleGetters(lazy, {
     BrowserUtils: "resource://gre/modules/BrowserUtils.sys.mjs",
     PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
-    SearchUIUtils: "resource:///modules/SearchUIUtils.sys.mjs",
+    SearchUIUtils: "moz-src:///browser/components/search/SearchUIUtils.sys.mjs",
   });
 
   class ContextMenuMods {

@@ -119,6 +119,7 @@
     --in-content-item-hover: color-mix(in srgb, var(--purple-30) 45%, transparent) !important;
     --in-content-item-hover-text: var(--in-content-text-color) !important;
     --focus-outline-color: var(--global-focus-outline-color) !important;
+    --in-content-focus-outline-color: var(--focus-outline-color) !important;
     --focus-outline-offset: 2px !important;
     --default-focusring: var(--global-focus-outline-width) solid var(--global-focus-outline-color) !important;
     --newtab-background-color: var(--in-content-page-background) !important;
@@ -1120,6 +1121,105 @@
   /* function names */
   span[style*="color: rgb(85, 106, 242)"] {
     color: var(--horizon-cyan) !important;
+  }
+}
+
+/* <link rel="stylesheet" href="chrome://browser/content/screenshots/overlay/overlay.css"> */
+link[rel="stylesheet"][href="chrome://browser/content/screenshots/overlay/overlay.css"] + #screenshots-component {
+  --in-content-page-background: var(--uc-content-page-background) !important;
+  --in-content-page-color: var(--uc-content-page-color) !important;
+  --in-content-text-color: var(--in-content-page-color) !important;
+  --in-content-accent-color: var(--purple-35) !important;
+  --in-content-border-color: var(--uc-content-border-color) !important;
+  --in-content-border-hover: var(--uc-content-border-hover) !important;
+  --in-content-border-active: var(--uc-content-border-active) !important;
+  --in-content-box-background: var(--uc-content-box-background) !important;
+  --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
+  --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
+  --in-content-box-border-color: var(--uc-content-box-border-color) !important;
+  --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+  --background-color-box: var(--in-content-box-background) !important;
+  --in-content-table-background: var(--in-content-box-background) !important;
+  --in-content-table-header-background: var(--purple-40-a50) !important;
+  --in-content-link-color: var(--purple-30) !important;
+  --in-content-link-color-hover: var(--purple-25) !important;
+  --in-content-link-color-active: var(--purple-20) !important;
+  --in-content-link-visited-color: var(--pink-40) !important;
+  --in-content-link-visited-color-hover: var(--pink-35) !important;
+  --in-content-link-visited-color-active: var(--pink-30) !important;
+  --link-color: var(--purple-30) !important;
+  --link-color-hover: var(--purple-25) !important;
+  --link-color-active: var(--purple-20) !important;
+  --link-visited-color: var(--pink-40) !important;
+  --link-visited-color-hover: var(--pink-35) !important;
+  --link-visited-color-active: var(--pink-30) !important;
+  --button-background: var(--uc-content-button-background) !important;
+  --button-background-hover: var(--uc-content-button-background-hover) !important;
+  --button-background-active: var(--uc-content-button-background-active) !important;
+  --button-background-solid: var(--uc-content-button-background-solid);
+  --in-content-button-background: var(--uc-content-button-background) !important;
+  --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
+  --in-content-button-background-active: var(--uc-content-button-background-active) !important;
+  --in-content-button-background-solid: var(--uc-content-button-background-solid);
+  --in-content-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
+  --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
+  --in-content-primary-button-background: var(--purple-40) !important;
+  --in-content-primary-button-background-hover: var(--purple-35) !important;
+  --in-content-primary-button-background-active: var(--purple-30) !important;
+  --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
+  --in-content-primary-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
+  --color-accent-primary: var(--purple-40) !important;
+  --color-accent-primary-hover: var(--purple-35) !important;
+  --color-accent-primary-active: var(--purple-30) !important;
+  --in-content-button-border-radius: var(--general-button-border-radius) !important;
+  --in-content-item-selected: var(--purple-40) !important;
+  --in-content-item-hover: color-mix(in srgb, var(--purple-30) 45%, transparent) !important;
+  --in-content-item-hover-text: var(--in-content-text-color) !important;
+  --focus-outline-color: var(--global-focus-outline-color) !important;
+  --in-content-focus-outline-color: var(--focus-outline-color) !important;
+  --focus-outline-offset: 2px !important;
+  --default-focusring: var(--global-focus-outline-width) solid var(--global-focus-outline-color) !important;
+
+  button {
+    cursor: default !important;
+  }
+  
+  #screenshots-cancel-button {
+    margin-top: 10px !important;
+  }
+
+  #selection-size {
+    border-radius: 3px !important;
+  }
+
+  #buttons-container {
+    padding: 4px !important;
+    box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
+
+    .screenshots-button {
+      margin: 0 !important;
+      border: 3px solid transparent !important;
+      background-clip: padding-box !important;
+      border-radius: 5px !important;
+      padding: .6em 1em !important;
+      outline-offset: -4px !important;
+
+      &#cancel {
+        padding: .6em !important;
+      }
+
+      &:not(#cancel) > img {
+        margin-inline-start: -.2em !important;
+      }
+    }
+  }
+
+  @media -moz-pref("userChrome.css.mac-ui-fonts") {
+    font-family: "SF Pro Display", "SF Arabic", "Segoe UI", "sans-serif" !important;
+
+    button {
+      font-weight: var(--uc-font-weight-semibold) !important;
+    }
   }
 }
 

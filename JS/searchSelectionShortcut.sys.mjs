@@ -523,7 +523,7 @@ if (Services.appinfo.processType === Services.appinfo.PROCESS_TYPE_DEFAULT) {
   ChromeUtils.defineESModuleGetters(lazy, {
     BrowserWindowTracker: "resource:///modules/BrowserWindowTracker.sys.mjs",
     PrivateBrowsingUtils: "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
-    SearchUIUtils: "resource:///modules/SearchUIUtils.sys.mjs",
+    SearchUIUtils: "moz-src:///browser/components/search/SearchUIUtils.sys.mjs",
   });
   XPCOMUtils.defineLazyPreferenceGetter(
     lazy,

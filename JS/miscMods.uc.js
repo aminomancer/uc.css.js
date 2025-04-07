@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.7
+// @version        2.1.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -154,17 +154,20 @@
         true
       ),
 
-    // When you click and drag a tab, Firefox displays a small thumbnail preview of the tab's
-    // content next to your mouse cursor (provided you have `nglayout.enable_drag_images` set to
-    // true). This preview has a white background, so it will display as a 160x90px white
-    // rectangle until the thumbnail loads. If you use "dark mode" a lot, this will pretty
-    // consistently result in an unsightly white flash every time you click and drag a tab.
-    // Unfortunately the white color is set at the Canvas level so can't be overridden with CSS.
-    // But with JavaScript we can change the method that sets the background color. Instead of
-    // using a fixed color value, this setting calculates the effective value of a CSS variable,
-    // --in-content-bg-dark. This variable is already set by duskFox so you don't need to set it
-    // yourself if you use my CSS theme. If you don't, then make sure you add
-    // `:root{--in-content-bg-dark: #000}` to your userChrome.css, or it will fall back to white.
+    // When you click and drag a tab, Firefox displays a small thumbnail preview
+    // of the tab's content next to your mouse cursor (provided you have
+    // `nglayout.enable_drag_images` set to true). This preview has a white
+    // background, so it will display as a 160x90px white rectangle until the
+    // thumbnail loads. If you use "dark mode" a lot, this will pretty
+    // consistently result in an unsightly white flash every time you click and
+    // drag a tab. Unfortunately the white color is set at the Canvas level so
+    // can't be overridden with CSS. But with JavaScript we can change the
+    // method that sets the background color. Instead of using a fixed color
+    // value, this setting calculates the effective value of a CSS variable,
+    // --in-content-bg-dark. This variable is already set by duskFox so you
+    // don't need to set it yourself if you use my CSS theme. If you don't, then
+    // make sure you add `:root{--in-content-bg-dark: #000}` to your
+    // userChrome.css, or it will fall back to white.
     "Customize tab drag preview background color": Services.prefs.getBoolPref(
       "miscMods.customizeTabDragPreviewBackgroundColor",
       true
@@ -273,17 +276,12 @@
           : [this.selectedTab];
         let previousTab = this.tabContainer.findNextTab(tabs[0], {
           direction: -1,
-          filter: tab => !tab.hidden,
+          filter: tab => !tab.hidden && this.selectedTab.pinned == tab.pinned,
         });
-        for (let tab of tabs) {
-          if (previousTab) {
-            this.moveTabTo(tab, previousTab._tPos);
-          } else if (
-            this.arrowKeysShouldWrap &&
-            tab._tPos < this.browsers.length - 1
-          ) {
-            this.moveTabTo(tab, this.browsers.length - 1);
-          }
+        if (previousTab) {
+          this.moveTabsBefore(tabs, previousTab);
+        } else if (this.arrowKeysShouldWrap) {
+          this.moveTabsToEnd(this.selectedTab);
         }
       };
       gBrowser.moveTabsForward = function () {
@@ -292,15 +290,12 @@
           : [this.selectedTab];
         let nextTab = this.tabContainer.findNextTab(tabs[tabs.length - 1], {
           direction: 1,
-          filter: tab => !tab.hidden,
+          filter: tab => !tab.hidden && this.selectedTab.pinned == tab.pinned,
         });
-        for (let i = tabs.length - 1; i >= 0; i--) {
-          let tab = tabs[i];
-          if (nextTab) {
-            this.moveTabTo(tab, nextTab._tPos);
-          } else if (this.arrowKeysShouldWrap && tab._tPos > 0) {
-            this.moveTabTo(tab, 0);
-          }
+        if (nextTab) {
+          this.moveTabsAfter(tabs, nextTab);
+        } else if (this.arrowKeysShouldWrap) {
+          this.moveTabsToStart(this.selectedTab);
         }
       };
       eval(
@@ -523,10 +518,38 @@
     tabDragPreview() {
       let { tabContainer } = gBrowser;
       if (tabContainer.hasOwnProperty("on_dragstart")) return;
+      const isTab = element => gBrowser.isTab(element);
+      const isTabGroupLabel = element => gBrowser.isTabGroupLabel(element);
+      gBrowser.tabContainer.getDragTarget = function (
+        event,
+        { ignoreSides = false } = {}
+      ) {
+        let { target } = event;
+        while (target) {
+          if (isTab(target) || isTabGroupLabel(target)) {
+            break;
+          }
+          target = target.parentNode;
+        }
+        if (target && ignoreSides) {
+          let { width, height } = target.getBoundingClientRect();
+          if (
+            event.screenX < target.screenX + width * 0.25 ||
+            event.screenX > target.screenX + width * 0.75 ||
+            ((event.screenY < target.screenY + height * 0.25 ||
+              event.screenY > target.screenY + height * 0.75) &&
+              this.verticalMode)
+          ) {
+            return null;
+          }
+        }
+        return target;
+      };
       eval(
         `tabContainer.on_dragstart = function ${tabContainer.on_dragstart
           .toSource()
           .replace(/on_dragstart/, "")
+          .replace(/#getDragTarget/, `getDragTarget`)
           .replace(
             /\"white\"/,
             `getComputedStyle(this).getPropertyValue("--in-content-bg-dark").trim() || "white"`

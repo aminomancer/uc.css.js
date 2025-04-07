@@ -49,8 +49,8 @@ from the style editor in the browser toolbox. */
     list-style-image: url(chrome://userchrome/content/skin/sidebars-right.svg);
   }
 
-  #sidebar-button:-moz-locale-dir(ltr):not([positionend]),
-  #sidebar-button:-moz-locale-dir(rtl)[positionend] {
+  #sidebar-button:-moz-locale-dir(ltr):not([sidebar-positionend]),
+  #sidebar-button:-moz-locale-dir(rtl)[sidebar-positionend] {
     list-style-image: url(chrome://userchrome/content/skin/sidebars.svg);
   }
 
@@ -870,6 +870,9 @@ of moz-document in stylesheets with file:// urls */
     --button-bgcolor: var(--arrowpanel-dimmed);
     --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
     --button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+    --button-background-color: var(--arrowpanel-dimmed);
+    --button-background-color-hover: var(--arrowpanel-dimmed-further);
+    --button-background-color-active: var(--arrowpanel-dimmed-even-further);
     --panel-item-hover-bgcolor: var(--arrowpanel-dimmed);
     --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further);
     --menu-background-color: var(--arrowpanel-background);
@@ -908,6 +911,9 @@ of moz-document in stylesheets with file:// urls */
       --button-bgcolor: var(--arrowpanel-dimmed);
       --button-hover-bgcolor: var(--arrowpanel-dimmed-further);
       --button-active-bgcolor: var(--arrowpanel-dimmed-even-further);
+      --button-background-color: var(--arrowpanel-dimmed);
+      --button-background-color-hover: var(--arrowpanel-dimmed-further);
+      --button-background-color-active: var(--arrowpanel-dimmed-even-further);
       --search-box-focus: var(--button-active-bgcolor);
       --panel-item-hover-bgcolor: var(--arrowpanel-dimmed);
       --panel-item-active-bgcolor: var(--arrowpanel-dimmed-further);

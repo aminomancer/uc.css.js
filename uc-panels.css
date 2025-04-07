@@ -572,7 +572,6 @@ popupnotificationcontent {
   margin-block: 6px 0 !important;
 }
 
-.popup-notification-body input,
 #protections-popup-sendReportView-collection-comments,
 #protections-popup-sendReportView-collection-url {
   padding: 5.5px !important;
@@ -984,6 +983,11 @@ panel :is(a, .text-link) {
 
 #protections-popup[toast] #protections-popup-mainView-panel-header {
   min-height: 30px !important;
+}
+
+#protections-popup-toast-panel-tp-on-desc,
+#protections-popup-toast-panel-tp-off-desc {
+	appearance: revert !important;
 }
 
 #protections-popup-mainView-panel-header-span {
@@ -1764,11 +1768,13 @@ ul.webext-perm-domains-list {
   color: var(--purple-30) !important;
 }
 
-#screenshotsPagePanel screenshots-buttons {
-  padding: 4px !important;
-  padding-top: 12px !important;
-  box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
-  inset-inline: 1.5em auto !important;
+#screenshotsPagePanel {
+  screenshots-buttons {
+    padding: 4px !important;
+    box-shadow: 0 0 0 1px rgba(12, 12, 13, 0.1), 0 0 8px rgba(12, 12, 13, 0.1) !important;
+    inset-inline: auto 1em !important;
+    top: 1em !important;
+  }
 }
 
 .footer-button.screenshot-button {
