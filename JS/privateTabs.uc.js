@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Private Tabs
-// @version        1.4.1
+// @version        1.4.2
 // @author         aminomancer
 // @homepage       https://github.com/aminomancer
 // @description    An fx-autoconfig port of [Private Tab](https://github.com/xiaoxiaoflood/firefox-scripts/blob/master/chrome/privateTab.uc.js) by xiaoxiaoflood. Adds buttons and menu items allowing you to open a "private tab" in nearly any circumstance in which you'd be able to open a normal tab. Instead of opening a link in a private window, you can open it in a private tab instead. This will use a special container and prevent history storage, depending on user configuration. You can also toggle tabs back and forth between private and normal mode. This script adds two hotkeys: Ctrl+Alt+P to open a new private tab, and Ctrl+Alt+T to toggle private mode for the active tab. These hotkeys can be configured along with several other options at the top of the script file.
@@ -61,9 +61,8 @@ class PrivateTabManager {
     // to addTrustedTab. so we need to make our own function, which requires us
     // to access some private objects.
     // eslint-disable-next-line mozilla/use-chromeutils-import
-    let { SessionStoreInternal, TAB_CUSTOM_VALUES } = Cu.import(
-      "resource:///modules/sessionstore/SessionStore.jsm"
-    );
+    let { SessionStoreInternal, TAB_CUSTOM_VALUES } = 
+    ChromeUtils.importESModule("resource:///modules/sessionstore/SessionStore.sys.mjs");
     this.SSI = SessionStoreInternal;
     this.TAB_CUSTOM_VALUES = TAB_CUSTOM_VALUES;
     ChromeUtils.defineESModuleGetters(this, {
@@ -401,6 +400,7 @@ class PrivateTabManager {
         PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
         PrivateBrowsingUtils:
           "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
+	PlacesUIUtils: "resource:///modules/PlacesUIUtils.sys.mjs",
       });
       function getBrowserWindow(aWindow) {
         // Prefer the caller window if it's a browser window, otherwise use
@@ -411,15 +411,12 @@ class PrivateTabManager {
           ? aWindow
           : lazy.BrowserWindowTracker.getTopWindow();
       }
-      let openTabsetString = PlacesUIUtils.openTabset.toString();
-      eval(
-        `PlacesUIUtils.openTabset = ${
-          openTabsetString.startsWith("function") ? "" : "function "
-        }${openTabsetString.replace(
-          /(\s+)(inBackground: loadInBackground,)/,
-          "$1$2$1userContextId: aEvent.userContextId || 0,"
-        )}`
-      );
+      let originalOpenTabset = PlacesUIUtils.openTabset;
+      lazy.PlacesUIUtils.openTabset = function(aURIs, aOptions) {
+        aOptions = aOptions || {};
+        aOptions.userContextId = aOptions.userContextId || 0;
+        originalOpenTabset.call(this, aURIs, aOptions);
+      };
     }
 
     const { WebExtensionPolicy } = Cu.getGlobalForObject(Services);
