@@ -400,7 +400,6 @@ class PrivateTabManager {
         PlacesUtils: "resource://gre/modules/PlacesUtils.sys.mjs",
         PrivateBrowsingUtils:
           "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
-	PlacesUIUtils: "resource:///modules/PlacesUIUtils.sys.mjs",
       });
       function getBrowserWindow(aWindow) {
         // Prefer the caller window if it's a browser window, otherwise use
@@ -411,8 +410,8 @@ class PrivateTabManager {
           ? aWindow
           : lazy.BrowserWindowTracker.getTopWindow();
       }
-      let originalOpenTabset = PlacesUIUtils.openTabset;
-      lazy.PlacesUIUtils.openTabset = function(aURIs, aOptions) {
+      let originalOpenTabset = PlacesUtils.openTabset;
+      lazy.PlacesUtils.openTabset = function(aURIs, aOptions) {
         aOptions = aOptions || {};
         aOptions.userContextId = aOptions.userContextId || 0;
         originalOpenTabset.call(this, aURIs, aOptions);
