@@ -1,7 +1,7 @@
 {
   "editor.formatOnPaste": false,
   "editor.formatOnType": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.formatOnSaveMode": "file",
   "[javascript][javascriptreact][typescript][typescriptreact]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
@@ -17,5 +17,10 @@
   },
   "[css][sass][scss][less]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  },
+  "css.lint.validProperties": ["color-adjust", "forced-color-adjust"],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "javascript.suggest.autoImports": false
 }
