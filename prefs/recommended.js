@@ -39,8 +39,6 @@ user_pref("browser.tabs.tabmanager.enabled", true);
 user_pref("browser.urlbar.groupLabels.enabled", false);
 // allow urlbar result menu buttons without slowing down tabbing through results
 user_pref("browser.urlbar.resultMenu.keyboardAccessible", false);
-// corresponds to the system color Highlight
-user_pref("ui.highlight", "hsl(250, 100%, 60%)");
 // Background for selected <option> elements and others
 user_pref("ui.selecteditem", "#2F3456");
 // Text color for selected <option> elements and others
@@ -114,21 +112,22 @@ user_pref("browser.theme.toolbar-theme", 0);
 // set the default background color for color-scheme: dark. see it for example
 // on about:blank
 user_pref("browser.display.background_color.dark", "#19191b");
-//// findbar highlight and selection colors
-user_pref("ui.textHighlightBackground", "#7755FF");
+//// selection/highlight colors
+user_pref("ui.highlight", "hsla(245, 100%, 70%, 0.55)");
+user_pref("ui.highlighttext", "#ffffff");
+// window inactive selection/highlight colors
+user_pref("ui.textSelectDisabledBackground", "hsla(243, 35%, 65%, 0.45)");
+//// findbar highlight and selection colors, match --global-selection-bgcolor
+user_pref("ui.textHighlightBackground", "hsla(245, 100%, 70%, 0.55)");
 user_pref("ui.textHighlightForeground", "#FFFFFF");
-user_pref("ui.textSelectBackground", "#FFFFFF");
-user_pref("ui.textSelectAttentionBackground", "#FF3388");
+user_pref("ui.textSelectAttentionBackground", "hsla(335, 100%, 60%, 0.65)");
 user_pref("ui.textSelectAttentionForeground", "#FFFFFF");
-user_pref("ui.textSelectDisabledBackground", "#7755FF");
-user_pref("ui.textSelectBackgroundAttention", "#FF3388");
-user_pref("ui.textSelectBackgroundDisabled", "#7755FF");
 //// spell check style
 user_pref("ui.SpellCheckerUnderline", "#E2467A");
 user_pref("ui.SpellCheckerUnderlineStyle", 1);
 //// IME style (for example when typing pinyin or hangul)
 user_pref("ui.IMERawInputBackground", "#000000");
-user_pref("ui.IMESelectedRawTextBackground", "#7755FF");
+user_pref("ui.IMESelectedRawTextBackground", "hsla(245, 100%, 70%, 0.55)");
 ////
 // about:reader dark mode
 user_pref("reader.color_scheme", "dark");
