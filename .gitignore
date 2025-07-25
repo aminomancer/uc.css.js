@@ -1,5 +1,6 @@
 *lz4
 .*/
+!.vscode/
 node_modules/
 package-lock.json
 .parcel-cache/
