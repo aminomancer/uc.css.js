@@ -88,7 +88,8 @@ class CopyCurrentURL {
           }
         }
       },
-    }).attachToWindow(window, { suppressOriginalKey: true });
+    });
+    this.hotkey.attachToWindow(window, { suppressOriginalKey: true });
   }
 
   get clipboard() {

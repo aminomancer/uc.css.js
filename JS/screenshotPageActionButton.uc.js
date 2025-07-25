@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Screenshot Page Action Button
-// @version        1.3.3
+// @version        1.3.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Creates a screenshot button in the page actions area (the right side of the urlbar) that works just like the screenshot toolbar button.
@@ -83,7 +83,7 @@
       if (this.titleString) return this.titleString;
       this.strings = await new Localization(["browser/screenshots.ftl"], true);
       const formatted = await this.strings.formatMessages([
-        "screenshot-toolbarbutton",
+        "screenshot-toolbar-button",
       ]);
       this.titleString = formatted[0].attributes[1].value;
       return this.titleString;

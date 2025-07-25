@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Misc. Mods
-// @version        2.1.8
+// @version        2.1.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Various tiny mods not worth making separate scripts for. Read the comments inside the script for details.
@@ -648,8 +648,9 @@
         `searchbarPopup.updateHeader = async function ${searchbarPopup.updateHeader
           .toSource()
           .replace(/async updateHeader/, "")
+          .replace(/\#currentEngineName/g, "_currentEngineName")
           .replace(
-            /(let uri = engine.iconURI;)/,
+            /(let uri = await engine\.getIconURL\(\);)/,
             `engine.name ? this.setAttribute("engine", engine.name) : this.removeAttribute("engine");\n      $1`
           )}`
       );

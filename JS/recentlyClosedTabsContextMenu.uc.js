@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Undo Recently Closed Tabs in Tab Context Menu
-// @version        2.1.6
+// @version        2.1.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -496,10 +496,13 @@ class UndoListInTabmenu {
 
     const lazy = {};
     ChromeUtils.defineESModuleGetters(lazy, {
-      PlacesUIUtils: "resource:///modules/PlacesUIUtils.sys.mjs",
+      PlacesUIUtils:
+        "moz-src:///browser/components/places/PlacesUIUtils.sys.mjs",
       PrivateBrowsingUtils:
         "resource://gre/modules/PrivateBrowsingUtils.sys.mjs",
       SessionStore: "resource:///modules/sessionstore/SessionStore.sys.mjs",
+      SessionWindowUI:
+        "resource:///modules/sessionstore/SessionWindowUI.sys.mjs",
     });
     XPCOMUtils.defineLazyPreferenceGetter(
       lazy,
@@ -587,7 +590,11 @@ class UndoListInTabmenu {
         element.setAttribute("value", aIndex);
         element.setAttribute("source-window-id", sourceWindowId);
         element.addEventListener("command", event => {
-          event.target.ownerGlobal.undoCloseTab(aIndex, sourceWindowId);
+          lazy.SessionWindowUI.undoCloseTab(
+            event.target.ownerGlobal,
+            aIndex,
+            sourceWindowId
+          );
           if (event.button === 1) {
             aDocument.ownerGlobal.gBrowser.moveTabToEnd();
           }
@@ -982,6 +989,10 @@ class RecentlyClosedPanelContext {
     button.remove();
   }
   onRestoreTab(e, button) {
+    window.SessionWindowUI.undoCloseTab(
+      window,
+      Number(button.getAttribute("value"))
+    );
     undoCloseTab(Number(button.getAttribute("value")));
     if (e.button === 1) gBrowser.moveTabToEnd();
   }
@@ -1136,7 +1147,10 @@ class RecentlyClosedPanelContext {
     } else if (e.button != 1) {
       return;
     }
-    undoCloseTab(target.getAttribute("value"));
+    window.SessionWindowUI.undoCloseTab(
+      window,
+      Number(target.getAttribute("value"))
+    );
     gBrowser.moveTabToEnd();
     let ancestorPanel = target.closest("panel");
     if (ancestorPanel) ancestorPanel.hidePopup();

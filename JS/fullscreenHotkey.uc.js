@@ -16,7 +16,8 @@ SessionStore.promiseInitialized.then(() => {
     key.setAttribute("key", "E");
     key.setAttribute("modifiers", "accel");
   }
-  document
-    .getElementById("key_search2")
-    .setAttribute("modifiers", "accel,shift");
+  let keySearchAlt = document.getElementById("key_search2");
+  if (keySearchAlt?.getAttribute("key") === "E") {
+    keySearchAlt.setAttribute("modifiers", "accel,shift");
+  }
 });

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.5.3
+// @version        1.5.4
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -135,7 +135,8 @@ This doesn't change anything about the layout so you may want to tweak some thin
     }
     const lazy = {};
     ChromeUtils.defineESModuleGetters(lazy, {
-      SearchUtils: "resource://gre/modules/SearchUtils.sys.mjs",
+      SearchUtils: "moz-src:///toolkit/components/search/SearchUtils.sys.mjs",
+      UrlbarPrefs: "resource:///modules/UrlbarPrefs.sys.mjs",
     });
     function getBuiltInEngineIcon(engine) {
       let preferredWidth = 16;

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Auto-hide Navbar Support
-// @version        1.2.5
+// @version        1.2.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -44,7 +44,7 @@ class AutoHideHandler {
       gNavToolbox.addEventListener(ev, this, true);
     }
     // onViewOpen and onViewClose
-    gURLBar.controller.addQueryListener(this);
+    gURLBar.controller.addListener(this);
     for (let topic of ["urlbar-focus", "urlbar-blur"]) {
       Services.obs.addObserver(this, topic);
     }
@@ -76,7 +76,7 @@ class AutoHideHandler {
   }
   _onPrefChanged(sub, pref) {
     switch (pref) {
-      case this.prefs.autohide:
+      case this.prefs.autohide: {
         let value = this.getPref(sub, pref, true);
         if (value) {
           document.documentElement.setAttribute("fullscreen-autohide", value);
@@ -84,6 +84,7 @@ class AutoHideHandler {
           document.documentElement.removeAttribute("fullscreen-autohide");
         }
         break;
+      }
       default:
     }
   }

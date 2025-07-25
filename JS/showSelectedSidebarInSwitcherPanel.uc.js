@@ -26,6 +26,9 @@ Proton removes the checkmark shown on the selected sidebar in the sidebar switch
         !sidebar.hasOwnProperty("extensionId") &&
         !sidebar.hasOwnProperty("switcherMenuId")
       ) {
+        if (type === "GenaiChat") {
+          type = "genai-chat";
+        }
         sidebar.switcherMenuId = `sidebar-switcher-${type.toLowerCase()}`;
       }
     });

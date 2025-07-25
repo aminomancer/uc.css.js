@@ -552,4 +552,31 @@ if (Services.appinfo.processType === Services.appinfo.PROCESS_TYPE_DEFAULT) {
     allFrames: true,
     messageManagerGroups: ["browsers", "webext-browsers", "sidebars"],
   });
+
+  // Might need to get rid of the F-key shortcuts on macOS.
+  const { AppConstants } = ChromeUtils.importESModule(
+    "resource://gre/modules/AppConstants.sys.mjs"
+  );
+  if (AppConstants.platform === "macosx") {
+    const { EveryWindow } = ChromeUtils.importESModule(
+      "resource:///modules/EveryWindow.sys.mjs"
+    );
+    EveryWindow.registerCallback(
+      "RemoveSearchFocusShortcutAlt",
+      win => {
+        // We can just remove it, since this key is an alt for Accel+K. On
+        // Windows it is mapped to a different key.
+        win.document
+          .querySelector(`key#key_search2[data-l10n-id="find-shortcut"]`)
+          ?.remove();
+        // There are also alts for the fullscreen keys that need to be removed.
+        for (let key of win.document.querySelectorAll(
+          `key[data-l10n-id="full-screen-shortcut"][modifiers="accel,shift"]`
+        )) {
+          key.remove();
+        }
+      },
+      () => {}
+    );
+  }
 }

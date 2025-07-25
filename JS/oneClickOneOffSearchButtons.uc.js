@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           One-click One-off Search Buttons
-// @version        1.8.5
+// @version        1.8.6
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -143,10 +143,49 @@ It's hard to explain in words exactly what's going on so I'll just say to try th
 
           return true;
         };
+        gURLBar.view.controller._focusOnUnifiedSearchButton = function () {
+          this.input.toggleAttribute("unifiedsearchbutton-available", true);
+
+          const switcher = this.input.document.getElementById(
+            "urlbar-searchmode-switcher"
+          );
+          // Set tabindex to be focusable.
+          switcher.setAttribute("tabindex", "-1");
+          // Remove blur listener to avoid closing urlbar view panel.
+          this.input.removeEventListener("blur", this.input);
+          // Move the focus.
+          switcher.focus();
+          // Restore all.
+          this.input.addEventListener("blur", this.input);
+          switcher.addEventListener(
+            "blur",
+            e => {
+              switcher.removeAttribute("tabindex");
+              if (
+                this.input.hasAttribute("focused") &&
+                !e.relatedTarget?.closest("#urlbar")
+              ) {
+                // If the focus is not back to urlbar, fire blur event explicitly to
+                // clear the urlbar. Because the input field has been losing an
+                // opportunity to lose the focus since we removed blur listener once.
+                this.input.inputField.dispatchEvent(
+                  new FocusEvent("blur", {
+                    relatedTarget: e.relatedTarget,
+                  })
+                );
+              }
+            },
+            { once: true }
+          );
+        };
         eval(
           `gURLBar.view.controller.handleKeyNavigation = function ${gURLBar.view.controller.handleKeyNavigation
             .toSource()
             .replace(/#dismissSelectedResult/, "_dismissSelectedResult")
+            .replace(
+              /#focusOnUnifiedSearchButton/,
+              "_focusOnUnifiedSearchButton"
+            )
             .replace(
               /(this\.\_lastQueryContextWrapper)/,
               `$1 && this.allowOneOffKeyNav`

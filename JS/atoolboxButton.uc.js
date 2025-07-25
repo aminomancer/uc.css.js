@@ -328,14 +328,17 @@ When you middle click, the button will show a notification telling you the curre
         };
 
         if (AppConstants.platform === "macosx") {
-          toolbarbutton.onmousedown = onClick;
-          toolbarbutton.onclick = e => {
-            if (e.getModifierState("Accel")) return;
+          toolbarbutton.addEventListener("contextmenu", e => {
+            let accel = e.getModifierState("Accel");
+            if (accel) {
+              return;
+            }
+            e.stopPropagation();
+            e.stopImmediatePropagation();
             e.preventDefault();
-          };
-        } else {
-          toolbarbutton.onclick = onClick;
+          });
         }
+        toolbarbutton.addEventListener("click", onClick);
 
         toolbarbutton.triggerAnimation = function () {
           this.addEventListener(
