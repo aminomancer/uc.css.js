@@ -373,7 +373,7 @@
   list-style-image: url(chrome://userchrome/content/material/system-report.svg);
 }
 
-#appMenu_help_reportSiteIssue {
+#appMenu-report-broken-site-button {
   list-style-image: url(chrome://userchrome/content/material/bug.svg);
 }
 
@@ -440,7 +440,7 @@
 #appMenu_feedbackPage > .toolbarbutton-text,
 #appMenu_helpSafeMode > .toolbarbutton-text,
 #appMenu_troubleShooting > .toolbarbutton-text,
-#appMenu_help_reportSiteIssue > .toolbarbutton-text,
+#appMenu-report-broken-site-button > .toolbarbutton-text,
 #appMenu_menu_HelpPopup_reportPhishingtoolmenu > .toolbarbutton-text,
 #appMenu_menu_HelpPopup_reportPhishingErrortoolmenu > .toolbarbutton-text,
 #appMenu_aboutName > .toolbarbutton-text,
@@ -704,7 +704,7 @@ toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + to
 
 toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] .toolbarbutton-text,
 toolbarbutton.subviewbutton.sendToDevice-device[clientType=""][clientId=""] + toolbarbutton.subviewbutton.sendToDevice-device:not([clientType], [clientId]) .toolbarbutton-text {
-  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px);
+  padding-inline-start: var(--arrowpanel-subviewbutton-iconic-gap, 8px) !important;
 }
 
 .PanelUI-remotetabs-clientcontainer > label[itemtype="client"] {

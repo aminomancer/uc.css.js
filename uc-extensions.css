@@ -67,11 +67,6 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
   list-style-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
-/* hide gitzip page action since it's pretty useless */
-#pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
-  display: none !important;
-}
-
 /* zotero, an extension for storing articles and auto generating academic citations, etc. */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="zotero@chnm.gmu.edu"i] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/material/zotero.svg) !important;
@@ -120,25 +115,46 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
   fill-opacity: var(--toolbarbutton-disabled-opacity) !important;
 }
 
-#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-iconic-left::before {
+#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/nord.svg);
 }
 
-#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-iconic-icon {
+#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-icon {
   display: none !important;
 }
 
 menupopup:not(#contentAreaContextMenu) > #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group:not(.menuitem-iconic, .menu-iconic)::before {
   background-image: url(chrome://userchrome/content/material/nord.svg);
+}
+
+#contentAreaContextMenu #_7962ff4a-5985-4cf2-9777-4bb642ad05b8_-menuitem-_svg-gobbler::before {
+  width: 16px;
+  height: 16px;
+  margin-inline: var(--context-iconic-margin);
+  fill: currentColor;
+  -moz-context-properties: fill, fill-opacity, stroke;
+  content: "";
+  display: flex;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(chrome://userchrome/content/material/svg-gobbler.svg);
+}
+
+#contentAreaContextMenu #_7962ff4a-5985-4cf2-9777-4bb642ad05b8_-menuitem-_svg-gobbler .menu-icon {
+  display: none !important;
+}
+
+menupopup:not(#contentAreaContextMenu) > #_7962ff4a-5985-4cf2-9777-4bb642ad05b8_-menuitem-_svg-gobbler:not(.menuitem-iconic, .menu-iconic)::before {
+  background-image: url(chrome://userchrome/content/material/svg-gobbler.svg);
 }
 
 /* cookie remover */
@@ -283,7 +299,7 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
 
 /* multithreaded download manager, an extension for downloading files more quickly or with fewer restrictions */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="multithreaded-download-manager@qw.linux-2g64.local"i] .toolbarbutton-icon,
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_multithreaded-download-manager_qw_linux-2g64_local-sidebar-action[style]:not([checked="true"]) .menu-iconic-left {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_multithreaded-download-manager_qw_linux-2g64_local-sidebar-action[style]:not([checked="true"]) .menu-icon {
   list-style-image: url(chrome://userchrome/content/downloads/double-download.svg);
 }
 
@@ -331,7 +347,7 @@ elaborate/compiled stylesheets */
 /* Notes by Firefox */
 :is(.webextension-browser-action, .eom-addon-button)[data-extensionid="notes@mozilla.com"i],
 #sidebar-box[sidebarcommand="notes_mozilla_com-sidebar-action"] #sidebar-switcher-target > #sidebar-icon,
-menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_notes_mozilla_com-sidebar-action[style]:not([checked="true"]) .menu-iconic-left {
+menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar_menu_notes_mozilla_com-sidebar-action[style]:not([checked="true"]) .menu-icon {
   list-style-image: url(chrome://userchrome/content/material/notepad-large.svg) !important;
 }
 
@@ -339,20 +355,20 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
   background-image: url(chrome://userchrome/content/material/notepad-large.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/notepad-large.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)#notes_mozilla_com-menuitem-_send-to-notes .menu-icon {
   display: none;
 }
 
@@ -361,20 +377,20 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
   list-style-image: url(chrome://userchrome/content/material/firefox-relay.svg) !important;
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"] .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/firefox-relay.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"] .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)[id^="private-relay_firefox_com-menuitem-"] .menu-icon {
   display: none;
 }
 
@@ -391,43 +407,47 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
 }
 
 /* Tab Stash menuitem icon */
-:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image] .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/tabstash-logo.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image] .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)[id^="tab-stash_condordes_net-menuitem-"][image] .menu-icon {
   display: none;
 }
 
 /* GitZip */
-:is(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"] .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/zipper.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"] .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic)[id^="gitzip-firefox-addons_gitzip_org-menuitem-"] .menu-icon {
   display: none;
 }
 
 .eom-addon-button[data-extensionid="gitzip-firefox-addons@gitzip.org"] .toolbarbutton-icon {
   list-style-image: url(chrome://userchrome/content/material/zipper.svg);
+}
+
+#pageAction-urlbar-gitzip-firefox-addons_gitzip_org {
+  list-style-image: url(chrome://userchrome/content/material/zipper.svg) !important;
 }
 
 /* invert some icons in the extension options panel */
@@ -527,89 +547,51 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
 
 /* make multithreaded download manager context menu item's English label smaller.
 do nothing for other languages since idk if the item is too long in other languages. */
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-left {
-  flex: 1;
-}
+#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] {
+  > .menu-text {
+    display: none;
+  }
 
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-text {
-  display: none;
-}
+  > .menu-accel {
+    margin-inline-start: 0 !important;
+    color: inherit !important;
 
-#multithreaded-download-manager_qw_linux-2g64_local-menuitem-_link-context-menu[label="Download with Multithreaded Download Manager"] .menu-iconic-left::after {
-  content: "Download (Multithreaded)";
-  display: -moz-inline-box;
-  flex: 1;
-}
-
-/* fix inconsistent string casing of menuitems in Multithreaded Download Manager */
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) > label {
-  display: none !important;
-}
-
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) > .menu-accel-container::before {
-  display: -moz-inline-box;
-  flex: 1;
-}
-
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new tab"] > .menu-accel-container::before {
-  content: "Open in New Tab";
-}
-
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in new window"] > .menu-accel-container::before {
-  content: "Open in New Window";
-}
-
-:is(menu, menuitem)[id^="multithreaded-download-manager"][label="Open in sidebar"] > .menu-accel-container::before {
-  content: "Open in Sidebar";
+    &::before {
+      content: "Download (Multithreaded)";
+      display: flex;
+    }
+  }
 }
 
 /* sort bookmarks menu icon */
-:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/skin/sort.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic)[id^="sort-bookmarks_heftig-menuitem"] .menu-iconic-icon {
-  display: none;
-}
-
-/* fix inconsistent string casing of menuitems in Sort Bookmarks */
-menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > label {
-  display: none !important;
-}
-
-menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
-  display: -moz-inline-box;
-  flex: 1;
-}
-
-menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .menu-accel-container::before {
-  content: "Sort this Folder…";
-}
-
 /* simple translate context menu icon */
-:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-iconic-left::before {
+:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"])::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/translate-small.svg);
 }
 
-:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-iconic-icon {
+:is(.menu-iconic, .menuitem-iconic):is([label="To Google Translate"], [label^="Translate this page"], [label="Translate selected link"], [label="Translate selected text"], [label="Simple Translate"]) .menu-icon {
   display: none;
 }
 
@@ -632,52 +614,26 @@ menuitem[id^="sort-bookmarks_heftig-menuitem"][label="Sort this folder…"] > .m
   }
 }
 
-/* fix inconsistent string casing of menuitems in Simple Translate */
-:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"] > label,
-#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > label,
-#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > label {
-  display: none !important;
-}
-
-:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"] > .menu-accel-container::before,
-#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before,
-#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
-  display: -moz-inline-box;
-  flex: 1;
-}
-
-:is(#simple-translate_sienori-menuitem-_translatePage, #simple-translate_sienori-menuitem-_translatePageOnTab)[label^="Translate this page"] > .menu-accel-container::before {
-  content: "Translate Page";
-}
-
-#simple-translate_sienori-menuitem-_translateLink[label="Translate selected link"] > .menu-accel-container::before {
-  content: "Translate Selected Link";
-}
-
-#simple-translate_sienori-menuitem-_translateText[label="Translate selected text"] > .menu-accel-container::before {
-  content: "Translate Selected Text";
-}
-
 /* hide translate this page menuitem when right-clicking text input */
 #contentAreaContextMenu #context-cut:not([hidden]) ~ :is(.menu-iconic, .menuitem-iconic):is([label^="Translate this page"], [label="Simple Translate"]) {
   display: none;
 }
 
 /* pushbullet context menu icon */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-left::before {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/pushbullet-solid.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-iconic-icon {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Pushbullet"] .menu-icon {
   display: none;
 }
 
@@ -694,82 +650,82 @@ right-clicking something particular *on* the page. */
 }
 
 /* multi-account containers menu icon */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-left::before,
-#_testpilot-containers-menuitem-_open-bookmark-in-container-tab > .menu-iconic-left::before {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"]::before,
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/skin/container-base.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-iconic-icon,
-#_testpilot-containers-menuitem-_open-bookmark-in-container-tab > .menu-iconic-left .menu-iconic-icon {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] .menu-icon,
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab > .menu-icon {
   display: none;
 }
 
-#_testpilot-containers-menuitem-_open-bookmark-in-container-tab > .menu-iconic-left::before {
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab::before {
   background-image: url(chrome://userchrome/content/skin/container-go.svg);
 }
 
 /* shorten the multi-account containers label */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-iconic-left {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-icon {
   flex: 1;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-iconic-left::after {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-icon::after {
   content: "Multi-Account Containers";
-  display: -moz-inline-box;
+  display: flex;
   flex: 1;
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-iconic-text {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Firefox Multi-Account Containers"] > .menu-text {
   display: none;
 }
 
-#_testpilot-containers-menuitem-_open-bookmark-in-container-tab menupopup .menu-iconic-icon {
+#_testpilot-containers-menuitem-_open-bookmark-in-container-tab menupopup .menu-icon {
   filter: invert(1);
   opacity: 0.8;
 }
 
 /* zotero menu icon */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-left::before {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/skin/sync.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-iconic-icon {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Zotero Connector"] .menu-icon {
   display: none;
 }
 
 /* ublock origin context menu icon */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[id^="ublock0_raymondhill_net-menuitem-"] .menu-iconic-left::before {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[id^="ublock0_raymondhill_net-menuitem-"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/hide-password.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[id^="ublock0_raymondhill_net-menuitem-"] .menu-iconic-icon {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[id^="ublock0_raymondhill_net-menuitem-"] .menu-icon {
   display: none;
 }
 
@@ -782,42 +738,21 @@ right-clicking something particular *on* the page. */
   background-image: url(chrome://userchrome/content/devtools/command-frames.svg);
 }
 
-/* fix the inconsistent casing for uBlock Origin's "Block element…" menuitem (in English) */
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element…"] > label {
-  display: none !important;
-}
-
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElement[label="Block element…"] > .menu-accel-container::before {
-  content: "Block Element…";
-  display: -moz-inline-box;
-  flex: 1;
-}
-
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame[label="Block element in frame…"] > label {
-  display: none !important;
-}
-
-#ublock0_raymondhill_net-menuitem-_uBlock0-blockElementInFrame[label="Block element in frame…"] > .menu-accel-container::before {
-  content: "Block Element in Frame…";
-  display: -moz-inline-box;
-  flex: 1;
-}
-
 /* bitwarden context menu icon */
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-left::before {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"]::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/bitwarden.svg);
 }
 
-#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-iconic-icon {
+#contentAreaContextMenu :is(.menu-iconic, .menuitem-iconic)[label="Bitwarden"] .menu-icon {
   display: none !important;
 }
 
@@ -826,20 +761,20 @@ right-clicking something particular *on* the page. */
   background-image: url(chrome://userchrome/content/material/bitwarden.svg);
 }
 
-#contentAreaContextMenu #addon_darkreader_org-menuitem-_DarkReader-top .menu-iconic-left::before {
+#contentAreaContextMenu #addon_darkreader_org-menuitem-_DarkReader-top::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(chrome://userchrome/content/material/darkmode.svg);
 }
 
-#contentAreaContextMenu #addon_darkreader_org-menuitem-_DarkReader-top .menu-iconic-icon {
+#contentAreaContextMenu #addon_darkreader_org-menuitem-_DarkReader-top .menu-icon {
   display: none !important;
 }
 
@@ -851,35 +786,6 @@ menu[id^="format-with-prettier_phryneas_de-menuitem-"][ext-type="top-level-menu"
   background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
 }
 
-/* fix inconsistent string casing of menuitems in Dark Reader */
-#addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > label,
-#addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > label,
-#addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"] > label {
-  display: none !important;
-}
-
-#addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > .menu-accel-container::before,
-#addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > .menu-accel-container::before,
-#addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
-  display: -moz-inline-box;
-  flex: 1;
-}
-
-#addon_darkreader_org-menuitem-_toggle[label="Toggle extension"] > .menu-accel-container::before {
-  content: "Toggle Extension";
-  white-space: nowrap !important;
-}
-
-#addon_darkreader_org-menuitem-_addSite[label="Toggle current site"] > .menu-accel-container::before {
-  content: "Toggle Current Site";
-  white-space: nowrap !important;
-}
-
-#addon_darkreader_org-menuitem-_switchEngine[label="Theme generation mode"] > .menu-accel-container::before {
-  content: "Theme Generation Mode";
-  white-space: nowrap !important;
-}
-
 /* stylus context menu items */
 #_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager:not(.menuitem-iconic, .menu-iconic)::before {
   background-image: url(chrome://userchrome/content/devtools/tool-styleeditor.svg);
@@ -889,28 +795,28 @@ menu[id^="format-with-prettier_phryneas_de-menuitem-"][ext-type="top-level-menu"
   background-image: url(chrome://userchrome/content/settings.svg);
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > label,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > label,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > label {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-text,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-text,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-text {
   display: none !important;
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before,
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
-  display: -moz-inline-box;
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel::before,
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel::before {
+  display: flex;
   flex: 1;
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_show-badge[label="Show active style count"] > .menu-accel::before {
   content: "Active Style Count";
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_disableAll[label="Turn all styles off"] > .menu-accel::before {
   content: "Disable All Styles";
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-manager[label="Open styles manager"] > .menu-accel::before {
   content: "Open Style Manager";
 }
 
@@ -919,59 +825,59 @@ menu[id^="format-with-prettier_phryneas_de-menuitem-"][ext-type="top-level-menu"
   display: none !important;
 }
 
-#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options[label="Options"]:not(.menuitem-iconic, .menu-iconic) > .menu-accel-container::before {
+#_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-menuitem-_open-options[label="Options"]:not(.menuitem-iconic, .menu-iconic) > .menu-accel::before {
   content: "Stylus Options";
-  display: -moz-inline-box;
+  display: flex;
   flex: 1;
 }
 
 /* View Image extension's context menu item "Search by image"
 I would recommend disabling the context menu in the extension's settings,
 since its casing is inconsistent with context menu norms. */
-#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-left::before {
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-icon {
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-icon {
   display: none !important;
 }
 
-#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage .menu-iconic-left::before,
+#_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage::before,
 #_287dcf75-bec6-4eec-b4f6-71948a2eea29_-menuitem-_ViewImage-SearchByImage:not(.menuitem-iconic, .menu-iconic)::before {
   background-image: url(chrome://userchrome/content/material/google-view-image.svg);
 }
 
 /* my "Invert Element" context menu extension */
-#invert-element_aminomancer-menuitem-_menuitem-invert .menu-iconic-left::before {
+#invert-element_aminomancer-menuitem-_menuitem-invert::before {
   width: 16px;
   height: 16px;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   content: "";
-  display: -moz-inline-box;
+  display: flex;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-#invert-element_aminomancer-menuitem-_menuitem-invert .menu-iconic-icon {
+#invert-element_aminomancer-menuitem-_menuitem-invert .menu-icon {
   display: none !important;
 }
 
-#invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"] .menu-iconic-left::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"]::before,
 #invert-element_aminomancer-menuitem-_menuitem-invert[label="Invert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
   background-image: url(chrome://userchrome/content/material/invert.svg);
 }
 
-#invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"] .menu-iconic-left::before,
+#invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"]::before,
 #invert-element_aminomancer-menuitem-_menuitem-invert[label="Uninvert Element"]:not(.menuitem-iconic, .menu-iconic)::before {
   background-image: url(chrome://userchrome/content/material/invert-off.svg);
 }
@@ -986,7 +892,7 @@ menupopup menuitem[class^="unified-nav"][uri="moz-extension://e158f52d-b5db-4594
 }
 
 /* invert github's black icon */
-:is(.menu-iconic-icon, .toolbarbutton-icon, .urlbarView-favicon):is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]) {
+:is(.menu-icon, .toolbarbutton-icon, .urlbarView-favicon):is([src^="page-icon:https://github.com"], [src^="page-icon:http://github.com"]) {
   background-image: url(chrome://userchrome/content/engines/github.svg) !important;
   background-size: 16px !important;
   background-repeat: no-repeat !important;

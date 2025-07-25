@@ -61,18 +61,17 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[disabled="tr
   fill: currentColor;
 }
 
-menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu) .menu-iconic-left {
-  padding: 0 !important;
-  appearance: none !important;
-  margin-inline-end: 0 !important;
-}
-
-menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu) .menu-iconic-icon {
-  margin-inline: var(--context-iconic-margin);
-}
-
-toolbarbutton menupopup[placespopup] > :is(menu, menuitem) .menu-iconic-icon {
+menupopup:is(:not([type="arrow"]), [placespopup]) :is(menuitem, menu) .menu-icon,
+toolbarbutton menupopup[placespopup] > :is(menu, menuitem) .menu-icon {
   margin-inline: var(--context-iconic-margin) !important;
+}
+
+.menu-icon {
+  menuitem:not(.menuitem-iconic, [image]) > &,
+    menu:not(.menu-iconic) > &,
+    menucaption:not(.menuitem-iconic, [image]) > & {
+      display: none;
+  }
 }
 
 panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem :is(.ac-site-icon, .ac-type-icon) {
@@ -80,28 +79,18 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem :is(.ac-site
   margin-inline-start: 0 !important;
 }
 
-#contentAreaContextMenu > .menuitem-iconic > .menu-iconic-left > .menu-iconic-icon {
+#contentAreaContextMenu > .menuitem-iconic > .menu-icon {
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
 }
 
-moz-input-box > menupopup .context-menu-add-engine > .menu-iconic-left::after {
-  background: url(chrome://userchrome/content/skin/search-indicator-badge-add.svg) no-repeat center/contain !important;
-  -moz-context-properties: fill, fill-opacity, stroke !important;
-  fill: var(--update-badge-bg) !important;
-  stroke: var(--update-badge-color) !important;
-  height: 12px !important;
-  width: 12px !important;
-  margin-inline: -12px 0 !important;
-  margin-top: -13px !important;
-}
-
-moz-input-box > menupopup .context-menu-add-engine:not([image]) .menu-iconic-icon {
-  list-style-image: url(chrome://userchrome/content/search-glass.svg);
-}
-
 .menu-text {
   padding-inline: var(--context-padding-inline) !important;
+}
+
+:is(.menu-iconic, .menuitem-iconic) > .menu-text {
+  margin-inline: 0 !important;
+  padding-inline: 0 2px !important;
 }
 
 menupopup:is(:not([type="arrow"]), [placespopup]) menugroup {
@@ -165,16 +154,21 @@ menupopup:is(:not([type="arrow"]), [placespopup]) menuseparator:last-child {
   display: none;
 }
 
-:is(.menu-accel, .menu-iconic-accel)[value] {
-  margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
-  padding-block: 0 !important;
+.menu-accel {
+  display: revert !important;
+  margin-inline: 0.74em 0.35em !important;
+
+  &[value] {
+    margin-inline: 1.55em calc(var(--menu-right-margin) + 4px) !important;
+    padding-block: 0 !important;
+  }
 }
 
-menuitem:not([disabled="true"]) :is(.menu-accel, .menu-iconic-accel) {
+menuitem:not([disabled="true"]) .menu-accel {
   color: var(--panel-shortcut-color);
 }
 
-menuitem[disabled="true"] :is(.menu-accel, .menu-iconic-accel) {
+menuitem[disabled="true"] .menu-accel {
   opacity: 0.6;
 }
 
@@ -216,11 +210,11 @@ menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"])::be
   display: none;
 }
 
-menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"]) :is(.menu-iconic-left, .menu-iconic-icon) {
+menupopup menuitem[class^="unified-nav"][type="radio"]:not([checked="true"]) .menu-icon {
   display: flex !important;
 }
 
-menupopup menuitem[class^="unified-nav"] .menu-iconic-accel:not([value]):empty {
+menupopup menuitem[class^="unified-nav"] .menu-accel:not([value]):empty {
   margin-inline: 4px !important;
 }
 
@@ -271,12 +265,12 @@ menupopup menuitem[type="radio"][checked="true"]::before,
   background-color: var(--checkbox-checked-bgcolor);
 }
 
-menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-icon {
   display: none;
 }
 
-#ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-iconic-text,
-menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
+#ContentSelectDropdown > menupopup > :where(menucaption, menuitem) > .menu-text,
+menupopup.in-menulist > :where(menucaption, menuitem) > .menu-text {
   padding-block: unset !important;
 }
 
@@ -325,7 +319,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([original
   fill: currentColor !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :where(menu, menuitem, menucaption) > :is(label, .menu-iconic-text, .menu-text) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) :where(menu, menuitem, menucaption) > .menu-text {
   padding-inline: 0 !important;
 }
 
@@ -337,7 +331,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem:is([original
   color: var(--panel-description-color) !important;
 }
 
-:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption > :is(label, .menu-iconic-text, .menu-text) {
+:is(#ContentSelectDropdown, menupopup.in-menulist, .contentSelectDropdown-ingroup) menucaption > .menu-text {
   padding: 4px 5px !important;
   border-bottom: 1px solid var(--menu-separator-color) !important;
   font-weight: var(--uc-font-weight-bold, 600) !important;
@@ -480,35 +474,8 @@ menuitem[default="true"] {
   }
 }
 
-:is(#context-navigation, #tab-context-navigation) .menuitem-iconic {
-  flex-grow: 1 !important;
-  width: unset !important;
-  min-width: 36px;
-  height: 38px;
-  padding: 0 !important;
-}
-
-:is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) {
-  background: none !important;
-}
-
-:is(#context-navigation, #tab-context-navigation) .menu-iconic-left {
-  height: 38px;
-  padding: 0 !important;
-  flex: 1;
-  border-radius: var(--arrowpanel-menuitem-border-radius);
-}
-
-:is(#context-navigation, #tab-context-navigation) .menuitem-iconic[_moz-menuactive="true"]:not([disabled="true"]) .menu-iconic-left {
-  background: var(--menuitem-hover-background-color);
-}
-
-:is(#context-navigation, #tab-context-navigation) .menu-iconic-icon {
-  margin: 0 !important;
-  width: 16px !important;
-  height: 16px !important;
-  padding: 0 !important;
-  background: none !important;
+:is(#context-navigation, #tab-context-navigation) .menu-accel {
+  display: none !important;
 }
 
 #context-sep-navigation,

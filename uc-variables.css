@@ -38,6 +38,7 @@ menupopup {
   --toolbar-color: var(--uc-toolbar-color) !important;
   --toolbarbutton-icon-fill: var(--ui-text-100) !important;
   --toolbarbutton-icon-fill-attention: var(--attention-color) !important;
+  --tab-selected-textcolor: var(--lwt-text-color) !important;
   --tab-attention-icon-color: var(--lwt-tab-attention-icon-color) !important;
   --lwt-background-alignment: right top !important;
   --lwt-background-tiling: no-repeat !important;
@@ -94,7 +95,11 @@ menupopup {
   --urlbarView-result-button-hover-background-color: var(--arrowpanel-dimmed) !important;
   --urlbarView-result-button-selected-color: var(--toolbar-field-focus-color) !important;
   --urlbarView-result-button-selected-background-color: var(--arrowpanel-faint) !important;
+  --urlbarView-hover-background: var(--arrowpanel-dimmed) !important;
   --urlbarView-highlight-background: var(--arrowpanel-dimmed-further) !important;
+  --urlbarView-background: var(--arrowpanel-background) !important;
+  --urlbarView-color: var(--lwt-text-color) !important;
+  --urlbarView-separator-color: var(--panel-separator-color) !important;
   --tab-min-height: var(--uc-tab-min-height) !important;
   --tab-block-margin: 2px !important;
   --tab-overflow-clip-margin: 1px !important;
@@ -102,10 +107,6 @@ menupopup {
   --inline-tab-padding: 10px !important;
   --tab-shadow-max-size: 0px !important;
   --tabs-navbar-shadow-size: 0px !important;
-  --autocomplete-popup-background: var(--arrowpanel-background) !important;
-  --autocomplete-popup-color: var(--lwt-text-color) !important;
-  --autocomplete-popup-separator-color: var(--panel-separator-color) !important;
-  --autocomplete-popup-highlight-background: var(--arrowpanel-dimmed-further) !important;
   --focus-outline-color: var(--global-focus-outline-color) !important;
   --focus-outline-width: 2px;
   --focus-outline-offset: 2px;
@@ -168,6 +169,7 @@ menupopup {
   --panel-banner-item-active-bgcolor: hsla(109.9, 90.9%, 47.3%, 0.2);
   --panel-banner-item-info-icon-bgcolor: var(--arrowpanel-color) !important;
 
+  --menuitem-margin: 0 var(--menupopup-inner-padding-magnitude) !important;
   --arrowpanel-menuitem-margin-inline: var(--uc-arrowpanel-menuitem-margin-inline, 4px) !important;
   --arrowpanel-menuitem-margin-block: var(--uc-arrowpanel-menuitem-margin-block, 0px) !important;
   --arrowpanel-menuitem-margin: var(--arrowpanel-menuitem-margin-block) var(--arrowpanel-menuitem-margin-inline) !important;

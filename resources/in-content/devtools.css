@@ -67,6 +67,10 @@ and a few elements like checkboxes */
     margin-block: 3px 2px;
   }
 
+  .ruleview-enableproperty {
+    background-color: transparent !important;
+  }
+
   .devtools-checkbox-label:not([hidden]) {
     display: flex;
     align-items: center;
@@ -155,7 +159,7 @@ and a few elements like checkboxes */
     background-color: initial !important;
   }
 
-  :is(menuitem, menu) .menu-iconic-left {
+  :is(menuitem, menu) .menu-icon {
     padding: 0 !important;
     appearance: none !important;
     margin-inline-end: 0 !important;
@@ -269,7 +273,7 @@ and a few elements like checkboxes */
     background-color: var(--checkbox-checked-bgcolor);
   }
 
-  menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+  menupopup menuitem:is([type="checkbox"], [type="radio"]) .menu-icon {
     display: none;
   }
 
@@ -392,7 +396,7 @@ and a few elements like checkboxes */
     padding: 0 !important;
   }
 
-  menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-iconic-left {
+  menupopup[menu-api] menuitem:is([type="checkbox"], [type="radio"]) .menu-icon {
     display: none !important;
   }
 
@@ -414,22 +418,22 @@ and a few elements like checkboxes */
   }
 
   /* highlight stylesheets owned by the user so they're easier to find */
-  #style-editor-chrome-window
-    .stylesheet-name
-    label:is([value^="uc-"], [value^="userChrome"], [value^="userContent"], [value="custom-chrome.css"], [value="custom-content.css"], [tooltiptext^="chrome://userchrome/"], [tooltiptext^="file://"]),
-  .ruleview-rule-source-label:is(
-    [title^="file://"][title*="/chrome/"]:is(
-        [title*="uc-"],
-        [title*="userChrome"],
-        [title*="userContent"],
-        [title*="custom-chrome.css"],
-        [title*="custom-content.css"],
-        [title*="chrome/resources/"]
-      ),
-      [title^="chrome://userchrome/"]
-    ) {
-    text-decoration: underline !important;
-    color: var(--attention-color) !important;
+  #style-editor-chrome-window .stylesheet-name label {
+    &[tooltiptext^="file://"],
+    &[tooltiptext^="chrome://userchrome/"],
+    &[tooltiptext^="chrome://userstyles/"] {
+      text-decoration: underline !important;
+      color: var(--attention-color) !important;
+    }
+  }
+
+  .ruleview-rule-source-label {
+    &[href^="file://"],
+    &[href^="chrome://userchrome/"],
+    &[href^="chrome://userstyles/"] {
+      text-decoration: underline !important;
+      color: var(--pink-action) !important;
+    }
   }
 
   /* make the highlighting on unsaved stylesheets more obvious */

@@ -50,6 +50,13 @@ which requires Stylus. don't use this stylesheet if you don't have that theme, i
     font-size: 14px !important;
   }
 
+  /* a more recent instance of github's theme */
+  .blob-code-inner, .blob-num, .cm-s-github-light .CodeMirror-lines, .CodeMirror pre > span, .CodeMirror, .CodeMirror-dialog input, .CodeMirror-hints, .CodeMirror-linenumber, .CodeMirror-lines, .commit .sha, .commit .sha-block, .commit-desc pre, .commit-ref, .commit-tease-sha, .export-phrase pre, .file-info, .FormControl-input.FormControl-monospace, .FormControl-select.FormControl-monospace, .FormControl-textarea.FormControl-monospace, .input-monospace, .markdown-body .footnotes .data-footnote-backref g-emoji, .pr-1 > code > a, .react-blob-print-hide, .react-code-text, .react-code-view-edit .cm-s-github-light .CodeMirror-lines, .text-mono *, .text-mono, .two-factor-recovery-codes, [aria-labelledby*="codemirror"] *, [class*="blob-code"] *, code > a[class="Link--secondary"], section[aria-labelledby*="file-name-id"] > div > div *, span.commit-ref > a > *, span.commit-ref > a{
+    font-family: Fira Code UC, Fira Code, SF Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+  }
+
   /* changing fonts makes the folder arrows next to line numbers misaligned with the text.
   remove the 1px block margins from the arrows to fix this. */
   .hXUKEK {

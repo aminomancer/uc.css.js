@@ -14,9 +14,17 @@ panel {
   --uc-content-button-background-active: var(--uc-arrowpanel-dimmed-further);
 }
 
-:where(panel, menupopup) * {
-  scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
-  scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+:where(panel, menupopup) {
+  /* fix weird bug with semitransparent background colors after bug 1948565.
+  without it, buttons in panels are too bright when the arrowcontainer's
+  max-width/max-height rule limits the panel's size */
+  backface-visibility: hidden !important;
+  transform-style: preserve-3d !important;
+
+  * {
+    scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
+    scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
+  }
 }
 
 /* hide the outline shown on panels when transitioning from subview to subview */

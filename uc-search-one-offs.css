@@ -66,11 +66,11 @@ it also changes the appearance of the one-offs in the searchbar. */
     }
 
     &:hover:not([selected]) > :is(stack, .button-box) {
-      background-color: var(--autocomplete-popup-hover-background) !important;
+      background-color: var(--urlbarView-hover-background) !important;
     }
 
     &[selected] > :is(stack, .button-box) {
-      background-color: var(--autocomplete-popup-highlight-background) !important;
+      background-color: var(--urlbarView-highlight-background) !important;
     }
   }
 

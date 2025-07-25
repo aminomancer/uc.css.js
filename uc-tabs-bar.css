@@ -9,6 +9,10 @@ also controls the all tabs panel since the all tabs button is within the tab
 bar. since the window controls and main menu bar are normally part of the
 titlebar, this sheet controls their appearance as well. */
 
+.browser-toolbox-background {
+  background-color: var(--lwt-accent-color) !important;
+}
+
 #toolbar-menubar[inactive="true"] ~ #TabsToolbar,
 #toolbar-menubar:not([inactive="true"]) {
   padding-inline-end: 6px !important;
@@ -40,8 +44,12 @@ titlebar, this sheet controls their appearance as well. */
     width: calc(var(--titlebar-spacer-width, 32px) / 2) !important;
   }
 
-  + #TabsToolbar > .titlebar-buttonbox-container {
-    visibility: collapse !important;
+  + #TabsToolbar {
+    > .titlebar-buttonbox-container {
+      display: none !important;
+    }
+
+    margin-inline-end: 472.817px !important;
   }
 }
 
@@ -62,6 +70,9 @@ titlebar, this sheet controls their appearance as well. */
 /* menubar next to tabs (merge tabs bar with titlebar menubar and flow them horizontally) */
 #toolbar-menubar {
   order: 2;
+  position: absolute;
+  right: 0;
+  height: var(--tabstrip-min-height) !important;
 
   &[autohide="true"][inactive="true"]:not([customizing="true"]) {
     max-width: 0 !important;
@@ -94,7 +105,8 @@ titlebar, this sheet controls their appearance as well. */
     > menu {
       appearance: none !important;
       background-color: transparent !important;
-      padding-inline: 2px;
+      padding-inline: 2px !important;
+      margin-inline: 0 !important;
 
       > label {
         margin: 0 !important;
@@ -108,6 +120,10 @@ titlebar, this sheet controls their appearance as well. */
 
       &[open] > label {
         background-color: var(--toolbarbutton-active-background) !important;
+      }
+      
+      > .menu-accel {
+        display: none !important;
       }
     }
   }
@@ -224,6 +240,11 @@ overflowing tabs don't draw shadows on the special new tab button */
   -moz-context-properties: fill, stroke !important;
   stroke: none !important;
   fill: none !important;
+  content: none !important;
+  
+  > .toolbarbutton-icon {
+    display: revert !important;
+  }
 }
 
 :root:not([sizemode="maximized"], [inFullscreen]) .titlebar-restore,

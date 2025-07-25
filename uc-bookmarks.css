@@ -648,11 +648,11 @@ toolbarbutton menupopup[placespopup][emptyplacesresult] > menuitem.bookmark-item
   padding-inline: calc(var(--context-iconic-margin-start) + 0.74em) !important;
 }
 
-toolbarbutton menupopup[placespopup] > :is(menu, menuitem) > .menu-accel-container > :is(.menu-accel, .menu-iconic-accel):not([value]) {
+toolbarbutton menupopup[placespopup] > :is(menu, menuitem) > .menu-accel:not([value]) {
   margin-inline: 0.74em 1.35em !important;
 }
 
-toolbarbutton menupopup[placespopup][emptyplacesresult] > menuitem.bookmark-item > .menu-accel-container > :is(.menu-accel, .menu-iconic-accel) {
+toolbarbutton menupopup[placespopup][emptyplacesresult] > menuitem.bookmark-item > .menu-accel {
 	margin: 0 !important;
 }
 

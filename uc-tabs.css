@@ -35,7 +35,7 @@
   background: var(--uc-tab-multi-hover) !important;
 }
 
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus {
   &:not([selected]) > .tab-stack > .tab-background {
     background: var(--uc-tab-hover) !important;
   }
@@ -67,7 +67,7 @@
 
 .tabbrowser-tab:not([selected], [multiselected]):is(:hover, [open]) .tab-background,
 .tabbrowser-tab[multiselected] .tab-background,
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus:not([selected], [multiselected]) .tab-background {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus:not([selected], [multiselected]) .tab-background {
   box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1), 0 0 15px 0 hsla(0, 0%, 0%, 0.25) !important;
 }
 
@@ -113,6 +113,7 @@
 .tab-label-container {
   height: revert !important;
   pointer-events: none !important;
+  opacity: revert !important;
 }
 
 .tab-label {
@@ -235,19 +236,19 @@ restoreTabSoundButton.uc.js since sound icon no longer exists in vanilla firefox
 }
 
 .tabbrowser-tab:is(:hover, [open]) :is(.tab-icon-sound, .tab-close-button),
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-sound, .tab-close-button) {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-sound, .tab-close-button) {
   opacity: 1 !important;
 }
 
 .tabbrowser-tab:is(:hover, [open]) :is(.tab-icon-sound, .tab-close-button):hover:active,
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-sound, .tab-close-button):hover:active {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-sound, .tab-close-button):hover:active {
   background-color: var(--arrowpanel-dimmed-further) !important;
 }
 
 /* for the picture in picture button to mute/unmute tabs with proton, you need
 to follow the restore tab sound button instructions on my repo's readme */
-#tabbrowser-tabs:not([tablist-has-focus]) .tabbrowser-tab:not(:hover, [open]) .tab-icon-sound[pictureinpicture],
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab:not(.tablist-keyboard-focus) .tab-icon-sound[pictureinpicture] {
+#tabbrowser-tabs:not(:focus-within) .tabbrowser-tab:not(:hover, [open]) .tab-icon-sound[pictureinpicture],
+#tabbrowser-tabs:focus-within .tabbrowser-tab:not(.tablist-keyboard-focus) .tab-icon-sound[pictureinpicture] {
   background-image: url(chrome://userchrome/content/tab-picture-in-picture.svg) !important;
   background-size: 12px !important;
   background-position: center !important;
@@ -260,7 +261,7 @@ to follow the restore tab sound button instructions on my repo's readme */
 }
 
 .tabbrowser-tab:is(:hover, [open]) .tab-icon-sound[pictureinpicture][soundplaying],
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound[pictureinpicture][soundplaying],
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound[pictureinpicture][soundplaying],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture][muted],
 .tabbrowser-tab .tab-icon-sound[pictureinpicture]:hover {
   background-size: 12px !important;
@@ -271,12 +272,12 @@ to follow the restore tab sound button instructions on my repo's readme */
 }
 
 .tabbrowser-tab:is(:hover, [open]) .tab-icon-sound[pictureinpicture][soundplaying],
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound[pictureinpicture][soundplaying] {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound[pictureinpicture][soundplaying] {
   background-image: url(chrome://userchrome/content/audioUnmutedButton.svg) !important;
 }
 
 .tabbrowser-tab:is(:hover, [open]) .tab-icon-sound,
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus .tab-icon-sound {
   &[pictureinpicture][muted],
   &[pictureinpicture][soundplaying][muted] {
     background-image: url(chrome://userchrome/content/audioMutedButton.svg) !important;
@@ -303,8 +304,8 @@ muted, but only shows on the selected tab if 1) the tab is muted, or 2) the tabs
 area is hovered. so in other words it won't show if audio is playing until you
 hover the general area of the tabs, but will show if audio is muted. */
 
-/* #tabbrowser-tabs:not(:hover, [tablist-has-focus]) .tabbrowser-tab[selected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]), */
-#tabbrowser-tabs:not(:hover, [tablist-has-focus]) .tabbrowser-tab:not([open]) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
+/* #tabbrowser-tabs:not(:hover, :focus-within) .tabbrowser-tab[selected] .tab-content > .tab-icon-sound:not([pictureinpicture], [muted]), */
+#tabbrowser-tabs:not(:hover, :focus-within) .tabbrowser-tab:not([open]) .tab-content > .tab-icon-sound:not([soundplaying], [muted], [activemedia-blocked], [pictureinpicture]) {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateX(16px) scale(0.5) !important;
@@ -355,8 +356,8 @@ hover the general area of the tabs, but will show if audio is muted. */
 }
 
 /* tab buttons are animated with opacity and transformation */
-#tabbrowser-tabs:not([tablist-has-focus]) .tabbrowser-tab:not(:hover, [tabdrop-samewindow], [open]) .tab-close-button,
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab:not(.tablist-keyboard-focus) .tab-close-button {
+#tabbrowser-tabs:not(:focus-within) .tabbrowser-tab:not(:hover, [tabdrop-samewindow], [open]) .tab-close-button,
+#tabbrowser-tabs:focus-within .tabbrowser-tab:not(.tablist-keyboard-focus) .tab-close-button {
   transform: translateX(-15px) scale(0.5) !important;
 }
 
@@ -376,7 +377,7 @@ hover the general area of the tabs, but will show if audio is muted. */
 }
 
 .tabbrowser-tab:is(:hover, [busy], [open]) :is(.tab-icon-image, .tab-sharing-icon-overlay),
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-image, .tab-sharing-icon-overlay) {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus :is(.tab-icon-image, .tab-sharing-icon-overlay) {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateX(25px) scale(0.5) !important;
@@ -394,7 +395,7 @@ hover the general area of the tabs, but will show if audio is muted. */
 }
 
 .tabbrowser-tab:is(:hover, [tabdrop-samewindow], [open]) .tab-throbber,
-#tabbrowser-tabs[tablist-has-focus] .tabbrowser-tab.tablist-keyboard-focus .tab-throbber {
+#tabbrowser-tabs:focus-within .tabbrowser-tab.tablist-keyboard-focus .tab-throbber {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translateX(25px) scale(0.5) !important;

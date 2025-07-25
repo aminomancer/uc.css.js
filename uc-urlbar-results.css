@@ -40,8 +40,17 @@ by underlining them (requires urlbarMods.uc.js) */
   fill-opacity: 1;
 }
 
+#urlbar {
+  /* fix weird bug with semitransparent background colors after bug 1948565.
+  without it, buttons in panels are too bright when the arrowcontainer's
+  max-width/max-height rule limits the panel's size */
+  backface-visibility: hidden !important;
+}
+
 .urlbarView {
-  background: transparent !important;
+  /* temporarily give it a background to fix a bug from bug 1948565 */
+/*   background: var(--urlbar-results-bgcolor) !important;
+  background-clip: content-box !important; */
   border: none !important;
   font-size: 1.04em !important;
 }
@@ -821,7 +830,6 @@ by underlining them (requires urlbarMods.uc.js) */
   overflow: visible !important;
   top: calc((var(--urlbar-container-height) - var(--urlbar-height)) / 2) !important;
   box-shadow: none !important;
-  background: none !important;
   border-bottom-left-radius: 4px !important;
   border-bottom-right-radius: 4px !important;
 }

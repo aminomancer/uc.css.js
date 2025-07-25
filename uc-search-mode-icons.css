@@ -79,7 +79,8 @@ a rule for it. */
   }
 
   /* google images */
-  &[engine="Google Images"] {
+  &[engine="Google Images"],
+  &[engine="Kagi Images"] {
     --search-engine-icon: url(chrome://userchrome/content/notifications/canvas.svg) !important;
   }
 

@@ -156,9 +156,10 @@ menuitem#menu_openHelp > .menu-text,
 menuitem#feedbackPage > .menu-text,
 menuitem#helpSafeMode > .menu-text,
 menuitem#troubleShooting > .menu-text,
-menuitem#help_reportSiteIssue > .menu-text,
+menuitem#help_reportBrokenSite > .menu-text,
 menuitem#menu_HelpPopup_reportPhishingtoolmenu > .menu-text,
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu > .menu-text,
+menuitem#helpSwitchDevice > .menu-text,
 menuitem#aboutName > .menu-text,
 menuitem#helpPolicySupport > .menu-text,
 :is(#new-tab-button-popup, .new-tab-popup) menuitem[command="Browser:OpenAboutContainers"] > .menu-text,
@@ -300,6 +301,7 @@ menuitem.viewCustomizeToolbar > .menu-text,
 #addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic) .menu-text,
 menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 menupopup:not(#contentAreaContextMenu) > #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group:not(.menuitem-iconic, .menu-iconic) > .menu-text,
+menupopup:not(#contentAreaContextMenu) > #_7962ff4a-5985-4cf2-9777-4bb642ad05b8_-menuitem-_svg-gobbler:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 #_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic) > .menu-text,
 menuitem.customize-context-removeFromToolbar > .menu-text,
@@ -397,9 +399,10 @@ menuitem#menu_openHelp::before,
 menuitem#feedbackPage::before,
 menuitem#helpSafeMode::before,
 menuitem#troubleShooting::before,
-menuitem#help_reportSiteIssue::before,
+menuitem#help_reportBrokenSite::before,
 menuitem#menu_HelpPopup_reportPhishingtoolmenu::before,
 menuitem#menu_HelpPopup_reportPhishingErrortoolmenu::before,
+menuitem#helpSwitchDevice::before,
 menuitem#aboutName::before,
 menuitem#helpPolicySupport::before,
 :is(#new-tab-button-popup, .new-tab-popup) menuitem[command="Browser:OpenAboutContainers"]::before,
@@ -629,6 +632,7 @@ menuitem.viewCustomizeToolbar::before,
 #addon_darkreader_org-menuitem-_switchEngine:not(.menuitem-iconic)::before,
 menupopup:not(#contentAreaContextMenu) > #addon_darkreader_org-menuitem-_DarkReader-top:not(.menuitem-iconic, .menu-iconic)::before,
 menupopup:not(#contentAreaContextMenu) > #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group:not(.menuitem-iconic, .menu-iconic)::before,
+menupopup:not(#contentAreaContextMenu) > #_7962ff4a-5985-4cf2-9777-4bb642ad05b8_-menuitem-_svg-gobbler:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_hide-container:not(.menuitem-iconic, .menu-iconic)::before,
 #_testpilot-containers-menuitem-_move-to-new-window-container:not(.menuitem-iconic, .menu-iconic)::before,
 menuitem.customize-context-removeFromToolbar::before,
@@ -683,13 +687,19 @@ menuitem.unified-extensions-context-menu-Options::before,
   height: 16px;
   min-width: 16px;
   min-height: 16px;
-  padding-inline: 0;
+  padding-inline: 0 !important;
   margin-inline: var(--context-iconic-margin);
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity, stroke;
   background-position: center;
   background-size: 16px;
   background-repeat: no-repeat;
+
+  /* revert the needsgutter styling */
+  display: revert !important;
+  vertical-align: revert !important;
+  line-height: revert !important;
+  visibility: visible !important;
 }
 
 #context_moveToStart::before,
@@ -929,7 +939,7 @@ menuitem#troubleShooting::before {
   background-image: url(chrome://userchrome/content/material/system-report.svg);
 }
 
-menuitem#help_reportSiteIssue::before {
+menuitem#help_reportBrokenSite::before {
   background-image: url(chrome://userchrome/content/material/bug.svg);
 }
 
@@ -959,7 +969,8 @@ menuitem#helpPolicySupport::before {
   background-image: url(chrome://userchrome/content/document.svg);
 }
 
-#viewFullZoomMenu::before {
+#viewFullZoomMenu::before,
+#helpSwitchDevice::before {
   background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
@@ -984,7 +995,7 @@ menuitem#helpPolicySupport::before {
 }
 
 /* view > sidebar menu */
-menupopup#viewSidebarMenu menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic)) .menu-iconic-left {
+menupopup#viewSidebarMenu menuitem:is([type="checkbox"], [type="radio"]):not([checked="true"], .webextension-menuitem:not(.menuitem-iconic)) .menu-icon {
   display: revert;
   fill: currentColor;
   -moz-context-properties: fill, fill-opacity;
@@ -1551,7 +1562,7 @@ menuitem#enableDeveloperTools::before {
   background-image: url(chrome://userchrome/content/fxa/add-device.svg);
 }
 
-:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) .menu-iconic-left {
+:is(menu, menuitem)[id^="multithreaded-download-manager"]:is([label="Open in new tab"], [label="Open in new window"], [label="Open in sidebar"]) .menu-icon {
   display: none;
 }
 

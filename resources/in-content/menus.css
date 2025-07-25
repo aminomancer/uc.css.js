@@ -15,6 +15,7 @@ menupopup.in-menulist {
   --menu-disabled-color: var(--uc-menu-disabled-color) !important;
   --menu-border-color: var(--uc-menu-border-color) !important;
   --menu-icon-opacity: 1 !important;
+  --menuitem-margin: 0 var(--menupopup-inner-padding-magnitude) !important;
   user-select: none !important;
   -moz-user-select: none !important;
   -moz-window-shadow: none !important;
@@ -41,6 +42,10 @@ menupopup.in-menulist > :where(menucaption, menuitem) {
 
 .actionsMenu > menupopup > menuitem {
   padding-inline-start: 0 !important;
+
+  .menu-icon {
+    margin-inline: var(--context-iconic-margin) !important;
+  }
 }
 
 #ContentSelectDropdown > menupopup .menu-text,

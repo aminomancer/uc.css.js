@@ -223,6 +223,13 @@ tabmodalprompt checkbox {
 }
 
 /* in-content autocomplete popup */
+panel[type="autocomplete-richlistbox"] {
+  --panel-background: var(--arrowpanel-background) !important;
+  --panel-color: var(--arrowpanel-color) !important;
+  --panel-border-color: var(--arrowpanel-border-color) !important;
+  --panel-border-radius: var(--arrowpanel-border-radius) !important;
+}
+
 panel[type="autocomplete-richlistbox"] > richlistbox {
   background: none !important;
   color: inherit !important;
@@ -1251,6 +1258,8 @@ rtl languages. adjust the border radius accordingly */
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
     --mr-welcome-background-color: var(--in-content-page-background) !important;
+
+    transform-style: preserve-3d;
   }
 
   .onboardingContainer .screen.light-text {
