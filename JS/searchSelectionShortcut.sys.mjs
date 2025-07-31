@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Selection Keyboard Shortcut
-// @version        1.8.1
+// @version        1.8.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -378,11 +378,12 @@ export class SearchSelectionShortcutParent extends JSWindowActorParent {
           win.gBrowser.selectedBrowser.getAttribute("userContextId"),
       });
 
+    let inBackground = Services.prefs.getBoolPref(
+      "browser.search.context.loadInBackground",
+      true
+    );
     let options = {
-      inBackground: Services.prefs.getBoolPref(
-        "browser.search.context.loadInBackground",
-        true
-      ),
+      inBackground,
       triggeringPrincipal: principal,
       relatedToCurrent: true,
       allowThirdPartyFixup: true,
@@ -461,16 +462,16 @@ export class SearchSelectionShortcutParent extends JSWindowActorParent {
       locationURL,
       locationHost
     );
-    lazy.SearchUIUtils._loadSearch(
-      win,
-      text,
+    lazy.SearchUIUtils._loadSearch({
+      window: win,
+      searchText: text,
       where,
-      lazy.PrivateBrowsingUtils.isWindowPrivate(win),
-      principal,
-      csp,
-      options.inBackground,
-      engine
-    );
+      usePrivate: lazy.PrivateBrowsingUtils.isWindowPrivate(win),
+      triggeringPrincipal: principal,
+      policyContainer: csp,
+      inBackground,
+      engine,
+    });
   }
 
   async receiveMessage(msg) {

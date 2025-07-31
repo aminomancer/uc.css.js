@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.1.0
+// @version        1.1.1
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -326,7 +326,7 @@
       }
     }
 
-    search(searchTerms, usePrivate, principal, csp, event) {
+    search(searchText, usePrivate, principal, csp, event) {
       event = lazy.BrowserUtils.getRootEvent(event);
       let where = lazy.BrowserUtils.whereToOpenLink(event);
       if (where == "current") {
@@ -343,18 +343,20 @@
         inBackground = !inBackground;
       }
 
-      lazy.SearchUIUtils._loadSearch(
+      lazy.SearchUIUtils._loadSearch({
         window,
-        searchTerms,
+        searchText,
         where,
         usePrivate,
-        Services.scriptSecurityManager.createNullPrincipal(
+        triggeringPrincipal: Services.scriptSecurityManager.createNullPrincipal(
           principal.originAttributes
         ),
-        csp,
+        policyContainer: csp,
         inBackground,
-        Services.search.getEngineById(event.target.getAttribute("engine-id"))
-      );
+        engine: Services.search.getEngineById(
+          event.target.getAttribute("engine-id")
+        ),
+      });
     }
   }
 
