@@ -419,7 +419,7 @@ toolbarpaletteitem[place="toolbar"]:not([mousedown="true"]):focus-visible {
 #PersonalToolbar {
   visibility: visible !important;
   padding-inline: 2px !important;
-  min-height: var(--urlbar-height) !important;
+  height: var(--urlbar-height) !important;
   transition: min-height 200ms ease-in-out, max-height 200ms ease-in-out, opacity 200ms ease-in-out !important;
   overflow-y: visible !important;
   outline: none !important;
