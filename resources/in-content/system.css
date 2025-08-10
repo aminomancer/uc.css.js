@@ -69,10 +69,13 @@
   info-item,
   info-group,
   certificate-section {
+    --background-color-canvas: var(--uc-content-page-background) !important;
     --in-content-page-background: var(--uc-content-page-background) !important;
     --in-content-page-color: var(--uc-content-page-color) !important;
     --in-content-text-color: var(--in-content-page-color) !important;
+    --text-color: var(--in-content-page-color) !important;
     --in-content-accent-color: var(--purple-35) !important;
+    --border-color: var(--in-content-border-color) !important;
     --in-content-border-color: var(--uc-content-border-color) !important;
     --in-content-border-hover: var(--uc-content-border-hover) !important;
     --in-content-border-active: var(--uc-content-border-active) !important;
@@ -84,6 +87,8 @@
     --background-color-box: var(--in-content-box-background) !important;
     --in-content-table-background: var(--in-content-box-background) !important;
     --in-content-table-header-background: var(--purple-40-a50) !important;
+    --in-content-table-header-color: var(--in-content-primary-button-color) !important;
+    --table-row-background-color-alternate: var(--in-content-box-background-odd) !important;
     --in-content-link-color: var(--purple-30) !important;
     --in-content-link-color-hover: var(--purple-25) !important;
     --in-content-link-color-active: var(--purple-20) !important;
@@ -96,21 +101,28 @@
     --link-visited-color: var(--pink-40) !important;
     --link-visited-color-hover: var(--pink-35) !important;
     --link-visited-color-active: var(--pink-30) !important;
-    --button-background: var(--uc-content-button-background) !important;
-    --button-background-hover: var(--uc-content-button-background-hover) !important;
-    --button-background-active: var(--uc-content-button-background-active) !important;
-    --button-background-solid: var(--uc-content-button-background-solid);
+    --button-background-color: var(--uc-content-button-background) !important;
+    --button-background-color-hover: var(--uc-content-button-background-hover) !important;
+    --button-background-color-active: var(--uc-content-button-background-active) !important;
+    --button-background-color-solid: var(--uc-content-button-background-solid) !important;
     --in-content-button-background: var(--uc-content-button-background) !important;
     --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
     --in-content-button-background-active: var(--uc-content-button-background-active) !important;
     --in-content-button-background-solid: var(--uc-content-button-background-solid);
     --in-content-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
     --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
+    --button-text-color-hover: var(--light-on-dark-button-text-color) !important;
+    --button-text-color-active: var(--in-content-button-text-color-hover) !important;
     --in-content-primary-button-background: var(--purple-40) !important;
     --in-content-primary-button-background-hover: var(--purple-35) !important;
     --in-content-primary-button-background-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-primary-button-text-color-hover: var(--light-on-dark-button-text-color) !important;
+    --button-background-color-primary: var(--purple-40) !important;
+    --button-background-color-primary-hover: var(--purple-35) !important;
+    --button-background-color-primary-active: var(--purple-30) !important;
+    --button-text-color-primary: var(--light-on-dark-button-text-color) !important;
+    --button-text-color-primary-hover: var(--light-on-dark-button-text-color) !important;
     --color-accent-primary: var(--purple-40) !important;
     --color-accent-primary-hover: var(--purple-35) !important;
     --color-accent-primary-active: var(--purple-30) !important;
@@ -162,6 +174,22 @@
     --newtab-search-text-color: var(--ui-text-70) !important;
     --newtab-search-first-shadow: rgba(21, 20, 26, 0.5);
     --newtab-search-second-shadow: rgba(21, 20, 26, 0.75);
+  }
+
+  moz-input-search {
+    --input-text-border-color: var(--in-content-box-border-color) !important;
+    --input-text-border-color-disabled: var(--border-color-interactive-disabled);
+    --input-text-border-radius: 4px !important;
+    --input-text-background-color: var(--background-color-box) !important;
+    --input-text-color: var(--in-content-page-color) !important;
+  }
+
+  .highlighting-group {
+    --section-highlight-background-color: color-mix(in srgb, var(--color-accent-primary) 8%, transparent) !important;
+  }
+
+  .privacy-detailedoption:not(.selected) {
+    background-color: var(--in-content-box-background) !important;
   }
 
   html:not([role="dialog"]) richlistitem[selected] * {
@@ -224,6 +252,19 @@
 
   radio[focused="true"] > .radio-label-box {
     outline: none !important;
+  }
+
+  #categories > .category[selected],
+  #categories > .category.selected {
+    &:hover {
+      background-color: color-mix(in srgb, currentColor 8%, transparent) !important;
+      color: var(--color-accent-primary-hover) !important;
+
+      &:active {
+        background-color: color-mix(in srgb, currentColor 14%, transparent) !important;
+        color: var(--color-accent-primary-active) !important;
+      }
+    }
   }
 
   #category-experimental > .category-icon {
@@ -1126,6 +1167,7 @@
 
 /* <link rel="stylesheet" href="chrome://browser/content/screenshots/overlay/overlay.css"> */
 link[rel="stylesheet"][href="chrome://browser/content/screenshots/overlay/overlay.css"] + #screenshots-component {
+  --background-color-canvas: var(--uc-content-page-background) !important;
   --in-content-page-background: var(--uc-content-page-background) !important;
   --in-content-page-color: var(--uc-content-page-color) !important;
   --in-content-text-color: var(--in-content-page-color) !important;

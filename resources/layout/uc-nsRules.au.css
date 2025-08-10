@@ -405,6 +405,12 @@ from the style editor in the browser toolbox. */
   }
 }
 
+@-moz-document url-prefix("about:preferences") {
+  menulist[image]::part(icon) {
+    width: 16px !important;
+  }
+}
+
 /* temporarily moved from userChrome.au.css due to an issue preventing the use
 of moz-document in stylesheets with file:// urls */
 @-moz-document regexp("^((chrome|resource|file)://|about:).*$")

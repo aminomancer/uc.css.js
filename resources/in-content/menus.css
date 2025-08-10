@@ -28,12 +28,8 @@ menupopup.in-menulist > :where(menucaption, menuitem) > .menu-iconic-text {
 
 #ContentSelectDropdown > menupopup :where(menucaption, menuitem),
 menupopup.in-menulist > :where(menucaption, menuitem) {
-  padding-inline: 8px !important;
+  padding-inline: 5px !important;
   align-items: center !important;
-
-  &.menuitem-iconic {
-    padding-inline-start: 0 !important;
-  }
 }
 
 .actionsMenu {
@@ -41,7 +37,7 @@ menupopup.in-menulist > :where(menucaption, menuitem) {
 }
 
 .actionsMenu > menupopup > menuitem {
-  padding-inline-start: 0 !important;
+  padding-inline: 5px !important;
 
   .menu-icon {
     margin-inline: var(--context-iconic-margin) !important;
@@ -148,6 +144,7 @@ menupopup.in-menulist :is(menu, menuitem, menucaption) {
   border: none !important;
   min-height: var(--menuitem-height) !important;
   padding-block: 0 !important;
+  
 }
 
 #ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption)[disabled="true"],
@@ -163,9 +160,11 @@ menupopup.in-menulist .menuitem-iconic {
   fill: currentColor;
 }
 
-#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-iconic-icon,
-menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-iconic-icon {
+#ContentSelectDropdown > menupopup :is(menu, menuitem, menucaption) .menu-icon,
+menupopup.in-menulist :is(menu, menuitem, menucaption) .menu-icon {
   margin-inline: var(--context-iconic-margin) !important;
+  margin-inline-start: 0 !important;
+  margin-block: 0 !important;
 }
 
 #ContentSelectDropdown > menupopup menugroup,
@@ -365,12 +364,12 @@ menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu
   margin-inline-end: unset !important;
 }
 
-menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left > .menu-iconic-icon {
+menulist[indicator="true"] > menupopup.in-menulist menuitem:not([image]) > .menu-iconic-left > .menu-icon {
   width: 16px !important;
   height: 16px !important;
 }
 
-menulist[indicator="true"] > menupopup.in-menulist menuitem[indicator="true"]:not([image]) > .menu-iconic-left > .menu-iconic-icon {
+menulist[indicator="true"] > menupopup.in-menulist menuitem[indicator="true"]:not([image]) > .menu-iconic-left > .menu-icon {
   list-style-image: url(chrome://userchrome/content/indicator-tab-attention.svg) !important;
   filter: hue-rotate(55deg);
   width: 16px !important;
@@ -410,7 +409,7 @@ menuitem[image="chrome://browser/skin/preferences/application.png"]
   background-image: url(chrome://userchrome/content/shortcut.svg);
 }
 
-menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-iconic-icon {
+menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-icon {
   display: none;
 }
 
