@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           App Menu Mods
-// @version        1.4.7
+// @version        1.4.8
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Makes some minor modifications to the app menu (the popup opened by clicking the hamburger button on the far right of the navbar). It adds a restart button to the app menu and it adds a separator under the "Manage Account" button in the profile/account panel. I'll continue adding more mods to this script as I think of them.
@@ -14,7 +14,6 @@
     constructor() {
       PanelUI._initialized || PanelUI.init(shouldSuppressPopupNotifications);
       PanelUI.mainView.addEventListener("ViewShowing", this, { once: true });
-      this.addSeparatorToAccountPanel();
       this.fixSyncSubviewButtonAlignment();
     }
     static create(aDoc, tag, props, isHTML = false) {
@@ -43,13 +42,6 @@
     async handleEvent(_e) {
       let strings = await this.generateStrings();
       this.addRestartButton(strings);
-    }
-    addSeparatorToAccountPanel() {
-      this.manageAccountSeparator =
-        this.fxaPanelView.ownerDocument.createXULElement("toolbarseparator");
-      this.fxaPanelView
-        .querySelector("#fxa-manage-account-button")
-        .after(this.manageAccountSeparator);
     }
     async addRestartButton(strings) {
       let restartButton = AppMenuMods.create(document, "toolbarbutton", {

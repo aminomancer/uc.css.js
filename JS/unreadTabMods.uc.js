@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Unread Tab Mods
-// @version        1.2.6
+// @version        1.2.7
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -72,6 +72,15 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
       if (
         gBrowser.tabContainer._handleTabSelect.name !== "uc_handleTabSelect"
       ) {
+        gBrowser.tabContainer._ensureTabIsVisible = function ensureTabIsVisible(
+          tab,
+          shouldScrollInstantly = false
+        ) {
+          let arrowScrollbox = tab.closest("arrowscrollbox");
+          if (arrowScrollbox.overflowing) {
+            arrowScrollbox.ensureElementIsVisible(tab, shouldScrollInstantly);
+          }
+        };
         eval(
           `gBrowser.tabContainer._handleTabSelect = function ${gBrowser.tabContainer._handleTabSelect
             .toSource()
@@ -80,6 +89,7 @@ If you use [duskFox][] (the theme on my repo) you will already have this CSS so 
             .replace(/^_handleTabSelect\s*/, "")
             .replace(/^function\s*/, "")
             .replace(/^(.)/, `uc_handleTabSelect $1`)
+            .replace(/#ensureTabIsVisible/, "_ensureTabIsVisible")
             .replace(
               /selectedTab\._notselectedsinceload = false;/,
               "modulateAttr(selectedTab);"
