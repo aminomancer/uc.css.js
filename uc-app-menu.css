@@ -553,7 +553,7 @@ toolbarseparator.proton-zap {
   margin-block: 0 !important;
 }
 
-#appMenu-fxa-status2 > #appMenu-fxa-label2 label:not([hidden="true"]) + label {
+#appMenu-fxa-status2 > #appMenu-fxa-label2 label:not([hidden]) + label {
   color: var(--panel-shortcut-color);
 }
 

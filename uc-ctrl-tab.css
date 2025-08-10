@@ -49,7 +49,8 @@
   fill-opacity: 0.8 !important;
   -moz-context-properties: fill, fill-opacity !important;
   border-radius: 3px !important;
-  overflow: clip !important;
+  min-width: min-content !important;
+  min-height: min-content !important;
 }
 
 #ctrlTab-showAll-container {
@@ -66,7 +67,6 @@
 }
 
 .ctrlTab-preview-inner {
-  flex: 0 !important;
   color: var(--ui-text-80) !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -89,10 +89,6 @@
 
 .ctrlTab-preview:focus > .ctrlTab-preview-inner > .ctrlTab-canvas {
   box-shadow: 0 0 4px hsla(0, 0%, 0%, 0.25), 0 0 6px hsla(0, 0%, 0%, 0.125), 0 0 8px hsla(0, 0%, 0%, 0.125) !important;
-}
-
-.ctrlTab-preview-inner {
-  position: relative;
 }
 
 .ctrlTab-favicon-container {

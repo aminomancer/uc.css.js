@@ -63,6 +63,7 @@ menupopup {
   --panel-shortcut-focus: var(--uc-panel-shortcut-focus) !important;
   --panel-disabled-color: var(--uc-menu-disabled-color) !important;
   --panel-separator-color: var(--desaturate-dimmed) !important;
+  --panel-separator-padding-horizontal: 4px !important;
   --toolbarbutton-checked-background: var(--uc-toolbarbutton-checked-background) !important;
   --toolbarbutton-hover-background: var(--uc-toolbarbutton-hover-background) !important;
   --toolbarbutton-active-background: var(--uc-toolbarbutton-active-background) !important;

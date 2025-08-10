@@ -838,7 +838,7 @@ by underlining them (requires urlbarMods.uc.js) */
   padding-block: 0 !important;
 }
 
-#urlbar-background {
+.urlbar-background {
   width: calc(100% + 10px) !important;
   top: var(--urlbar-container-height) !important;
   border: var(--searchbar-popup-border) !important;
@@ -850,13 +850,13 @@ by underlining them (requires urlbarMods.uc.js) */
 #urlbar {
   &:not([open]),
   &:not([breakout]) {
-    #urlbar-background {
+    .urlbar-background {
       display: none !important;
     }
   }
 }
 
-#urlbar[breakout][breakout-extend] #urlbar-background {
+#urlbar[breakout][breakout-extend] .urlbar-background {
   animation-name: urlbar-grow-bg !important;
   animation-timing-function: var(--animation-easing-function) !important;
   animation-duration: 0.1s !important;
@@ -903,7 +903,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
 /* stylelint-disable-next-line media-query-no-invalid */
 @media -moz-pref("userChrome.urlbar-results.disable_animation") {
   #urlbar[breakout][breakout-extend] .urlbarView,
-  #urlbar[breakout][breakout-extend] #urlbar-background {
+  #urlbar[breakout][breakout-extend] .urlbar-background {
     animation: none !important;
     transform-style: flat !important;
     backface-visibility: hidden !important;
@@ -912,7 +912,7 @@ so you might wanna turn the animation off. I might even make it off by default. 
 
 @media (prefers-reduced-motion: reduce) {
   #urlbar[breakout][breakout-extend] .urlbarView,
-  #urlbar[breakout][breakout-extend] #urlbar-background {
+  #urlbar[breakout][breakout-extend] .urlbar-background {
     animation: none !important;
   }
 }

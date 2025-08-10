@@ -293,7 +293,7 @@ toolbarpaletteitem[mousedown] > #stop-reload-button .toolbarbutton-icon {
 }
 
 toolbarpaletteitem[mousedown] > #search-container > #searchbar,
-toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > #urlbar-background {
+toolbarpaletteitem[mousedown] > #urlbar-container > #urlbar > .urlbar-background {
   outline: none !important;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 1) !important;
   box-shadow: none !important;

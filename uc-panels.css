@@ -1385,15 +1385,6 @@ toolbar button slider script. but just in case) */
   margin: 3em 5em !important;
 }
 
-/* ugly small menu separators */
-#widget-overflow-mainView > toolbarseparator,
-#widget-overflow-mainView > .panel-subview-body > toolbarseparator,
-.PanelUI-subView toolbarseparator,
-.cui-widget-panelview menuseparator,
-.cui-widget-panel toolbarseparator {
-  margin-inline: 4px !important;
-}
-
 .panel-footer.panel-footer-menulike {
   margin-inline: 4px !important;
   margin-bottom: 4px !important;

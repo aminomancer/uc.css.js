@@ -396,9 +396,9 @@ but other than that these variables should be available everywhere. */
   --uc-content-box-background-odd: hsl(260, 3%, 19%);
   --uc-content-box-background-dim: hsl(240, 2%, 12%);
   --uc-content-box-border-color: hsla(240, 7%, 98%, 0.1);
-  --uc-content-button-background: hsla(240, 3%, 70%, 0.1);
-  --uc-content-button-background-hover: hsla(240, 4%, 70%, 0.15);
-  --uc-content-button-background-active: hsla(240, 5%, 70%, 0.19);
+  --uc-content-button-background: hsla(240, 3%, 70%, 0.05);
+  --uc-content-button-background-hover: hsla(240, 4%, 70%, 0.1);
+  --uc-content-button-background-active: hsla(240, 5%, 70%, 0.15);
   --uc-content-button-background-solid: hsl(240, 3%, 18%);
   --uc-content-border-color: hsla(240, 7%, 98%, 0.1);
   --uc-content-border-hover: hsla(240, 7%, 98%, 0.15);
