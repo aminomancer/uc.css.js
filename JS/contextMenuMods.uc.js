@@ -116,9 +116,11 @@
               id: engine.id,
               name: engine.name,
               iconURL: await engine.getIconURL(16),
+              order: engine._metaData.order,
             });
           })
         );
+        this.engines.sort((a, b) => a.order - b.order);
         enginesLocked = false;
       };
 
