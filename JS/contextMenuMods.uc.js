@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Context Menu Mods
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Add some new items to the main content area context menu.
@@ -116,9 +116,11 @@
               id: engine.id,
               name: engine.name,
               iconURL: await engine.getIconURL(16),
+              order: engine._metaData.order,
             });
           })
         );
+        this.engines.sort((a, b) => a.order - b.order);
         enginesLocked = false;
       };
 
