@@ -1,5 +1,7 @@
 ////// ⚠️ REQUIRED PREFS
 
+// only required if you're using any of my scripts that use eval().
+user_pref("security.allow_unsafe_dangerous_privileged_evil_eval", true);
 //// disable telemetry since we're modding firefox
 user_pref("toolkit.telemetry.enabled", false);
 user_pref("browser.discovery.enabled", false);
