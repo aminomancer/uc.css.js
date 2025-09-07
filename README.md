@@ -1288,6 +1288,67 @@ This script is entirely optional — some of my scripts take advantage of it, if
 #### [Misc. Mods](/JS/miscMods.uc.js):
 
 Various tiny mods not worth making separate scripts for. Read the comments [inside the script](/JS/miscMods.uc.js) for details.
+  
+#### [Alarm Clock Audio Device Handler](/JS/alarmClockAudioDeviceHandler.sys.mjs):
+
+For use with alarm clock [scheduled tasks](https://www.technipages.com/scheduled-task-windows/) (if you want to use your computer as an alarm clock). When the alarm clock tab is closed, this script will switch the audio output device back to the original device.<details><summary>💬 **_More details..._**</summary>
+
+This doesn't do anything on its own. It's an add-on for any sort of scheduled task that sets off an alarm clock by opening a playlist in Firefox. I use that instead of a proper alarm clock. The scheduled task just needs to be programmed to run at a certain time, wake up the PC, set the sound device (so the audio plays through speakers instead of headphones), and open the URL for your playlist. This script just makes the sound device automatically switch back to my headphones once I've woken up and stopped the playlist, so I don't have to manually do it.
+
+Use a scheduled task that opens a playlist with `%24` at the end of the URL search params, like `https://www.youtube.com/watch?v=example&list=example&index=1%24`. Have your task also wake up your computer and set your audio device to speakers. Firefox will recognize the playlist tab thanks to the `%24`, and it will watch for that tab to close or leave. This way, your computer switches to your loud speakers to wake you up, but when you close the tab and start using the browser, it automatically switches back to your preferred sound device.
+
+This requires [NirCmd](https://www.nirsoft.net/utils/nircmd.html) to switch audio devices. You can install it portably or just put it in `C:\Windows\`. Set the path to nircmd.exe in `userChrome.nircmd.path` (default is `C:\Windows\nircmd.exe`). Set the desired audio device name in `userChrome.alarm.soundDevice`. The default sound device name is "Headphones". Find it in your Windows sound control panel. Set the alarm URL globs in `userChrome.alarm.urlGlobs` (default is `["*://*.youtube.com/watch?v=*&list=*%24"]`). It's a JSON array, so you can have multiple globs if you want. Make sure to include `%24` at the end of the URL search params so that the script can identify the alarm tab. This script only works on Windows because it uses NirCmd.
+
+The script will see when the special `%24` URL loads and watch the tab it loaded in. When the tab is closed, or when it navigates away from the playlist, it will switch your sound device to the device configured in `userChrome.alarm.soundDevice`.
+
+The way it determines if you've navigated away from the playlist within that tab is by processing your url glob. The `%24` disappears immediately upon loading, so we don't check that. Instead, we check if the URL matches the glob _minus_ the `%24`. So if your glob is `*://*.youtube.com/watch?v=*&list=*%24`, the script will check if the URL still matches `*://*.youtube.com/watch?v=*&list=*`. For YouTube purposes, this means leaving the playlist player will switch sound devices. You can use a totally different website if you want. Just update the globs accordingly.
+
+Regarding the task itself, I actually use two tasks to make it as reliable as possible. The first task is configured for "Windows 10", "Run whether user is logged on or not." It switches sound devices, sets the volume, and runs `nircmd monitor on`. The second task runs 30 seconds later, it's configured for "Windows 7, Windows Server 2008 R2", "Run only when user is logged on", and "Run with highest privileges." It sets the sound device and volume again, just to be safe, and launches the playlist. It does so like this:
+
+```shell
+# task action
+powershell.exe -ExecutionPolicy Bypass -File "path\to\launch-playlist.ps1"
+```
+
+```shell
+# launch-playlist.ps1
+Start-Sleep -Seconds 5
+# pick any video in the playlist, get the URL, and add %24
+Start-Process "https://www.youtube.com/watch?v=example&list=example&index=1%24"
+```
+
+Then, I have a greasemonkey script that matches the playlist URL and automatically shuffles the playlist:
+
+```js
+// ==UserScript==
+// @name         YouTube Shuffler
+// @namespace    https://github.com/aminomancer
+// @version      1.6.1
+// @description  Automatically shuffles the YouTube playlist specified in @include.
+// @author       aminomancer
+// @include      *://*.youtube.com/watch?v=*&list=*%24
+// @run-at       document-body
+// @grant        none
+// ==/UserScript==
+
+let intervalId = window.setInterval(() => {
+  if (document.querySelector("#content #playlist-action-menu")) {
+    window.clearInterval(intervalId);
+    requestAnimationFrame(() => {
+      // loop
+      document.querySelector("#content #playlist-action-menu")?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.click();
+      // shuffle
+      document.querySelector("#content #playlist-action-menu")?.children[0]?.children[0]?.children[1]?.children[0]?.children[0]?.click();
+      const video = document.querySelector("video");
+      if (!video) return;
+      // Jump close enough to the end to trigger "ended"
+      video.currentTime = Math.max(video.duration - 1, 0);
+    });
+  }
+}, 50);
+```
+
+</details>
 
 ## **Thanks to my past sponsors for supporting this project:**
 
