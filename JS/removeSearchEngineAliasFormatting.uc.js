@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Remove Search Engine Alias Formatting
-// @version        1.1.1
+// @version        1.1.2
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @description    Depending on your settings you might have noticed that typing a search engine alias (e.g. `goo` for Google) causes some special formatting to be applied to the text you input in the url bar. This is a trainwreck because the formatting is applied using the selection controller, not via CSS, meaning you can't change it in your stylesheets. It's blue by default, and certainly doesn't match my personal theme very well. This script just prevents the formatting from ever happening at all.
@@ -10,14 +10,22 @@
 // ==/UserScript==
 
 (() => {
-  function startup() {
-    function init() {
-      if (!gURLBar.valueFormatter._formatSearchAlias) return;
-      gURLBar.valueFormatter._formatSearchAlias = () => false;
-      gURLBar.removeEventListener("focus", init);
-    }
+  const lazy = XPCOMUtils.declareLazy({
+    UrlbarValueFormatter: "resource:///modules/UrlbarValueFormatter.sys.mjs",
+    valueFormatter: () => {
+      let formatter = new lazy.UrlbarValueFormatter(gURLBar);
+      formatter._formatSearchAlias = () => false;
+      return formatter;
+    },
+  });
 
-    gURLBar.addEventListener("focus", init);
+  function startup() {
+    gURLBar.formatValue = function () {
+      // The editor may not exist if the toolbar is not visible.
+      if (this.isAddressbar && this.editor) {
+        lazy.valueFormatter.update();
+      }
+    };
   }
 
   if (gBrowserInit.delayedStartupFinished) {

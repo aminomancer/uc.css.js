@@ -371,8 +371,11 @@ and a few elements like checkboxes */
     width: 4px !important;
   }
 
-  .menu-text {
-    padding-inline: var(--context-padding-inline) !important;
+  menu,
+  menuitem {
+    &:not([type="checkbox"]) > .menu-text {
+      padding-inline: var(--context-padding-inline) !important;
+    }
   }
 
   :is(.menu-accel, .menu-iconic-accel)[value] {

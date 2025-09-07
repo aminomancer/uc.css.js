@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           about:preferences Find in Page Highlight Mod
-// @version        1.2
+// @version        1.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make the searchbar result highlighting in about:preferences adapt to user's CSS variables. Allows us to change the highlight color of search results to be more consistent with the theme.
@@ -62,9 +62,10 @@ var gSearchResultsPane = {
 
     if (!this.searchInput.hidden) {
       this.searchInput.addEventListener("input", this);
-      this.searchInput.addEventListener("command", this);
       window.addEventListener("DOMContentLoaded", () => {
-        this.searchInput.focus();
+        this.searchInput.updateComplete.then(() => {
+          this.searchInput.focus();
+        });
         // Initialize other panes in an idle callback.
         window.requestIdleCallback(() => this.initializeCategories());
       });
@@ -294,11 +295,6 @@ var gSearchResultsPane = {
     // this next search.
     this.removeAllSearchIndicators(window, !query.length);
 
-    // Clear telemetry request if user types very frequently.
-    if (this.telemetryTimer) {
-      clearTimeout(this.telemetryTimer);
-    }
-
     let srHeader = document.getElementById("header-searchResults");
     let noResultsEl = document.getElementById("no-results-message");
     if (this.query) {
@@ -396,17 +392,6 @@ var gSearchResultsPane = {
         for (let anchorNode of this.listSearchTooltips) {
           this.createSearchTooltip(anchorNode, this.query);
         }
-
-        // Implant search telemetry probe after user stops typing for a while
-        if (this.query.length >= 2) {
-          this.telemetryTimer = setTimeout(() => {
-            Services.telemetry.keyedScalarAdd(
-              "preferences.search_query",
-              this.query,
-              1
-            );
-          }, 1000);
-        }
       }
     } else {
       if (endQuery) {
@@ -474,7 +459,8 @@ var gSearchResultsPane = {
 
       if (
         nodeObject.localName == "label" ||
-        nodeObject.localName == "description"
+        nodeObject.localName == "description" ||
+        nodeObject.localName.startsWith("moz-")
       ) {
         accessKeyTextNodes.push(...simpleTextNodes);
       }

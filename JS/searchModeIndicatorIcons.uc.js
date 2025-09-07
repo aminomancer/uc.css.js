@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Search Mode Indicator Icons
-// @version        1.5.4
+// @version        1.5.5
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer
 // @long-description
@@ -113,6 +113,18 @@ This doesn't change anything about the layout so you may want to tweak some thin
       3
     ),
   };
+
+  let placeholderString = `engine`;
+  if (config["Engine name character limit"] > 0) {
+    placeholderString += ` && engineName.length <= config["Engine name character limit"]`;
+  }
+  if (config["Engine name word limit"] > 0) {
+    placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
+  }
+
+  const { SearchUIUtils } = ChromeUtils.importESModule(
+    "moz-src:///browser/components/search/SearchUIUtils.sys.mjs"
+  );
   function init() {
     const defaultIcon = `chrome://global/skin/icons/search-glass.svg`;
     const searchModeIndicatorFocused = gURLBar._searchModeIndicatorTitle;
@@ -140,7 +152,7 @@ This doesn't change anything about the layout so you may want to tweak some thin
     });
     function getBuiltInEngineIcon(engine) {
       let preferredWidth = 16;
-      if (!engine._iconMapObj) {
+      if (!engine?._iconMapObj) {
         return undefined;
       }
       let availableWidths = Object.keys(engine._iconMapObj).map(k =>
@@ -213,33 +225,15 @@ This doesn't change anything about the layout so you may want to tweak some thin
             )}`
         );
       }
-      let placeholderString = `engine`;
-      if (config["Engine name character limit"] > 0) {
-        placeholderString += ` && engineName.length <= config["Engine name character limit"]`;
-      }
-      if (config["Engine name word limit"] > 0) {
-        placeholderString += ` && engineName.split(" ").length <= config["Engine name word limit"]`;
-      }
       if (gURLBar._updatePlaceholder.name) {
         eval(
           `gURLBar._updatePlaceholder = function ${gURLBar._updatePlaceholder
             .toSource()
             .replace(/^_updatePlaceholder/, "")
-            .replace(/engine\.isAppProvided/, placeholderString)}`
+            .replace(/!engine\.isConfigEngine/, `!(${placeholderString})`)}`
         );
       }
-      if (SearchUIUtils.updatePlaceholderNamePreference.name) {
-        eval(
-          `SearchUIUtils.updatePlaceholderNamePreference = function ${SearchUIUtils.updatePlaceholderNamePreference
-            .toSource()
-            .replace(/^updatePlaceholderNamePreference/, "")
-            .replace(
-              /engine\.isAppProvided/,
-              placeholderString.replace(/engineName/g, "engine.name")
-            )}`
-        );
-      }
-      gURLBar.initPlaceHolder();
+      gURLBar._updatePlaceholderFromDefaultEngine();
     }
     async function searchModeCallback(mus, _observer) {
       for (let mu of mus) {
@@ -336,6 +330,18 @@ This doesn't change anything about the layout so you may want to tweak some thin
       attributes: true,
       attributeFilter: ["actiontype", "searchmode", "actionoverride"],
     });
+  }
+
+  if (SearchUIUtils.updatePlaceholderNamePreference.name) {
+    eval(
+      `SearchUIUtils.updatePlaceholderNamePreference = function ${SearchUIUtils.updatePlaceholderNamePreference
+        .toSource()
+        .replace(/^updatePlaceholderNamePreference/, "")
+        .replace(
+          /engine\.isConfigEngine/,
+          placeholderString.replace(/engineName/g, "engine.name")
+        )}`
+    );
   }
 
   if (gBrowserInit.delayedStartupFinished) {

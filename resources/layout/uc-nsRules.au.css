@@ -402,6 +402,10 @@ from the style editor in the browser toolbox. */
         }
       }
     }
+
+    .toggle-container-with-text > & {
+      margin-inline-end: var(--context-checkbox-margin-end);
+    }
   }
 }
 

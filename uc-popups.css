@@ -10,14 +10,15 @@
 tabmodalprompt {
   background: none !important;
   --in-content-page-background: transparent !important;
-  --in-content-page-color: var(--uc-parent-page-color) !important;
+  --background-color-canvas: transparent !important;
+  --text-color: var(--uc-parent-page-color) !important;
   --in-content-box-background: var(--dialog-box-bgcolor) !important;
   --background-color-box: var(--dialog-box-bgcolor) !important;
   --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
   --in-content-box-border-color: var(--dialog-box-border-color) !important;
-  --in-content-button-background: var(--arrowpanel-dimmed) !important;
-  --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-  --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+  --button-background-color: var(--arrowpanel-dimmed) !important;
+  --button-background-color-hover: var(--arrowpanel-dimmed-further) !important;
+  --button-background-color-active: var(--arrowpanel-dimmed-even-further) !important;
   --in-content-item-selected: var(--purple-40) !important;
   --in-content-border-color: var(--dialog-box-border-color) !important;
   --in-content-border-hover: var(--dialog-box-border-hover) !important;
@@ -30,24 +31,24 @@ tabmodalprompt {
   --color-accent-primary: var(--purple-40) !important;
   --color-accent-primary-hover: var(--purple-35) !important;
   --color-accent-primary-active: var(--purple-30) !important;
-  --in-content-primary-button-background: var(--purple-40) !important;
-  --in-content-primary-button-background-hover: var(--purple-35) !important;
-  --in-content-primary-button-background-active: var(--purple-30) !important;
+  --button-background-color-primary: var(--purple-40) !important;
+  --button-background-color-primary-hover: var(--purple-35) !important;
+  --button-background-color-primary-active: var(--purple-30) !important;
   --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
   --checkbox-border-color: var(--in-content-box-border-color) !important;
   --checkbox-checked-border-color: transparent !important;
-  --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-  --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-  --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-  --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+  --checkbox-unchecked-bgcolor: var(--button-background-color) !important;
+  --checkbox-unchecked-hover-bgcolor: var(--button-background-color-hover) !important;
+  --checkbox-unchecked-active-bgcolor: var(--button-background-color-active) !important;
+  --checkbox-checked-bgcolor: var(--button-background-color-primary) !important;
   --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-  --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-  --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
+  --checkbox-checked-hover-bgcolor: var(--button-background-color-primary-hover) !important;
+  --checkbox-checked-active-bgcolor: var(--button-background-color-primary-active) !important;
   --dropdown-bgcolor: var(--arrowpanel-background) !important;
   --in-content-button-border-radius: var(--general-button-border-radius) !important;
   --in-content-button-vertical-padding: 5px !important;
-  --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-  --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+  --in-content-focus-outline-color: var(--button-background-color-primary-hover) !important;
+  --focus-outline-color: var(--button-background-color-primary-hover) !important;
   --tabmodalprompt-padding: var(--arrowpanel-padding) !important;
 }
 
@@ -180,7 +181,7 @@ tabmodalprompt #titleText {
 .tabmodalprompt-buttonContainer button {
   appearance: none !important;
   border-radius: 3px !important;
-  background-color: var(--in-content-button-background) !important;
+  background-color: var(--button-background-color) !important;
   margin: revert !important;
   color: var(--uc-parent-page-color) !important;
   padding: 2px !important;
@@ -189,17 +190,17 @@ tabmodalprompt #titleText {
 }
 
 .tabmodalprompt-buttonContainer button:is(:hover, :focus-visible) {
-  background-color: var(--in-content-button-background-hover) !important;
+  background-color: var(--button-background-color-hover) !important;
   color: var(--uc-parent-page-color) !important;
 }
 
 .tabmodalprompt-buttonContainer button:hover:active {
-  background-color: var(--in-content-button-background-active) !important;
+  background-color: var(--button-background-color-active) !important;
 }
 
 tabmodalprompt button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible),
 tabmodalprompt button:is([default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
-  background-color: var(--in-content-primary-button-background-hover) !important;
+  background-color: var(--button-background-color-primary-hover) !important;
   color: var(--in-content-primary-button-text-color-hover) !important;
 }
 
@@ -409,13 +410,13 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
     --panel-bgcolor: var(--in-content-box-bg-dark) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
-    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-unchecked-bgcolor: var(--button-background-color) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--button-background-color-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--button-background-color-active) !important;
+    --checkbox-checked-bgcolor: var(--button-background-color-primary) !important;
     --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
+    --checkbox-checked-hover-bgcolor: var(--button-background-color-primary-hover) !important;
+    --checkbox-checked-active-bgcolor: var(--button-background-color-primary-active) !important;
   }
 
   button.control-item {
@@ -513,7 +514,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   }
 
   .slider {
-    background-color: var(--in-content-button-background) !important;
+    background-color: var(--button-background-color) !important;
   }
 
   .slider::before {
@@ -521,11 +522,11 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   }
 
   .slider:hover {
-    background-color: var(--in-content-button-background-hover) !important;
+    background-color: var(--button-background-color-hover) !important;
   }
 
   .slider:hover:active {
-    background-color: var(--in-content-button-background-active) !important;
+    background-color: var(--button-background-color-active) !important;
   }
 
   input:checked + .slider {
@@ -612,6 +613,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
 
   :root {
     --in-content-page-background: var(--toolbar-bgcolor) !important;
+    --background-color-canvas: var(--toolbar-bgcolor) !important;
     --font-color: var(--uc-content-page-color) !important;
     --fill-color: var(--arrowpanel-dimmed) !important;
     --selected-fill-color: var(--in-content-link-color) !important;
@@ -764,7 +766,7 @@ panel[type="autocomplete-richlistbox"] > richlistbox > richlistitem[originaltype
   /* tab-prompt-dialogs are anchored to the top of the browser content area.
   this makes them look like they emerge from under the navbar. */
   margin-top: 0 !important;
-  border: 1px solid var(--arrowpanel-border-color);
+  outline: 1px solid var(--arrowpanel-border-color) !important;
 }
 
 :is(.tab-prompt-dialog, #window-modal-dialog) :is(.dialogBox, .dialogFrame) {
@@ -822,14 +824,15 @@ rtl languages. adjust the border radius accordingly */
   #commonDialogWindow[dialogroot] *,
   .dialog-button-box {
     --in-content-page-background: var(--ui-quaternary-bg) !important;
-    --in-content-page-color: var(--uc-parent-page-color) !important;
+    --background-color-canvas: var(--ui-quaternary-bg) !important;
+    --text-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --background-color-box: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
     --in-content-box-border-color: var(--dialog-box-border-color) !important;
-    --in-content-button-background: var(--arrowpanel-dimmed) !important;
-    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
+    --button-background-color: var(--arrowpanel-dimmed) !important;
+    --button-background-color-hover: var(--arrowpanel-dimmed-further) !important;
+    --button-background-color-active: var(--arrowpanel-dimmed-even-further) !important;
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
     --in-content-border-color: var(--dialog-box-border-color) !important;
@@ -843,26 +846,27 @@ rtl languages. adjust the border radius accordingly */
     --color-accent-primary: var(--purple-40) !important;
     --color-accent-primary-hover: var(--purple-35) !important;
     --color-accent-primary-active: var(--purple-30) !important;
-    --in-content-primary-button-background: var(--purple-40) !important;
-    --in-content-primary-button-background-hover: var(--purple-35) !important;
-    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --button-background-color-primary: var(--purple-40) !important;
+    --button-background-color-primary-hover: var(--purple-35) !important;
+    --button-background-color-primary-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
     --in-content-primary-button-text-color-hover: white !important;
-    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --in-content-focus-outline-color: var(--button-background-color-primary-hover) !important;
+    --focus-outline-color: var(--button-background-color-primary-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
-    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-unchecked-bgcolor: var(--button-background-color) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--button-background-color-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--button-background-color-active) !important;
+    --checkbox-checked-bgcolor: var(--button-background-color-primary) !important;
     --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
+    --checkbox-checked-hover-bgcolor: var(--button-background-color-primary-hover) !important;
+    --checkbox-checked-active-bgcolor: var(--button-background-color-primary-active) !important;
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
 
+    transform-style: preserve-3d;
     scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;
   }
@@ -895,52 +899,15 @@ rtl languages. adjust the border radius accordingly */
   .dialog-button-box > button {
     appearance: none !important;
     min-height: var(--menuitem-height) !important;
-    color: var(--in-content-button-text-color) !important;
-    border: 1px solid var(--in-content-button-border-color) !important;
     border-radius: var(--in-content-button-border-radius) !important;
-    background-color: var(--in-content-button-background) !important;
     font-weight: 400 !important;
     text-decoration: none !important;
     margin: 4px 8px !important;
     font-size: 1em !important;
   }
 
-  .dialog-button-box > button:not([disabled="true"]):is(:hover, :focus-visible) {
-    background-color: var(--in-content-button-background-hover) !important;
-    color: var(--in-content-button-text-color-hover) !important;
-    border-color: var(--in-content-button-border-color-hover) !important;
-  }
-
-  .dialog-button-box > button:not([disabled="true"]):focus-visible {
-    outline: var(--global-focus-outline, var(--default-focusring, auto)) !important;
-  }
-
-  .dialog-button-box > button:not([disabled="true"]):hover:active,
-  .dialog-button-box > button[open],
-  .dialog-button-box > button[open]:hover {
-    background-color: var(--in-content-button-background-active) !important;
-    color: var(--in-content-button-text-color-active) !important;
-    border-color: var(--in-content-button-border-color-active) !important;
-  }
-
   .dialog-button-box > button[disabled="true"] {
     opacity: 0.4 !important;
-  }
-
-  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary) {
-    background-color: var(--in-content-primary-button-background) !important;
-    color: var(--in-content-primary-button-text-color) !important;
-    border-color: var(--in-content-primary-button-border-color) !important;
-  }
-
-  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):is(:hover, :focus-visible) {
-    background-color: var(--in-content-primary-button-background-hover) !important;
-    color: var(--in-content-primary-button-text-color-hover) !important;
-    border-color: var(--in-content-primary-button-border-hover) !important;
-  }
-
-  .dialog-button-box > button:is([autofocus], [type="submit"], [default], .primary):not([disabled="true"]):hover:active {
-    background-color: var(--in-content-primary-button-background-active) !important;
   }
 
   dialog input:-moz-focusring,
@@ -964,8 +931,8 @@ rtl languages. adjust the border radius accordingly */
   }
 
   richlistbox[id] richlistitem[selected="true"] {
-    background-color: var(--in-content-button-background) !important;
-    color: var(--in-content-page-color) !important;
+    background-color: var(--button-background-color) !important;
+    color: var(--text-color) !important;
   }
 
   richlistbox[id] richlistitem > button {
@@ -974,17 +941,17 @@ rtl languages. adjust the border radius accordingly */
   }
 
   richlistbox[id] richlistitem > button[label] {
-    background-color: var(--in-content-primary-button-background) !important;
+    background-color: var(--button-background-color-primary) !important;
   }
 
   richlistbox[id] richlistitem:not([disabled="true"]) > button[label]:is(:enabled, :not([disabled="true"])):is(:hover, :focus-visible) {
-    background-color: var(--in-content-primary-button-background-hover) !important;
+    background-color: var(--button-background-color-primary-hover) !important;
   }
 
   richlistbox[id] richlistitem:not([disabled="true"]) > button[label]:is(:enabled, :not([disabled="true"])):hover:active,
   richlistbox[id] richlistitem > button[label][open],
   richlistbox[id] richlistitem > button[label][open]:hover {
-    background-color: var(--in-content-primary-button-background-active) !important;
+    background-color: var(--button-background-color-primary-active) !important;
   }
 
   select:not([size], [multiple]) > option {
@@ -1103,16 +1070,16 @@ rtl languages. adjust the border radius accordingly */
   :root dialog,
   .dialog-button-box {
     --in-content-page-background: var(--uc-content-page-background) !important;
-    --in-content-page-color: var(--uc-content-page-color) !important;
+    --text-color: var(--uc-content-page-color) !important;
     --in-content-box-background: var(--uc-content-box-background) !important;
     --background-color-box: var(--uc-content-box-background) !important;
     --in-content-box-background-odd: var(--uc-content-box-background-odd) !important;
     --in-content-box-background-dim: var(--uc-content-box-background-dim) !important;
     --in-content-box-border-color: var(--uc-content-box-border-color) !important;
-    --in-content-button-background: var(--uc-content-button-background) !important;
-    --in-content-button-background-hover: var(--uc-content-button-background-hover) !important;
-    --in-content-button-background-active: var(--uc-content-button-background-active) !important;
-    --in-content-button-background-solid: var(--uc-content-button-background-solid);
+    --button-background-color: var(--uc-content-button-background) !important;
+    --button-background-color-hover: var(--uc-content-button-background-hover) !important;
+    --button-background-color-active: var(--uc-content-button-background-active) !important;
+    --button-background-color-solid: var(--uc-content-button-background-solid);
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-border-color: var(--uc-content-border-color) !important;
     --in-content-border-hover: var(--uc-content-border-hover) !important;
@@ -1131,12 +1098,12 @@ rtl languages. adjust the border radius accordingly */
     --color-accent-primary: var(--purple-40) !important;
     --color-accent-primary-hover: var(--purple-35) !important;
     --color-accent-primary-active: var(--purple-30) !important;
-    --in-content-primary-button-background: var(--purple-40) !important;
-    --in-content-primary-button-background-hover: var(--purple-35) !important;
-    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --button-background-color-primary: var(--purple-40) !important;
+    --button-background-color-primary-hover: var(--purple-35) !important;
+    --button-background-color-primary-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
-    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --in-content-focus-outline-color: var(--button-background-color-primary-hover) !important;
+    --focus-outline-color: var(--button-background-color-primary-hover) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-accent-color: var(--purple-35) !important;
     --in-content-table-background: var(--in-content-box-background) !important;
@@ -1211,20 +1178,21 @@ rtl languages. adjust the border radius accordingly */
   :root[dialogroot] .onboardingContainer,
   :root[dialogroot] .onboardingContainer .screen {
     --in-content-page-background: var(--ui-quaternary-bg) !important;
-    --in-content-page-color: var(--uc-parent-page-color) !important;
+    --background-color-canvas: var(--ui-quaternary-bg) !important;
+    --text-color: var(--uc-parent-page-color) !important;
     --in-content-box-background: var(--dialog-box-bgcolor) !important;
     --in-content-box-background-dim: var(--dialog-box-bgcolor-dim) !important;
     --in-content-box-border-color: var(--dialog-box-border-color) !important;
-    --in-content-box-info-background: var(--in-content-button-background-solid) !important;
+    --in-content-box-info-background: var(--button-background-color-solid) !important;
     --background-color-box: var(--in-content-box-background) !important;
-    --in-content-button-background: var(--arrowpanel-dimmed) !important;
-    --in-content-button-background-hover: var(--arrowpanel-dimmed-further) !important;
-    --in-content-button-background-active: var(--arrowpanel-dimmed-even-further) !important;
-    --in-content-button-background-solid: var(--uc-content-button-background-solid);
-    --button-background: var(--in-content-button-background) !important;
-    --button-background-hover: var(--in-content-button-background-hover) !important;
-    --button-background-active: var(--in-content-button-background-active) !important;
-    --button-background-solid: var(--in-content-button-background-solid);
+    --button-background-color: var(--arrowpanel-dimmed) !important;
+    --button-background-color-hover: var(--arrowpanel-dimmed-further) !important;
+    --button-background-color-active: var(--arrowpanel-dimmed-even-further) !important;
+    --button-background-color-solid: var(--uc-content-button-background-solid);
+    --button-background: var(--button-background-color) !important;
+    --button-background-hover: var(--button-background-color-hover) !important;
+    --button-background-active: var(--button-background-color-active) !important;
+    --button-background-solid: var(--button-background-color-solid);
     --in-content-item-selected: var(--purple-40) !important;
     --in-content-item-hover: var(--arrowpanel-dimmed) !important;
     --in-content-deemphasized-text: var(--uc-panel-description-color) !important;
@@ -1239,21 +1207,21 @@ rtl languages. adjust the border radius accordingly */
     --color-accent-primary: var(--purple-40) !important;
     --color-accent-primary-hover: var(--purple-35) !important;
     --color-accent-primary-active: var(--purple-30) !important;
-    --in-content-primary-button-background: var(--purple-40) !important;
-    --in-content-primary-button-background-hover: var(--purple-35) !important;
-    --in-content-primary-button-background-active: var(--purple-30) !important;
+    --button-background-color-primary: var(--purple-40) !important;
+    --button-background-color-primary-hover: var(--purple-35) !important;
+    --button-background-color-primary-active: var(--purple-30) !important;
     --in-content-primary-button-text-color: var(--light-on-dark-button-text-color) !important;
-    --in-content-focus-outline-color: var(--in-content-primary-button-background-hover) !important;
-    --focus-outline-color: var(--in-content-primary-button-background-hover) !important;
+    --in-content-focus-outline-color: var(--button-background-color-primary-hover) !important;
+    --focus-outline-color: var(--button-background-color-primary-hover) !important;
     --checkbox-border-color: var(--in-content-box-border-color) !important;
     --checkbox-checked-border-color: transparent !important;
-    --checkbox-unchecked-bgcolor: var(--in-content-button-background) !important;
-    --checkbox-unchecked-hover-bgcolor: var(--in-content-button-background-hover) !important;
-    --checkbox-unchecked-active-bgcolor: var(--in-content-button-background-active) !important;
-    --checkbox-checked-bgcolor: var(--in-content-primary-button-background) !important;
+    --checkbox-unchecked-bgcolor: var(--button-background-color) !important;
+    --checkbox-unchecked-hover-bgcolor: var(--button-background-color-hover) !important;
+    --checkbox-unchecked-active-bgcolor: var(--button-background-color-active) !important;
+    --checkbox-checked-bgcolor: var(--button-background-color-primary) !important;
     --checkbox-checked-color: var(--in-content-primary-button-text-color) !important;
-    --checkbox-checked-hover-bgcolor: var(--in-content-primary-button-background-hover) !important;
-    --checkbox-checked-active-bgcolor: var(--in-content-primary-button-background-active) !important;
+    --checkbox-checked-hover-bgcolor: var(--button-background-color-primary-hover) !important;
+    --checkbox-checked-active-bgcolor: var(--button-background-color-primary-active) !important;
     --dropdown-bgcolor: var(--arrowpanel-background) !important;
     --in-content-button-border-radius: var(--general-button-border-radius) !important;
     --in-content-button-vertical-padding: 5px !important;
@@ -1263,7 +1231,7 @@ rtl languages. adjust the border radius accordingly */
   }
 
   .onboardingContainer .screen.light-text {
-    --in-content-page-color: var(--ui-text-100) !important;
+    --text-color: var(--ui-text-100) !important;
     --in-content-primary-button-text-color: var(--ui-text-100) !important;
     --in-content-primary-button-text-color-hover: var(--ui-text-100) !important;
   }
@@ -1388,20 +1356,20 @@ rtl languages. adjust the border radius accordingly */
 
   button[dlgtype]:is(:hover, :focus-visible):not(:hover:active, [disabled="true"], [default]),
   :root[dialogroot] :is(.expander-up, .expander-down, .panel-button):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]) {
-    background-color: var(--in-content-button-background-hover) !important;
+    background-color: var(--button-background-color-hover) !important;
     color: var(--in-content-button-text-color-hover) !important;
     border-color: transparent;
   }
 
   :root[dialogroot] menulist:not([disabled="true"]):focus-visible:not(:hover:active) {
-    background-color: var(--in-content-button-background-hover) !important;
+    background-color: var(--button-background-color-hover) !important;
     color: var(--in-content-button-text-color-hover) !important;
   }
 
   button:is([autofocus], [type="submit"], .primary):enabled:is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
   button:is([default], .primary):is(:hover, :focus-visible):not(:hover:active, [disabled="true"]),
   .toggle-group-input:checked:focus-visible + .toggle-group-label {
-    background-color: var(--in-content-primary-button-background-hover) !important;
+    background-color: var(--button-background-color-primary-hover) !important;
     color: var(--in-content-primary-button-text-color-hover) !important;
   }
 
@@ -1505,9 +1473,9 @@ rtl languages. adjust the border radius accordingly */
   }
 
   richlistbox.theme-listbox > richlistitem {
-    --in-content-button-background: var(--purple-50) !important;
-    --in-content-button-background-hover: var(--purple-55) !important;
-    --in-content-button-background-active: var(--purple-60) !important;
+    --button-background-color: var(--purple-50) !important;
+    --button-background-color-hover: var(--purple-55) !important;
+    --button-background-color-active: var(--purple-60) !important;
     --in-content-button-text-color: var(--in-content-item-selected-text) !important;
     --in-content-button-text-color-hover: var(--in-content-item-selected-text) !important;
     --in-content-button-text-color-active: var(--in-content-button-text-color-hover) !important;
@@ -1576,11 +1544,6 @@ rtl languages. adjust the border radius accordingly */
 }
 
 @-moz-document url-prefix("chrome://global/content/print.html") {
-  :root {
-    --in-content-page-background: var(--uc-content-page-background) !important;
-    --dropdown-bgcolor: var(--in-content-page-background) !important;
-  }
-
   * {
     scrollbar-width: var(--chrome-scrollbar-width, thin) !important;
     scrollbar-color: var(--chrome-scrollbar-thumb-color, inherit) var(--chrome-scrollbar-track-color, transparent) !important;

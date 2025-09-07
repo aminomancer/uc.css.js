@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Browser Chrome Bookmark Keywords
-// @version        1.1.9
+// @version        1.2.0
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @long-description
@@ -90,8 +90,9 @@ Be careful when using this, of course. You always need to take care when using J
 
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
 
-    let UrlbarProviderBookmarkKeywords =
-      UrlbarProvidersManager.getProvider("BookmarkKeywords");
+    let UrlbarProviderBookmarkKeywords = UrlbarProvidersManager.getProvider(
+      "UrlbarProviderBookmarkKeywords"
+    );
 
     let schema = UrlbarUtils.getPayloadSchema(UrlbarUtils.RESULT_TYPE.KEYWORD);
     schema.properties.ucjs = { type: "boolean" };

@@ -74,7 +74,7 @@ titlebar, this sheet controls their appearance as well. */
   right: 0;
   height: var(--tabstrip-min-height) !important;
 
-  &[autohide="true"][inactive="true"]:not([customizing="true"]) {
+  &[autohide=""][inactive="true"]:not([customizing="true"]) {
     max-width: 0 !important;
     min-width: 0 !important;
     width: 0 !important;

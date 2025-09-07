@@ -128,7 +128,7 @@ menupopup#viewSidebarMenu menuitem.menuitem-iconic.webextension-menuitem#menubar
   background-image: url(chrome://userchrome/content/material/nord.svg);
 }
 
-#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group .menu-icon {
+#contentAreaContextMenu #nordvpnproxy_nordvpn_com-menuitem-_nordvpn_extension_context_menu_group > .menu-icon {
   display: none !important;
 }
 

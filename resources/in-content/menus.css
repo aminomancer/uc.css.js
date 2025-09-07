@@ -413,6 +413,14 @@ menuitem[image="chrome://browser/skin/preferences/application.png"] .menu-icon {
   display: none;
 }
 
+menupopup[needsgutter] {
+  @media (-moz-platform: linux) or (-moz-platform: windows) {
+    > :is(menu, menuitem) > .menu-icon {
+      display: none !important;
+    }
+  }
+}
+
 /* stylelint-disable-next-line media-query-no-invalid */
 @media -moz-pref("userChrome.css.mac-ui-fonts") {
   #ContentSelectDropdown,

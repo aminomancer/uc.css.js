@@ -102,6 +102,8 @@ override chrome://browser/skin/downloads/notification-finish-animation.svg ../re
 override chrome://browser/skin/fullscreen.svg ../resources/skin/fullscreen.svg
 override chrome://browser/skin/fullscreen-exit.svg ../resources/skin/fullscreen-exit.svg
 override chrome://browser/skin/translations.svg ../resources/material/translate.svg
+override chrome://browser/skin/taskbar-tabs-add-tab.svg ../resources/taskbar-tabs-add-tab.svg
+override chrome://browser/skin/taskbar-tabs-move-tab.svg ../resources/taskbar-tabs-move-tab.svg
 override chrome://browser/skin/controlcenter/socialblock.svg ../resources/material/dislike.svg
 override chrome://browser/skin/controlcenter/3rdpartycookies.svg ../resources/skin/controlcenter/3rdpartycookies.svg
 override chrome://browser/skin/notification-icons/autoplay-media.svg ../resources/notifications/autoplay-media.svg

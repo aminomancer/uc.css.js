@@ -27,7 +27,6 @@
 .ctrlTab-preview {
   background: none !important;
   flex: 0 !important;
-  min-width: min-content !important;
 
   &:not([hidden]) {
     display: flex !important;
@@ -49,8 +48,11 @@
   fill-opacity: 0.8 !important;
   -moz-context-properties: fill, fill-opacity !important;
   border-radius: 3px !important;
-  min-width: min-content !important;
-  min-height: min-content !important;
+
+  /* fix an issue where multiple canvases are rendered in one box */
+  > canvas:not(:last-child) {
+    display: none !important;
+  }
 }
 
 #ctrlTab-showAll-container {

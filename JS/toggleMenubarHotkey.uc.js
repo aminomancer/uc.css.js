@@ -40,7 +40,7 @@
     if (!ToolbarContextMenu._modifiedByToggleMenubarHotkey) {
       const lazy = {};
       ChromeUtils.defineESModuleGetters(lazy, {
-        CustomizableUI: "resource:///modules/CustomizableUI.sys.mjs",
+        CustomizableUI: "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs",
         SessionStore: "resource:///modules/sessionstore/SessionStore.sys.mjs",
       });
 

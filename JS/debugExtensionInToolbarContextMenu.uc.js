@@ -429,7 +429,8 @@ class DebugExtension {
     const lazy = {};
     ChromeUtils.defineESModuleGetters(lazy, {
       AddonManager: "resource://gre/modules/AddonManager.sys.mjs",
-      CustomizableUI: "resource:///modules/CustomizableUI.sys.mjs",
+      CustomizableUI:
+        "moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs",
       ExtensionsUI: "resource:///modules/ExtensionsUI.sys.mjs",
     });
     XPCOMUtils.defineLazyPreferenceGetter(

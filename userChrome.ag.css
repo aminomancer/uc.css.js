@@ -27,6 +27,18 @@ tooltip {
   padding: 5px;
   pointer-events: none;
   --uc-tooltip-inner-padding: 4px 7px 6px 7px;
+
+  @media (-moz-platform: windows) {
+    appearance: none;
+    border: 1px solid;
+
+    @media not (prefers-contrast) {
+      background-color: transparent;
+      color: var(--tooltip-color);
+      border: none;
+      border-radius: 0;
+    }
+  }
 }
 
 tooltip > description {

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Urlbar Mods
-// @version        1.8.2
+// @version        1.8.3
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Make some minor modifications to the urlbar. See the code comments in the script for more details.
@@ -552,8 +552,9 @@ class UrlbarMods {
       "resource:///modules/UrlbarSearchUtils.sys.mjs"
     );
     const UrlbarProvidersManager = gURLBar.view.controller.manager;
-    const UrlbarProviderAutofill =
-      UrlbarProvidersManager.getProvider("Autofill");
+    const UrlbarProviderAutofill = UrlbarProvidersManager.getProvider(
+      "UrlbarProviderAutofill"
+    );
     // these variables look unused but they're for the functions that will be modified
     // dynamically and evaluated later like provider.startQuery.toSource()
     let { showRemoteIconsPref } = this;
@@ -617,8 +618,12 @@ class UrlbarMods {
       result.suggestedIndex = 1;
       return result;
     }
-    let RemoteTabs = UrlbarProvidersManager.getProvider("RemoteTabs");
-    let TabToSearch = UrlbarProvidersManager.getProvider("TabToSearch");
+    let RemoteTabs = UrlbarProvidersManager.getProvider(
+      "UrlbarProviderRemoteTabs"
+    );
+    let TabToSearch = UrlbarProvidersManager.getProvider(
+      "UrlbarProviderTabToSearch"
+    );
     UrlbarUtils.getPayloadSchema(
       UrlbarUtils.RESULT_TYPE.REMOTE_TAB
     ).properties.clientType = {

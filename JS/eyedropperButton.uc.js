@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Eyedropper Button
-// @version        1.0.8
+// @version        1.0.9
 // @author         aminomancer
 // @homepageURL    https://github.com/aminomancer/uc.css.js
 // @description    Adds a toolbar button that implements the color picker without launching the devtools. Similar to the menu item in the "More Tools" and "Tools > Browser Tools" menus, only this one can be placed directly on your toolbar. Also adds a customizable hotkey to do the same — by default, it's Ctrl+Shift+Y (or ⌘+⇧+Y on macOS)
@@ -43,23 +43,6 @@ class EyedropperButton {
   getString(name, where) {
     return this[`${where}Bundle`].GetStringFromName(name);
   }
-  // "Eyedropper"
-  get labelString() {
-    return (
-      this._labelString ||
-      (this._labelString = this.getString("eyedropper.label", "menu"))
-    );
-  }
-  // "Grab a color from the page"
-  get tooltipString() {
-    return (
-      this._tooltipString ||
-      (this._tooltipString = this.getString(
-        "inspector.eyedropper.label",
-        "inspector"
-      ))
-    );
-  }
   get devToolsMenu() {
     return (
       this._devToolsMenu ||
@@ -88,9 +71,9 @@ class EyedropperButton {
       id: "eyedropper-button",
       type: "button",
       defaultArea: CustomizableUI.AREA_NAVBAR,
-      label: this.labelString,
+      label: this.getString("eyedropper.label", "menu"),
       tooltiptext: `${this.getString(
-        "inspector.eyedropper.label",
+        "inspector.eyedropper.label2",
         "inspector"
       )} (${ShortcutUtils.prettifyShortcut(
         document.getElementById(this.shortcut.id)
